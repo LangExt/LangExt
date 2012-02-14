@@ -1,0 +1,139 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="Config.ttinclude" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LangExt
+{
+    partial class IEnumerableUtil
+    {
+        #region Zipメソッド
+
+<#
+for (int i = 2; i <= Max; i++) {
+	var types = Seq("T{0}", i);
+	var args = Seq("IEnumerable<T{0}> t{0}", i);
+#>
+        /// <summary>
+        /// 対象と引数を <#= i #> 要素のタプルにまとめます。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>"><#= j + 1 #> つ目のシーケンスの型。</typeparam>
+<# } #>
+<# for (int j = 0; j < i; j++) { #>
+        /// <param name="t<#= j + 1 #>"><#= j + 1 #> つ目のシーケンス。</param>
+<# } #>
+        /// <returns>タプルのシーケンス。</returns>
+        public static IEnumerable<_<<#= types #>>> Zip<<#= types #>>(this <#= args #>)
+        {
+<# for (int j = 0; j < i; j++) { #>
+            using (var itr<#= j + 1 #> = t<#= j + 1 #>.GetEnumerator())
+<# } #>
+            {
+                while (<#= Seq("itr{0}.MoveNext()", " && ", i) #>)
+                    yield return Tpl.Of(<#= Seq("itr{0}.Current", i) #>);
+            }
+        }
+
+<# } #>
+        #endregion
+
+        #region Unzipメソッド
+
+<#
+for (int i = 2; i <= Max; i++) {
+	var types = Seq("T{0}", i);
+	var args = Seq("IEnumerable<T{0}> t{0}", i);
+#>
+        /// <summary>
+        /// Zip したものを元に戻します。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>"><#= j + 1 #> つ目のシーケンスの型。</typeparam>
+<# } #>
+        /// <param name="self">タプルのシーケンス。</param>
+        /// <returns>シーケンスのタプル。</returns>
+        public static _<<#= Seq("IEnumerable<T{0}>", i) #>> Unzip<<#= types #>>(this IEnumerable<_<<#= types #>>> self)
+        {
+            return Tpl.Of(<#= Seq("self.Select(t => t._{0})", i) #>);
+        }
+
+<# } #>
+        #endregion
+
+        #region ZipWithメソッド
+
+<#
+for (int i = 2; i <= Max; i++) {
+	var types = Seq("T{0}", i);
+	var args = Seq("IEnumerable<T{0}> t{0}", i);
+#>
+        /// <summary>
+        /// 引数に処理を適用した結果を返します。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>"><#= j + 1 #> つ目のシーケンスの型。</typeparam>
+<# } #>
+        /// <typeparam name="R">処理の結果の型。</typeparam>
+<# for (int j = 0; j < i; j++) { #>
+        /// <param name="t<#= j + 1 #>">処理に渡す <#= j + 1 #> つ目のシーケンス。</param>
+<# } #>
+        /// <param name="func">処理。</param>
+        /// <returns>処理の結果。</returns>
+        public static IEnumerable<R> ZipWith<<#= types #>, R>(this <#= Seq("IEnumerable<T{0}> t{0}", i) #>, Func<<#= types #>, R> func)
+        {
+<# for (int j = 0; j < i; j++) { #>
+            using (var itr<#= j + 1 #> = t<#= j + 1 #>.GetEnumerator())
+<# } #>
+            {
+                while (<#= Seq("itr{0}.MoveNext()", " && ", i) #>)
+                    yield return func(<#= Seq("itr{0}.Current", i) #>);
+            }
+        }
+
+<# } #>
+        #endregion
+
+        #region ZipWithIndexメソッド
+
+<#
+for (int i = 1; i < Max; i++) {
+	var types = Seq("T{0}", i);
+	var args = Seq("IEnumerable<T{0}> t{0}", i);
+#>
+        /// <summary>
+        /// 対象と<#= i == 1 ? "" : "引数と" #>インデックスを <#= i + 1 #> 要素のタプルにまとめます。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>"><#= j + 1 #> つ目のシーケンスの型。</typeparam>
+<# } #>
+<# for (int j = 0; j < i; j++) { #>
+        /// <param name="t<#= j + 1 #>"><#= j + 1 #> つ目のシーケンス。</param>
+<# } #>
+        /// <returns>インデックスを持ったタプルのシーケンス。</returns>
+        public static IEnumerable<_<<#= types #>, int>> ZipWithIndex<<#= types #>>(this <#= args #>)
+        {
+<# for (int j = 0; j < i; j++) { #>
+            using (var itr<#= j + 1 #> = t<#= j + 1 #>.GetEnumerator())
+<# } #>
+            {
+                var index = 0;
+                while (<#= Seq("itr{0}.MoveNext()", " && ", i) #>)
+                    yield return Tpl.Of(<#= Seq("itr{0}.Current", i) #>, index++);
+            }
+        }
+
+<# } #>
+        #endregion
+    }
+}

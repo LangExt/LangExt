@@ -1,0 +1,30 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="Config.ttinclude" #>
+namespace LangExt
+{
+<# if (Version == TargetFramework.V3_5) { #>
+<# for (int i = 5; i <= 16; i++) { #>
+    /// <summary>
+    /// <#= i #> 個のパラメーターを受け取って TResult パラメーターに指定された型の値を返すメソッドをカプセル化します。
+    /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+    /// <typeparam name="T<#= j + 1 #>">このデリゲートによってカプセル化されるメソッドの第 <#= j + 1 #> パラメーターの型。</typeparam>
+<# } #>
+    /// <typeparam name="TResult">このデリゲートによってカプセル化されるメソッドの戻り値の型。</typeparam>
+<# for (int j = 0; j < i; j++) { #>
+    /// <param name="arg<#= j + 1 #>">このデリゲートによってカプセル化されるメソッドの第 <#= j + 1 #> パラメーター。</param>
+<# } #>
+    /// <returns>このデリゲートによってカプセル化されるメソッドの戻り値。</returns>
+    public delegate TResult Func<<#= Seq("T{0}", i) #>,  TResult>(<#= Seq("T{0} arg{0}", i) #>);
+
+<# }} #>
+}

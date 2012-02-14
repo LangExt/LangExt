@@ -1,0 +1,41 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../Config.ttinclude" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LangExt.Dragon
+{
+    partial class Linq
+    {
+<#
+for (int i = 2; i <= Max; i++) {
+	var types = Seq("T{0}", i);
+	var args = Seq("t._{0}", i);
+#>
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開して predicate に渡す exists です。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">シーケンスの保持する <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <param name="self">対象となるシーケンス。</param>
+        /// <param name="predicate">各要素が条件を満たしているかどうかをテストする関数。</param>
+        /// <returns>シーケンスのいずれかの要素に対して predicate が true を返す場合は true。それ以外の場合は false。</returns>
+        public static bool Any<<#= types #>>(this IEnumerable<_<<#= types #>>> self, Func<<#= types #>, bool> predicate)
+        {
+            return self.Any(t => predicate(<#= args #>));
+        }
+
+<# } #>
+    }
+}

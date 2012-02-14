@@ -1,0 +1,55 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../Config.ttinclude" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LangExt.Dragon
+{
+    partial class Linq
+    {
+<#
+for (int i = 2; i <= Max; i++) {
+	var types = Seq("T{0}", i);
+	var args = Seq("t._{0}", i);
+#>
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開して predicate に渡す takeWhile です。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">シーケンスの保持する <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <param name="self">drop 対象となる値のシーケンス。</param>
+        /// <param name="predicate">各要素が条件を満たしているかどうかをテストする関数。</param>
+        /// <returns>条件を満たさなかった最初の要素までの入力シーケンス。</returns>
+        public static IEnumerable<_<<#= types #>>> TakeWhile<<#= types #>>(this IEnumerable<_<<#= types #>>> self, Func<<#= types #>, bool> predicate)
+        {
+            return self.TakeWhile(t => predicate(<#= args #>));
+        }
+
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開して predicate に渡す takeWhile です。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">シーケンスの保持する <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <param name="self">drop 対象となる値のシーケンス。</param>
+        /// <param name="predicate">各要素が条件を満たしているかどうかをテストする関数。最後のパラメータにはインデックスが渡されます。</param>
+        /// <returns>条件を満たさなかった最初の要素までの入力シーケンス。</returns>
+        public static IEnumerable<_<<#= types #>>> TakeWhile<<#= types #>>(this IEnumerable<_<<#= types #>>> self, Func<<#= types #>, int, bool> predicate)
+        {
+            return self.TakeWhile((t, i) => predicate(<#= args #>, i));
+        }
+
+<# } #>
+    }
+}

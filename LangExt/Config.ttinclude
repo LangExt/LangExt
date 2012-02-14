@@ -1,0 +1,41 @@
+﻿<#@ Assembly Name="System.Core.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+ 
+const int Max = 10;
+
+public enum TargetFramework
+{
+	V3_5, V4_0
+}
+
+TargetFramework Version {
+	get {
+		var projPath = Host.ResolvePath("LangExt.csproj");
+		using (var stream = new StreamReader(projPath)) {
+			var content = stream.ReadToEnd();
+			var start = "<TargetFrameworkVersion>";
+			var version = content.Substring(content.IndexOf(start) + start.Length, "v4.0".Length);
+			return version == "v4.0" ? TargetFramework.V4_0 : TargetFramework.V3_5;
+		}
+	}
+}
+
+string Seq(string template, string sep, int begin, int end) {
+	return string.Join(sep, Enumerable.Range(begin, end - begin).Select(i => string.Format(template, i)).ToArray());
+}
+
+string Seq(string template, string sep, int end) {
+	return Seq(template, sep, 1, end + 1);
+}
+
+string Seq(string template, int begin, int end) {
+	return Seq(template, ", ", begin, end);
+}
+
+string Seq(string template, int end) {
+	return Seq(template, ", ", 1, end + 1);
+}
+#>

@@ -1,0 +1,72 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../Config.ttinclude" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LangExt.Dragon
+{
+    partial class Linq
+    {
+<#
+for (int i = 2; i <= Max; i++) {
+	var types = Seq("T{0}", i);
+	var args = Seq("t._{0}", i);
+	foreach (var numType in new[] { "decimal", "double", "float", "int", "long" }) {
+#>
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開して数値に変換し、最小値を返します。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">シーケンスの保持する <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <param name="self">最小値の確認対象となるシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>値のシーケンスの最小値に対応する<#= numType #>。</returns>
+        public static <#= numType #> Min<<#= types #>>(this IEnumerable<_<<#= types #>>> self, Func<<#= types #>, <#= numType #>> selector)
+        {
+            return self.Min(t => selector(<#= args #>));
+        }
+
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開して数値に変換し、最小値を返します。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">シーケンスの保持する <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <param name="self">最小値の確認対象となるシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>値のシーケンスの最小値に対応するnull許容<#= numType #>。</returns>
+        public static <#= numType #>? Min<<#= types #>>(this IEnumerable<_<<#= types #>>> self, Func<<#= types #>, <#= numType #>?> selector)
+        {
+            return self.Min(t => selector(<#= args #>));
+        }
+
+<# } #>
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開して変換関数を呼び出し、最小値を返します。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">シーケンスの保持する <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">最小値の確認対象となるシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>値のシーケンスの最小値に対応するTResult。</returns>
+        public static TResult Min<<#= types #>, TResult>(this IEnumerable<_<<#= types #>>> self, Func<<#= types #>, TResult> selector)
+        {
+            return self.Min(t => selector(<#= args #>));
+        }
+
+<# } #>
+    }
+}
