@@ -13,13 +13,10 @@ public enum TargetFramework
 
 TargetFramework Version {
 	get {
-		var projPath = Host.ResolvePath("LangExt.csproj");
-		using (var stream = new StreamReader(projPath)) {
-			var content = stream.ReadToEnd();
-			var start = "<TargetFrameworkVersion>";
-			var version = content.Substring(content.IndexOf(start) + start.Length, "v4.0".Length);
-			return version == "v4.0" ? TargetFramework.V4_0 : TargetFramework.V3_5;
-		}
+		var solDir = Host.ResolvePath("../");
+		if (Directory.Exists(Path.Combine(solDir, "specify4.0")))
+			return TargetFramework.V4_0;
+		return TargetFramework.V3_5;
 	}
 }
 
