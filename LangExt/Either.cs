@@ -153,7 +153,7 @@ namespace LangExt
         /// <summary>
         /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを示します。
         /// </summary>
-        /// <param name="other">このオブジェクトと比較する Option。</param>
+        /// <param name="other">このオブジェクトと比較する Either。</param>
         /// <returns>現在のオブジェクトが other パラメータと等しい場合は true。それ以外の場合は false。</returns>
         public bool Equals(Either<TLeft,TRight> other)
         {
@@ -163,7 +163,7 @@ namespace LangExt
         /// <summary>
         /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを示します。
         /// </summary>
-        /// <param name="other">このオブジェクトと比較する Option。</param>
+        /// <param name="other">このオブジェクトと比較する Either。</param>
         /// <returns>現在のオブジェクトが other パラメータと等しい場合は true。それ以外の場合は false。</returns>
         private bool EqualsRight(Either.IEitherRight<TRight> other)
         {
@@ -173,7 +173,7 @@ namespace LangExt
         /// <summary>
         /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを示します。
         /// </summary>
-        /// <param name="other">このオブジェクトと比較する Option。</param>
+        /// <param name="other">このオブジェクトと比較する Either。</param>
         /// <returns>現在のオブジェクトが other パラメータと等しい場合は true。それ以外の場合は false。</returns>
         private bool EqualsLeft(Either.IEitherLeft<TLeft> other)
         {
@@ -209,43 +209,43 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は true、それ以外の場合は false。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は true、それ以外の場合は false。</returns>
         public static bool operator ==(Either<TLeft, TRight> a, Either<TLeft, TRight> b)
         {
             return a.Equals(b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は false、それ以外の場合は true。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は false、それ以外の場合は true。</returns>
         public static bool operator !=(Either<TLeft, TRight> a, Either<TLeft, TRight> b)
         {
             return !(a == b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は true、それ以外の場合は false。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は true、それ以外の場合は false。</returns>
         public static bool operator ==(Either<Either.Undefined, TRight> a, Either<TLeft, TRight> b)
         {
             return a.Equals(b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
         /// <returns>2 つの Option が等しい場合は false、それ以外の場合は true。</returns>
         public static bool operator !=(Either<Either.Undefined, TRight> a, Either<TLeft, TRight> b)
         {
@@ -253,23 +253,23 @@ namespace LangExt
         }
 
 
-        /// <summary>
+        Either
         /// 2 つの Option の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は true、それ以外の場合は false。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は true、それ以外の場合は false。</returns>
         public static bool operator ==(Either<TLeft, Either.Undefined> a, Either<TLeft, TRight> b)
         {
             return a.Equals(b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は false、それ以外の場合は true。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は false、それ以外の場合は true。</returns>
         public static bool operator !=(Either<TLeft, Either.Undefined> a, Either<TLeft, TRight> b)
         {
             return !(a == b);
@@ -277,44 +277,44 @@ namespace LangExt
 
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は true、それ以外の場合は false。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は true、それ以外の場合は false。</returns>
         public static bool operator ==(Either<TLeft, TRight> a, Either<Either.Undefined, TRight> b)
         {
             return a.Equals(b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は false、それ以外の場合は true。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は false、それ以外の場合は true。</returns>
         public static bool operator !=(Either<TLeft, TRight> a, Either<Either.Undefined, TRight> b)
         {
             return !(a == b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は true、それ以外の場合は false。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は true、それ以外の場合は false。</returns>
         public static bool operator ==(Either<TLeft, TRight> a, Either<TLeft, Either.Undefined> b)
         {
             return a.Equals(b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2 つの Either の比較を行います。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は false、それ以外の場合は true。</returns>
+        /// <param name="a">1 つ目の Either。</param>
+        /// <param name="b">2 つ目の Either。</param>
+        /// <returns>2 つの Either が等しい場合は false、それ以外の場合は true。</returns>
         public static bool operator !=(Either<TLeft, TRight> a, Either<TLeft, Either.Undefined> b)
         {
             return !(a == b);

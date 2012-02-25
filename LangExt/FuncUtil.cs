@@ -5,8 +5,17 @@ using System.Text;
 
 namespace LangExt
 {
+    /// <summary>
+    /// 関数に対する便利関数を提供します。
+    /// </summary>
     public static class FuncUtil
     {
+        /// <summary>
+        /// オブジェクトのアイデンティティ値を返します。
+        /// </summary>
+        /// <typeparam name="T">対象のオブジェクトの型を指定します。</typeparam>
+        /// <param name="t">対象のオブジェクトを指定します。</param>
+        /// <returns>指定されたオブジェクトのアイデンティティ値です。</returns>
         public static T Id<T>(T t)
         {
             return t;
