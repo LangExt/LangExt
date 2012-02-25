@@ -60,7 +60,9 @@
     <Compile Include="Dragon\LinqTest.Select.cs" />
     <Compile Include="Dragon\LinqTest.Where.cs" />
     <Compile Include="EitherTest.cs" />
+    <Compile Include="FuncTest.cs" />
     <Compile Include="IEnumerableUtilTest.cs" />
+    <Compile Include="MonadTest.cs" />
     <Compile Include="ObjectUtilTest.cs" />
     <Compile Include="OptionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -121,5 +121,15 @@ namespace LangExt.Test
 
             Assert.That(result.Equals(Either.Left(100)), Is.True);
         }
+
+        [Test]
+        public void 等値演算子が定義されている()
+        {
+            Either<Exception, string> rightEither1 = Either.Right("Right1");
+            var rightEither2 = Either.Right("Right1");
+
+            Assert.That(rightEither1, Is.EqualTo(rightEither2));
+            Assert.That(rightEither2, Is.EqualTo(rightEither1));
+        }
     }
 }

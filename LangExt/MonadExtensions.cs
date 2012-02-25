@@ -4,8 +4,12 @@ using System.Text;
 
 namespace LangExt
 {
+    /// <summary>
+    /// クエリ式によるLINQ to Monadをサポートします。
+    /// </summary>
     public static class MonadExtensions
     {
+        #region Option Monad
         public static Option<U> Select<T,U>(this Option<T> m, Func<T, U> k)
         {
             return m.Match(some => k(some) , _ => Option<U>.None);
@@ -20,7 +24,9 @@ namespace LangExt
         {
             return m.Bind(x => k(x).Bind(y => new Option<V>(s(x, y))));
         }
+        #endregion
 
+        #region Either Monad
         public static Either<TLeft, TRight2> Select<TLeft, TRight, TRight2>(this Either<TLeft, TRight> m, Func<TRight, TRight2> k)
         {
             return m.Match<Either<TLeft, TRight2>>(e => Either.Left(e), some => Either.Right(k(some)));
@@ -34,6 +40,7 @@ namespace LangExt
         public static Either<TLeft, TRight3> SelectMany<TLeft, TRight, TRight2, TRight3>(this Either<TLeft, TRight> m, Func<TRight, Either<TLeft, TRight2>> k, Func<TRight, TRight2, TRight3> s)
         {
             return m.Bind( x => k(x).Bind(y => Either.Right(s(x, y))));
-        }  
+        }
+        #endregion
     }
 }

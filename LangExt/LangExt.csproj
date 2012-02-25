@@ -138,6 +138,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Func.tt</DependentUpon>
     </Compile>
+    <Compile Include="FuncUtil.cs" />
     <Compile Include="IEnumerableUtil.cs" />
     <Compile Include="IEnumerableUtil.Zip.cs">
       <AutoGen>True</AutoGen>
