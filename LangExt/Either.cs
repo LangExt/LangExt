@@ -72,6 +72,7 @@ namespace LangExt
         /// <summary>
         /// Leftの値を取得します。
         /// </summary>
+        [Obsolete("このプロパティは使わないでください。代わりにパターンマッチを使います")]
         public TLeft Left
         {
             get { return (TLeft)left; }
@@ -80,6 +81,7 @@ namespace LangExt
         /// <summary>
         /// Rightの値を取得します。
         /// </summary>
+        [Obsolete("このプロパティは使わないでください。代わりにパターンマッチを使います")]
         public TRight Right
         {
             get { return (TRight)right; }
