@@ -252,8 +252,6 @@ namespace LangExt
             return !(a == b);
         }
 
-
-        Either
         /// 2 つの Option の比較を行います。
         /// </summary>
         /// <param name="a">1 つ目の Either。</param>
