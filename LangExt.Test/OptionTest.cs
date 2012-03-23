@@ -9,7 +9,7 @@ namespace LangExt.Test
         [Test]
         public void Someが生成できる()
         {
-            Option<int> some = 42;
+            Option<int> some = Option.Some(42);
             Assert.That(some.GetType(), Is.EqualTo(typeof(Option<int>)));
         }
 

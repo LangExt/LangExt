@@ -173,5 +173,14 @@ namespace LangExt.Test
             var t = Tpl.Of("aaa", "bbb", "ccc");
             Assert.That(t.ToString(), Is.EqualTo("(aaa, bbb, ccc)"));
         }
+
+        [Test]
+        public void 三要素タプルをLetで展開する()
+        {
+            var t = Tpl.Of("aaa", "bbb", "ccc");
+            var second = t.Let((_1, _2, _3) => _2);
+
+            Assert.That(second, Is.EqualTo("bbb"));
+        }
     }
 }

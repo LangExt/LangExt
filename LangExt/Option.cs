@@ -4,6 +4,23 @@ using System.Collections.Generic;
 namespace LangExt
 {
     /// <summary>
+    /// Optionのユーティリティ関数を提供します。
+    /// </summary>
+    public static class Option
+    {
+        /// <summary>
+        /// 値を指定して Some を生成します。
+        /// </summary>
+        /// <typeparam name="T">Some に保持する値</typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Option<T> Some<T>(T value)
+        {
+            return new Option<T>(value);
+        }
+    }
+
+    /// <summary>
     /// nullよりも安全に「値がないこと」を表すことのできるデータ型です。
     /// </summary>
     /// <remarks>

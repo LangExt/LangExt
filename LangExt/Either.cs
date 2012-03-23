@@ -13,7 +13,7 @@ namespace LangExt
         /// <summary>
         /// 定義されていない型を示します。
         /// </summary>
-        public class Undefined { }
+        public enum Undefined { }
 
         internal interface IEitherRight<T>
         {

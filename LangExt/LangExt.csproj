@@ -139,11 +139,14 @@
       <DependentUpon>Func.tt</DependentUpon>
     </Compile>
     <Compile Include="FuncUtil.cs" />
-    <Compile Include="IEnumerableUtil.cs" />
+    <Compile Include="IEnumerableUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IEnumerableUtil.Zip.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>IEnumerableUtil.Zip.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="MonadExtensions.cs" />
     <Compile Include="ObjectUtil.cs" />
@@ -241,9 +244,9 @@
       <LastGenOutput>Func.cs</LastGenOutput>
     </None>
     <None Include="IEnumerableUtil.Zip.tt">
+      <DependentUpon>IEnumerableUtil.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IEnumerableUtil.Zip.cs</LastGenOutput>
-      <DependentUpon>IEnumerableUtil.cs</DependentUpon>
     </None>
     <None Include="ObjectUtil.TypeMatch.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

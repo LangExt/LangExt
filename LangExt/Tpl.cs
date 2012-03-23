@@ -102,6 +102,20 @@ namespace LangExt
             _1 = t1;
             _2 = t2;
         }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, TResult> f)
+        {
+            return f(_1, _2);
+        }
 
         #region IEquatable<Tpl<T1, T2>> メンバ
 
@@ -196,6 +210,21 @@ namespace LangExt
             _1 = t1;
             _2 = t2;
             _3 = t3;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, TResult> f)
+        {
+            return f(_1, _2, _3);
         }
 
         #region IEquatable<Tpl<T1, T2, T3>> メンバ
@@ -297,6 +326,22 @@ namespace LangExt
             _2 = t2;
             _3 = t3;
             _4 = t4;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="T4">シーケンスの保持する 4 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, T4, TResult> f)
+        {
+            return f(_1, _2, _3, _4);
         }
 
         #region IEquatable<Tpl<T1, T2, T3, T4>> メンバ
@@ -404,6 +449,23 @@ namespace LangExt
             _3 = t3;
             _4 = t4;
             _5 = t5;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="T4">シーケンスの保持する 4 つ目の型。</typeparam>
+        /// <typeparam name="T5">シーケンスの保持する 5 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, T4, T5, TResult> f)
+        {
+            return f(_1, _2, _3, _4, _5);
         }
 
         #region IEquatable<Tpl<T1, T2, T3, T4, T5>> メンバ
@@ -517,6 +579,24 @@ namespace LangExt
             _4 = t4;
             _5 = t5;
             _6 = t6;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="T4">シーケンスの保持する 4 つ目の型。</typeparam>
+        /// <typeparam name="T5">シーケンスの保持する 5 つ目の型。</typeparam>
+        /// <typeparam name="T6">シーケンスの保持する 6 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> f)
+        {
+            return f(_1, _2, _3, _4, _5, _6);
         }
 
         #region IEquatable<Tpl<T1, T2, T3, T4, T5, T6>> メンバ
@@ -636,6 +716,25 @@ namespace LangExt
             _5 = t5;
             _6 = t6;
             _7 = t7;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="T4">シーケンスの保持する 4 つ目の型。</typeparam>
+        /// <typeparam name="T5">シーケンスの保持する 5 つ目の型。</typeparam>
+        /// <typeparam name="T6">シーケンスの保持する 6 つ目の型。</typeparam>
+        /// <typeparam name="T7">シーケンスの保持する 7 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> f)
+        {
+            return f(_1, _2, _3, _4, _5, _6, _7);
         }
 
         #region IEquatable<Tpl<T1, T2, T3, T4, T5, T6, T7>> メンバ
@@ -761,6 +860,26 @@ namespace LangExt
             _6 = t6;
             _7 = t7;
             _8 = t8;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="T4">シーケンスの保持する 4 つ目の型。</typeparam>
+        /// <typeparam name="T5">シーケンスの保持する 5 つ目の型。</typeparam>
+        /// <typeparam name="T6">シーケンスの保持する 6 つ目の型。</typeparam>
+        /// <typeparam name="T7">シーケンスの保持する 7 つ目の型。</typeparam>
+        /// <typeparam name="T8">シーケンスの保持する 8 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> f)
+        {
+            return f(_1, _2, _3, _4, _5, _6, _7, _8);
         }
 
         #region IEquatable<Tpl<T1, T2, T3, T4, T5, T6, T7, T8>> メンバ
@@ -892,6 +1011,27 @@ namespace LangExt
             _7 = t7;
             _8 = t8;
             _9 = t9;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="T4">シーケンスの保持する 4 つ目の型。</typeparam>
+        /// <typeparam name="T5">シーケンスの保持する 5 つ目の型。</typeparam>
+        /// <typeparam name="T6">シーケンスの保持する 6 つ目の型。</typeparam>
+        /// <typeparam name="T7">シーケンスの保持する 7 つ目の型。</typeparam>
+        /// <typeparam name="T8">シーケンスの保持する 8 つ目の型。</typeparam>
+        /// <typeparam name="T9">シーケンスの保持する 9 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> f)
+        {
+            return f(_1, _2, _3, _4, _5, _6, _7, _8, _9);
         }
 
         #region IEquatable<Tpl<T1, T2, T3, T4, T5, T6, T7, T8, T9>> メンバ
@@ -1029,6 +1169,28 @@ namespace LangExt
             _8 = t8;
             _9 = t9;
             _10 = t10;
+        }
+        
+        /// <summary>
+        /// タプルのシーケンスの各要素を展開します。
+        /// </summary>
+        /// <typeparam name="T1">シーケンスの保持する 1 つ目の型。</typeparam>
+        /// <typeparam name="T2">シーケンスの保持する 2 つ目の型。</typeparam>
+        /// <typeparam name="T3">シーケンスの保持する 3 つ目の型。</typeparam>
+        /// <typeparam name="T4">シーケンスの保持する 4 つ目の型。</typeparam>
+        /// <typeparam name="T5">シーケンスの保持する 5 つ目の型。</typeparam>
+        /// <typeparam name="T6">シーケンスの保持する 6 つ目の型。</typeparam>
+        /// <typeparam name="T7">シーケンスの保持する 7 つ目の型。</typeparam>
+        /// <typeparam name="T8">シーケンスの保持する 8 つ目の型。</typeparam>
+        /// <typeparam name="T9">シーケンスの保持する 9 つ目の型。</typeparam>
+        /// <typeparam name="T10">シーケンスの保持する 10 つ目の型。</typeparam>
+        /// <typeparam name="TResult">selector によって返される値の型。</typeparam>
+        /// <param name="self">変換関数を呼び出す対象となる値のシーケンス。</param>
+        /// <param name="selector">各要素に適用する変換関数。</param>
+        /// <returns>self の各要素に対して変換関数を適用した結果を要素に持つシーケンス。</returns>
+        public TResult Let<TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> f)
+        {
+            return f(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10);
         }
 
         #region IEquatable<Tpl<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> メンバ
