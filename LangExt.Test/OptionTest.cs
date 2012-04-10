@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace LangExt.Test
@@ -150,6 +151,46 @@ namespace LangExt.Test
                     select v2;
 
             Assert.That(result.Equals(Option<int>.None), Is.True);
+        }
+
+        [Test]
+        public void Orの短絡で左が成功した場合右を評価せず成功した値を返せる()
+        {
+            Func<Option<int>> f1 = () => Option.Some(42);
+            Func<Option<int>> f2 = () => { throw new Exception(); };
+
+            var result = f1() || f2();
+            Assert.That(result.Or(0), Is.EqualTo(42));
+        }
+
+        [Test]
+        public void Orの短絡で左が失敗した場合右を評価して返せる()
+        {
+            Func<Option<int>> f1 = () => Option<int>.None;
+            Func<Option<int>> f2 = () => Option.Some(42);
+
+            var result = f1() || f2();
+            Assert.That(result.Or(0), Is.EqualTo(42));
+        }
+
+        [Test]
+        public void Andの短絡で左が失敗した場合右を評価せずにNoneを返せる()
+        {
+            Func<Option<int>> f1 = () => Option<int>.None;
+            Func<Option<int>> f2 = () => { throw new Exception(); };
+
+            var result = f1() && f2();
+            Assert.That(result, Is.EqualTo(Option<int>.None));
+        }
+
+        [Test]
+        public void Andの短絡で左が成功した場合右を評価して返せる()
+        {
+            Func<Option<int>> f1 = () => Option.Some(-1);
+            Func<Option<int>> f2 = () => Option.Some(42);
+
+            var result = f1() && f2();
+            Assert.That(result.Or(0), Is.EqualTo(42));
         }
     }
 }

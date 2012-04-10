@@ -149,6 +149,54 @@ namespace LangExt
         }
 
         /// <summary>
+        /// Option が値を持つかどうかを判定します。
+        /// </summary>
+        /// <param name="x">判定の対象。</param>
+        /// <returns>値を持つ場合は true、それ以外の場合は false。</returns>
+        public static bool operator true(Option<T> x)
+        {
+            return x.hasValue;
+        }
+
+        /// <summary>
+        /// Option が値を持たないかどうかを判定します。
+        /// </summary>
+        /// <param name="x">判定の対象。</param>
+        /// <returns>値を持つ場合は false、それ以外の場合は true。</returns>
+        public static bool operator false(Option<T> x)
+        {
+            return !x.hasValue;
+        }
+
+        /// <summary>
+        /// 左辺の Option が値を持つ場合は左辺を、そうでない場合は右辺を返します。
+        /// 通常、直接使用せず、短絡演算子として使用します。
+        /// </summary>
+        /// <param name="a">1 つ目の Option。</param>
+        /// <param name="b">2 つ目の Option。</param>
+        /// <returns>左辺の Option が値を持つ場合は左辺、それ以外の場合は右辺。</returns>
+        public static Option<T> operator |(Option<T> a, Option<T> b)
+        {
+            if (a.hasValue)
+                return a;
+            return b;
+        }
+
+        /// <summary>
+        /// 左辺の Option が値を持たない場合は None を、そうでない場合は右辺を返します。
+        /// 通常、直接使用せず、短絡演算子として使用します。
+        /// </summary>
+        /// <param name="a">1 つ目の Option。</param>
+        /// <param name="b">2 つ目の Option。</param>
+        /// <returns>左辺の Option が値を持たない場合は None、それ以外の場合は右辺。</returns>
+        public static Option<T> operator &(Option<T> a, Option<T> b)
+        {
+            if (a.hasValue == false)
+                return None;
+            return b;
+        }
+
+        /// <summary>
         /// 現在のオブジェクトのハッシュコードを取得します。
         /// </summary>
         /// <returns>現在のオブジェクトのハッシュコード。</returns>
