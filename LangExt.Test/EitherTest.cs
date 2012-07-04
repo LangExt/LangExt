@@ -131,5 +131,13 @@ namespace LangExt.Test
             Assert.That(rightEither1, Is.EqualTo(rightEither2));
             Assert.That(rightEither2, Is.EqualTo(rightEither1));
         }
+
+        [Test]
+        public void 引数なしのRightでUnit値を生成できる()
+        {
+            Either<Either.Undefined, Unit> either = Either.Right();
+
+            Assert.That(either, Is.EqualTo(Either.Right(Unit._)));
+        }
     }
 }

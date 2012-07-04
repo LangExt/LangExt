@@ -40,6 +40,15 @@ namespace LangExt
         }
 
         /// <summary>
+        /// UnitのRight値を取得します。
+        /// </summary>
+        /// <returns></returns>
+        public static Either<Undefined, Unit> Right()
+        {
+            return Either.Right(Unit._);
+        }
+
+        /// <summary>
         /// Right値を取得します。
         /// </summary>
         /// <typeparam name="TRight"></typeparam>
