@@ -38,6 +38,18 @@ namespace LangExt.Test
         }
 
         [Test]
+        public void 配列の最初の要素が述語で指定して安全に取り出せる()
+        {
+            Assert.That(new[] { 10, 20, 30 }.First(elm => 20 < elm), Is.EqualTo(Option.Some(30)));
+        }
+
+        [Test]
+        public void 配列の最初の要素が述語で指定して安全に取り出せる_存在しない場合はNone()
+        {
+            Assert.That(new int[] { 10, 19}.First(elm => 20 < elm), Is.EqualTo(Option<int>.None));
+        }
+
+        [Test]
         public void 配列の一つだけの要素が安全に取り出せる()
         {
             Assert.That(new[] { 10 }.Single(), Is.EqualTo(Option.Some(10)));
@@ -53,6 +65,18 @@ namespace LangExt.Test
         public void 配列の一つだけの要素が安全に取り出せる_二つ以上存在する場合はNone()
         {
             Assert.That(new int[] {　10, 20, 30 }.Single(), Is.EqualTo(Option<int>.None));
+        }
+
+        [Test]
+        public void 配列の一つだけの要素が述語で指定して安全に取り出せる_存在しない場合はNone()
+        {
+            Assert.That(new int[] { 10, 20 }.Single(elm => 20 < elm), Is.EqualTo(Option<int>.None));
+        }
+
+        [Test]
+        public void 配列の一つだけの要素が述語で指定して安全に取り出せる_二つ以上存在する場合はNone()
+        {
+            Assert.That(new int[] { 10, 20, 30, 40 }.Single(elm => 20 < elm), Is.EqualTo(Option<int>.None));
         }
     }
 }

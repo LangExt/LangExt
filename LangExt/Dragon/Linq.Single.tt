@@ -34,7 +34,7 @@ for (int i = 2; i <= Max; i++) {
         /// <returns>条件を満たす要素。</returns>
         public static _<<#= types #>> Single<<#= types #>>(this IEnumerable<_<<#= types #>>> self, Func<<#= types #>, bool> predicate)
         {
-            return self.Single(t => predicate(<#= args #>));
+            return Enumerable.Single(self, t => predicate(<#= args #>));
         }
 
         /// <summary>

@@ -18,7 +18,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2> First<T1, T2>(this IEnumerable<_<T1, T2>> self, Func<T1, T2, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2));
+            return Enumerable.First(self, t => predicate(t._1, t._2));
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3> First<T1, T2, T3>(this IEnumerable<_<T1, T2, T3>> self, Func<T1, T2, T3, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3));
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3, T4> First<T1, T2, T3, T4>(this IEnumerable<_<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3, t._4));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3, t._4));
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3, T4, T5> First<T1, T2, T3, T4, T5>(this IEnumerable<_<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3, t._4, t._5));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3, t._4, t._5));
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3, T4, T5, T6> First<T1, T2, T3, T4, T5, T6>(this IEnumerable<_<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3, t._4, t._5, t._6));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3, t._4, t._5, t._6));
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3, T4, T5, T6, T7> First<T1, T2, T3, T4, T5, T6, T7>(this IEnumerable<_<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7));
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3, T4, T5, T6, T7, T8> First<T1, T2, T3, T4, T5, T6, T7, T8>(this IEnumerable<_<T1, T2, T3, T4, T5, T6, T7, T8>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8));
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3, T4, T5, T6, T7, T8, T9> First<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IEnumerable<_<T1, T2, T3, T4, T5, T6, T7, T8, T9>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9));
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace LangExt.Dragon
         /// <returns>条件を満たす最初の要素。</returns>
         public static _<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> First<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IEnumerable<_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> predicate)
         {
-            return self.First(t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10));
+            return Enumerable.First(self, t => predicate(t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10));
         }
 
         /// <summary>

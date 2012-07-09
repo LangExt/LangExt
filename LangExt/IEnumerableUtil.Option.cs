@@ -11,7 +11,7 @@ namespace LangExt
         /// シーケンス内の指定されたインデックス位置にある要素を安全に返します。
         /// </summary>
         /// <typeparam name="TSource">source の要素の型。</typeparam>
-        /// <param name="source">返される要素が含まれる IEnumerable<T>。</param>
+        /// <param name="source">返される要素が含まれる IEnumerable。</param>
         /// <param name="index">取得する要素の、0 から始まるインデックス。</param>
         /// <returns>ソース シーケンス内の指定された位置にある要素。</returns>
         public static Option<TSource> ElementAt<TSource>(this IEnumerable<TSource> source, int index)
@@ -26,8 +26,8 @@ namespace LangExt
         /// シーケンスの最初の要素を安全に返します。
         /// </summary>
         /// <typeparam name="TSource">source の要素の型。</typeparam>
-        /// <param name="source">最初の要素を返す IEnumerable<T>。</param>
-        /// <returns指定されたシーケンスの最初の要素。></returns>
+        /// <param name="source">最初の要素を返す IEnumerable。</param>
+        /// <returns>指定されたシーケンスの最初の要素。</returns>
         public static Option<TSource> First<TSource>(this IEnumerable<TSource> source)
         {
             if (source.Any())
@@ -37,16 +37,47 @@ namespace LangExt
         }
 
         /// <summary>
+        /// シーケンスの最初の要素を安全に返します。
+        /// </summary>
+        /// <typeparam name="TSource">source の要素の型。</typeparam>
+        /// <param name="source">最初の要素を返す IEnumerable。</param>
+        /// <param name="predicate">各要素が条件を満たしているかどうかをテストする関数。</param>
+        /// <returns>指定されたシーケンスの最初の要素。</returns>
+        public static Option<TSource> First<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            if (source.Any(predicate))
+                return Enumerable.First(source, predicate);
+            else
+                return Option<TSource>.None;
+        }
+
+        /// <summary>
         /// シーケンスの唯一の要素を返します。シーケンス内の要素が 1 つだけではない場合は、Noneを返します。
         /// </summary>
         /// <typeparam name="TSource">source の要素の型。</typeparam>
-        /// <param name="source">1 つの要素を返す IEnumerable<T>。</param>
+        /// <param name="source">1 つの要素を返す IEnumerable。</param>
         /// <returns>入力シーケンスの 1 つの要素。</returns>
         public static Option<TSource> Single<TSource>(this IEnumerable<TSource> source)
         {
             var count = source.Count();
             if (0 < count && count < 2)
                 return Enumerable.First(source);
+            else
+                return Option<TSource>.None;
+        }
+
+        /// <summary>
+        /// シーケンスの唯一の要素を返します。シーケンス内の要素が 1 つだけではない場合は、Noneを返します。
+        /// </summary>
+        /// <typeparam name="TSource">source の要素の型。</typeparam>
+        /// <param name="source">1 つの要素を返す IEnumerable。</param>
+        /// <param name="predicate">各要素が条件を満たしているかどうかをテストする関数。</param>
+        /// <returns>入力シーケンスの 1 つの要素。</returns>
+        public static Option<TSource> Single<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            var count = source.Count(predicate);
+            if (0 < count && count < 2)
+                return Enumerable.First(source, predicate);
             else
                 return Option<TSource>.None;
         }

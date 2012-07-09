@@ -20,7 +20,7 @@ namespace LangExt.Test.Dragon
 
             Assert.That(
                 ts.First((i, s) => i < 30 && s.Length == 1),
-                Is.EqualTo(ts.First(t => t._1 < 30 && t._2.Length == 1)));
+                Is.EqualTo(Enumerable.First(ts, t => t._1 < 30 && t._2.Length == 1)));
             Assert.That(
                 ts.FirstOrDefault((i, s) => i < 30 && s.Length == 1),
                 Is.EqualTo(ts.FirstOrDefault(t => t._1 < 30 && t._2.Length == 1)));
@@ -36,7 +36,7 @@ namespace LangExt.Test.Dragon
 
             Assert.That(
                 ts.First((i, s, j) => i < 30 && s.Length + j == 2),
-                Is.EqualTo(ts.First(t => t._1 < 30 && t._2.Length + t._3 == 2)));
+                Is.EqualTo(Enumerable.First(ts, t => t._1 < 30 && t._2.Length + t._3 == 2)));
             Assert.That(
                 ts.FirstOrDefault((i, s, j) => i < 30 && s.Length + j == 2),
                 Is.EqualTo(ts.FirstOrDefault(t => t._1 < 30 && t._2.Length + t._3 == 2)));
