@@ -22,6 +22,13 @@ namespace LangExt.Test
         }
 
         [Test]
+        public void Someが暗黙的に生成できる()
+        {
+            Option<string> some = "hoge";
+            Assert.That(some.Or(null), Is.EqualTo("hoge"));
+        }
+
+        [Test]
         public void Noneが生成できる()
         {
             var none = default(Option<int>);
@@ -29,10 +36,25 @@ namespace LangExt.Test
         }
 
         [Test]
+        public void UndefinedなOptionをNoneに変換できる()
+        {
+            Option<string> none = Option.None();
+            Assert.That(none, Is.EqualTo(Option<string>.None));
+            Assert.That(none, Is.Not.EqualTo(Option<int>.None));
+        }
+
+        [Test]
         public void Noneが明示的に生成できる()
         {
             var none = Option<int>.None;
             Assert.That(none.GetType(), Is.EqualTo(typeof(Option<int>)));
+        }
+
+        [Test]
+        public void Noneが暗黙的に生成できる()
+        {
+            Option<string> none = null;
+            Assert.That(none.Match(s => "ng", _ => "ok"), Is.EqualTo("ok"));
         }
 
         [Test]

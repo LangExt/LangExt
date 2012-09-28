@@ -18,6 +18,15 @@ namespace LangExt
         {
             return new Option<T>(value);
         }
+
+        /// <summary>
+        /// None を生成します。
+        /// </summary>
+        /// <returns>None</returns>
+        public static Option<Undefined> None()
+        {
+            return Option<Undefined>.None;
+        }
     }
 
     /// <summary>
@@ -56,7 +65,14 @@ namespace LangExt
         /// <returns>引数で指定された値を保持する Some。</returns>
         public static implicit operator Option<T>(T value)
         {
+            if (value == null)
+                return Option<T>.None;
             return new Option<T>(value);
+        }
+
+        public static implicit operator Option<T>(Option<Undefined> value)
+        {
+            return Option<T>.None;
         }
 
         public static explicit operator T(Option<T> value)

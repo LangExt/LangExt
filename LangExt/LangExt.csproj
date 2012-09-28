@@ -163,6 +163,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tpl.tt</DependentUpon>
     </Compile>
+    <Compile Include="Undefined.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="Variant.cs">
       <AutoGen>True</AutoGen>

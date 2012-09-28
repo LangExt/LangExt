@@ -61,15 +61,12 @@ for (int i = 2; i <= Max; i++) {
         public T Match<T>(<#= Seq("Func<T{0}, T> ifT{0}", i) #>)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-<# for (int j = 0; j < i; j++) { #>
-            var v<#= j + 1 #> = from v in t<#= j + 1 #> select v;
-<# } #>
-            return v1.Match<T>(ifT1, 
+            return t1.Match<T>(ifT1, 
 <# for (int j = 1; j < i; j++) { #>
 <# if(j == (i - 1)) { #>
-                                _<#= j + 1 #> => v<#= j + 1 #>.Match<T>(ifT<#= j + 1 #>, thrower)<# }else{ #>
-                                _<#= j + 1 #> => v<#= j + 1 #>.Match<T>(ifT<#= j + 1 #>, <# } #>
-								<# } #><# for (int j = 2; j < i; j++) { #>)<# } #>
+                                _<#= j + 1 #> => t<#= j + 1 #>.Match<T>(ifT<#= j + 1 #>, thrower)<# }else{ #>
+                                _<#= j + 1 #> => t<#= j + 1 #>.Match<T>(ifT<#= j + 1 #>, <# } #>
+                                <# } #><# for (int j = 2; j < i; j++) { #>)<# } #>
                                 );
         }
 

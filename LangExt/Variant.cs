@@ -61,10 +61,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, thrower)								                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2, thrower)                                                                );
         }
 
         /// <summary>
@@ -218,11 +216,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, thrower)								)                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3, thrower)                                )                                );
         }
 
         /// <summary>
@@ -400,12 +395,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3, Func<T4, T> ifT4)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            var v4 = from v in t4 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, 								                                _4 => v4.Match<T>(ifT4, thrower)								))                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3,                                                                 _4 => t4.Match<T>(ifT4, thrower)                                ))                                );
         }
 
         /// <summary>
@@ -607,13 +598,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3, Func<T4, T> ifT4, Func<T5, T> ifT5)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            var v4 = from v in t4 select v;
-            var v5 = from v in t5 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, 								                                _4 => v4.Match<T>(ifT4, 								                                _5 => v5.Match<T>(ifT5, thrower)								)))                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3,                                                                 _4 => t4.Match<T>(ifT4,                                                                 _5 => t5.Match<T>(ifT5, thrower)                                )))                                );
         }
 
         /// <summary>
@@ -839,14 +825,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3, Func<T4, T> ifT4, Func<T5, T> ifT5, Func<T6, T> ifT6)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            var v4 = from v in t4 select v;
-            var v5 = from v in t5 select v;
-            var v6 = from v in t6 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, 								                                _4 => v4.Match<T>(ifT4, 								                                _5 => v5.Match<T>(ifT5, 								                                _6 => v6.Match<T>(ifT6, thrower)								))))                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3,                                                                 _4 => t4.Match<T>(ifT4,                                                                 _5 => t5.Match<T>(ifT5,                                                                 _6 => t6.Match<T>(ifT6, thrower)                                ))))                                );
         }
 
         /// <summary>
@@ -1096,15 +1076,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3, Func<T4, T> ifT4, Func<T5, T> ifT5, Func<T6, T> ifT6, Func<T7, T> ifT7)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            var v4 = from v in t4 select v;
-            var v5 = from v in t5 select v;
-            var v6 = from v in t6 select v;
-            var v7 = from v in t7 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, 								                                _4 => v4.Match<T>(ifT4, 								                                _5 => v5.Match<T>(ifT5, 								                                _6 => v6.Match<T>(ifT6, 								                                _7 => v7.Match<T>(ifT7, thrower)								)))))                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3,                                                                 _4 => t4.Match<T>(ifT4,                                                                 _5 => t5.Match<T>(ifT5,                                                                 _6 => t6.Match<T>(ifT6,                                                                 _7 => t7.Match<T>(ifT7, thrower)                                )))))                                );
         }
 
         /// <summary>
@@ -1378,16 +1351,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3, Func<T4, T> ifT4, Func<T5, T> ifT5, Func<T6, T> ifT6, Func<T7, T> ifT7, Func<T8, T> ifT8)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            var v4 = from v in t4 select v;
-            var v5 = from v in t5 select v;
-            var v6 = from v in t6 select v;
-            var v7 = from v in t7 select v;
-            var v8 = from v in t8 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, 								                                _4 => v4.Match<T>(ifT4, 								                                _5 => v5.Match<T>(ifT5, 								                                _6 => v6.Match<T>(ifT6, 								                                _7 => v7.Match<T>(ifT7, 								                                _8 => v8.Match<T>(ifT8, thrower)								))))))                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3,                                                                 _4 => t4.Match<T>(ifT4,                                                                 _5 => t5.Match<T>(ifT5,                                                                 _6 => t6.Match<T>(ifT6,                                                                 _7 => t7.Match<T>(ifT7,                                                                 _8 => t8.Match<T>(ifT8, thrower)                                ))))))                                );
         }
 
         /// <summary>
@@ -1685,17 +1650,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3, Func<T4, T> ifT4, Func<T5, T> ifT5, Func<T6, T> ifT6, Func<T7, T> ifT7, Func<T8, T> ifT8, Func<T9, T> ifT9)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            var v4 = from v in t4 select v;
-            var v5 = from v in t5 select v;
-            var v6 = from v in t6 select v;
-            var v7 = from v in t7 select v;
-            var v8 = from v in t8 select v;
-            var v9 = from v in t9 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, 								                                _4 => v4.Match<T>(ifT4, 								                                _5 => v5.Match<T>(ifT5, 								                                _6 => v6.Match<T>(ifT6, 								                                _7 => v7.Match<T>(ifT7, 								                                _8 => v8.Match<T>(ifT8, 								                                _9 => v9.Match<T>(ifT9, thrower)								)))))))                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3,                                                                 _4 => t4.Match<T>(ifT4,                                                                 _5 => t5.Match<T>(ifT5,                                                                 _6 => t6.Match<T>(ifT6,                                                                 _7 => t7.Match<T>(ifT7,                                                                 _8 => t8.Match<T>(ifT8,                                                                 _9 => t9.Match<T>(ifT9, thrower)                                )))))))                                );
         }
 
         /// <summary>
@@ -2017,18 +1973,8 @@ namespace LangExt
         public T Match<T>(Func<T1, T> ifT1, Func<T2, T> ifT2, Func<T3, T> ifT3, Func<T4, T> ifT4, Func<T5, T> ifT5, Func<T6, T> ifT6, Func<T7, T> ifT7, Func<T8, T> ifT8, Func<T9, T> ifT9, Func<T10, T> ifT10)
         {
             Func<Unit, T> thrower = _ => { throw new InvalidOperationException(); };
-            var v1 = from v in t1 select v;
-            var v2 = from v in t2 select v;
-            var v3 = from v in t3 select v;
-            var v4 = from v in t4 select v;
-            var v5 = from v in t5 select v;
-            var v6 = from v in t6 select v;
-            var v7 = from v in t7 select v;
-            var v8 = from v in t8 select v;
-            var v9 = from v in t9 select v;
-            var v10 = from v in t10 select v;
-            return v1.Match<T>(ifT1, 
-                                _2 => v2.Match<T>(ifT2, 								                                _3 => v3.Match<T>(ifT3, 								                                _4 => v4.Match<T>(ifT4, 								                                _5 => v5.Match<T>(ifT5, 								                                _6 => v6.Match<T>(ifT6, 								                                _7 => v7.Match<T>(ifT7, 								                                _8 => v8.Match<T>(ifT8, 								                                _9 => v9.Match<T>(ifT9, 								                                _10 => v10.Match<T>(ifT10, thrower)								))))))))                                );
+            return t1.Match<T>(ifT1, 
+                                _2 => t2.Match<T>(ifT2,                                                                 _3 => t3.Match<T>(ifT3,                                                                 _4 => t4.Match<T>(ifT4,                                                                 _5 => t5.Match<T>(ifT5,                                                                 _6 => t6.Match<T>(ifT6,                                                                 _7 => t7.Match<T>(ifT7,                                                                 _8 => t8.Match<T>(ifT8,                                                                 _9 => t9.Match<T>(ifT9,                                                                 _10 => t10.Match<T>(ifT10, thrower)                                ))))))))                                );
         }
 
         /// <summary>

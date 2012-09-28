@@ -135,7 +135,7 @@ namespace LangExt.Test
         [Test]
         public void 引数なしのRightでUnit値を生成できる()
         {
-            Either<Either.Undefined, Unit> either = Either.Right();
+            Either<Undefined, Unit> either = Either.Right();
 
             Assert.That(either, Is.EqualTo(Either.Right(Unit._)));
         }
