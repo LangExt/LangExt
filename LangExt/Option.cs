@@ -23,9 +23,12 @@ namespace LangExt
         /// None を生成します。
         /// </summary>
         /// <returns>None</returns>
-        public static Option<Undefined> None()
+        public static Option<Undefined> None
         {
-            return Option<Undefined>.None;
+            get
+            {
+                return Option<Undefined>.None;
+            }
         }
     }
 

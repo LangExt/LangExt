@@ -38,7 +38,7 @@ namespace LangExt.Test
         [Test]
         public void UndefinedなOptionをNoneに変換できる()
         {
-            Option<string> none = Option.None();
+            Option<string> none = Option.None;
             Assert.That(none, Is.EqualTo(Option<string>.None));
             Assert.That(none, Is.Not.EqualTo(Option<int>.None));
         }
