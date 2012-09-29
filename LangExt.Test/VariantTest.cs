@@ -58,8 +58,9 @@ namespace LangExt.Test
         [Test]
         public void intとstringとobjectからなるVariantにオブジェクトを入れるとオブジェクトが取り出せる()
         {
-            Variant<int, string, object> v = default(object);
-            Assert.That(v.Match(Fail<int, object>, Fail<string, object>, Id), Is.Null);
+            var obj = new object();
+            Variant<int, string, object> v = obj;
+            Assert.That(v.Match(Fail<int, object>, Fail<string, object>, Id), Is.EqualTo(obj));
         }
 
         [Test]
@@ -72,8 +73,9 @@ namespace LangExt.Test
         [Test]
         public void intとobjectとstringからなるVariantにオブジェクトを入れるとオブジェクトが取り出せる()
         {
-            Variant<int, object, string> v = default(object);
-            Assert.That(v.Match(Fail<int, object>, o => o, Fail<string, object>), Is.Null);
+            var obj = new object();
+            Variant<int, object, string> v = obj;
+            Assert.That(v.Match(Fail<int, object>, o => o, Fail<string, object>), Is.EqualTo(obj));
         }
     }
 }

@@ -58,6 +58,14 @@ namespace LangExt.Test
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Some_Nullは例外が投げられる()
+        {
+            Option<string> opt = Option.Some((string)null);
+            Assert.Fail();
+        }
+
+        [Test]
         public void Optionを値型のdefaultで初期化してもNoneにならない()
         {
             Option<int> some = default(int); // 0

@@ -49,6 +49,9 @@ namespace LangExt
         /// <param name="value">Some に保持する値。</param>
         public Option(T value)
         {
+            if (value == null)
+                throw new ArgumentNullException("value");
+
             this.hasValue = true;
             this.value = value;
         }
