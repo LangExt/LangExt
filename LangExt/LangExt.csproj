@@ -142,7 +142,7 @@
     <Compile Include="IEnumerableUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IEnumerableUtil.Option.cs" />
+    <Compile Include="Safety\IEnumerableUtil.Option.cs" />
     <Compile Include="IEnumerableUtil.Zip.cs">
       <DependentUpon>IEnumerableUtil.Zip.tt</DependentUpon>
       <SubType>Code</SubType>

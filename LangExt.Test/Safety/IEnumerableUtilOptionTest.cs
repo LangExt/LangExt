@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace LangExt.Test
+namespace LangExt.Safety.Test
 {
     [TestFixture]
     class IEnumerableUtilOptionTest

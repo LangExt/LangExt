@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LangExt
+namespace LangExt.Safety
 {
-    partial class IEnumerableUtil
+    public static class IEnumerableUtil
     {
         /// <summary>
         /// シーケンス内の指定されたインデックス位置にある要素を安全に返します。
