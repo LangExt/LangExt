@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LangExt.Compatibility.FSharp</id>
+    <version>1.0.0.0</version>
+    <authors>bleis-tift,otf</authors>
+    <licenseUrl>https://github.com/LangExt/LangExt.Compatibility.FSharp/blob/master/NYSL.txt</licenseUrl>
+    <projectUrl>https://github.com/LangExt/LangExt.Compatibility.FSharp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>This is a functional library for C#.</summary>
+    <description>This library supports functional programming using C#.</description>
+    <tags>functional c# f# csharp fsharp library</tags>
+  </metadata>
+  <files>
+      <file src="bin\net3.5\*" target="lib\net20"/>
+      <file src="bin\net4.0\*" target="lib\net40"/>
+  </files>
+</package>
