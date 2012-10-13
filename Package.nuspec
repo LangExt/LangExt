@@ -12,7 +12,6 @@
     <tags>functional c# f# csharp fsharp library</tags>
   </metadata>
   <files>
-      <file src="bin\net3.5\*" target="lib\net20"/>
       <file src="bin\net4.0\*" target="lib\net40"/>
   </files>
 </package>
