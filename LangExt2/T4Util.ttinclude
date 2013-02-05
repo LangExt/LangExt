@@ -1,0 +1,125 @@
+﻿<#@ IntelliSenseLanguage processor="tangibleT4Editor" language="C#" #>
+<#@ assemblyForIntellisenseOnly processor="tangibleT4Editor" name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+string Fold(string init, string format, int count)
+{
+    var result = init;
+    for (int i = 0; i < count; i++)
+    {
+        result = string.Format(format, result, count - i);
+    }
+    return result;
+}
+
+string Fold(string init, string format, int begin, int end)
+{
+    var result = init;
+    for (int i = begin; i < end; i++)
+    {
+        result = string.Format(format, result, (end - begin) - i);
+    }
+    return result;
+}
+
+string Repeat(string separator, string format, int begin, int end)
+{
+    return string.Join(separator, Enumerable.Range(begin, end - begin).Select(i => string.Format(format, i)));
+}
+
+string Repeat(string separator, string format, int count)
+{
+    return string.Join(separator, Enumerable.Range(1, count).Select(i => string.Format(format, i)));
+}
+
+string TypeParams(string prefix, int count)
+{
+    return Repeat(", ", prefix + "{0}", count);
+}
+
+string TypeParams(string prefix, int begin, int end)
+{
+    return Repeat(", ", prefix + "{0}", begin, end);
+}
+
+string MethodDefArgs(string typePrefix, string varPrefix, int count)
+{
+    return Repeat(", ", typePrefix + "{0} " + varPrefix + "{0}", count);
+}
+
+string MethodDefArgs(string typePrefix, string varPrefix, int begin, int end)
+{
+    return Repeat(", ", typePrefix + "{0} " + varPrefix + "{0}", begin, end);
+}
+
+string MethodCallArgs(string prefix, int count)
+{
+    return Repeat(", ", prefix + "{0}", count);
+}
+
+string MethodCallArgs(string prefix, int begin, int end)
+{
+    return Repeat(", ", prefix + "{0}", begin, end);
+}
+
+string TupleType(int elems)
+{
+    var res = new StringBuilder("Tuple<");
+    var nest = 0;
+    for (int i = 0; i < elems; i++)
+    {
+        if (i != 0 && i % 7 == 0)
+        {
+            res.Append("Tuple<");
+            nest++;
+        }
+        res.AppendFormat("T{0}, ", i + 1);
+    }
+    res.Remove(res.Length - 2, 2);
+    return res.ToString() + new string('>', nest + 1);
+}
+
+string TupleTypeArgs(int begin, int end)
+{
+    if (end - begin < 7)
+        return Repeat(", ", "T{0}", begin, end + 1);
+    else
+        return string.Format(
+            "{0}, Tuple<{1}>",
+            Repeat(", ", "T{0}", begin, begin + 7),
+            TupleTypeArgs(begin + 7, end));
+}
+
+string NewTuple(int begin, int end)
+{
+    if (end - begin < 7)
+        return string.Format(
+            "new Tuple<{0}>({1})",
+            TupleTypeArgs(begin, end),
+            Repeat(", ", "t{0}", begin, end + 1));
+    else
+        return string.Format(
+            "new Tuple<{0}>({1}, {2})",
+            TupleTypeArgs(begin, end),
+            Repeat(", ", "t{0}", begin, begin + 7),
+            NewTuple(begin + 7, end));
+}
+
+string NewTuple(int n) { return NewTuple(1, n); }
+
+string ItemN(int n)
+{
+    // 7  -> Item7
+    // 8  -> Rest.Item1
+    // 14 -> Rest.Item7
+    // 15 -> Rest.Rest.Item1
+    // 21 -> Rest.Rest.Item7
+    // 22 -> Rest.Rest.Rest.Item1
+    var rests = (n - 1) / 7;
+    var item = n % 7 == 0 ? 7 : n % 7;
+    return string.Join("", Enumerable.Repeat(".Rest", rests)) + ".Item" + item;
+}
+#>
