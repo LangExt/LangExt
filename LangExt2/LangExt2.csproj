@@ -42,6 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Create.cs" />
+    <Compile Include="Func.cs" />
+    <Compile Include="Func.Curry.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Func.Curry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Func.Option.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Func.Option.tt</DependentUpon>
+    </Compile>
     <Compile Include="ObjectModule.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Option.Module.cs">
@@ -59,6 +70,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Func.Curry.tt">
+      <DependentUpon>Func.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Func.Curry.cs</LastGenOutput>
+    </None>
+    <None Include="Func.Option.tt">
+      <DependentUpon>Func.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Func.Option.cs</LastGenOutput>
+    </None>
     <None Include="T4Util.ttinclude" />
     <None Include="TupleModule.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
