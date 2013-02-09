@@ -118,7 +118,7 @@ namespace LangExt2
 
 
         /// <summary>2要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, U>(this Tuple<T1, T2> self, Func<T1, T2, U> f)
+        public static U Match<T1, T2, U>(this Tuple<T1, T2> self, Func<T1, T2, U> f)
         {
             return f(self._1(), self._2());
         }
@@ -160,7 +160,7 @@ namespace LangExt2
         }
 
         /// <summary>3要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, U>(this Tuple<T1, T2, T3> self, Func<T1, T2, T3, U> f)
+        public static U Match<T1, T2, T3, U>(this Tuple<T1, T2, T3> self, Func<T1, T2, T3, U> f)
         {
             return f(self._1(), self._2(), self._3());
         }
@@ -210,7 +210,7 @@ namespace LangExt2
         }
 
         /// <summary>4要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, U>(this Tuple<T1, T2, T3, T4> self, Func<T1, T2, T3, T4, U> f)
+        public static U Match<T1, T2, T3, T4, U>(this Tuple<T1, T2, T3, T4> self, Func<T1, T2, T3, T4, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4());
         }
@@ -268,7 +268,7 @@ namespace LangExt2
         }
 
         /// <summary>5要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, U>(this Tuple<T1, T2, T3, T4, T5> self, Func<T1, T2, T3, T4, T5, U> f)
+        public static U Match<T1, T2, T3, T4, T5, U>(this Tuple<T1, T2, T3, T4, T5> self, Func<T1, T2, T3, T4, T5, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5());
         }
@@ -334,7 +334,7 @@ namespace LangExt2
         }
 
         /// <summary>6要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, U>(this Tuple<T1, T2, T3, T4, T5, T6> self, Func<T1, T2, T3, T4, T5, T6, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, U>(this Tuple<T1, T2, T3, T4, T5, T6> self, Func<T1, T2, T3, T4, T5, T6, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6());
         }
@@ -408,7 +408,7 @@ namespace LangExt2
         }
 
         /// <summary>7要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7());
         }
@@ -490,7 +490,7 @@ namespace LangExt2
         }
 
         /// <summary>8要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8());
         }
@@ -580,7 +580,7 @@ namespace LangExt2
         }
 
         /// <summary>9要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9());
         }
@@ -678,7 +678,7 @@ namespace LangExt2
         }
 
         /// <summary>10要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10());
         }
@@ -784,7 +784,7 @@ namespace LangExt2
         }
 
         /// <summary>11要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11());
         }
@@ -898,7 +898,7 @@ namespace LangExt2
         }
 
         /// <summary>12要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12());
         }
@@ -1020,7 +1020,7 @@ namespace LangExt2
         }
 
         /// <summary>13要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13());
         }
@@ -1150,7 +1150,7 @@ namespace LangExt2
         }
 
         /// <summary>14要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14());
         }
@@ -1288,7 +1288,7 @@ namespace LangExt2
         }
 
         /// <summary>15要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15());
         }
@@ -1429,7 +1429,7 @@ namespace LangExt2
         }
 
         /// <summary>16要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
+        public static U Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
         {
             return f(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15(), self._16());
         }

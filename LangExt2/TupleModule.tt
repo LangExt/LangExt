@@ -69,7 +69,7 @@ namespace LangExt2
 <# } #>
 
         /// <summary><#= i #>要素タプルに対して、擬似的にパターンマッチを行います。</summary>
-        public static U Match_<<#= types #>, U>(this <#= tplType #> self, Func<<#= types #>, U> f)
+        public static U Match<<#= types #>, U>(this <#= tplType #> self, Func<<#= types #>, U> f)
         {
             return f(<#= Repeat(", ", "self._{0}()", i) #>);
         }
