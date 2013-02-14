@@ -1,0 +1,71 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="T4Util.ttinclude" #>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt2
+{
+    partial class IEnumerableModule
+    {
+<# for (int i = 2; i <= 16; i++) { #>
+        /// <summary><#= i #>個のIEnumerableの要素1つ1つに対して、fを適用したIEnumerableを返します。</summary>
+        public static IEnumerable<U> ZipWith<<#= TypeParams("T", i) #>, U>(this <#= Repeat(", ", "IEnumerable<T{0}> ie{0}", i) #>, Func<<#= TypeParams("T", i) #>, U> f)
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            using (var itor<#= j #> = ie<#= j #>.GetEnumerator())
+<# } #>
+            {
+                while (<#= Repeat(" && ", "itor{0}.MoveNext()", i) #>)
+                {
+                    yield return f(<#= Repeat(", ", "itor{0}.Current", i) #>);
+                }
+            }
+        }
+
+        /// <summary><#= i #>個のIEnumerableをZipします。</summary>
+        public static IEnumerable<<#= TupleType(i) #>> Zip<<#= TypeParams("T", i) #>>(this <#= Repeat(", ", "IEnumerable<T{0}> ie{0}", i) #>)
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            using (var itor<#= j #> = ie<#= j #>.GetEnumerator())
+<# } #>
+            {
+                while (<#= Repeat(" && ", "itor{0}.MoveNext()", i) #>)
+                {
+                    yield return Create.Tuple(<#= Repeat(", ", "itor{0}.Current", i) #>);
+                }
+            }
+        }
+
+        /// <summary>ZipされたIEnumerableを元に戻し、<#= i #>個のIEnumerableのタプルとして返します。</summary>
+        public static Tuple<<#= TupleTypeArgs("IEnumerable<T{0}>", 1, i) #>> Unzip<<#= TypeParams("T", i) #>>(this IEnumerable<<#= TupleType(i) #>> self)
+        {
+            return Create.Tuple(<#= Repeat(", ", "self.Map(x => x._{0}())", i) #>);
+        }
+
+<# } #>
+
+        /// <summary>IEnumerableに対して、0から始まる整数列をZipします。</summary>
+        public static IEnumerable<Tuple<T1, int>> WithIndex<T1>(this IEnumerable<T1> self)
+        {
+            return self.Zip(InitInfinite(Func.Id));
+        }
+
+<# for (int i = 2; i <= 15; i++) { #>
+        /// <summary><#= i #>要素のタプルのIEnumerableに対して、0から始まる整数列を加えたタプルのIEnumerableとして返します。</summary>
+        public static IEnumerable<<#= TupleType(i + 1, n => n == i + 1 ? "int" : ("T" + n)) #>> WithIndex<<#= TypeParams("T", i) #>>(this IEnumerable<Tuple<<#= TupleTypeArgs(1, i) #>>> self)
+        {
+            foreach (var tpl in self.Zip(InitInfinite(Func.Id))) yield return tpl.Item1.Add(tpl.Item2);
+        }
+
+<# } #>
+    }
+}

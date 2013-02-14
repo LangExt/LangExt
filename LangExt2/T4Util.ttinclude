@@ -65,7 +65,7 @@ string MethodCallArgs(string prefix, int begin, int end)
     return Repeat(", ", prefix + "{0}", begin, end);
 }
 
-string TupleType(int elems)
+string TupleType(int elems, Func<int, string> f)
 {
     var res = new StringBuilder("Tuple<");
     var nest = 0;
@@ -76,21 +76,31 @@ string TupleType(int elems)
             res.Append("Tuple<");
             nest++;
         }
-        res.AppendFormat("T{0}, ", i + 1);
+        res.Append(f(i + 1) + ", ");
     }
     res.Remove(res.Length - 2, 2);
     return res.ToString() + new string('>', nest + 1);
 }
 
-string TupleTypeArgs(int begin, int end)
+string TupleType(int elems)
+{
+    return TupleType(elems, i => "T" + i);
+}
+
+string TupleTypeArgs(string typeFormat, int begin, int end)
 {
     if (end - begin < 7)
-        return Repeat(", ", "T{0}", begin, end + 1);
+        return Repeat(", ", typeFormat, begin, end + 1);
     else
         return string.Format(
             "{0}, Tuple<{1}>",
-            Repeat(", ", "T{0}", begin, begin + 7),
-            TupleTypeArgs(begin + 7, end));
+            Repeat(", ", typeFormat, begin, begin + 7),
+            TupleTypeArgs(typeFormat, begin + 7, end));
+}
+
+string TupleTypeArgs(int begin, int end)
+{
+    return TupleTypeArgs("T{0}", begin, end);
 }
 
 string NewTuple(int begin, int end)

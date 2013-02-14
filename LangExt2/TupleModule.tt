@@ -43,6 +43,10 @@ namespace LangExt2
         {
             return <#= NewTuple(i) #>;
         }
+        /// <summary><#= i #>要素タプルから1番目の要素を取り出します。</summary>
+        public static T1 Fst<<#= types #>>(this <#= tplType #> self) { return self.Item1; }
+        /// <summary><#= i #>要素タプルから2番目の要素を取り出します。</summary>
+        public static T2 Snd<<#= types #>>(this <#= tplType #> self) { return self.Item2; }
 <#
         for (int j = 1; j <= i; j++) {
 #>

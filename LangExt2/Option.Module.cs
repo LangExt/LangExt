@@ -74,7 +74,7 @@ namespace LangExt2
         /// <summary>
         /// Option[T] → int
         /// </summary>
-        public static int Length<T>(this Option<T> self)
+        public static int Len<T>(this Option<T> self)
         {
             return self.Match(_ => 1, () => 0);
         }
