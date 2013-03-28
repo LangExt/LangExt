@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace LangExt2
 {
-    partial class IEnumerableModule
+    partial class Enumerable
     {
 <# for (int i = 2; i <= 16; i++) { #>
         /// <summary><#= i #>個のIEnumerableの要素1つ1つに対して、fを適用したIEnumerableを返します。</summary>

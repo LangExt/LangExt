@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LangExt2
 {
-    partial class IEnumerableModule
+    partial class Enumerable
     {
         /// <summary>
         /// クエリ式用に用意しています。

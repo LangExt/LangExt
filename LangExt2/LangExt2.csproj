@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachedEnumerable.cs" />
+    <Compile Include="Comparable.cs" />
     <Compile Include="Create.cs" />
     <Compile Include="Func.cs" />
     <Compile Include="Func.Curry.cs">
@@ -54,14 +55,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Func.Option.tt</DependentUpon>
     </Compile>
-    <Compile Include="IEnumerableModule.QueryExpr.cs">
-      <DependentUpon>IEnumerableModule.cs</DependentUpon>
+    <Compile Include="Enumerable.QueryExpr.cs">
+      <DependentUpon>Enumerable.cs</DependentUpon>
     </Compile>
-    <Compile Include="IEnumerableModule.Zip.cs">
+    <Compile Include="Enumerable.Zip.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IEnumerableModule.Zip.tt</DependentUpon>
+      <DependentUpon>Enumerable.Zip.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderedSeq.cs" />
+    <Compile Include="Seq.cs" />
     <Compile Include="ObjectModule.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Option.Module.cs">
@@ -72,7 +75,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AuxTypes.cs" />
-    <Compile Include="IEnumerableModule.cs" />
+    <Compile Include="Enumerable.cs" />
+    <Compile Include="Seq.QueryExpr.cs">
+      <DependentUpon>Seq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Seq.Zip.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Seq.Zip.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SumStrategy.cs" />
     <Compile Include="TupleModule.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,10 +102,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Option.cs</LastGenOutput>
     </None>
-    <None Include="IEnumerableModule.Zip.tt">
+    <None Include="Enumerable.Zip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IEnumerableModule.Zip.cs</LastGenOutput>
-      <DependentUpon>IEnumerableModule.cs</DependentUpon>
+      <LastGenOutput>Enumerable.Zip.cs</LastGenOutput>
+      <DependentUpon>Enumerable.cs</DependentUpon>
+    </None>
+    <None Include="Seq.Zip.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Seq.Zip.cs</LastGenOutput>
+      <DependentUpon>Seq.cs</DependentUpon>
     </None>
     <None Include="T4Util.ttinclude" />
     <None Include="TupleModule.tt">

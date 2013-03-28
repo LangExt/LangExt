@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LangExt2
 {
-    partial class IEnumerableModule
+    partial class Enumerable
     {
         /// <summary>2個のIEnumerableの要素1つ1つに対して、fを適用したIEnumerableを返します。</summary>
         public static IEnumerable<U> ZipWith<T1, T2, U>(this IEnumerable<T1> ie1, IEnumerable<T2> ie2, Func<T1, T2, U> f)

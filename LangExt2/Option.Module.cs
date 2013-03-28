@@ -96,11 +96,11 @@ namespace LangExt2
         }
 
         /// <summary>
-        /// Option[T] → List[T]
+        /// Option[T] → ISeq[T]
         /// </summary>
-        public static List<T> ToList<T>(this Option<T> self)
+        public static ISeq<T> ToSeq<T>(this Option<T> self)
         {
-            return self.Match(v => new List<T> { v }, () => new List<T>());
+            return self.Match(Seq.Singleton, () => Seq.Create<T>());
         }
     }
 }

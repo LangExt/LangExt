@@ -16,7 +16,19 @@ namespace LangExt2
         /// <typeparam name="T">生成するOptionの要素の型</typeparam>
         /// <param name="value">値</param>
         /// <returns>valueがnullの場合None、そうでない場合Some</returns>
-        public static Option<T> Option<T>(T value)
+        public static Option<T> Option<T>(T value) where T : class
+        {
+            return LangExt2.Option.Create(value);
+        }
+
+        /// <summary>
+        /// valueがnullでない場合はOption.Some(value.Value)と、
+        /// valueがnullの場合はOption.Noneと同じオブジェクトを返します。
+        /// </summary>
+        /// <typeparam name="T">生成するOptionの要素の型</typeparam>
+        /// <param name="value">値</param>
+        /// <returns>valueがnullの場合None、そうでない場合Some</returns>
+        public static Option<T> Option<T>(T? value) where T : struct
         {
             return LangExt2.Option.Create(value);
         }
@@ -34,9 +46,21 @@ namespace LangExt2
         /// <typeparam name="T">生成するOptionの要素の型</typeparam>
         /// <param name="value">値</param>
         /// <returns>valueがnullの場合None、そうでない場合Some</returns>
-        public static Option<T> Create<T>(T value)
+        public static Option<T> Create<T>(T value) where T : class
         {
             return value == null ? Option<T>.None : new Option<T>(value);
+        }
+
+        /// <summary>
+        /// valueがnullでない場合はOption.Some(value.Value)と、
+        /// valueがnullの場合はOption.Noneと同じオブジェクトを返します。
+        /// </summary>
+        /// <typeparam name="T">生成するOptionの要素の型</typeparam>
+        /// <param name="value">値</param>
+        /// <returns>valueがnullの場合None、そうでない場合Some</returns>
+        public static Option<T> Create<T>(T? value) where T : struct
+        {
+            return value == null ? Option<T>.None : new Option<T>(value.Value);
         }
 
         /// <summary>
@@ -59,6 +83,35 @@ namespace LangExt2
             {
                 return Option<Undefined>.None;
             }
+        }
+
+        /// <summary>
+        /// 保持している値を強制的に取得します。
+        /// このメソッドはNoneの場合に意味のない値(default(T))を返すため、危険です。
+        /// そのため、このメソッドは基本的には使用せず、
+        /// MatchメソッドやGetOrメソッドを使用するようにしてください。
+        /// </summary>
+        /// <returns>内部で保持している値</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static T GetValue<T>(this Option<T> self)
+        {
+            return self.Value;
+        }
+
+        /// <summary>
+        /// 値を持つかどうかを取得する関数が必要な時に使います。
+        /// </summary>
+        public static bool IsSome<T>(Option<T> self)
+        {
+            return self.IsSome;
+        }
+
+        /// <summary>
+        /// 値を持たないかどうかを取得する関数が必要な時に使います。
+        /// </summary>
+        public static bool IsNone<T>(Option<T> self)
+        {
+            return self.IsNone;
         }
     }
 
@@ -110,6 +163,8 @@ namespace LangExt2
         {
             return Option<T>.None;
         }
+
+        internal T Value { get { return this.value; } }
 
         /// <summary>
         /// Someの場合、保持された値を取り出します。

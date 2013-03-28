@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace LangExt2
 {
+    using StdEnumerable = System.Linq.Enumerable;
+
     /// <summary>IEnumerableに対する関数を提供します。</summary>
-    public static partial class IEnumerableModule
+    public static partial class Enumerable
     {
         /// <summary>
-        /// fを元にIEnumerableを生成します。
+        /// IEnumerable[T]からシーケンスに変換します。
+        /// </summary>
+        public static ISeq<T> ToSeq<T>(this IEnumerable<T> self)
+        {
+            return new Seq<T>(self);
+        }
+
+        /// <summary>
+        /// fを元に無限に続くIEnumerableを生成します。
         /// </summary>
         public static IEnumerable<T> InitInfinite<T>(Func<int, T> f)
         {
@@ -46,7 +55,7 @@ namespace LangExt2
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のWhereに対応します。
         /// </summary>
-        public static IEnumerable<T> FilterWitIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return self.Where(pred); }
+        public static IEnumerable<T> FilterWitIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return StdEnumerable.Where(self, pred); }
 
         /// <summary>
         /// IEnumerableのすべての要素に対してfを適用したIEnumerableを生成して返します。
@@ -59,20 +68,20 @@ namespace LangExt2
         /// fには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のSelectに対応します。
         /// </summary>
-        public static IEnumerable<U> MapWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, U> f) { return self.Select(f); }
+        public static IEnumerable<U> MapWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, U> f) { return StdEnumerable.Select(self, f); }
 
         /// <summary>
         /// IEnumerableの各要素を順番にfの引数に対して渡し、fから返された各IEnumerableを平坦化したIEnumerableを生成して返します。
         /// 標準クエリ演算子のSelectManyに対応します。
         /// </summary>
-        public static IEnumerable<U> Bind<T, U>(this IEnumerable<T> self, Func<T, IEnumerable<U>> f) { return self.SelectMany(f); }
+        public static IEnumerable<U> Bind<T, U>(this IEnumerable<T> self, Func<T, IEnumerable<U>> f) { return StdEnumerable.SelectMany(self, f); }
 
         /// <summary>
         /// IEnumerableの各要素を順番にfの引数に対して渡し、fから返された各IEnumerableを平坦化したIEnumerableを生成して返します。
         /// fには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のSelectManyに対応します。
         /// </summary>
-        public static IEnumerable<U> BindWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, IEnumerable<U>> f) { return self.SelectMany(f); }
+        public static IEnumerable<U> BindWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, IEnumerable<U>> f) { return StdEnumerable.SelectMany(self, f); }
 
         /// <summary>
         /// IEnumerableのすべての要素に対してfを適用し、Someを返した要素のみを集めたIEnumerableを生成して返します。
@@ -85,7 +94,10 @@ namespace LangExt2
         /// fには、要素のほかに要素のインデックスも渡されます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, Option<U>> f) { return self.BindWithIndex((t, i) => f(t, i).ToArray()); }
+        public static IEnumerable<U> ChooseWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, Option<U>> f)
+        {
+            return self.BindWithIndex((t, i) => f(t, i).ToArray());
+        }
 
         /// <summary>
         /// 非ジェネリック型のIEnumerableを、IEnumerable[T]に変換します。
@@ -97,7 +109,7 @@ namespace LangExt2
         /// IEnumerableに別のIEnumerableを連結したIEnumerableを生成して返します。
         /// 標準クエリ演算子のConcatに対応します。
         /// </summary>
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> self, IEnumerable<T> other) { return Enumerable.Concat(self, other); }
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> self, IEnumerable<T> other) { return StdEnumerable.Concat(self, other); }
 
         /// <summary>
         /// ネストしたIEnumerableのネストを一段取り除きます。
@@ -112,7 +124,7 @@ namespace LangExt2
         /// nがIEnumerableの要素の個数よりも大きい場合、空のIEnumerableが返されます。
         /// 標準クエリ演算子のSkipに対応します。
         /// </summary>
-        public static IEnumerable<T> Skip<T>(this IEnumerable<T> self, int n) { return Enumerable.Skip(self, n); }
+        public static IEnumerable<T> Skip<T>(this IEnumerable<T> self, int n) { return StdEnumerable.Skip(self, n); }
 
         /// <summary>
         /// IEnumerableの先頭からn個の要素を取り出したIEnumerableを生成して返します。
@@ -120,33 +132,33 @@ namespace LangExt2
         /// nがIEnumerableの要素の個数よりも大きい場合、入力のIEnumerableがそのまま返されます。
         /// 標準クエリ演算子のTakeに対応します。
         /// </summary>
-        public static IEnumerable<T> Take<T>(this IEnumerable<T> self, int n) { return Enumerable.Take(self, n); }
+        public static IEnumerable<T> Take<T>(this IEnumerable<T> self, int n) { return StdEnumerable.Take(self, n); }
 
         /// <summary>
         /// IEnumerableの先頭からpredを満たす要素をスキップしたIEnumerableを生成して返します。
         /// 標準クエリ演算子のSkipWhileに対応します。
         /// </summary>
-        public static IEnumerable<T> SkipWhile<T>(this IEnumerable<T> self, Func<T, bool> pred) { return Enumerable.SkipWhile(self, pred); }
+        public static IEnumerable<T> SkipWhile<T>(this IEnumerable<T> self, Func<T, bool> pred) { return StdEnumerable.SkipWhile(self, pred); }
 
         /// <summary>
         /// IEnumerableの先頭からpredを満たす要素をスキップしたIEnumerableを生成して返します。
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のSkipWhileに対応します。
         /// </summary>
-        public static IEnumerable<T> SkipWhileWithIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return Enumerable.SkipWhile(self, pred); }
+        public static IEnumerable<T> SkipWhileWithIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return StdEnumerable.SkipWhile(self, pred); }
 
         /// <summary>
         /// IEnumerableの先頭からpredを満たす要素を取り出したIEnumerableを生成して返します。
         /// 標準クエリ演算子のTakeWhileに対応します。
         /// </summary>
-        public static IEnumerable<T> TakeWhile<T>(this IEnumerable<T> self, Func<T, bool> pred) { return Enumerable.TakeWhile(self, pred); }
+        public static IEnumerable<T> TakeWhile<T>(this IEnumerable<T> self, Func<T, bool> pred) { return StdEnumerable.TakeWhile(self, pred); }
 
         /// <summary>
         /// IEnumerableの先頭からpredを満たす要素を取り出したIEnumerableを生成して返します。
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のTakeWhileに対応します。
         /// </summary>
-        public static IEnumerable<T> TakeWhileWithIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return Enumerable.TakeWhile(self, pred); }
+        public static IEnumerable<T> TakeWhileWithIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return StdEnumerable.TakeWhile(self, pred); }
 
         /// <summary>
         /// IEnumerableを、走査した要素をキャッシュするIEnumerableに変換します。
@@ -257,7 +269,7 @@ namespace LangExt2
         /// Scanと異なり、初期値にはIEnumerableの先頭要素が使われます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static IEnumerable<T> Scan1<T, U>(this IEnumerable<T> self, Func<T, T, T> f)
+        public static IEnumerable<T> Scan1<T>(this IEnumerable<T> self, Func<T, T, T> f)
         {
             using (var itor = self.GetEnumerator())
             {
