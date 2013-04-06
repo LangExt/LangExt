@@ -8,6 +8,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ include file="$(SolutionDir)\LangExt2\T4Util.ttinclude" #>
 using System;
 using LangExt2;
 using NUnit.Framework;
@@ -18,14 +19,14 @@ namespace LangExt2.Tests
     [TestFixture]
     public class TupleModuleTest
     {
-#region Create.Tuple / TupleModule.Create / _1() ... _16()
-<# for (int i = 1; i <= 16; i++) { #>
+#region Create.Tuple / TupleModule.Create / _1() ... _<#= Max #>()
+<# for (int i = 1; i <= Max; i++) { #>
         [Test]
-        public void _16要素タプルの<#= i #>番目の要素にアクセスできる()
+        public void _<#= Max #>要素タプルの<#= i #>番目の要素にアクセスできる()
         {
-            var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            var tpl = Create.Tuple(<#= MethodCallArgs("", 1, Max + 1) #>);
             Assert.That(tpl._<#= i #>(), Is.EqualTo(<#= i #>));
-    }
+        }
 
 <# } #>
 #endregion
@@ -47,9 +48,9 @@ namespace LangExt2.Tests
         }
 
     [Test]
-    public void _16要素タプルにはAddが存在しない()
+    public void _<#= Max #>要素タプルにはAddが存在しない()
         {
-            dynamic tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            dynamic tpl = Create.Tuple(<#= MethodCallArgs("", 1, Max + 1) #>);
         try
         {
             var _ = tpl.Add("hoge");
@@ -63,29 +64,29 @@ namespace LangExt2.Tests
 #endregion
 
 #region Match
-<# for (int i = 1; i <= 16; i++) { #>
+<# for (int i = 1; i <= Max; i++) { #>
         [Test]
-        public void _16要素タプルをMatchさせると<#= i #>番目の引数に<#= i #>番目の要素が入ってくる()
+        public void _<#= Max #>要素タプルをMatchさせると<#= i #>番目の引数に<#= i #>番目の要素が入ってくる()
         {
-            var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            var tpl = Create.Tuple(<#= MethodCallArgs("", 1, Max + 1) #>);
             Assert.That(
-            tpl.Match((t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16) => t<#= i #>),
+            tpl.Match((<#= MethodCallArgs("t", 1, Max + 1) #>) => t<#= i #>),
             Is.EqualTo(<#= i #>));
     }
 
 <# } #>
 #endregion
 
-#region Map1 ... Map 16
-<# for (int i = 1; i <= 16; i++) { #>
+#region Map1 ... Map<#= Max #>
+<# for (int i = 1; i <= Max; i++) { #>
         [Test]
-        public void _16要素タプルの<#= i #>番目の要素に対してMapできる()
+        public void _<#= Max #>要素タプルの<#= i #>番目の要素に対してMapできる()
         {
-            var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            var tpl = Create.Tuple(<#= MethodCallArgs("", 1, Max + 1) #>);
         var mapped = tpl.Map<#= i #>(x => x * 2);
         
         Assert.That(mapped._<#= i #>(), Is.EqualTo(<#= i #> * 2));
-<# for (int j = 1; j <= 16; j++) if (j != i) { #>
+<# for (int j = 1; j <= Max; j++) if (j != i) { #>
         Assert.That(mapped._<#= j #>(), Is.EqualTo(<#= j #>));
 <# } #>
     }

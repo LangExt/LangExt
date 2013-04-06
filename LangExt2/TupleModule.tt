@@ -16,7 +16,7 @@ namespace LangExt2
     partial class Create
     {
 <#
-    for (int i = 2; i <= 16; i++) {
+    for (int i = 2; i <= Max; i++) {
         var types = TypeParams("T", i);
         var tplType = TupleType(i);
 #>
@@ -33,8 +33,8 @@ namespace LangExt2
     public static class TupleModule
     {
 <#
-    // Funcデリゲートが16引数まで対応しているので、16要素タプルまで用意する
-    for (int i = 2; i <= 16; i++) {
+    // Funcデリゲートが16引数まで対応しているので、16要素タプルまで用意する(Maxはデフォルトで16)
+    for (int i = 2; i <= Max; i++) {
         var types = TypeParams("T", i);
         var tplType = TupleType(i);
 #>
@@ -56,7 +56,7 @@ namespace LangExt2
         }
 #>
 
-<# if (i < 16) { #>
+<# if (i < Max) { #>
         /// <summary><#= i #>要素タプルに要素を追加し、<#= i + 1 #>要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<<#= TupleTypeArgs(1, i + 1) #>> Add<<#= types #>, T<#= i + 1 #>>(this <#= tplType #> self, T<#= i + 1 #> t)
         {

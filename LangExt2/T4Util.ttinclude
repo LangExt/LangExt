@@ -5,6 +5,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#+
+const int Max = 16;
 string Fold(string init, string format, int count)
 {
     var result = init;

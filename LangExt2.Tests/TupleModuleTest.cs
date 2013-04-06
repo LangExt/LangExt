@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using LangExt2;
 using NUnit.Framework;
 using Microsoft.CSharp.RuntimeBinder;
@@ -14,112 +15,112 @@ namespace LangExt2.Tests
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._1(), Is.EqualTo(1));
-    }
+        }
 
         [Test]
         public void _16要素タプルの2番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._2(), Is.EqualTo(2));
-    }
+        }
 
         [Test]
         public void _16要素タプルの3番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._3(), Is.EqualTo(3));
-    }
+        }
 
         [Test]
         public void _16要素タプルの4番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._4(), Is.EqualTo(4));
-    }
+        }
 
         [Test]
         public void _16要素タプルの5番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._5(), Is.EqualTo(5));
-    }
+        }
 
         [Test]
         public void _16要素タプルの6番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._6(), Is.EqualTo(6));
-    }
+        }
 
         [Test]
         public void _16要素タプルの7番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._7(), Is.EqualTo(7));
-    }
+        }
 
         [Test]
         public void _16要素タプルの8番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._8(), Is.EqualTo(8));
-    }
+        }
 
         [Test]
         public void _16要素タプルの9番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._9(), Is.EqualTo(9));
-    }
+        }
 
         [Test]
         public void _16要素タプルの10番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._10(), Is.EqualTo(10));
-    }
+        }
 
         [Test]
         public void _16要素タプルの11番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._11(), Is.EqualTo(11));
-    }
+        }
 
         [Test]
         public void _16要素タプルの12番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._12(), Is.EqualTo(12));
-    }
+        }
 
         [Test]
         public void _16要素タプルの13番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._13(), Is.EqualTo(13));
-    }
+        }
 
         [Test]
         public void _16要素タプルの14番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._14(), Is.EqualTo(14));
-    }
+        }
 
         [Test]
         public void _16要素タプルの15番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._15(), Is.EqualTo(15));
-    }
+        }
 
         [Test]
         public void _16要素タプルの16番目の要素にアクセスできる()
         {
             var tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
             Assert.That(tpl._16(), Is.EqualTo(16));
-    }
+        }
 
 #endregion
 
@@ -302,7 +303,7 @@ namespace LangExt2.Tests
 
 #endregion
 
-#region Map1 ... Map 16
+#region Map1 ... Map16
         [Test]
         public void _16要素タプルの1番目の要素に対してMapできる()
         {

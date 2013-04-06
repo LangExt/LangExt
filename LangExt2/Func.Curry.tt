@@ -16,7 +16,7 @@ namespace LangExt2
     partial class Func
     {
 <#
-    for (int i = 2; i <= 16; i++) {
+    for (int i = 2; i <= Max; i++) {
         var types = TypeParams("T", i);
 #>
         /// <summary><#= i #>つの引数を受け取る関数をカリー化します。</summary>

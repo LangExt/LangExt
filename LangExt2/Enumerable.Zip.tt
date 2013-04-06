@@ -16,7 +16,7 @@ namespace LangExt2
 {
     partial class Enumerable
     {
-<# for (int i = 2; i <= 16; i++) { #>
+<# for (int i = 2; i <= Max; i++) { #>
         /// <summary><#= i #>個のIEnumerableの要素1つ1つに対して、fを適用したIEnumerableを返します。</summary>
         public static IEnumerable<U> ZipWith<<#= TypeParams("T", i) #>, U>(this <#= Repeat(", ", "IEnumerable<T{0}> ie{0}", i) #>, Func<<#= TypeParams("T", i) #>, U> f)
         {
@@ -59,7 +59,7 @@ namespace LangExt2
             return self.Zip(InitInfinite(Func.Id));
         }
 
-<# for (int i = 2; i <= 15; i++) { #>
+<# for (int i = 2; i <= Max - 1; i++) { #>
         /// <summary><#= i #>要素のタプルのIEnumerableに対して、0から始まる整数列を加えたタプルのIEnumerableとして返します。</summary>
         public static IEnumerable<<#= TupleType(i + 1, n => n == i + 1 ? "int" : ("T" + n)) #>> WithIndex<<#= TypeParams("T", i) #>>(this IEnumerable<Tuple<<#= TupleTypeArgs(1, i) #>>> self)
         {
