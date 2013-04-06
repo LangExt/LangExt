@@ -156,7 +156,7 @@ else
 これに対してOption型は、その必要がありません。
 
 ```csharp
-str.ToIntOption().Match(
+str.TryToInt().Match(
     result => /* 変換に成功した場合の式 */,
     () => /* 変換に失敗した場合の式 */);
 ```
@@ -199,7 +199,7 @@ select c + b
 クエリ式は、「一つでも失敗したら失敗する」ことを表現しますが、||演算子を使うことで「一つでも成功したら成功する」ことも表現できます。
 
 ```csharp
-return F1() || F2() || F3().Select(int.Parse);
+return F1() || F2() || F3().Map(int.Parse);
 ```
 
 この場合、すべての戻り値の型が同じである必要があります。
