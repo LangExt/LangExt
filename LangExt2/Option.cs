@@ -100,6 +100,7 @@ namespace LangExt2
 
         /// <summary>
         /// 値を持つかどうかを取得する関数が必要な時に使います。
+        /// Option[T]がプロパティとしてIsSomeを持つため、拡張メソッドにはしていません。
         /// </summary>
         public static bool IsSome<T>(Option<T> self)
         {
@@ -108,6 +109,7 @@ namespace LangExt2
 
         /// <summary>
         /// 値を持たないかどうかを取得する関数が必要な時に使います。
+        /// Option[T]がプロパティとしてIsNoneを持つため、拡張メソッドにはしていません。
         /// </summary>
         public static bool IsNone<T>(Option<T> self)
         {
@@ -182,7 +184,7 @@ namespace LangExt2
         /// Noneの場合、引数に指定した関数の実行結果を返します。
         /// </summary>
         /// <param name="defaultF">Noneの場合の戻り値を返す関数</param>
-        /// <returns>Someの場合保持している値。Noneの場合引数で指定した関数が返す関数</returns>
+        /// <returns>Someの場合保持している値。Noneの場合引数で指定した関数が返す値</returns>
         public T GetOrElse(Func<T> defaultF)
         {
             return this.hasValue ? this.value : defaultF();
@@ -193,26 +195,26 @@ namespace LangExt2
         /// 値がある場合とない場合の両方で何らかの処理を行う必要がある際に使用します。
         /// </summary>
         /// <typeparam name="U">パターンマッチが返す処理の型</typeparam>
-        /// <param name="ifSome">Someの場合の処理</param>
-        /// <param name="ifNone">Noneの場合の処理</param>
+        /// <param name="Some">Someの場合の処理</param>
+        /// <param name="None">Noneの場合の処理</param>
         /// <returns>処理が返した値</returns>
-        public U Match<U>(Func<T, U> ifSome, Func<U> ifNone)
+        public U Match<U>(Func<T, U> Some, Func<U> None)
         {
-            return this.hasValue ? ifSome(this.value) : ifNone();
+            return this.hasValue ? Some(this.value) : None();
         }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
         /// 値がある場合とない場合の両方で何らかの処理を行う必要がある際に使用します。
         /// </summary>
-        /// <param name="ifSome">Someの場合の処理</param>
-        /// <param name="ifNone">Noneの場合の処理</param>
-        public void Match(Action<T> ifSome, Action ifNone)
+        /// <param name="Some">Someの場合の処理</param>
+        /// <param name="None">Noneの場合の処理</param>
+        public void Match(Action<T> Some, Action None)
         {
             if (this.hasValue)
-                ifSome(this.value);
+                Some(this.value);
             else
-                ifNone();
+                None();
         }
 
         /// <summary>

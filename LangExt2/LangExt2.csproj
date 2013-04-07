@@ -63,7 +63,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Enumerable.Zip.tt</DependentUpon>
     </Compile>
+    <Compile Include="Func.Result.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Func.Result.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrderedSeq.cs" />
+    <Compile Include="Result.cs" />
+    <Compile Include="Result.Module.cs">
+      <DependentUpon>Result.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Result.QueryExpr.cs">
+      <DependentUpon>Result.cs</DependentUpon>
+    </Compile>
     <Compile Include="Seq.cs" />
     <Compile Include="ObjectModule.cs" />
     <Compile Include="Option.cs" />
@@ -106,6 +118,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Enumerable.Zip.cs</LastGenOutput>
       <DependentUpon>Enumerable.cs</DependentUpon>
+    </None>
+    <None Include="Func.Result.tt">
+      <DependentUpon>Func.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Func.Result.cs</LastGenOutput>
     </None>
     <None Include="Seq.Zip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -102,5 +102,13 @@ namespace LangExt2
         {
             return self.Match(Seq.Singleton, () => Seq.Create<T>());
         }
+
+        /// <summary>
+        /// Option[T] → Result[T, Unit]
+        /// </summary>
+        public static Result<T, Unit> ToResult<T>(this Option<T> self)
+        {
+            return self.Match(v => Result.Success(v).CastFailure<Unit>(), () => Result.Failure(Unit._));
+        }
     }
 }

@@ -87,5 +87,27 @@ namespace LangExt2
         {
             return cond() ? Option.Some(self) : Option<T>.None;
         }
+
+        /// <summary>
+        /// bool値によってResultを生成します。
+        /// </summary>
+        public static Result<T, Unit> ToResultIf<T>(this T self, bool cond)
+        {
+            if (cond)
+                return Result.Success(self);
+            else
+                return Result.Failure(Unit._);
+        }
+
+        /// <summary>
+        /// bool値によってResultを生成します。
+        /// </summary>
+        public static Result<T, Unit> ToResultIf<T>(this T self, Func<bool> cond)
+        {
+            if (cond())
+                return Result.Success(self);
+            else
+                return Result.Failure(Unit._);
+        }
     }
 }

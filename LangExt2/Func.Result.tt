@@ -1,0 +1,81 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="T4Util.ttinclude" #>
+using System;
+
+namespace LangExt2
+{
+    /// <summary>
+    /// 関数がnullを返したことを表す例外です。
+    /// この例外は、Func.ToResultの結果としてのみ使用されます。
+    /// </summary>
+    public sealed class NullResultException : Exception { }
+
+    partial class Func
+    {
+<#
+    for (int i = 1; i <= 16; i++) {
+#>
+        /// <summary>関数の結果をResultで包む関数に変換します。</summary>
+        public static Func<<#= TypeParams("T", i) #>, Result<U, Exception>> ExnToResult<<#= TypeParams("T", i) #>, U>(this Func<<#= TypeParams("T", i) #>, U> self)
+        {
+            return (<#= MethodCallArgs("t", i) #>) => { try { return Result.Success(self(<#= MethodCallArgs("t", i) #>)); } catch (Exception e) { return Result.Failure(e); } };
+        }
+
+        /// <summary>関数の結果をResultで包む関数に変換します。関数の結果がnullの場合、Failureになります。</summary>
+        public static Func<<#= TypeParams("T", i) #>, Result<U, Unit>> NullToResult<<#= TypeParams("T", i) #>, U>(this Func<<#= TypeParams("T", i) #>, U> self)
+            where U : class
+        {
+            return (<#= MethodCallArgs("t", i) #>) => Result.Create(self(<#= MethodCallArgs("t", i) #>));
+        }
+
+        /// <summary>関数の結果をResultで包む関数に変換します。関数の結果がnullの場合、Failureになります。</summary>
+        public static Func<<#= TypeParams("T", i) #>, Result<U, Unit>> NullToResult<<#= TypeParams("T", i) #>, U>(this Func<<#= TypeParams("T", i) #>, U?> self)
+            where U : struct
+        {
+            return (<#= MethodCallArgs("t", i) #>) => Result.Create(self(<#= MethodCallArgs("t", i) #>));
+        }
+
+        /// <summary>関数の結果をResultで包む関数に変換します。関数の結果がnullか例外の場合、Failureになります。nullの場合はNullResultExceptionがFailureの値として使用されます。</summary>
+        public static Func<<#= TypeParams("T", i) #>, Result<U, Exception>> ToResult<<#= TypeParams("T", i) #>, U>(this Func<<#= TypeParams("T", i) #>, U> self)
+            where U : class
+        {
+            return (<#= MethodCallArgs("t", i) #>) =>
+            {
+                try
+                {
+                    var res = self(<#= MethodCallArgs("t", i) #>);
+                    if (res == null)
+                        return Result.Failure((Exception)new NullResultException());
+                    return Result.Success(res);
+                } catch (Exception e) { return Result.Failure(e); }
+            };
+        }
+
+        /// <summary>関数の結果をResultで包む関数に変換します。関数の結果がnullか例外の場合、Failureになります。nullの場合はNullResultExceptionがFailureの値として使用されます。</summary>
+        public static Func<<#= TypeParams("T", i) #>, Result<U, Exception>> ToResult<<#= TypeParams("T", i) #>, U>(this Func<<#= TypeParams("T", i) #>, U?> self)
+            where U : struct
+        {
+            return (<#= MethodCallArgs("t", i) #>) =>
+            {
+                try
+                {
+                    var res = self(<#= MethodCallArgs("t", i) #>);
+                    if (res == null)
+                        return Result.Failure((Exception)new NullResultException());
+                    return Result.Success(res.Value);
+                } catch (Exception e) { return Result.Failure(e); }
+            };
+        }
+
+<# } #>
+    }
+}

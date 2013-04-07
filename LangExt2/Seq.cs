@@ -800,10 +800,56 @@ namespace LangExt2
         }
 
         /// <summary>
+        /// Result[TSuccess, TFailure]のシーケンスすべてがSuccessだった場合は値を取り出したシーケンスをSuccessに包んで返し、
+        /// 一つでもFailureが存在した場合はFailureを返します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Result<ISeq<TSuccess>, TFailure> SequenceSuccess<TSuccess, TFailure>(this ISeq<Result<TSuccess, TFailure>> self)
+        {
+            var res = new List<TSuccess>();
+            foreach (var x in self)
+            {
+                if (x.IsFailure)
+                    return Result.Failure(x.FailureValue);
+                res.Add(x.SuccessValue);
+            }
+            return Result.Success((ISeq<TSuccess>)new Seq<TSuccess>(res));
+        }
+
+        /// <summary>
+        /// Result[TSuccess, TFailure]のシーケンスすべてがFailureだった場合は値を取り出したシーケンスをSuccessに包んで返し、
+        /// 一つでもFailureが存在した場合はFailureを返します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Result<TSuccess, ISeq<TFailure>> SequenceFailure<TSuccess, TFailure>(this ISeq<Result<TSuccess, TFailure>> self)
+        {
+            var res = new List<TFailure>();
+            foreach (var x in self)
+            {
+                if (x.IsSuccess)
+                    return Result.Success(x.SuccessValue);
+                res.Add(x.FailureValue);
+            }
+            return Result.Failure((ISeq<TFailure>)new Seq<TFailure>(res));
+        }
+
+        /// <summary>
         /// Option[T]のシーケンスからSomeの要素のみを抜き出し、その値を取り出したシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
         public static ISeq<T> OnlySome<T>(this ISeq<Option<T>> self) { return self.Choose(Func.Id); }
+
+        /// <summary>
+        /// Result[T, _]のシーケンスからSuccessの要素のみを抜き出し、その値を取り出したシーケンスに変換します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static ISeq<T> OnlySuccess<T, _>(this ISeq<Result<T, _>> self) { return self.Choose(Result.ToOption); }
+
+        /// <summary>
+        /// Result[_, T]のシーケンスからFailureの要素のみを抜き出し、その値を取り出したシーケンスに変換します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static ISeq<T> OnlyFailure<_, T>(this ISeq<Result<_, T>> self) { return self.Choose(Result.ToOptionFailure); }
 
         /// <summary>
         /// nullを含みうるシーケンスから、Optionのシーケンスに変換します。
