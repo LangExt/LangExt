@@ -73,9 +73,9 @@ namespace LangExt2
         /// <typeparam name="TSuccess">Resultに保持する成功の型</typeparam>
         /// <param name="value">Resultに保持する成功を表す値</param>
         /// <returns>Success(value)</returns>
-        public static Result<TSuccess, Undefined> Success<TSuccess>(TSuccess value)
+        public static Result<TSuccess, Placeholder> Success<TSuccess>(TSuccess value)
         {
-            return new Result<TSuccess, Undefined>(Option.Some(value), Option.None);
+            return new Result<TSuccess, Placeholder>(Option.Some(value), Option.None);
         }
 
         /// <summary>
@@ -84,9 +84,9 @@ namespace LangExt2
         /// <typeparam name="TFailure">Resultに格納する失敗の型</typeparam>
         /// <param name="value">Resultに保持する失敗を表す値</param>
         /// <returns>Failure(value)</returns>
-        public static Result<Undefined, TFailure> Failure<TFailure>(TFailure value)
+        public static Result<Placeholder, TFailure> Failure<TFailure>(TFailure value)
         {
-            return new Result<Undefined, TFailure>(Option.None, Option.Some(value));
+            return new Result<Placeholder, TFailure>(Option.None, Option.Some(value));
         }
 
         /// <summary>
@@ -229,7 +229,7 @@ namespace LangExt2
         /// </summary>
         /// <param name="r">Result.Success</param>
         /// <returns>任意のTFailureのSuccess</returns>
-        public static implicit operator Result<TSuccess, TFailure>(Result<TSuccess, Undefined> r)
+        public static implicit operator Result<TSuccess, TFailure>(Result<TSuccess, Placeholder> r)
         {
             return new Result<TSuccess, TFailure>(r.success, Option.None);
         }
@@ -247,7 +247,7 @@ namespace LangExt2
         /// </summary>
         /// <param name="r">Result.Failure</param>
         /// <returns>任意のTSuccessのFailure</returns>
-        public static implicit operator Result<TSuccess, TFailure>(Result<Undefined, TFailure> r)
+        public static implicit operator Result<TSuccess, TFailure>(Result<Placeholder, TFailure> r)
         {
             return new Result<TSuccess, TFailure>(Option.None, r.failure);
         }

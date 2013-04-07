@@ -77,11 +77,11 @@ namespace LangExt2
         /// <summary>
         /// 値がないことを表すOption型の値(None)を取得します。 
         /// </summary>
-        public static Option<Undefined> None
+        public static Option<Placeholder> None
         {
             get
             {
-                return Option<Undefined>.None;
+                return Option<Placeholder>.None;
             }
         }
 
@@ -161,7 +161,7 @@ namespace LangExt2
         /// </summary>
         /// <param name="value">Option.None</param>
         /// <returns>任意のTのNone</returns>
-        public static implicit operator Option<T>(Option<Undefined> value)
+        public static implicit operator Option<T>(Option<Placeholder> value)
         {
             return Option<T>.None;
         }
@@ -258,11 +258,11 @@ namespace LangExt2
             if (genType != typeof(Option<>))
                 return false;
 
-            if (typeof(T) == typeof(Undefined))
+            if (typeof(T) == typeof(Placeholder))
                 return !(bool)type.GetField("hasValue", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(obj);
 
             var elemType = type.GetGenericArguments()[0];
-            if (elemType == typeof(Undefined))
+            if (elemType == typeof(Placeholder))
                 return this.hasValue == false;
 
             if ((obj is Option<T>) == false)

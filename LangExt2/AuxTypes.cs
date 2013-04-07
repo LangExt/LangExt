@@ -8,7 +8,7 @@ namespace LangExt2
     /// <summary>
     /// プレースホルダーとして使用することを前提とした型です。
     /// </summary>
-    public enum Undefined { }
+    public enum Placeholder { }
 
     /// <summary>
     /// 値がないことを表すための型です。
