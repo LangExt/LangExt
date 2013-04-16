@@ -45,6 +45,20 @@ namespace LangExt2
         }
 
         /// <summary>
+        /// 初期状態からfによって計算されたIEnumerableを生成します。
+        /// </summary>
+        public static IEnumerable<U> Unfold<T, U>(T self, Func<T, Option<Tuple<U, T>>> f)
+        {
+            var crnt = f(self);
+            while (crnt.IsSome)
+            {
+                var v = crnt.Value;
+                crnt = f(v._2());
+                yield return v._1();
+            }
+        }
+
+        /// <summary>
         /// IEnumerableから、predを満たす要素のみを含むIEnumerableを生成して返します。
         /// 標準クエリ演算子のWhereに対応します。
         /// </summary>

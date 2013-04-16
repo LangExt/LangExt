@@ -84,7 +84,7 @@ namespace LangExt2
             return res.ToString();
         }
 
-        #region 生成系メソッド(Empty/Create/InitInifinite/Init/Repeat/RepeatInfinite/Singleton)
+        #region 生成系メソッド(Empty/Create/InitInifinite/Init/Repeat/RepeatInfinite/Singleton/Unfold)
         /// <summary>
         /// 空のシーケンスを生成します。
         /// </summary>
@@ -119,6 +119,14 @@ namespace LangExt2
         /// 指定した要素のみを含む1要素のシーケンスを生成します。
         /// </summary>
         public static ISeq<T> Singleton<T>(T t) { return Repeat(1, t); }
+
+        /// <summary>
+        /// 初期状態からfによって計算されたシーケンスを生成します。
+        /// </summary>
+        public static ISeq<U> Unfold<T, U>(this T self, Func<T, Option<Tuple<U, T>>> f)
+        {
+            return new Seq<U>(Enumerable.Unfold(self, f));
+        }
         #endregion
 
         #region Sum系メソッド
