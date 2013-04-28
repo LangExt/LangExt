@@ -73,19 +73,32 @@ namespace LangExt2
         }
 
         /// <summary>
-        /// bool値によってOptionを生成します。
+        /// 自身がxと等しい場合Noneを返し、そうでない場合Someを返します。
+        /// 自身がnullかつxがnullではなかったときのみ、このメソッドは例外を投げます。
+        /// 自身もxもnullだった場合は、Noneを返します。
         /// </summary>
-        public static Option<T> ToOptionIf<T>(this T self, bool cond)
+        public static Option<T> NoneIf<T>(this T self, T x)
         {
-            return cond ? Option.Some(self) : Option<T>.None;
+            return self.IsEqualTo(x) ? Option<T>.None : Option.Some(self);
         }
 
         /// <summary>
-        /// bool値によってOptionを生成します。
+        /// predがtrueを返す場合Noneを返し、falseを返す場合Someを返します。
+        /// 自身がnullかつpredがfalseを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// 自身がnullでpredがtrueを返した場合は、Noneを返します。
         /// </summary>
-        public static Option<T> ToOptionIf<T>(this T self, Func<bool> cond)
+        public static Option<T> NoneIf<T>(this T self, Func<bool> pred)
         {
-            return cond() ? Option.Some(self) : Option<T>.None;
+            return pred() ? Option<T>.None : Option.Some(self);
+        }
+
+        /// <summary>
+        /// 自身がnullの場合のみNoneを返し、それ以外の場合はSomeを返します。
+        /// </summary>
+        public static Option<T> NoneIfNull<T>(this T self)
+        {
+            return self.IsNull() ? Option<T>.None : Option.Some(self);
         }
 
         /// <summary>

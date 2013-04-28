@@ -8,14 +8,6 @@ namespace LangExt2
     partial class Option
     {
         /// <summary>
-        /// (bool, T) → Option[T]
-        /// </summary>
-        public static Option<T> SomeIf<T>(bool cond, T value)
-        {
-            return value.ToOptionIf(cond);
-        }
-
-        /// <summary>
         /// (Option[T], U, T → U) → U
         /// </summary>
         public static U Maybe<T, U>(this Option<T> self, U defaultValue, Func<T, U> f)
