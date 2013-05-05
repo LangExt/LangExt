@@ -29,7 +29,7 @@ namespace LangExt2
         {
             static readonly IEnumerator<U> dummy = ((ICollection<U>)new U[0]).GetEnumerator();
 
-            int index = 0;
+            int index = -1;
             readonly CachedEnumerable<U> src;
             internal CachedEnumerator(CachedEnumerable<U> src) { this.src = src; }
 
@@ -39,13 +39,13 @@ namespace LangExt2
             {
                 lock (src.itor)
                 {
+                    if (src.values.Count == 0 || src.itor == dummy)
+                        return false;
                     if (index < src.values.Count)
                     {
                         index++;
                         return true;
                     }
-                    if (src.itor == dummy)
-                        return false;
                     if (src.itor.MoveNext())
                     {
                         index++;
