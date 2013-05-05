@@ -794,7 +794,7 @@ namespace LangExt2
         }
         #endregion
 
-        #region 変換系メソッド(ToString)
+        #region 変換系メソッド(ToString/ToArray)
         /// <summary>
         /// 指定されたセパレータでシーケンスを連結し、文字列化します。
         /// 対応する標準クエリ演算子はありません。
@@ -827,6 +827,15 @@ namespace LangExt2
         public static string ToString<T>(this ISeq<T> self, string sep)
         {
             return ToString(self, "", sep, "");
+        }
+
+        /// <summary>
+        /// シーケンスを配列に変換します。
+        /// 標準クエリ演算子のToArrayに対応します。
+        /// </summary>
+        public static T[] ToArray<T>(this ISeq<T> self)
+        {
+            return StdEnumerable.ToArray(self);
         }
         #endregion
 
