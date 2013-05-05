@@ -698,3 +698,21 @@ let ``LangExtSeq.MapResult (nullable struct) eq (Seq.Map (function Null -> failu
   let nullableIntSeq xs = LangExtSeq.Map(intSeq xs, fun x -> if nat x then Nullable<int>() else Nullable(x))
   test (nullableIntSeq >> LangExtSeq.MapResult)
     eq (nullableIntSeq >> (Seq.map (function Null -> failure(LangExt.Unit.``_``) | NotNull x -> success(x))))
+
+[<Test>]
+let ``LangExtSeq.Zip eq Seq.zip``() =
+  test (fun (xs, ys) -> LangExtSeq.Zip(intSeq xs, strSeq ys)) eq (fun (xs, ys) -> Seq.zip xs ys)
+
+[<Test>]
+let ``LangExtSeq.ZipWith``() =
+  test (fun (xs, ys) -> LangExtSeq.ZipWith(intSeq xs, strSeq ys, fun x y -> string x + y))
+    eq (fun (xs, ys) -> Seq.zip xs ys |> Seq.map (fun (x, y) -> string x + y))
+
+[<Test>]
+let ``LangExtSeq.Unzip``() =
+  test (fun xs -> LangExtSeq.Unzip(LangExtSeq.Zip(intSeq xs, intSeq xs)) |> fst) eq id
+
+[<Test>]
+let ``LangExtSeq.WithIndex``() =
+  test (fun xs -> LangExtSeq.WithIndex(strSeq xs))
+    eq (Seq.mapi (fun i x -> (x, i)))
