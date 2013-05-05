@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LangExt</id>
-    <version>1.4.0.0</version>
+    <version>2.0.0.0</version>
     <authors>bleis-tift,otf</authors>
     <licenseUrl>https://github.com/LangExt/LangExt/blob/master/NYSL.txt</licenseUrl>
     <projectUrl>https://github.com/LangExt/LangExt</projectUrl>
@@ -12,7 +12,6 @@
     <tags>functional c# library</tags>
   </metadata>
   <files>
-      <file src="bin\net3.5\*" target="lib\net20"/>
-      <file src="bin\net4.0\*" target="lib\net40"/>
+      <file src="LangExt\bin\Release\*" target="lib\portable-windows8+net40"/>
   </files>
 </package>
