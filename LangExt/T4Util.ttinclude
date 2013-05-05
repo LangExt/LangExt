@@ -1,6 +1,4 @@
-﻿<#@ IntelliSenseLanguage processor="tangibleT4Editor" language="C#" #>
-<#@ assemblyForIntellisenseOnly processor="tangibleT4Editor" name="System.Core" #>
-<#@ import namespace="System" #>
+﻿<#@ import namespace="System" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
