@@ -129,6 +129,32 @@ namespace LangExt2
         }
         #endregion
 
+        #region 長さ取得系メソッド(Len/Count)
+        /// <summary>
+        /// シーケンスの長さを求めます。
+        /// 標準クエリ演算子のCountに対応します。
+        /// </summary>
+        public static int Len<T>(this ISeq<T> self) { return StdEnumerable.Count(self); }
+
+        /// <summary>
+        /// シーケンスの長さを求めます。
+        /// 標準クエリ演算子のLongCountに対応します。
+        /// </summary>
+        public static long LongLen<T>(this ISeq<T> self) { return StdEnumerable.LongCount(self); }
+
+        /// <summary>
+        /// predに合致する要素の個数を求めます。
+        /// 標準クエリ演算子のCountに対応します。
+        /// </summary>
+        public static int Count<T>(this ISeq<T> self, Func<T, bool> pred) { return StdEnumerable.Count(self, pred); }
+
+        /// <summary>
+        /// predに合致する要素の個数を求めます。
+        /// 標準クエリ演算子のLongCountに対応します。
+        /// </summary>
+        public static long LongCount<T>(this ISeq<T> self, Func<T, bool> pred) { return StdEnumerable.LongCount(self, pred); }
+        #endregion
+
         #region Sum系メソッド
         /// <summary>
         /// intのシーケンスの総和を求めます。
