@@ -947,5 +947,17 @@ namespace LangExt2
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
         public static ISeq<Option<T>> MapOption<T>(this ISeq<T?> self) where T : struct { return self.Map(Option.Create); }
+        
+        /// <summary>
+        /// nullを含みうるシーケンスから、Resultのシーケンスに変換します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static ISeq<Result<T, Unit>> MapResult<T>(this ISeq<T> self) where T : class { return self.Map(Result.Create); }
+
+        /// <summary>
+        /// nullを含みうるシーケンスから、Resultのシーケンスに変換します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static ISeq<Result<T, Unit>> MapResult<T>(this ISeq<T?> self) where T : struct { return self.Map(Result.Create); }
     }
 }
