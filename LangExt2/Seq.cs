@@ -103,7 +103,11 @@ namespace LangExt2
         /// <summary>
         /// fを元にn要素のシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Init<T>(int n, Func<int, T> f) { return new Seq<T>(Enumerable.Init(n, f)); }
+        public static ISeq<T> Init<T>(int n, Func<int, T> f)
+        {
+            if (n < 0) throw new ArgumentOutOfRangeException("n", n, "n must be greater than or equal to 0.");
+            return new Seq<T>(Enumerable.Init(n, f));
+        }
 
         /// <summary>
         /// 指定した要素を含む無限に続くシーケンスを生成します。
@@ -113,7 +117,11 @@ namespace LangExt2
         /// <summary>
         /// 指定した要素を含むn要素のシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Repeat<T>(int n, T t) { return new Seq<T>(Enumerable.Repeat(n, t)); }
+        public static ISeq<T> Repeat<T>(int n, T t)
+        {
+            if (n < 0) throw new ArgumentOutOfRangeException("n", n, "n must be greater than or equal to 0.");
+            return new Seq<T>(Enumerable.Repeat(n, t));
+        }
 
         /// <summary>
         /// 指定した要素のみを含む1要素のシーケンスを生成します。
@@ -222,7 +230,7 @@ namespace LangExt2
         /// 任意の型のシーケンスの最大値を求めます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static T Max<T>(this ISeq<T> self, Func<T, T, int> comparer)
+        public static T MaxWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
             return self.Reduce((a, b) =>
             {
@@ -238,9 +246,9 @@ namespace LangExt2
         /// シーケンスに要素が含まれなかった場合、Noneを返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Option<T> TryMax<T>(this ISeq<T> self, Func<T, T, int> comparer)
+        public static Option<T> TryMaxWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Max(self, comparer));
+            return self.IsEmpty() ? Option.None : Option.Some(MaxWith(self, comparer));
         }
 
         /// <summary>
@@ -252,7 +260,7 @@ namespace LangExt2
             // Reduceでf(a).Cmp(f(b))してもよかったけど、fの呼び出し回数を減らすためにいったんMapすることにした
             return self
                 .Map(x => Tuple.Create(x, f(x)))
-                .Reduce((a, b) => a._2().Cmp(b._2()).Match(() => a, () => a, () => b))
+                .Reduce((a, b) => a._2().Cmp(b._2()).Match(() => b, () => a, () => a))
                 ._1();
         }
 
@@ -288,13 +296,13 @@ namespace LangExt2
         /// 任意の型のシーケンスの最小値を求めます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static T Min<T>(this ISeq<T> self, Func<T, T, int> comparer)
+        public static T MinWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
             return self.Reduce((a, b) =>
             {
                 var r = comparer(a, b);
-                return r > 0 ? a :
-                       r < 0 ? b :
+                return r > 0 ? b :
+                       r < 0 ? a :
                                a;
             });
         }
@@ -304,9 +312,9 @@ namespace LangExt2
         /// シーケンスに要素が含まれなかった場合、Noneを返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Option<T> TryMin<T>(this ISeq<T> self, Func<T, T, int> comparer)
+        public static Option<T> TryMinWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Min(self, comparer));
+            return self.IsEmpty() ? Option.None : Option.Some(MinWith(self, comparer));
         }
 
         /// <summary>
@@ -380,7 +388,7 @@ namespace LangExt2
             using (var itor = xs.GetEnumerator())
             {
                 if (itor.MoveNext() == false)
-                    throw new ArgumentException();
+                    throw new InvalidOperationException(); // TODO : message
                 var res = itor.Current;
                 while (itor.MoveNext())
                     res = f(itor.Current, res);
@@ -414,7 +422,7 @@ namespace LangExt2
         public static ISeq<U> ScanBack<T, U>(this ISeq<T> self, U init, Func<T, U, U> f)
         {
             var xs = StdEnumerable.Reverse(self);
-            return new Seq<U>(xs.Scan(init, (acc, x) => f(x, acc)));
+            return new Seq<U>(xs.Scan(init, (acc, x) => f(x, acc))).Reverse();
         }
 
         /// <summary>
@@ -435,7 +443,7 @@ namespace LangExt2
         public static ISeq<T> ScanBack1<T>(this ISeq<T> self, Func<T, T, T> f)
         {
             var xs = StdEnumerable.Reverse(self);
-            return new Seq<T>(xs.Scan1((acc, x) => f(x, acc)));
+            return new Seq<T>(xs.Scan1((acc, x) => f(x, acc))).Reverse();
         }
         #endregion
 
@@ -617,6 +625,8 @@ namespace LangExt2
             }
             return res;
         }
+        
+        // TODO : CollectWithIndex
         #endregion
 
         #region Choose系メソッド(Map + Filter)

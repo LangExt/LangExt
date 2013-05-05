@@ -28,8 +28,11 @@ namespace LangExt2
 
         internal static IEnumerable<T> Init<T>(int n, Func<int, T> f)
         {
-            for (int i = 0; i < n; i++) yield return f(i++);
+            if (n < 0) throw new ArgumentException("n", string.Format("n must be greater than or equal to 0 but {0}.", n));
+            return InitImpl(n, f);
         }
+
+        static IEnumerable<T> InitImpl<T>(int n, Func<int, T> f) { for (int i = 0; i < n; i++) yield return f(i); }
 
         /// <summary>
         /// 指定した要素を含む無限に続くIEnumerableを生成します。
@@ -41,8 +44,11 @@ namespace LangExt2
 
         internal static IEnumerable<T> Repeat<T>(int n, T t)
         {
-            for (int i = 0; i < n; i++) yield return t;
+            if (n < 0) throw new ArgumentException("n", string.Format("n must be greater than or equal to 0 but {0}.", n));
+            return RepeatImpl(n, t);
         }
+
+        static IEnumerable<T> RepeatImpl<T>(int n, T t) { for (int i = 0; i < n; i++) yield return t; }
 
         /// <summary>
         /// 初期状態からfによって計算されたIEnumerableを生成します。
@@ -212,6 +218,13 @@ namespace LangExt2
         /// </summary>
         public static IEnumerable<T[]> Windowed<T>(this IEnumerable<T> self, int windowSize)
         {
+            if (windowSize < 1)
+                throw new ArgumentOutOfRangeException("windowSize", windowSize, "windowSize must be greater than 0.");
+            return WindowedImpl(self, windowSize);
+        }
+
+        static IEnumerable<T[]> WindowedImpl<T>(IEnumerable<T> self, int windowSize)
+        {
             var buffer = new Queue<T>(windowSize);
             using (var itor = self.GetEnumerator())
             {
@@ -269,11 +282,12 @@ namespace LangExt2
         /// </summary>
         public static IEnumerable<U> Scan<T, U>(this IEnumerable<T> self, U init, Func<U, T, U> f)
         {
+            yield return init;
             var crnt = init;
             foreach (var x in self)
             {
                 var res = f(crnt, x);
-                yield return crnt;
+                yield return res;
                 crnt = res;
             }
         }
@@ -288,12 +302,13 @@ namespace LangExt2
             using (var itor = self.GetEnumerator())
             {
                 if (itor.MoveNext() == false)
-                    throw new Exception();
+                    yield break;
                 var crnt = itor.Current;
+                yield return crnt;
                 while (itor.MoveNext())
                 {
                     var res = f(crnt, itor.Current);
-                    yield return crnt;
+                    yield return res;
                     crnt = res;
                 }
             }
