@@ -547,6 +547,48 @@ namespace LangExt2
         public static ISeq<U> MapWithIndex<T, U>(this ISeq<T> self, Func<T, int, U> f) { return new Seq<U>(StdEnumerable.Select(self, f)); }
         #endregion
 
+        #region Iter系メソッド
+        /// <summary>
+        /// シーケンスのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static void Iter<T>(this ISeq<T> self, Action<T> act)
+        {
+            foreach (var x in self) act(x);
+        }
+
+        /// <summary>
+        /// シーケンスのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Unit Iter<T>(this ISeq<T> self, Func<T, Unit> act)
+        {
+            foreach (var x in self) act(x);
+            return Unit._;
+        }
+
+        /// <summary>
+        /// シーケンスのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static void IterWithIndex<T>(this ISeq<T> self, Action<T, int> act)
+        {
+            var i = 0;
+            foreach (var x in self) act(x, i++);
+        }
+
+        /// <summary>
+        /// シーケンスのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Unit IterWithIndex<T>(this ISeq<T> self, Func<T, int, Unit> act)
+        {
+            var i = 0;
+            foreach (var x in self) act(x, i++);
+            return Unit._;
+        }
+        #endregion
+
         #region Bind系メソッド(Bind/BindWithIndex/Collect)
         /// <summary>
         /// シーケンスの各要素を順番にfの引数に対して渡し、fから返された各シーケンスを平坦化したシーケンスを生成して返します。
