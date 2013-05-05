@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("LangExt")]
+[assembly: AssemblyTitle("LangExt.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LangExt")]
+[assembly: AssemblyProduct("LangExt.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 次の GUID は、このプロジェクトが COM に公開される場合の、typelib の ID です
-[assembly: Guid("4e74babf-6cb1-4e19-8ca6-19dfdd35dd05")]
+[assembly: Guid("6737aedd-0b03-49e0-98d3-0a305a5846a1")]
 
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //

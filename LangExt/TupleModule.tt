@@ -1,0 +1,95 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="T4Util.ttinclude" #>
+using System;
+
+namespace LangExt
+{
+    partial class Create
+    {
+<#
+    for (int i = 2; i <= Max; i++) {
+        var types = TypeParams("T", i);
+        var tplType = TupleType(i);
+#>
+        /// <summary><#= i #>要素のタプルを生成します。</summary>
+        public static <#= tplType #> Tuple<<#= types #>>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            return TupleModule.Create(<#= MethodCallArgs("t", i) #>);
+        }
+
+<# } #>
+    }
+
+    /// <summary>タプルに対する関数を提供します。</summary>
+    public static class TupleModule
+    {
+<#
+    // Funcデリゲートが16引数まで対応しているので、16要素タプルまで用意する(Maxはデフォルトで16)
+    for (int i = 2; i <= Max; i++) {
+        var types = TypeParams("T", i);
+        var tplType = TupleType(i);
+#>
+        /// <summary><#= i #>要素のタプルを生成します。</summary>
+        public static <#= tplType #> Create<<#= types #>>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            return <#= NewTuple(i) #>;
+        }
+        /// <summary><#= i #>要素タプルから1番目の要素を取り出します。</summary>
+        public static T1 Fst<<#= types #>>(this <#= tplType #> self) { return self.Item1; }
+        /// <summary><#= i #>要素タプルから2番目の要素を取り出します。</summary>
+        public static T2 Snd<<#= types #>>(this <#= tplType #> self) { return self.Item2; }
+<#
+        for (int j = 1; j <= i; j++) {
+#>
+        /// <summary><#= i #>要素タプルから<#= j #>番目の要素を取り出します。</summary>
+        public static T<#= j #> _<#= j #><<#= types #>>(this <#= tplType #> self) { return self<#= ItemN(j) #> ; }
+<#
+        }
+#>
+
+<# if (i < Max) { #>
+        /// <summary><#= i #>要素タプルに要素を追加し、<#= i + 1 #>要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<<#= TupleTypeArgs(1, i + 1) #>> Add<<#= types #>, T<#= i + 1 #>>(this <#= tplType #> self, T<#= i + 1 #> t)
+        {
+            return LangExt.Create.Tuple(<#= Repeat(", ", "self._{0}()", i) #>, t);
+        }
+<# } #>
+
+<# if (i > 2) { #>
+        /// <summary><#= i #>要素タプルから末尾要素を削除し、<#= i - 1 #>要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<<#= TupleTypeArgs(1, i - 1) #>> RemoveLast<<#= types #>>(this <#= tplType #> self)
+        {
+            return LangExt.Create.Tuple(<#= Repeat(", ", "self._{0}()", i - 1) #>);
+        }
+<# } #>
+
+        /// <summary><#= i #>要素タプルに対して、擬似的にパターンマッチを行います。</summary>
+        public static U Match<<#= types #>, U>(this <#= tplType #> self, Func<<#= types #>, U> f)
+        {
+            return f(<#= Repeat(", ", "self._{0}()", i) #>);
+        }
+
+<#
+        for (int j = 1; j <= i; j++) {
+#>
+        /// <summary><#= i #>要素タプルの<#= j #>番目の要素に対して、関数を適用します。</summary>
+        public static <#= tplType.Replace("T" + j + ", ", "U, ").Replace("T" + j + ">", "U>") #> Map<#= j #><<#= types #>, U>(this <#= tplType #> self, Func<T<#= j #>, U> f)
+        {
+            return TupleModule.Create(<#= Repeat(", ", "self._{0}()", i).Replace("self._" + j + "()", "f(self._" + j + "())") #>);
+        }
+
+<#
+        }
+#>
+<# } #>
+    }
+}

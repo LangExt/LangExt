@@ -1,34 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 
 namespace LangExt
 {
-    /// <summary>
-    /// Optionのユーティリティ関数を提供します。
-    /// </summary>
-    public static class Option
+    partial class Create
     {
         /// <summary>
-        /// 値を指定して Some を生成します。
+        /// valueがnullでない場合はOption.Some(value)と、
+        /// valueがnullの場合はOption.Noneと同じオブジェクトを返します。
         /// </summary>
-        /// <typeparam name="T">Some に保持する値</typeparam>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">生成するOptionの要素の型</typeparam>
+        /// <param name="value">値</param>
+        /// <returns>valueがnullの場合None、そうでない場合Some</returns>
+        public static Option<T> Option<T>(T value) where T : class
+        {
+            return LangExt.Option.Create(value);
+        }
+
+        /// <summary>
+        /// valueがnullでない場合はOption.Some(value.Value)と、
+        /// valueがnullの場合はOption.Noneと同じオブジェクトを返します。
+        /// </summary>
+        /// <typeparam name="T">生成するOptionの要素の型</typeparam>
+        /// <param name="value">値</param>
+        /// <returns>valueがnullの場合None、そうでない場合Some</returns>
+        public static Option<T> Option<T>(T? value) where T : struct
+        {
+            return LangExt.Option.Create(value);
+        }
+    }
+
+    /// <summary>
+    /// Optionに対する関数を提供します。
+    /// </summary>
+    public static partial class Option
+    {
+        /// <summary>
+        /// valueがnullでない場合はOption.Some(value)と、
+        /// valueがnullの場合はOption.Noneと同じオブジェクトを返します。
+        /// </summary>
+        /// <typeparam name="T">生成するOptionの要素の型</typeparam>
+        /// <param name="value">値</param>
+        /// <returns>valueがnullの場合None、そうでない場合Some</returns>
+        public static Option<T> Create<T>(T value) where T : class
+        {
+            return value == null ? Option<T>.None : new Option<T>(value);
+        }
+
+        /// <summary>
+        /// valueがnullでない場合はOption.Some(value.Value)と、
+        /// valueがnullの場合はOption.Noneと同じオブジェクトを返します。
+        /// </summary>
+        /// <typeparam name="T">生成するOptionの要素の型</typeparam>
+        /// <param name="value">値</param>
+        /// <returns>valueがnullの場合None、そうでない場合Some</returns>
+        public static Option<T> Create<T>(T? value) where T : struct
+        {
+            return value == null ? Option<T>.None : new Option<T>(value.Value);
+        }
+
+        /// <summary>
+        /// valueを格納するOptionを生成します。
+        /// </summary>
+        /// <typeparam name="T">Someに保持する値の型</typeparam>
+        /// <param name="value">Someに保持する値</param>
+        /// <returns>Some(value)</returns>
         public static Option<T> Some<T>(T value)
         {
             return new Option<T>(value);
         }
 
         /// <summary>
-        /// None を生成します。
+        /// 値がないことを表すOption型の値(None)を取得します。 
         /// </summary>
-        /// <returns>None</returns>
-        public static Option<Undefined> None
+        public static Option<Placeholder> None
         {
             get
             {
-                return Option<Undefined>.None;
+                return Option<Placeholder>.None;
             }
+        }
+
+        /// <summary>
+        /// 保持している値を強制的に取得します。
+        /// このメソッドはNoneの場合に意味のない値(default(T))を返すため、危険です。
+        /// そのため、このメソッドは基本的には使用せず、
+        /// MatchメソッドやGetOrメソッドを使用するようにしてください。
+        /// </summary>
+        /// <returns>内部で保持している値</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static T GetValue<T>(this Option<T> self)
+        {
+            return self.Value;
+        }
+
+        /// <summary>
+        /// 値を持つかどうかを取得する関数が必要な時に使います。
+        /// Option[T]がプロパティとしてIsSomeを持つため、拡張メソッドにはしていません。
+        /// </summary>
+        public static bool IsSome<T>(Option<T> self)
+        {
+            return self.IsSome;
+        }
+
+        /// <summary>
+        /// 値を持たないかどうかを取得する関数が必要な時に使います。
+        /// Option[T]がプロパティとしてIsNoneを持つため、拡張メソッドにはしていません。
+        /// </summary>
+        public static bool IsNone<T>(Option<T> self)
+        {
+            return self.IsNone;
         }
     }
 
@@ -36,20 +121,22 @@ namespace LangExt
     /// nullよりも安全に「値がないこと」を表すことのできるデータ型です。
     /// </summary>
     /// <remarks>
-    /// この型は値のある「Some」と、値のない「None」を表すことができ、
-    /// デフォルトでは None となります。
-    /// また、任意の値からの暗黙変換を定義しており、この場合その値を保持する Some となります。
+    /// この型は値のある「Some」と、値がない「None」を表すことができ、
+    /// デフォルトではNoneとなります。
+    /// また、任意の型からの暗黙変換を定義しており、この場合を保持するSomeとなります。
     /// </remarks>
-    /// <typeparam name="T">値の型。</typeparam>
+    /// <typeparam name="T">値の型</typeparam>
     public struct Option<T> : IEquatable<Option<T>>
     {
         readonly bool hasValue;
         readonly T value;
 
         /// <summary>
-        /// 値を指定して明示的に Some を生成します。
+        /// 値を指定して明示的にSomeを生成します。
+        /// 基本的にはこのコンストラクタを直接使用せずに、
+        /// Option.Someメソッドを使用してください。
         /// </summary>
-        /// <param name="value">Some に保持する値。</param>
+        /// <param name="value">Optionに格納する値</param>
         public Option(T value)
         {
             if (value == null)
@@ -59,187 +146,257 @@ namespace LangExt
             this.value = value;
         }
 
-        public Option<T2> Bind<T2>(Func<T, Option<T2>> f)
+        /// <summary>
+        /// 任意の型のNoneを取得します。
+        /// 基本的にはこのプロパティを直接使用せずに、
+        /// Option.Noneプロパティを使用してください。
+        /// </summary>
+        public static Option<T> None
         {
-            return Match(f, _ => Option<T2>.None);
+            get { return default(Option<T>); }
         }
 
         /// <summary>
-        /// 任意の値からその値を保持する Some に変換します。
+        /// Option.Noneで取得したオブジェクトを、任意のTのNoneに暗黙変換します。
         /// </summary>
-        /// <param name="value">値。</param>
-        /// <returns>引数で指定された値を保持する Some。</returns>
-        public static implicit operator Option<T>(T value)
-        {
-            if (value == null)
-                return Option<T>.None;
-            return new Option<T>(value);
-        }
-
-        public static implicit operator Option<T>(Option<Undefined> value)
+        /// <param name="value">Option.None</param>
+        /// <returns>任意のTのNone</returns>
+        public static implicit operator Option<T>(Option<Placeholder> value)
         {
             return Option<T>.None;
         }
 
-        public static explicit operator T(Option<T> value)
+        internal T Value { get { return this.value; } }
+
+        /// <summary>
+        /// Someの場合、保持された値を取り出します。
+        /// Noneの場合、引数に指定した値を返します。
+        /// </summary>
+        /// <param name="defaultValue">Noneの場合の戻り値</param>
+        /// <returns>Someの場合保持している値。Noneの場合引数で指定した値</returns>
+        public T GetOr(T defaultValue)
         {
-            return value.Match(
-                some => some,
-                _ => { throw new InvalidCastException(); });
+            return this.hasValue ? this.value : defaultValue;
         }
 
         /// <summary>
-        /// None を明示的に取得します。
+        /// Someの場合、保持された値を取り出します。
+        /// Noneの場合、引数に指定した関数の実行結果を返します。
         /// </summary>
-        public static Option<T> None { get { return default(Option<T>); } }
-
-        /// <summary>
-        /// 保持された値を安全に取り出します。
-        /// </summary>
-        /// <remarks>
-        /// このオブジェクトが Some の場合、保持している値を、
-        /// None の場合、引数で指定した値を返します。
-        /// </remarks>
-        /// <param name="ifNone">None だった場合に返す値。</param>
-        /// <returns>Some の場合、保持された値。None の場合、引数で指定された値。</returns>
-        public T Or(T ifNone)
+        /// <param name="defaultF">Noneの場合の戻り値を返す関数</param>
+        /// <returns>Someの場合保持している値。Noneの場合引数で指定した関数が返す値</returns>
+        public T GetOrElse(Func<T> defaultF)
         {
-            if (hasValue)
-                return value;
-            else
-                return ifNone;
+            return this.hasValue ? this.value : defaultF();
         }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
         /// 値がある場合とない場合の両方で何らかの処理を行う必要がある際に使用します。
         /// </summary>
-        /// <typeparam name="S">パターンマッチが返す値の型。</typeparam>
-        /// <param name="ifSome">Some の場合の処理。</param>
-        /// <param name="ifNone">None の場合の処理。</param>
-        /// <returns>処理が返した値。</returns>
-        public S Match<S>(Func<T, S> ifSome, Func<Unit, S> ifNone)
+        /// <typeparam name="U">パターンマッチが返す処理の型</typeparam>
+        /// <param name="Some">Someの場合の処理</param>
+        /// <param name="None">Noneの場合の処理</param>
+        /// <returns>処理が返した値</returns>
+        public U Match<U>(Func<T, U> Some, Func<U> None)
         {
-            if (hasValue)
-                return ifSome(value);
-            else
-                return ifNone(Unit._);
+            return this.hasValue ? Some(this.value) : None();
         }
 
         /// <summary>
-        /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを示します。
+        /// 擬似的にパターンマッチを行います。
+        /// 値がある場合とない場合の両方で何らかの処理を行う必要がある際に使用します。
         /// </summary>
-        /// <param name="other">このオブジェクトと比較する Option。</param>
-        /// <returns>現在のオブジェクトが other パラメータと等しい場合は true。それ以外の場合は false。</returns>
+        /// <param name="Some">Someの場合の処理</param>
+        /// <param name="None">Noneの場合の処理</param>
+        public void Match(Action<T> Some, Action None)
+        {
+            if (this.hasValue)
+                Some(this.value);
+            else
+                None();
+        }
+
+        /// <summary>
+        /// T型のOptionをU型のオプションに変換します。
+        /// 値がある場合のみに変換を適用します。
+        /// 変換は、T型を受け取りU型のOptionを返す関数として指定します。
+        /// </summary>
+        /// <typeparam name="U">変換先の型</typeparam>
+        /// <param name="f">変換に用いる関数</param>
+        /// <returns>変換した値</returns>
+        public Option<U> Bind<U>(Func<T, Option<U>> f)
+        {
+            return this.hasValue ? f(this.value) : Option<U>.None;
+        }
+
+        /// <summary>
+        /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを判定します。
+        /// </summary>
+        /// <param name="other">このオブジェクトと比較するOption</param>
+        /// <returns>現在のオブジェクトがotherで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
         public bool Equals(Option<T> other)
         {
-            return hasValue == other.hasValue && Equals(value, other.value);
+            return this.hasValue == other.hasValue && Equals(this.value, other.value);
         }
 
         /// <summary>
-        /// 現在のオブジェクトが、別のオブジェクトと等しいかどうかを示します。
+        /// 現在のオブジェクトが、別のオブジェクトと等しいかどうかを判定します。
         /// </summary>
-        /// <param name="obj">このオブジェクトと比較するオブジェクト。</param>
-        /// <returns>現在のオブジェクトが obj パラメータと等しい場合は true。それ以外の場合は false。</returns>
+        /// <param name="obj">このオブジェクトと比較するオブジェクト</param>
+        /// <returns>現在のオブジェクトがobjで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
         public override bool Equals(object obj)
         {
+            if (obj.IsNull())
+                return false;
+
+            var type = obj.GetType();
+            if (type.IsGenericType == false)
+                return false;
+
+            var genType = type.GetGenericTypeDefinition();
+            if (genType != typeof(Option<>))
+                return false;
+
+            if (typeof(T) == typeof(Placeholder))
+                return !(bool)type.GetField("hasValue", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(obj);
+
+            var elemType = type.GetGenericArguments()[0];
+            if (elemType == typeof(Placeholder))
+                return this.hasValue == false;
+
             if ((obj is Option<T>) == false)
                 return false;
             return Equals((Option<T>)obj);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2つのOptionの比較を行います。 
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は true、それ以外の場合は false。</returns>
+        /// <param name="a">1つ目のOption</param>
+        /// <param name="b">2つ目のOption</param>
+        /// <returns>2つのOptionが等しい場合はtrue、それ以外の場合はfalse</returns>
         public static bool operator ==(Option<T> a, Option<T> b)
         {
             return a.Equals(b);
         }
 
         /// <summary>
-        /// 2 つの Option の比較を行います。
+        /// 2つのOptionの比較を行います。 
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>2 つの Option が等しい場合は false、それ以外の場合は true。</returns>
+        /// <param name="a">1つ目のOption</param>
+        /// <param name="b">2つ目のOption</param>
+        /// <returns>2つのOptionが等しい場合はfalse、それ以外の場合はtrue</returns>
         public static bool operator !=(Option<T> a, Option<T> b)
         {
             return !(a == b);
         }
 
         /// <summary>
-        /// Option が値を持つかどうかを判定します。
+        /// このオブジェクトが値を持つかどうかを取得します。
+        /// 制御構文内でboolが必要な場所に対しては、IsSomeやIsNoneではなく、Optionオブジェクトをそのまま使用することも可能です。
         /// </summary>
-        /// <param name="x">判定の対象。</param>
-        /// <returns>値を持つ場合は true、それ以外の場合は false。</returns>
+        public bool IsSome
+        {
+            get { return this.hasValue; }
+        }
+
+        /// <summary>
+        /// このオブジェクトが値を持たないかどうかを取得します。
+        /// 制御構文内でboolが必要な場所に対しては、IsSomeやIsNoneではなく、Optionオブジェクトをそのまま使用することも可能です。
+        /// </summary>
+        public bool IsNone
+        {
+            get { return this.hasValue == false; }
+        }
+
+        /// <summary>
+        /// Optionが値を持つかどうかを判定します。
+        /// </summary>
+        /// <param name="x">判定の対象</param>
+        /// <returns>値を持つ場合はtrue、持たない場合はfalse</returns>
         public static bool operator true(Option<T> x)
         {
             return x.hasValue;
         }
 
         /// <summary>
-        /// Option が値を持たないかどうかを判定します。
+        /// Optionが値を持たないかどうかを判定します。
         /// </summary>
-        /// <param name="x">判定の対象。</param>
-        /// <returns>値を持つ場合は false、それ以外の場合は true。</returns>
+        /// <param name="x">判定の対象</param>
+        /// <returns>値を持つ場合はfalse、持たない場合はtrue</returns>
         public static bool operator false(Option<T> x)
         {
-            return !x.hasValue;
+            return x.hasValue == false;
         }
 
         /// <summary>
-        /// 左辺の Option が値を持つ場合は左辺を、そうでない場合は右辺を返します。
+        /// 自身が値を持つ場合は自身を、そうでない場合はelsePartの結果を返します。
+        /// Optionは短絡のor演算子を提供しているため、そちらを使用したほうが効率的です。
+        /// </summary>
+        /// <param name="elsePart">自身が値を持たなかった場合の値を返す関数</param>
+        /// <returns>自身が値を持つ場合は自身、値を持たない場合はelsePartの結果</returns>
+        public Option<T> OrElse(Func<Option<T>> elsePart)
+        {
+            return this.hasValue ? this : elsePart();
+        }
+
+        /// <summary>
+        /// 自身とthenPartの結果の両方が値を持つ場合はthenPartの結果を、
+        /// そうでない場合はNoneを返します。
+        /// Optionは短絡のand演算子を提供しているため、そちらを使用したほうが効率的です。
+        /// </summary>
+        /// <param name="thenPart">自身が値を持つ場合の値を返す関数</param>
+        /// <returns>自身とthenPartの結果の両方が値を持つ場合はthenPartの結果、どちらか一方でも値を持たなかった場合はNone</returns>
+        public Option<U> AndThen<U>(Func<Option<U>> thenPart)
+        {
+            return this.hasValue == false ? Option<U>.None : thenPart();
+        }
+
+        /// <summary>
+        /// 左辺のOptionが値を持つ場合は左辺を、そうでない場合は右辺を返します。
         /// 通常、直接使用せず、短絡演算子として使用します。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>左辺の Option が値を持つ場合は左辺、それ以外の場合は右辺。</returns>
+        /// <param name="a">1つ目のOption</param>
+        /// <param name="b">2つ目のOption</param>
+        /// <returns>左辺のOptionが値を持つ場合は左辺、それ以外の場合は右辺</returns>
         public static Option<T> operator |(Option<T> a, Option<T> b)
         {
-            if (a.hasValue)
-                return a;
-            return b;
+            return a.hasValue ? a : b;
         }
 
         /// <summary>
-        /// 左辺の Option が値を持たない場合は None を、そうでない場合は右辺を返します。
+        /// 両辺のOptionが値を持つ場合は右辺を、そうでない場合はNoneを返します。
         /// 通常、直接使用せず、短絡演算子として使用します。
         /// </summary>
-        /// <param name="a">1 つ目の Option。</param>
-        /// <param name="b">2 つ目の Option。</param>
-        /// <returns>左辺の Option が値を持たない場合は None、それ以外の場合は右辺。</returns>
+        /// <param name="a">1つ目のOption</param>
+        /// <param name="b">2つ目のOption</param>
+        /// <returns>両辺のOptionが値を持つ場合は右辺を、一方でも値を持たない場合はNone</returns>
         public static Option<T> operator &(Option<T> a, Option<T> b)
         {
-            if (a.hasValue == false)
-                return None;
-            return b;
+            return a.hasValue == false ? Option<T>.None : b;
         }
 
         /// <summary>
-        /// 現在のオブジェクトのハッシュコードを取得します。
+        /// オブジェクトのハッシュコードを取得します。
         /// </summary>
-        /// <returns>現在のオブジェクトのハッシュコード。</returns>
+        /// <returns>ハッシュコード</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
         {
             var result = 31;
-            result ^= hasValue.GetHashCode();
-            result ^= value == null ? 0 : value.GetHashCode();
+            result ^= this.hasValue.GetHashCode();
+            result ^= this.value.IsNull() ? 0 : this.value.GetHashCode();
             return result;
         }
 
         /// <summary>
-        /// 現在のオブジェクトを文字列表現に変換します。
+        /// このオブジェクトを文字列表現に変換します。
         /// </summary>
-        /// <returns>現在のオブジェクトの文字列表現。</returns>
+        /// <returns>このオブジェクトの文字列表現</returns>
         public override string ToString()
         {
-            if (hasValue)
-                return string.Format("Some({0})", value);
-            else
-                return "None";
+            return this.hasValue ? string.Concat("Some(", this.value, ")") : "None";
         }
     }
 }
