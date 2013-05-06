@@ -34,5 +34,14 @@ namespace LangExt
         {
             return self.Bind(x => f(x).Bind(y => Option.Some(g(x, y))));
         }
+
+        /// <summary>
+        /// クエリ式でOptionを扱うためのメソッドです。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static Option<T> Cast<T>(this Option<Placeholder> self)
+        {
+            return (Option<T>)self;
+        }
     }
 }
