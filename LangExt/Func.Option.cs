@@ -6,6 +6,40 @@ namespace LangExt
     partial class Func
     {
         /// <summary>関数の結果をOptionで包む関数に変換します。関数の結果が例外の場合、Noneになります。</summary>
+        public static Func<Option<T>> ExnToOption<T>(this Func<T> self)
+        {
+            return () => { try { return Option.Some(self()); } catch { return Option.None; } };
+        }
+
+        /// <summary>関数の結果をOptionで包む関数に変換します。関数の結果がnullの場合、Noneになります。</summary>
+        public static Func<Option<T>> NullToOption<T>(this Func<T> self)
+            where T : class
+        {
+            return () => Option.Create(self());
+        }
+
+        /// <summary>関数の結果をOptionで包む関数に変換します。関数の結果がnullの場合、Noneになります。</summary>
+        public static Func<Option<T>> NullToOption<T>(this Func<T?> self)
+            where T : struct
+        {
+            return () => Option.Create(self());
+        }
+
+        /// <summary>関数の結果をOptionで包む関数に変換します。関数の結果がnullか例外の場合、Noneになります。</summary>
+        public static Func<Option<T>> ToOption<T>(this Func<T> self)
+            where T : class
+        {
+            return () => { try { return Option.Create(self()); } catch { return Option.None; } };
+        }
+
+        /// <summary>関数の結果をOptionで包む関数に変換します。関数の結果がnullか例外の場合、Noneになります。</summary>
+        public static Func<Option<T>> ToOption<T>(this Func<T?> self)
+            where T : struct
+        {
+            return () => { try { return Option.Create(self()); } catch { return Option.None; } };
+        }
+
+        /// <summary>関数の結果をOptionで包む関数に変換します。関数の結果が例外の場合、Noneになります。</summary>
         public static Func<T1, Option<U>> ExnToOption<T1, U>(this Func<T1, U> self)
         {
             return (t1) => { try { return Option.Some(self(t1)); } catch { return Option.None; } };
