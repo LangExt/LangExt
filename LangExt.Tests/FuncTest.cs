@@ -154,12 +154,19 @@ namespace LangExt.Tests
             #endregion
         }
 
-        public static readonly Func<int> Error0 = () => { throw new Exception(); };
-        public static readonly Func<int> NotError0 = () => 42;
-        public static readonly Func<int, int> Error1 = x => Error0();
-        public static readonly Func<int, int> NotError1 = x => NotError0();
-        public static readonly Func<int, int, int> Error2 = (x, y) => Error0();
-        public static readonly Func<int, int, int> NotError2 = (x, y) => NotError0();
+        public static readonly Func<int?> ErrorInt0 = () => { throw new Exception(); };
+        public static readonly Func<int?> NotErrorInt0 = () => 42;
+        public static readonly Func<int, int?> ErrorInt1 = x => ErrorInt0();
+        public static readonly Func<int, int?> NotErrorInt1 = x => NotErrorInt0();
+        public static readonly Func<int, int, int?> ErrorInt2 = (x, y) => ErrorInt0();
+        public static readonly Func<int, int, int?> NotErrorInt2 = (x, y) => NotErrorInt0();
+
+        public static readonly Func<string> ErrorStr0 = () => { throw new Exception(); };
+        public static readonly Func<string> NotErrorStr0 = () => "hoge";
+        public static readonly Func<int, string> ErrorStr1 = x => ErrorStr0();
+        public static readonly Func<int, string> NotErrorStr1 = x => NotErrorStr0();
+        public static readonly Func<int, int, string> ErrorStr2 = (x, y) => ErrorStr0();
+        public static readonly Func<int, int, string> NotErrorStr2 = (x, y) => NotErrorStr0();
 
         public static readonly Func<int?> NullInt0 = () => null;
         public static readonly Func<int?> NotNullInt0 = () => 42;
@@ -197,22 +204,22 @@ namespace LangExt.Tests
 
             #region ExnToOption
             [Test]
-            public void ExnToOption0_Error() { Test0<int>(Error0.ExnToOption, Option.None); }
+            public void ExnToOption0_Error() { Test0<int?>(ErrorInt0.ExnToOption, Option.None); }
 
             [Test]
-            public void ExnToOption0_NotError() { Test0(NotError0.ExnToOption, Option.Some(42)); }
+            public void ExnToOption0_NotError() { Test0(NotErrorInt0.ExnToOption, Option.Some<int?>(42)); }
 
             [Test]
-            public void ExnToOption1_Error() { Test1<int>(Error1.ExnToOption, Option.None); }
+            public void ExnToOption1_Error() { Test1<int?>(ErrorInt1.ExnToOption, Option.None); }
 
             [Test]
-            public void ExnToOption1_NotError() { Test1(NotError1.ExnToOption, Option.Some(42)); }
+            public void ExnToOption1_NotError() { Test1(NotErrorInt1.ExnToOption, Option.Some<int?>(42)); }
 
             [Test]
-            public void ExnToOption2_Error() { Test2<int>(Error2.ExnToOption, Option.None); }
+            public void ExnToOption2_Error() { Test2<int?>(ErrorInt2.ExnToOption, Option.None); }
 
             [Test]
-            public void ExnToOption2_NotError() { Test2(NotError2.ExnToOption, Option.Some(42)); }
+            public void ExnToOption2_NotError() { Test2(NotErrorInt2.ExnToOption, Option.Some<int?>(42)); }
             #endregion
 
             #region NullToOption
@@ -251,6 +258,62 @@ namespace LangExt.Tests
 
             [Test]
             public void NullToOption2_NotNullStr() { Test2(NotNullStr2.NullToOption, Option.Some("hoge")); }
+            #endregion
+
+            #region ToOption
+            [Test]
+            public void ToOption0_ErrorInt() { Test0<int>(ErrorInt0.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption0_NullInt() { Test0<int>(NullInt0.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption0_Int() { Test0(NotNullInt0.ToOption, Option.Some(42)); }
+
+            [Test]
+            public void ToOption0_ErrorStr() { Test0<string>(ErrorStr0.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption0_NullStr() { Test0<string>(NullStr0.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption0_Str() { Test0(NotNullStr0.ToOption, Option.Some("hoge")); }
+
+            [Test]
+            public void ToOption1_ErrorInt() { Test1<int>(ErrorInt1.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption1_NullInt() { Test1<int>(NullInt1.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption1_Int() { Test1(NotNullInt1.ToOption, Option.Some(42)); }
+
+            [Test]
+            public void ToOption1_ErrorStr() { Test1<string>(ErrorStr1.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption1_NullStr() { Test1<string>(NullStr1.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption1_Str() { Test1(NotNullStr1.ToOption, Option.Some("hoge")); }
+
+            [Test]
+            public void ToOption2_ErrorInt() { Test2<int>(ErrorInt2.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption2_NullInt() { Test2<int>(NullInt2.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption2_Int() { Test2(NotNullInt2.ToOption, Option.Some(42)); }
+
+            [Test]
+            public void ToOption2_ErrorStr() { Test2<string>(ErrorStr2.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption2_NullStr() { Test2<string>(NullStr2.ToOption, Option.None); }
+
+            [Test]
+            public void ToOption2_Str() { Test2(NotNullStr2.ToOption, Option.Some("hoge")); }
             #endregion
         }
     }
