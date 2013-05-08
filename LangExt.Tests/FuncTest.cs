@@ -38,190 +38,119 @@ namespace LangExt.Tests
 
         public class FuncCurry
         {
+            void TestCurry2(Func<Func<int, Func<int, int>>> testTarget)
+            {
+                var curried = testTarget();
+                Assert.That(curried(20)(1), Is.EqualTo(19));
+            }
+
+            void TestCurry3(Func<Func<int, Func<int, Func<int, int>>>> testTarget)
+            {
+                var curried = testTarget();
+                Assert.That(curried(20)(1)(2), Is.EqualTo(17));
+            }
+
+            void TestMultiargs2(Func<Func<int, int, int>> testTaregt)
+            {
+                var multiargs = testTaregt();
+                Assert.That(multiargs(20, 1), Is.EqualTo(19));
+            }
+
+            void TestMultiargs3(Func<Func<int, int, int, int>> testTarget)
+            {
+                var multiargs = testTarget();
+                Assert.That(multiargs(20, 1, 2), Is.EqualTo(17));
+            }
+
+            void TestTupled2(Func<Func<Tuple<int, int>, int>> testTarget)
+            {
+                var tupled = testTarget();
+                Assert.That(tupled(Tuple.Create(20, 1)), Is.EqualTo(19));
+            }
+
+            void TestTupled3(Func<Func<Tuple<int, int, int>, int>> testTarget)
+            {
+                var tupled = testTarget();
+                Assert.That(tupled(Tuple.Create(20, 1, 2)), Is.EqualTo(17));
+            }
+
             #region Curry/Uncurry/Curried/Uncurried
-            [Test]
-            public void Curry2()
-            {
-                var curried = Func.Curry(Sub);
-                Assert.That(curried(20)(1), Is.EqualTo(19));
-            }
 
             [Test]
-            public void Curry3()
-            {
-                var curried = Func.Curry(Sub3);
-                Assert.That(curried(20)(1)(2), Is.EqualTo(17));
-            }
+            public void Curry2() { TestCurry2(() => Func.Curry(Sub)); }
 
             [Test]
-            public void Uncurry2()
-            {
-                var curried = Func.Curry(Sub);
-                var uncurried = Func.Uncurried(curried);
-                Assert.That(uncurried(20, 1), Is.EqualTo(19));
-            }
+            public void Curried2() { TestCurry2(() => Sub.Curried()); }
 
             [Test]
-            public void Uncurry3()
-            {
-                var curried = Func.Curry(Sub3);
-                var uncurried = Func.Uncurried(curried);
-                Assert.That(uncurried(20, 1, 2), Is.EqualTo(17));
-            }
+            public void Curry3() { TestCurry3(() => Func.Curry(Sub3)); }
 
             [Test]
-            public void Curried2()
-            {
-                var curried = Sub.Curried();
-                Assert.That(curried(20)(1), Is.EqualTo(19));
-            }
+            public void Curried3() { TestCurry3(() => Sub3.Curried()); }
 
             [Test]
-            public void Curried3()
-            {
-                var curried = Sub3.Curried();
-                Assert.That(curried(20)(1)(2), Is.EqualTo(17));
-            }
+            public void Uncurry2() { TestMultiargs2(() => Func.Uncurry(Sub.Curried())); }
 
             [Test]
-            public void Uncurried2()
-            {
-                var curried = Sub.Curried();
-                var uncurried = curried.Uncurried();
-                Assert.That(uncurried(20, 1), Is.EqualTo(19));
-            }
+            public void Uncurried2() { TestMultiargs2(() => Sub.Curried().Uncurried()); }
 
             [Test]
-            public void Uncurried3()
-            {
-                var curried = Sub3.Curried();
-                var uncurried = curried.Uncurried();
-                Assert.That(uncurried(20, 1, 2), Is.EqualTo(17));
-            }
+            public void Uncurry3() { TestMultiargs3(() => Func.Uncurry(Sub3.Curried())); }
+
+            [Test]
+            public void Uncurried3() { TestMultiargs3(() => Sub3.Curried().Uncurried()); }
             #endregion
 
             #region Tuple/Untuple/Tupled/Untupled
             [Test]
-            public void Tuple2()
-            {
-                var tupled = Func.Tuple(Sub);
-                Assert.That(tupled(Create.Tuple(20, 1)), Is.EqualTo(19));
-            }
+            public void Tuple2() { TestTupled2(() => Func.Tuple(Sub)); }
 
             [Test]
-            public void Tuple3()
-            {
-                var tupled = Func.Tuple(Sub3);
-                Assert.That(tupled(Create.Tuple(20, 1, 2)), Is.EqualTo(17));
-            }
+            public void Tupled2() { TestTupled2(() => Sub.Tupled()); }
 
             [Test]
-            public void Untuple2()
-            {
-                var tupled = Func.Tuple(Sub);
-                var untupled = Func.Untuple(tupled);
-                Assert.That(untupled(20, 1), Is.EqualTo(19));
-            }
+            public void Tuple3() { TestTupled3(() => Func.Tuple(Sub3)); }
 
             [Test]
-            public void Untuple3()
-            {
-                var tupled = Func.Tuple(Sub3);
-                var untupled = Func.Untuple(tupled);
-                Assert.That(untupled(20, 1, 2), Is.EqualTo(17));
-            }
+            public void Tupled3() { TestTupled3(() => Sub3.Tupled()); }
 
             [Test]
-            public void Tupled2()
-            {
-                var tupled = Sub.Tupled();
-                Assert.That(tupled(Create.Tuple(20, 1)), Is.EqualTo(19));
-            }
+            public void Untuple2() { TestMultiargs2(() => Func.Untuple(Sub.Tupled())); }
 
             [Test]
-            public void Tupled3()
-            {
-                var tupled = Sub3.Tupled();
-                Assert.That(tupled(Create.Tuple(20, 1, 2)), Is.EqualTo(17));
-            }
+            public void Untupled2() { TestMultiargs2(() => Sub.Tupled().Untupled()); }
 
             [Test]
-            public void Untupled2()
-            {
-                var tupled = Sub.Tupled();
-                var untupled = tupled.Untupled();
-                Assert.That(untupled(20, 1), Is.EqualTo(19));
-            }
+            public void Untuple3() { TestMultiargs3(() => Func.Untuple(Sub3.Tupled())); }
 
             [Test]
-            public void Untupled3()
-            {
-                var tupled = Sub3.Tupled();
-                var untupled = tupled.Untupled();
-                Assert.That(untupled(20, 1, 2), Is.EqualTo(17));
-            }
+            public void Untupled3() { TestMultiargs3(() => Sub3.Tupled().Untupled()); }
             #endregion
 
             #region CurryX/UncurryX/UncurriedX/UncurryX
             [Test]
-            public void CurryX2()
-            {
-                var curried = Func.CurryX(SubT);
-                Assert.That(curried(20)(1), Is.EqualTo(19));
-            }
+            public void CurryX2() { TestCurry2(() => Func.CurryX(SubT)); }
 
             [Test]
-            public void CurryX3()
-            {
-                var curried = Func.CurryX(Sub3T);
-                Assert.That(curried(20)(1)(2), Is.EqualTo(17));
-            }
+            public void CurriedX2() { TestCurry2(() => SubT.CurriedX()); }
 
             [Test]
-            public void UncurryX2()
-            {
-                var curried = Func.CurryX(SubT);
-                var uncurried = Func.UncurryX(curried);
-                Assert.That(uncurried(Create.Tuple(20, 1)), Is.EqualTo(19));
-            }
+            public void CurryX3() { TestCurry3(() => Func.CurryX(Sub3T)); }
 
             [Test]
-            public void UncurryX3()
-            {
-                var curried = Func.CurryX(Sub3T);
-                var uncurried = Func.UncurryX(curried);
-                Assert.That(uncurried(Create.Tuple(20, 1, 2)), Is.EqualTo(17));
-            }
+            public void CurriedX3() { TestCurry3(() => Sub3T.CurriedX()); } 
 
             [Test]
-            public void CurriedX2()
-            {
-                var curried = SubT.CurriedX();
-                Assert.That(curried(20)(1), Is.EqualTo(19));
-            }
+            public void UncurryX2() { TestTupled2(() => Func.UncurryX(SubT.CurriedX())); }
 
             [Test]
-            public void CurriedX3()
-            {
-                var curried = Sub3T.CurriedX();
-                Assert.That(curried(20)(1)(2), Is.EqualTo(17));
-            }
+            public void UncurriedX2() { TestTupled2(() => SubT.CurriedX().UncurriedX()); }
 
             [Test]
-            public void UncurriedX2()
-            {
-                var curried = SubT.CurriedX();
-                var uncurried = curried.UncurriedX();
-                Assert.That(uncurried(Create.Tuple(20, 1)), Is.EqualTo(19));
-            }
+            public void UncurryX3() { TestTupled3(() => Func.UncurryX(Sub3T.CurriedX())); }
 
             [Test]
-            public void UncurriedX3()
-            {
-                var curried = Sub3T.CurriedX();
-                var uncurried = curried.UncurriedX();
-                Assert.That(uncurried(Create.Tuple(20, 1, 2)), Is.EqualTo(17));
-            }
+            public void UncurriedX3() { TestTupled3(() => Sub3T.CurriedX().UncurriedX()); }
             #endregion
         }
 
@@ -248,106 +177,80 @@ namespace LangExt.Tests
 
         public class FuncOption
         {
+            void Test0<T>(Func<Func<Option<T>>> testTarget, Option<T> expected)
+            {
+                var f = testTarget();
+                Assert.That(f(), Is.EqualTo(expected));
+            }
+
+            void Test1<T>(Func<Func<int, Option<T>>> testTarget, Option<T> expected)
+            {
+                var f = testTarget();
+                Assert.That(f(0), Is.EqualTo(expected));
+            }
+
+            void Test2<T>(Func<Func<int, int, Option<T>>> testTarget, Option<T> expected)
+            {
+                var f = testTarget();
+                Assert.That(f(0, 1), Is.EqualTo(expected));
+            }
+
             #region ExnToOption
             [Test]
-            public void ExnToOption0_Error()
-            {
-                var f = Error0.ExnToOption();
-                Assert.That(f(), Is.EqualTo(Option.None));
-            }
+            public void ExnToOption0_Error() { Test0<int>(Error0.ExnToOption, Option.None); }
 
             [Test]
-            public void ExnToOption0_NotError()
-            {
-                var f = NotError0.ExnToOption();
-                Assert.That(f(), Is.EqualTo(Option.Some(42)));
-            }
+            public void ExnToOption0_NotError() { Test0(NotError0.ExnToOption, Option.Some(42)); }
 
             [Test]
-            public void ExnToOption1_Error()
-            {
-                var f = Error1.ExnToOption();
-                Assert.That(f(0), Is.EqualTo(Option.None));
-            }
+            public void ExnToOption1_Error() { Test1<int>(Error1.ExnToOption, Option.None); }
 
             [Test]
-            public void ExnToOption1_NotError()
-            {
-                var f = NotError1.ExnToOption();
-                Assert.That(f(0), Is.EqualTo(Option.Some(42)));
-            }
+            public void ExnToOption1_NotError() { Test1(NotError1.ExnToOption, Option.Some(42)); }
 
             [Test]
-            public void ExnToOption2_Error()
-            {
-                var f = Error2.ExnToOption();
-                Assert.That(f(0, 1), Is.EqualTo(Option.None));
-            }
+            public void ExnToOption2_Error() { Test2<int>(Error2.ExnToOption, Option.None); }
 
             [Test]
-            public void ExnToOption2_NotError()
-            {
-                var f = NotError2.ExnToOption();
-                Assert.That(f(0, 1), Is.EqualTo(Option.Some(42)));
-            }
+            public void ExnToOption2_NotError() { Test2(NotError2.ExnToOption, Option.Some(42)); }
             #endregion
 
             #region NullToOption
             [Test]
-            public void NullToOption0_NullInt()
-            {
-                var f = NullInt0.NullToOption();
-                Assert.That(f(), Is.EqualTo(Option.None));
-            }
+            public void NullToOption0_NullInt() { Test0<int>(NullInt0.NullToOption, Option.None); }
 
             [Test]
-            public void NullToOption0_NotNullInt()
-            {
-                var f = NotNullInt0.NullToOption();
-                Assert.That(f(), Is.EqualTo(Option.Some(42)));
-            }
+            public void NullToOption0_NotNullInt() { Test0(NotNullInt0.NullToOption, Option.Some(42)); }
 
             [Test]
-            public void NullToOption0_NullStr()
-            {
-                var f = NullStr0.NullToOption();
-                Assert.That(f(), Is.EqualTo(Option.None));
-            }
+            public void NullToOption0_NullStr() { Test0<string>(NullStr0.NullToOption, Option.None); }
 
             [Test]
-            public void NullToOption0_NotNullStr()
-            {
-                var f = NotNullStr0.NullToOption();
-                Assert.That(f(), Is.EqualTo(Option.Some("hoge")));
-            }
+            public void NullToOption0_NotNullStr() { Test0(NotNullStr0.NullToOption, Option.Some("hoge")); }
 
             [Test]
-            public void NullToOption1_NullInt()
-            {
-                var f = NullInt1.ToOption();
-                Assert.That(f(0), Is.EqualTo(Option.None));
-            }
+            public void NullToOption1_NullInt() { Test1<int>(NullInt1.NullToOption, Option.None); } 
 
             [Test]
-            public void NullToOption1_NotNullInt()
-            {
-                var f = NotNullInt1.ToOption();
-                Assert.That(f(0), Is.EqualTo(Option.Some(42)));
-            }
+            public void NullToOption1_NotNullInt() { Test1(NotNullInt1.NullToOption, Option.Some(42)); }
 
             [Test]
-            public void NullToOption1_NullStr()
-            {
-                var f = NullStr1.ToOption();
-                Assert.That(f(0), Is.EqualTo(Option.None));
-            }
+            public void NullToOption1_NullStr() { Test1<string>(NullStr1.NullToOption, Option.None); }
 
             [Test]
-            public void NullToOption1_NotNullStr()
-            {
-                var f = NotNullStr1.ToOption();
-                Assert.That(f(0), Is.EqualTo(Option.Some("hoge")));
-            }
+            public void NullToOption1_NotNullStr() { Test1(NotNullStr1.NullToOption, Option.Some("hoge")); }
+
+            [Test]
+            public void NullToOption2_NullInt() { Test2<int>(NullInt2.NullToOption, Option.None); }
+
+            [Test]
+            public void NullToOption2_NotNullInt() { Test2(NotNullInt2.NullToOption, Option.Some(42)); }
+
+            [Test]
+            public void NullToOption2_NullStr() { Test2<string>(NullStr2.NullToOption, Option.None); }
+
+            [Test]
+            public void NullToOption2_NotNullStr() { Test2(NotNullStr2.NullToOption, Option.Some("hoge")); }
             #endregion
         }
     }
