@@ -6,6 +6,11 @@ using NUnit.Framework;
 
 namespace LangExt.Tests
 {
+    public static class ExnExt
+    {
+        public static Exception AsExn<T>(this T self) where T : Exception { return self; }
+    }
+
     [TestFixture]
     public class FuncTest
     {
@@ -154,14 +159,19 @@ namespace LangExt.Tests
             #endregion
         }
 
-        public static readonly Func<int?> ErrorInt0 = () => { throw new Exception(); };
+        public class MyException : Exception
+        {
+            public override bool Equals(object obj) { return obj is MyException; }
+        }
+
+        public static readonly Func<int?> ErrorInt0 = () => { throw new MyException(); };
         public static readonly Func<int?> NotErrorInt0 = () => 42;
         public static readonly Func<int, int?> ErrorInt1 = x => ErrorInt0();
         public static readonly Func<int, int?> NotErrorInt1 = x => NotErrorInt0();
         public static readonly Func<int, int, int?> ErrorInt2 = (x, y) => ErrorInt0();
         public static readonly Func<int, int, int?> NotErrorInt2 = (x, y) => NotErrorInt0();
 
-        public static readonly Func<string> ErrorStr0 = () => { throw new Exception(); };
+        public static readonly Func<string> ErrorStr0 = () => { throw new MyException(); };
         public static readonly Func<string> NotErrorStr0 = () => "hoge";
         public static readonly Func<int, string> ErrorStr1 = x => ErrorStr0();
         public static readonly Func<int, string> NotErrorStr1 = x => NotErrorStr0();
@@ -314,6 +324,168 @@ namespace LangExt.Tests
 
             [Test]
             public void ToOption2_Str() { Test2(NotNullStr2.ToOption, Option.Some("hoge")); }
+            #endregion
+        }
+
+        public class FuncResult
+        {
+            void Test0<T, U>(Func<Func<Result<T, U>>> testTarget, Result<T, U> expected)
+            {
+                var f = testTarget();
+                Assert.That(f(), Is.EqualTo(expected));
+            }
+
+            void Test0<T>(Func<Func<Result<T, Exception>>> testTarget, Result<T, Exception> expected)
+            {
+                var res = testTarget()();
+                if (expected.IsFailure && expected.GetFailureValue().GetType() == typeof(NullResultException))
+                    Assert.That(res.GetFailureValue(), Is.TypeOf<NullResultException>());
+                else
+                    Assert.That(res, Is.EqualTo(expected));
+            }
+
+            void Test1<T, U>(Func<Func<int, Result<T, U>>> testTarget, Result<T, U> expected)
+            {
+                var f = testTarget();
+                Assert.That(f(0), Is.EqualTo(expected));
+            }
+
+            void Test1<T>(Func<Func<int, Result<T, Exception>>> testTarget, Result<T, Exception> expected)
+            {
+                var res = testTarget()(0);
+                if (expected.IsFailure && expected.GetFailureValue().GetType() == typeof(NullResultException))
+                    Assert.That(res.GetFailureValue(), Is.TypeOf<NullResultException>());
+                else
+                    Assert.That(res, Is.EqualTo(expected));
+            }
+
+            void Test2<T, U>(Func<Func<int, int, Result<T, U>>> testTarget, Result<T, U> expected)
+            {
+                var f = testTarget();
+                Assert.That(f(0, 1), Is.EqualTo(expected));
+            }
+
+            void Test2<T>(Func<Func<int, int, Result<T, Exception>>> testTarget, Result<T, Exception> expected)
+            {
+                var res = testTarget()(0, 1);
+                if (expected.IsFailure && expected.GetFailureValue().GetType() == typeof(NullResultException))
+                    Assert.That(res.GetFailureValue(), Is.TypeOf<NullResultException>());
+                else
+                    Assert.That(res, Is.EqualTo(expected));
+            }
+
+            #region ExnToResult
+            [Test]
+            public void ExnToResult0_Error() { Test0<int?, Exception>(ErrorInt0.ExnToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ExnToResult0_NotError() { Test0(NotErrorInt0.ExnToResult, Result.Success<int?>(42).CastFailure<Exception>()); }
+
+            [Test]
+            public void ExnToResult1_Error() { Test1<int?, Exception>(ErrorInt1.ExnToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ExnToResult1_NotError() { Test1(NotErrorInt1.ExnToResult, Result.Success<int?>(42).CastFailure<Exception>()); }
+
+            [Test]
+            public void ExnToResult2_Error() { Test2<int?, Exception>(ErrorInt2.ExnToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ExnToResult2_NotError() { Test2(NotErrorInt2.ExnToResult, Result.Success<int?>(42).CastFailure<Exception>()); }
+            #endregion
+
+            #region NullToResult
+            [Test]
+            public void NullToResult0_NullInt() { Test0<int, Unit>(NullInt0.NullToResult, Result.Failure(Unit._)); }
+
+            [Test]
+            public void NullToResult0_NotNullInt() { Test0(NotNullInt0.NullToResult, Result.Success(42).CastFailure<Unit>()); }
+
+            [Test]
+            public void NullToResult0_NullStr() { Test0<string, Unit>(NullStr0.NullToResult, Result.Failure(Unit._)); }
+
+            [Test]
+            public void NullToResult0_NotNullStr() { Test0(NotNullStr0.NullToResult, Result.Success("hoge").CastFailure<Unit>()); }
+
+            [Test]
+            public void NullToResult1_NullInt() { Test1<int, Unit>(NullInt1.NullToResult, Result.Failure(Unit._)); } 
+
+            [Test]
+            public void NullToResult1_NotNullInt() { Test1(NotNullInt1.NullToResult, Result.Success(42).CastFailure<Unit>()); }
+
+            [Test]
+            public void NullToResult1_NullStr() { Test1<string, Unit>(NullStr1.NullToResult, Result.Failure(Unit._)); }
+
+            [Test]
+            public void NullToResult1_NotNullStr() { Test1(NotNullStr1.NullToResult, Result.Success("hoge").CastFailure<Unit>()); }
+
+            [Test]
+            public void NullToResult2_NullInt() { Test2<int, Unit>(NullInt2.NullToResult, Result.Failure(Unit._)); }
+
+            [Test]
+            public void NullToResult2_NotNullInt() { Test2(NotNullInt2.NullToResult, Result.Success(42).CastFailure<Unit>()); }
+
+            [Test]
+            public void NullToResult2_NullStr() { Test2<string, Unit>(NullStr2.NullToResult, Result.Failure(Unit._)); }
+
+            [Test]
+            public void NullToResult2_NotNullStr() { Test2(NotNullStr2.NullToResult, Result.Success("hoge").CastFailure<Unit>()); }
+            #endregion
+
+            #region ToResult
+            [Test]
+            public void ToResult0_ErrorInt() { Test0<int>(ErrorInt0.ToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ToResult0_NullInt() { Test0<int>(NullInt0.ToResult, Result.Failure(new NullResultException().AsExn())); }
+
+            [Test]
+            public void ToResult0_Int() { Test0(NotNullInt0.ToResult, Result.Success(42).CastFailure<Exception>()); }
+
+            [Test]
+            public void ToResult0_ErrorStr() { Test0<string>(ErrorStr0.ToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ToResult0_NullStr() { Test0<string>(NullStr0.ToResult, Result.Failure(new NullResultException().AsExn())); }
+
+            [Test]
+            public void ToResult0_Str() { Test0(NotNullStr0.ToResult, Result.Success("hoge").CastFailure<Exception>()); }
+
+            [Test]
+            public void ToResult1_ErrorInt() { Test1<int>(ErrorInt1.ToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ToResult1_NullInt() { Test1<int>(NullInt1.ToResult, Result.Failure(new NullResultException().AsExn())); }
+
+            [Test]
+            public void ToResult1_Int() { Test1(NotNullInt1.ToResult, Result.Success(42).CastFailure<Exception>()); }
+
+            [Test]
+            public void ToResult1_ErrorStr() { Test1<string>(ErrorStr1.ToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ToResult1_NullStr() { Test1<string>(NullStr1.ToResult, Result.Failure(new NullResultException().AsExn())); }
+
+            [Test]
+            public void ToResult1_Str() { Test1(NotNullStr1.ToResult, Result.Success("hoge").CastFailure<Exception>()); }
+
+            [Test]
+            public void ToResult2_ErrorInt() { Test2<int>(ErrorInt2.ToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ToResult2_NullInt() { Test2<int>(NullInt2.ToResult, Result.Failure(new NullResultException().AsExn())); }
+
+            [Test]
+            public void ToResult2_Int() { Test2(NotNullInt2.ToResult, Result.Success(42).CastFailure<Exception>()); }
+
+            [Test]
+            public void ToResult2_ErrorStr() { Test2<string>(ErrorStr2.ToResult, Result.Failure(new MyException().AsExn())); }
+
+            [Test]
+            public void ToResult2_NullStr() { Test2<string>(NullStr2.ToResult, Result.Failure(new NullResultException().AsExn())); }
+
+            [Test]
+            public void ToResult2_Str() { Test2(NotNullStr2.ToResult, Result.Success("hoge").CastFailure<Exception>()); }
             #endregion
         }
     }
