@@ -8,6 +8,11 @@ namespace LangExt
     partial class Option
     {
         /// <summary>
+        /// () → Option[T]
+        /// </summary>
+        public static Option<T> Empty<T>() { return Option<T>.None; }
+
+        /// <summary>
         /// (Option[T], U, T → U) → U
         /// </summary>
         public static U Maybe<T, U>(this Option<T> self, U defaultValue, Func<T, U> f)
@@ -45,6 +50,22 @@ namespace LangExt
         public static void Iter<T>(this Option<T> self, Action<T> act)
         {
             self.Match(v => act(v), () => { });
+        }
+
+        /// <summary>
+        /// Option[T] → bool
+        /// </summary>
+        public static bool IsEmpty<T>(this Option<T> self)
+        {
+            return self.Match(_ => false, () => true);
+        }
+
+        /// <summary>
+        /// Option[T] → bool
+        /// </summary>
+        public static bool IsNotEmpty<T>(this Option<T> self)
+        {
+            return self.Match(_ => true, () => false);
         }
 
         /// <summary>
