@@ -53,6 +53,14 @@ namespace LangExt
         }
 
         /// <summary>
+        /// (Option[T], (T → Unit)) → Unit
+        /// </summary>
+        public static Unit Iter<T>(this Option<T> self, Func<T, Unit> act)
+        {
+            return self.Match(v => act(v), () => Unit._);
+        }
+
+        /// <summary>
         /// Option[T] → bool
         /// </summary>
         public static bool IsEmpty<T>(this Option<T> self)

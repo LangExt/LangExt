@@ -65,6 +65,7 @@ namespace LangExt
 
         /// <summary>
         /// valueを格納するOptionを生成します。
+        /// valueとしてnullを格納することは出来ません。
         /// </summary>
         /// <typeparam name="T">Someに保持する値の型</typeparam>
         /// <param name="value">Someに保持する値</param>
@@ -135,6 +136,8 @@ namespace LangExt
         /// 値を指定して明示的にSomeを生成します。
         /// 基本的にはこのコンストラクタを直接使用せずに、
         /// Option.Someメソッドを使用してください。
+        /// 引数にnullを指定すると、ArgumentNullExceptionが投げられます。
+        /// これにより、Optionが値を持つ場合、その値がnullではないことが保証されます。
         /// </summary>
         /// <param name="value">Optionに格納する値</param>
         public Option(T value)
@@ -257,13 +260,6 @@ namespace LangExt
             var genType = type.GetGenericTypeDefinition();
             if (genType != typeof(Option<>))
                 return false;
-
-            if (typeof(T) == typeof(Placeholder))
-                return !(bool)type.GetField("hasValue", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(obj);
-
-            var elemType = type.GetGenericArguments()[0];
-            if (elemType == typeof(Placeholder))
-                return this.hasValue == false;
 
             if ((obj is Option<T>) == false)
                 return false;

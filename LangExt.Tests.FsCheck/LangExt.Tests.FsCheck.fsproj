@@ -43,6 +43,7 @@
     <None Include="app.config" />
     <Compile Include="FsCheck.NUnit.fs" />
     <Compile Include="SeqTest.fs" />
+    <Compile Include="OptionTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsCheck">

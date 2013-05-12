@@ -100,7 +100,7 @@ namespace LangExt.Tests
                 var res =
                     from int x in Option.None
                     select x * 2;
-                Assert.That(res, Is.EqualTo(Option.None));
+                Assert.That(res, Is.EqualTo(Option<int>.None));
             }
 
             [TestCase(42, true)]
@@ -121,7 +121,7 @@ namespace LangExt.Tests
                     from int x in Option.None
                     where x % 2 == 0
                     select x;
-                Assert.That(res, Is.EqualTo(Option.None));
+                Assert.That(res, Is.EqualTo(Option<int>.None));
             }
 
             [Test]
@@ -143,7 +143,7 @@ namespace LangExt.Tests
                     from y in Option.Some(20)
                     from z in Option.None
                     select Create.Tuple(x, y, z);
-                Assert.That(res, Is.EqualTo(Option.None));
+                Assert.That(res, Is.EqualTo(Option<Tuple<int, int, Placeholder>>.None));
             }
         }
 
