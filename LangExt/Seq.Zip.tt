@@ -47,7 +47,7 @@ namespace LangExt
         /// <summary><#= i #>要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<<#= TupleType(i + 1, n => n == i + 1 ? "int" : ("T" + n)) #>> WithIndex<<#= TypeParams("T", i) #>>(this ISeq<Tuple<<#= TupleTypeArgs(1, i) #>>> self)
         {
-            return new Seq<<#= TupleType(i + 1, n => n == i + 1 ? "int" : ("T" + n)) #>>(self.WithIndex());
+            return new Seq<<#= TupleType(i + 1, n => n == i + 1 ? "int" : ("T" + n)) #>>(Enumerable.WithIndex(self));
         }
 
 <# } #>

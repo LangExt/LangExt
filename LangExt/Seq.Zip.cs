@@ -286,85 +286,85 @@ namespace LangExt
         /// <summary>2要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, int>> WithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self)
         {
-            return new Seq<Tuple<T1, T2, int>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, int>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>3要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, int>> WithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, int>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, int>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>4要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, int>> WithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, int>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, int>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>5要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, int>> WithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, int>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, int>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>6要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, int>> WithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, int>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, int>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>7要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<int>>> WithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<int>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<int>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>8要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, int>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, int>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, int>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>9要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, int>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, int>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, int>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>10要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, int>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, int>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, int>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>11要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, int>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, int>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, int>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>12要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, int>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, int>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, int>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>13要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, int>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, int>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, int>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>14要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<int>>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<int>>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<int>>>>(Enumerable.WithIndex(self));
         }
 
         /// <summary>15要素のタプルのシーケンスに対して、0から始まる整数列を加えたタプルのシーケンスとして返します。</summary>
         public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, int>>>> WithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self)
         {
-            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, int>>>>(self.WithIndex());
+            return new Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, int>>>>(Enumerable.WithIndex(self));
         }
 
     }
