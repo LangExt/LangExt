@@ -93,5 +93,31 @@ namespace LangExt.Tests
 
 <# } #>
 #endregion
+
+#region その他のテスト
+        [Test]
+        public void その他のメソッドが呼び出せるかどうか()
+        {
+            // TODO : 位置によって型を変えたテストにする 
+<# for (int i = 1; i < Max; i++) { #>
+
+            var tpl<#= i + 1 #> = Create.Tuple(<#= MethodCallArgs("", 1, i + 2) #>);
+            Assert.That(tpl<#= i + 1 #>.Fst(), Is.EqualTo(1));
+            Assert.That(tpl<#= i + 1 #>.Snd(), Is.EqualTo(2));
+<# for (int j = 1; j <= i + 1; j++) { #>
+            Assert.That(tpl<#= i + 1 #>.Map<#= j #>(i => i + 1), Is.EqualTo(Create.Tuple(<#=
+    string.Join(", ", MethodCallArgs("", 1, i + 2).Split(new[] { ", " }, StringSplitOptions.None).Select((x, n) => n + 1 == j ? (int.Parse(x) + 1).ToString() : x))
+#>)));
+<# } #>
+<# for (int j = 1; j <= i + 1; j++) { #>
+            Assert.That(tpl<#= i + 1 #>._<#= j #>(), Is.EqualTo(<#= j #>));
+<# } #>
+            Assert.That(tpl<#= i + 1 #>.Match((<#= Repeat(", ", "i{0}", i + 1) #>) => <#= Repeat(" + ", "i{0}", i + 1) #>), Is.EqualTo(<#= i + 1 #> * (<#= i + 1 #> + 1) / 2));
+<# if (i + 1 != Max) { #>            Assert.That(tpl<#= i + 1 #>.Add(<#= i + 2 #>), Is.EqualTo(Create.Tuple(<#= MethodCallArgs("", 1, i + 3) #>)));
+<# } #>
+<# if (i + 1 != 2) { #>            Assert.That(tpl<#= i + 1 #>.RemoveLast(), Is.EqualTo(Create.Tuple(<#= MethodCallArgs("", 1, i + 1) #>)));
+<# } } #>
+        }
+#endregion
     }
 }

@@ -1,0 +1,54 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\LangExt\T4Util.ttinclude" #>
+using System;
+using LangExt;
+using NUnit.Framework;
+using Microsoft.CSharp.RuntimeBinder;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class SeqZipTest
+    {
+        [Test]
+        public void Seq_Zip()
+        {
+<# for (int i = 2; i <= Max; i++) { #>
+<# for (int j = 1; j <= i; j++) { #>
+            var xs<#= i #>_<#= j #> = Seq.Repeat(10, <#= j #>);
+<# } #>
+            var zipped<#= i #> = Seq.Zip(<#= Repeat(", ", "xs" + i + "_{0}", i) #>);
+<# for (int j = 1; j <= i; j++) { #>
+            Assert.That(zipped<#= i #>.Unzip()._<#= j #>(), Is.EqualTo(xs<#= i #>_<#= j #>));
+<# } #>
+            Assert.That(Seq.ZipWith(<#= Repeat(", ", "xs" + i + "_{0}", i) #>, Create.Tuple), Is.EqualTo(zipped<#= i #>));
+
+<# } #>
+        }
+
+        [Test]
+        public void Seq_WithIndex()
+        {
+            var xs = Seq.Repeat(10, 1);
+            var res = Seq.WithIndex(xs);
+            Assert.That(res, Is.EqualTo(Seq.Zip(xs, Seq.InitInfinite(i => i))));
+<# for (int i = 2; i < Max; i++) { #>
+
+<# for (int j = 1; j <= i; j++) { #>
+            var xs<#= i #>_<#= j #> = Seq.Repeat(10, <#= j #>);
+<# } #>
+            var res<#= i #> = Seq.WithIndex(Seq.Zip(<#= Repeat(", ", "xs" + i + "_{0}", i) #>));
+            Assert.That(res<#= i #>, Is.EqualTo(Seq.Zip(<#= Repeat(", ", "xs" + i + "_{0}", i) #>, Seq.InitInfinite(i => i))));
+<# } #>
+        }
+    }
+}
