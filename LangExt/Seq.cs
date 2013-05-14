@@ -771,18 +771,18 @@ namespace LangExt
         /// シーケンスをソートします。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static IOrderedSeq<T> Sort<T>(this ISeq<T> self)
+        public static ISeq<T> Sort<T>(this ISeq<T> self)
         {
-            return new OrderedSeq<T>(StdEnumerable.OrderBy(self, x => x));
+            return new Seq<T>(StdEnumerable.OrderBy(self, x => x));
         }
 
         /// <summary>
         /// シーケンスを逆順にソートします。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static IOrderedSeq<T> RevSort<T>(this ISeq<T> self)
+        public static ISeq<T> RevSort<T>(this ISeq<T> self)
         {
-            return new OrderedSeq<T>(StdEnumerable.OrderByDescending(self, x => x));
+            return new Seq<T>(StdEnumerable.OrderByDescending(self, x => x));
         }
 
         /// <summary>
