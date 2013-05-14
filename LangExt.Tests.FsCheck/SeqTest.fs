@@ -17,6 +17,7 @@ let intSeq (xs: int[]) = LangExtSeq.Create(xs)
 let longSeq (xs: int64[]) = LangExtSeq.Create(xs)
 let strSeq (xs: string[]) = LangExtSeq.Create(xs)
 let emptySeq<'a> = LangExtSeq.Empty<'a>()
+let intIntSeq (xs: int[]) = LangExtSeq.Create(xs |> Array.map (fun x -> (x, x)))
 
 // 2つのシーケンスを比較するtester
 let eq xs ys =
@@ -554,6 +555,16 @@ let ``LangExtSeq.RevSort eq (Seq.sort >> Seq.toList >> List.rev``() =
 let ``LangExtSeq.SortBy eq Seq.sortBy``() =
   test (fun xs -> LangExtSeq.SortBy(intSeq xs, fun x -> if even x then -x else x))
     eq (Seq.sortBy (fun x -> if even x then -x else x))
+
+[<Test>]
+let ``ThenBy``() =
+  test (fun xs -> LangExt.OrderedSeq.ThenBy(LangExtSeq.SortBy(intIntSeq xs, fun (x, _) -> x), fun (_, y) -> y))
+    eq (fun xs -> LangExtSeq.Sort(intIntSeq xs))
+
+[<Test>]
+let ``RevThenBy``() =
+  test (fun xs -> LangExt.OrderedSeq.RevThenBy(LangExtSeq.RevSortBy(intIntSeq xs, fun (x, _) -> x), fun (_, y) -> y))
+    eq (fun xs -> LangExtSeq.RevSort(intIntSeq xs))
 
 [<Test>]
 let ``LangExtSeq.RevSortBy eq (Seq.sortBy >> Seq.toList >> List.rev``() =
