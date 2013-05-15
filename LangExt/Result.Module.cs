@@ -8,14 +8,6 @@ namespace LangExt
     partial class Result
     {
         /// <summary>
-        /// (bool, T) → Result[T, Unit]
-        /// </summary>
-        public static Result<T, Unit> SuccessIf<T>(bool cond, T value)
-        {
-            return value.ToResultIf(cond);
-        }
-
-        /// <summary>
         /// (Result[T, _], U, T → U) → U
         /// </summary>
         public static U Maybe<T, _, U>(this Result<T, _> self, U defaultValue, Func<T, U> f)

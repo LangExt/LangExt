@@ -94,6 +94,17 @@ namespace LangExt
         }
 
         /// <summary>
+        /// predがtrueを返す場合Noneを返し、falseを返す場合Someを返します。
+        /// 自身がnullかつpredがfalseを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// 自身がnullでpredがtrueを返した場合は、Noneを返します。
+        /// </summary>
+        public static Option<T> NoneIf<T>(this T self, Func<T, bool> pred)
+        {
+            return pred(self) ? Option<T>.None : Option.Some(self);
+        }
+
+        /// <summary>
         /// 自身がnullの場合のみNoneを返し、それ以外の場合はSomeを返します。
         /// </summary>
         public static Option<T> NoneIfNull<T>(this T self)
@@ -102,25 +113,43 @@ namespace LangExt
         }
 
         /// <summary>
-        /// bool値によってResultを生成します。
+        /// 自身がxと等しい場合Failureを返し、そうでない場合Successを返します。
+        /// 自身がnullかつxがnullではなかったときのみ、このメソッドは例外を投げます。
+        /// 自身もxもnullだった場合は、Failureを返します。
         /// </summary>
-        public static Result<T, Unit> ToResultIf<T>(this T self, bool cond)
+        public static Result<T, Unit> FailureIf<T>(this T self, T x)
         {
-            if (cond)
-                return Result.Success(self);
-            else
-                return Result.Failure(Unit._);
+            return self.IsEqualTo(x) ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
         }
 
         /// <summary>
-        /// bool値によってResultを生成します。
+        /// predがtrueを返す場合Failureを返し、falseを返す場合Successを返します。
+        /// 自身がnullかつpredがfalseを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// 自身がnullでpredがtrueを返した場合は、Failureを返します。
         /// </summary>
-        public static Result<T, Unit> ToResultIf<T>(this T self, Func<bool> cond)
+        public static Result<T, Unit> FailureIf<T>(this T self, Func<bool> pred)
         {
-            if (cond())
-                return Result.Success(self);
-            else
-                return Result.Failure(Unit._);
+            return pred() ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
+        }
+
+        /// <summary>
+        /// predがtrueを返す場合Failureを返し、falseを返す場合Successを返します。
+        /// 自身がnullかつpredがfalseを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// 自身がnullでpredがtrueを返した場合は、Failureを返します。
+        /// </summary>
+        public static Result<T, Unit> FailureIf<T>(this T self, Func<T, bool> pred)
+        {
+            return pred(self) ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
+        }
+
+        /// <summary>
+        /// 自身がnullの場合のみFailureを返し、それ以外の場合はSuccessを返します。
+        /// </summary>
+        public static Result<T, Unit> FailureIfNull<T>(this T self)
+        {
+            return self.IsNull() ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
         }
     }
 }

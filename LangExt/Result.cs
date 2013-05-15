@@ -69,6 +69,20 @@ namespace LangExt
 
         /// <summary>
         /// 成功した結果としてvalueを格納するResultを生成します。
+        /// 通常は、NewSuccessではなく、Successを使用します。
+        /// このメソッドは、失敗側の型も指定したい場合に使用します。
+        /// </summary>
+        /// <typeparam name="TSuccess">Resultに保持する成功の型</typeparam>
+        /// <typeparam name="TFailure">Resultに保持する失敗の型</typeparam>
+        /// <param name="value">Resultに保持する成功を表す値</param>
+        /// <returns>Success(value)</returns>
+        public static Result<TSuccess, TFailure> NewSuccess<TSuccess, TFailure>(TSuccess value)
+        {
+            return new Result<TSuccess, TFailure>(Option.Some(value), Option<TFailure>.None);
+        }
+
+        /// <summary>
+        /// 成功した結果としてvalueを格納するResultを生成します。
         /// </summary>
         /// <typeparam name="TSuccess">Resultに保持する成功の型</typeparam>
         /// <param name="value">Resultに保持する成功を表す値</param>
@@ -76,6 +90,20 @@ namespace LangExt
         public static Result<TSuccess, Placeholder> Success<TSuccess>(TSuccess value)
         {
             return new Result<TSuccess, Placeholder>(Option.Some(value), Option.None);
+        }
+
+        /// <summary>
+        /// 失敗した結果としてvalueを格納するResultを生成します。
+        /// 通常は、NewFailureではなく、Failureを使用します。
+        /// このメソッドは、成功側の型も指定したい場合に使用します。
+        /// </summary>
+        /// <typeparam name="TSuccess">Resultに保持する成功の型</typeparam>
+        /// <typeparam name="TFailure">Resultに保持する失敗の型</typeparam>
+        /// <param name="value">Resultに保持する失敗を表す値</param>
+        /// <returns>Failure(value)</returns>
+        public static Result<TSuccess, TFailure> NewFailure<TSuccess, TFailure>(TFailure value)
+        {
+            return new Result<TSuccess, TFailure>(Option<TSuccess>.None, Option.Some(value));
         }
 
         /// <summary>
