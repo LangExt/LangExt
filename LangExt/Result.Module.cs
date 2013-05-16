@@ -8,14 +8,6 @@ namespace LangExt
     partial class Result
     {
         /// <summary>
-        /// (Result[T, _], U, T → U) → U
-        /// </summary>
-        public static U Maybe<T, _, U>(this Result<T, _> self, U defaultValue, Func<T, U> f)
-        {
-            return self.Match(f, e => defaultValue);
-        }
-
-        /// <summary>
         /// (Result[T, _], U, ((U, T) → U)) → U
         /// </summary>
         public static U Fold<T, _, U>(this Result<T, _> self, U init, Func<U, T, U> f)
