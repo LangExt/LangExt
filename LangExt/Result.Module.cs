@@ -42,17 +42,33 @@ namespace LangExt
         /// <summary>
         /// (Result[T, _], (T → void)) → void
         /// </summary>
-        public static void Iter<T, _, U>(this Result<T, _> self, Action<T> f)
+        public static void Iter<T, _>(this Result<T, _> self, Action<T> f)
         {
             self.Match(s => f(s), e => { });
         }
 
         /// <summary>
+        /// (Result[T, _], (T → Unit)) → Unit
+        /// </summary>
+        public static Unit Iter<T, _>(this Result<T, _> self, Func<T, Unit> f)
+        {
+            return self.Match(s => f(s), e => Unit._);
+        }
+
+        /// <summary>
         /// (Result[_, T], (T → void)) → void
         /// </summary>
-        public static void IterFailure<_, T, U>(this Result<_, T> self, Action<T> f)
+        public static void IterFailure<_, T>(this Result<_, T> self, Action<T> f)
         {
             self.Match(s => { }, e => f(e));
+        }
+
+        /// <summary>
+        /// (Result[_, T], (T → Unit)) → Unit
+        /// </summary>
+        public static Unit IterFailure<_, T>(this Result<_, T> self, Func<T, Unit> f)
+        {
+            return self.Match(s => Unit._, e => f(e));
         }
 
         /// <summary>
