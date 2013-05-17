@@ -126,7 +126,7 @@ namespace LangExt
         /// <returns>関数が成功した場合、結果をSuccessで包んだ値。失敗した場合、例外をFailureで包んだ値。</returns>
         public static Result<TSuccess, Exception> FromFunc<TSuccess>(Func<TSuccess> f)
         {
-            return f.ToResult()();
+            return f.ToResultFunc()();
         }
         
         /// <summary>

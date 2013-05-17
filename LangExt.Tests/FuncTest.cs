@@ -212,118 +212,118 @@ namespace LangExt.Tests
                 Assert.That(f(0, 1), Is.EqualTo(expected));
             }
 
-            #region ExnToOption
+            #region ExnToOptionFunc
             [Test]
-            public void ExnToOption0_Error() { Test0<int?>(ErrorInt0.ExnToOption, Option.None); }
+            public void ExnToOptionFunc0_Error() { Test0<int?>(ErrorInt0.ExnToOptionFunc, Option.None); }
 
             [Test]
-            public void ExnToOption0_NotError() { Test0(NotErrorInt0.ExnToOption, Option.Some<int?>(42)); }
+            public void ExnToOptionFunc0_NotError() { Test0(NotErrorInt0.ExnToOptionFunc, Option.Some<int?>(42)); }
 
             [Test]
-            public void ExnToOption1_Error() { Test1<int?>(ErrorInt1.ExnToOption, Option.None); }
+            public void ExnToOptionFunc1_Error() { Test1<int?>(ErrorInt1.ExnToOptionFunc, Option.None); }
 
             [Test]
-            public void ExnToOption1_NotError() { Test1(NotErrorInt1.ExnToOption, Option.Some<int?>(42)); }
+            public void ExnToOptionFunc1_NotError() { Test1(NotErrorInt1.ExnToOptionFunc, Option.Some<int?>(42)); }
 
             [Test]
-            public void ExnToOption2_Error() { Test2<int?>(ErrorInt2.ExnToOption, Option.None); }
+            public void ExnToOptionFunc2_Error() { Test2<int?>(ErrorInt2.ExnToOptionFunc, Option.None); }
 
             [Test]
-            public void ExnToOption2_NotError() { Test2(NotErrorInt2.ExnToOption, Option.Some<int?>(42)); }
+            public void ExnToOptionFunc2_NotError() { Test2(NotErrorInt2.ExnToOptionFunc, Option.Some<int?>(42)); }
             #endregion
 
-            #region NullToOption
+            #region NullToOptionFunc
             [Test]
-            public void NullToOption0_NullInt() { Test0<int>(NullInt0.NullToOption, Option.None); }
+            public void NullToOptionFunc0_NullInt() { Test0<int>(NullInt0.NullToOptionFunc, Option.None); }
 
             [Test]
-            public void NullToOption0_NotNullInt() { Test0(NotNullInt0.NullToOption, Option.Some(42)); }
+            public void NullToOptionFunc0_NotNullInt() { Test0(NotNullInt0.NullToOptionFunc, Option.Some(42)); }
 
             [Test]
-            public void NullToOption0_NullStr() { Test0<string>(NullStr0.NullToOption, Option.None); }
+            public void NullToOptionFunc0_NullStr() { Test0<string>(NullStr0.NullToOptionFunc, Option.None); }
 
             [Test]
-            public void NullToOption0_NotNullStr() { Test0(NotNullStr0.NullToOption, Option.Some("hoge")); }
+            public void NullToOptionFunc0_NotNullStr() { Test0(NotNullStr0.NullToOptionFunc, Option.Some("hoge")); }
 
             [Test]
-            public void NullToOption1_NullInt() { Test1<int>(NullInt1.NullToOption, Option.None); } 
+            public void NullToOptionFunc1_NullInt() { Test1<int>(NullInt1.NullToOptionFunc, Option.None); } 
 
             [Test]
-            public void NullToOption1_NotNullInt() { Test1(NotNullInt1.NullToOption, Option.Some(42)); }
+            public void NullToOptionFunc1_NotNullInt() { Test1(NotNullInt1.NullToOptionFunc, Option.Some(42)); }
 
             [Test]
-            public void NullToOption1_NullStr() { Test1<string>(NullStr1.NullToOption, Option.None); }
+            public void NullToOptionFunc1_NullStr() { Test1<string>(NullStr1.NullToOptionFunc, Option.None); }
 
             [Test]
-            public void NullToOption1_NotNullStr() { Test1(NotNullStr1.NullToOption, Option.Some("hoge")); }
+            public void NullToOptionFunc1_NotNullStr() { Test1(NotNullStr1.NullToOptionFunc, Option.Some("hoge")); }
 
             [Test]
-            public void NullToOption2_NullInt() { Test2<int>(NullInt2.NullToOption, Option.None); }
+            public void NullToOptionFunc2_NullInt() { Test2<int>(NullInt2.NullToOptionFunc, Option.None); }
 
             [Test]
-            public void NullToOption2_NotNullInt() { Test2(NotNullInt2.NullToOption, Option.Some(42)); }
+            public void NullToOptionFunc2_NotNullInt() { Test2(NotNullInt2.NullToOptionFunc, Option.Some(42)); }
 
             [Test]
-            public void NullToOption2_NullStr() { Test2<string>(NullStr2.NullToOption, Option.None); }
+            public void NullToOptionFunc2_NullStr() { Test2<string>(NullStr2.NullToOptionFunc, Option.None); }
 
             [Test]
-            public void NullToOption2_NotNullStr() { Test2(NotNullStr2.NullToOption, Option.Some("hoge")); }
+            public void NullToOptionFunc2_NotNullStr() { Test2(NotNullStr2.NullToOptionFunc, Option.Some("hoge")); }
             #endregion
 
-            #region ToOption
+            #region ToOptionFunc
             [Test]
-            public void ToOption0_ErrorInt() { Test0<int>(ErrorInt0.ToOption, Option.None); }
+            public void ToOptionFunc0_ErrorInt() { Test0<int>(ErrorInt0.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption0_NullInt() { Test0<int>(NullInt0.ToOption, Option.None); }
+            public void ToOptionFunc0_NullInt() { Test0<int>(NullInt0.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption0_Int() { Test0(NotNullInt0.ToOption, Option.Some(42)); }
+            public void ToOptionFunc0_Int() { Test0(NotNullInt0.ToOptionFunc, Option.Some(42)); }
 
             [Test]
-            public void ToOption0_ErrorStr() { Test0<string>(ErrorStr0.ToOption, Option.None); }
+            public void ToOptionFunc0_ErrorStr() { Test0<string>(ErrorStr0.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption0_NullStr() { Test0<string>(NullStr0.ToOption, Option.None); }
+            public void ToOptionFunc0_NullStr() { Test0<string>(NullStr0.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption0_Str() { Test0(NotNullStr0.ToOption, Option.Some("hoge")); }
+            public void ToOptionFunc0_Str() { Test0(NotNullStr0.ToOptionFunc, Option.Some("hoge")); }
 
             [Test]
-            public void ToOption1_ErrorInt() { Test1<int>(ErrorInt1.ToOption, Option.None); }
+            public void ToOptionFunc1_ErrorInt() { Test1<int>(ErrorInt1.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption1_NullInt() { Test1<int>(NullInt1.ToOption, Option.None); }
+            public void ToOptionFunc1_NullInt() { Test1<int>(NullInt1.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption1_Int() { Test1(NotNullInt1.ToOption, Option.Some(42)); }
+            public void ToOptionFunc1_Int() { Test1(NotNullInt1.ToOptionFunc, Option.Some(42)); }
 
             [Test]
-            public void ToOption1_ErrorStr() { Test1<string>(ErrorStr1.ToOption, Option.None); }
+            public void ToOptionFunc1_ErrorStr() { Test1<string>(ErrorStr1.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption1_NullStr() { Test1<string>(NullStr1.ToOption, Option.None); }
+            public void ToOptionFunc1_NullStr() { Test1<string>(NullStr1.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption1_Str() { Test1(NotNullStr1.ToOption, Option.Some("hoge")); }
+            public void ToOptionFunc1_Str() { Test1(NotNullStr1.ToOptionFunc, Option.Some("hoge")); }
 
             [Test]
-            public void ToOption2_ErrorInt() { Test2<int>(ErrorInt2.ToOption, Option.None); }
+            public void ToOptionFunc2_ErrorInt() { Test2<int>(ErrorInt2.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption2_NullInt() { Test2<int>(NullInt2.ToOption, Option.None); }
+            public void ToOptionFunc2_NullInt() { Test2<int>(NullInt2.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption2_Int() { Test2(NotNullInt2.ToOption, Option.Some(42)); }
+            public void ToOptionFunc2_Int() { Test2(NotNullInt2.ToOptionFunc, Option.Some(42)); }
 
             [Test]
-            public void ToOption2_ErrorStr() { Test2<string>(ErrorStr2.ToOption, Option.None); }
+            public void ToOptionFunc2_ErrorStr() { Test2<string>(ErrorStr2.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption2_NullStr() { Test2<string>(NullStr2.ToOption, Option.None); }
+            public void ToOptionFunc2_NullStr() { Test2<string>(NullStr2.ToOptionFunc, Option.None); }
 
             [Test]
-            public void ToOption2_Str() { Test2(NotNullStr2.ToOption, Option.Some("hoge")); }
+            public void ToOptionFunc2_Str() { Test2(NotNullStr2.ToOptionFunc, Option.Some("hoge")); }
             #endregion
         }
 
@@ -374,118 +374,118 @@ namespace LangExt.Tests
                     Assert.That(res, Is.EqualTo(expected));
             }
 
-            #region ExnToResult
+            #region ExnToResultFunc
             [Test]
-            public void ExnToResult0_Error() { Test0<int?, Exception>(ErrorInt0.ExnToResult, Result.Failure(new MyException().AsExn())); }
+            public void ExnToResultFunc0_Error() { Test0<int?, Exception>(ErrorInt0.ExnToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ExnToResult0_NotError() { Test0(NotErrorInt0.ExnToResult, Result.Success<int?>(42).CastFailure<Exception>()); }
+            public void ExnToResultFunc0_NotError() { Test0(NotErrorInt0.ExnToResultFunc, Result.Success<int?>(42).CastFailure<Exception>()); }
 
             [Test]
-            public void ExnToResult1_Error() { Test1<int?, Exception>(ErrorInt1.ExnToResult, Result.Failure(new MyException().AsExn())); }
+            public void ExnToResultFunc1_Error() { Test1<int?, Exception>(ErrorInt1.ExnToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ExnToResult1_NotError() { Test1(NotErrorInt1.ExnToResult, Result.Success<int?>(42).CastFailure<Exception>()); }
+            public void ExnToResultFunc1_NotError() { Test1(NotErrorInt1.ExnToResultFunc, Result.Success<int?>(42).CastFailure<Exception>()); }
 
             [Test]
-            public void ExnToResult2_Error() { Test2<int?, Exception>(ErrorInt2.ExnToResult, Result.Failure(new MyException().AsExn())); }
+            public void ExnToResultFunc2_Error() { Test2<int?, Exception>(ErrorInt2.ExnToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ExnToResult2_NotError() { Test2(NotErrorInt2.ExnToResult, Result.Success<int?>(42).CastFailure<Exception>()); }
+            public void ExnToResultFunc2_NotError() { Test2(NotErrorInt2.ExnToResultFunc, Result.Success<int?>(42).CastFailure<Exception>()); }
             #endregion
 
-            #region NullToResult
+            #region NullToResultFunc
             [Test]
-            public void NullToResult0_NullInt() { Test0<int, Unit>(NullInt0.NullToResult, Result.Failure(Unit._)); }
+            public void NullToResultFunc0_NullInt() { Test0<int, Unit>(NullInt0.NullToResultFunc, Result.Failure(Unit._)); }
 
             [Test]
-            public void NullToResult0_NotNullInt() { Test0(NotNullInt0.NullToResult, Result.Success(42).CastFailure<Unit>()); }
+            public void NullToResultFunc0_NotNullInt() { Test0(NotNullInt0.NullToResultFunc, Result.Success(42).CastFailure<Unit>()); }
 
             [Test]
-            public void NullToResult0_NullStr() { Test0<string, Unit>(NullStr0.NullToResult, Result.Failure(Unit._)); }
+            public void NullToResultFunc0_NullStr() { Test0<string, Unit>(NullStr0.NullToResultFunc, Result.Failure(Unit._)); }
 
             [Test]
-            public void NullToResult0_NotNullStr() { Test0(NotNullStr0.NullToResult, Result.Success("hoge").CastFailure<Unit>()); }
+            public void NullToResultFunc0_NotNullStr() { Test0(NotNullStr0.NullToResultFunc, Result.Success("hoge").CastFailure<Unit>()); }
 
             [Test]
-            public void NullToResult1_NullInt() { Test1<int, Unit>(NullInt1.NullToResult, Result.Failure(Unit._)); } 
+            public void NullToResultFunc1_NullInt() { Test1<int, Unit>(NullInt1.NullToResultFunc, Result.Failure(Unit._)); } 
 
             [Test]
-            public void NullToResult1_NotNullInt() { Test1(NotNullInt1.NullToResult, Result.Success(42).CastFailure<Unit>()); }
+            public void NullToResultFunc1_NotNullInt() { Test1(NotNullInt1.NullToResultFunc, Result.Success(42).CastFailure<Unit>()); }
 
             [Test]
-            public void NullToResult1_NullStr() { Test1<string, Unit>(NullStr1.NullToResult, Result.Failure(Unit._)); }
+            public void NullToResultFunc1_NullStr() { Test1<string, Unit>(NullStr1.NullToResultFunc, Result.Failure(Unit._)); }
 
             [Test]
-            public void NullToResult1_NotNullStr() { Test1(NotNullStr1.NullToResult, Result.Success("hoge").CastFailure<Unit>()); }
+            public void NullToResultFunc1_NotNullStr() { Test1(NotNullStr1.NullToResultFunc, Result.Success("hoge").CastFailure<Unit>()); }
 
             [Test]
-            public void NullToResult2_NullInt() { Test2<int, Unit>(NullInt2.NullToResult, Result.Failure(Unit._)); }
+            public void NullToResultFunc2_NullInt() { Test2<int, Unit>(NullInt2.NullToResultFunc, Result.Failure(Unit._)); }
 
             [Test]
-            public void NullToResult2_NotNullInt() { Test2(NotNullInt2.NullToResult, Result.Success(42).CastFailure<Unit>()); }
+            public void NullToResultFunc2_NotNullInt() { Test2(NotNullInt2.NullToResultFunc, Result.Success(42).CastFailure<Unit>()); }
 
             [Test]
-            public void NullToResult2_NullStr() { Test2<string, Unit>(NullStr2.NullToResult, Result.Failure(Unit._)); }
+            public void NullToResultFunc2_NullStr() { Test2<string, Unit>(NullStr2.NullToResultFunc, Result.Failure(Unit._)); }
 
             [Test]
-            public void NullToResult2_NotNullStr() { Test2(NotNullStr2.NullToResult, Result.Success("hoge").CastFailure<Unit>()); }
+            public void NullToResultFunc2_NotNullStr() { Test2(NotNullStr2.NullToResultFunc, Result.Success("hoge").CastFailure<Unit>()); }
             #endregion
 
-            #region ToResult
+            #region ToResultFunc
             [Test]
-            public void ToResult0_ErrorInt() { Test0<int>(ErrorInt0.ToResult, Result.Failure(new MyException().AsExn())); }
+            public void ToResultFunc0_ErrorInt() { Test0<int>(ErrorInt0.ToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ToResult0_NullInt() { Test0<int>(NullInt0.ToResult, Result.Failure(new NullResultException().AsExn())); }
+            public void ToResultFunc0_NullInt() { Test0<int>(NullInt0.ToResultFunc, Result.Failure(new NullResultException().AsExn())); }
 
             [Test]
-            public void ToResult0_Int() { Test0(NotNullInt0.ToResult, Result.Success(42).CastFailure<Exception>()); }
+            public void ToResultFunc0_Int() { Test0(NotNullInt0.ToResultFunc, Result.Success(42).CastFailure<Exception>()); }
 
             [Test]
-            public void ToResult0_ErrorStr() { Test0<string>(ErrorStr0.ToResult, Result.Failure(new MyException().AsExn())); }
+            public void ToResultFunc0_ErrorStr() { Test0<string>(ErrorStr0.ToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ToResult0_NullStr() { Test0<string>(NullStr0.ToResult, Result.Failure(new NullResultException().AsExn())); }
+            public void ToResultFunc0_NullStr() { Test0<string>(NullStr0.ToResultFunc, Result.Failure(new NullResultException().AsExn())); }
 
             [Test]
-            public void ToResult0_Str() { Test0(NotNullStr0.ToResult, Result.Success("hoge").CastFailure<Exception>()); }
+            public void ToResultFunc0_Str() { Test0(NotNullStr0.ToResultFunc, Result.Success("hoge").CastFailure<Exception>()); }
 
             [Test]
-            public void ToResult1_ErrorInt() { Test1<int>(ErrorInt1.ToResult, Result.Failure(new MyException().AsExn())); }
+            public void ToResultFunc1_ErrorInt() { Test1<int>(ErrorInt1.ToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ToResult1_NullInt() { Test1<int>(NullInt1.ToResult, Result.Failure(new NullResultException().AsExn())); }
+            public void ToResultFunc1_NullInt() { Test1<int>(NullInt1.ToResultFunc, Result.Failure(new NullResultException().AsExn())); }
 
             [Test]
-            public void ToResult1_Int() { Test1(NotNullInt1.ToResult, Result.Success(42).CastFailure<Exception>()); }
+            public void ToResultFunc1_Int() { Test1(NotNullInt1.ToResultFunc, Result.Success(42).CastFailure<Exception>()); }
 
             [Test]
-            public void ToResult1_ErrorStr() { Test1<string>(ErrorStr1.ToResult, Result.Failure(new MyException().AsExn())); }
+            public void ToResultFunc1_ErrorStr() { Test1<string>(ErrorStr1.ToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ToResult1_NullStr() { Test1<string>(NullStr1.ToResult, Result.Failure(new NullResultException().AsExn())); }
+            public void ToResultFunc1_NullStr() { Test1<string>(NullStr1.ToResultFunc, Result.Failure(new NullResultException().AsExn())); }
 
             [Test]
-            public void ToResult1_Str() { Test1(NotNullStr1.ToResult, Result.Success("hoge").CastFailure<Exception>()); }
+            public void ToResultFunc1_Str() { Test1(NotNullStr1.ToResultFunc, Result.Success("hoge").CastFailure<Exception>()); }
 
             [Test]
-            public void ToResult2_ErrorInt() { Test2<int>(ErrorInt2.ToResult, Result.Failure(new MyException().AsExn())); }
+            public void ToResultFunc2_ErrorInt() { Test2<int>(ErrorInt2.ToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ToResult2_NullInt() { Test2<int>(NullInt2.ToResult, Result.Failure(new NullResultException().AsExn())); }
+            public void ToResultFunc2_NullInt() { Test2<int>(NullInt2.ToResultFunc, Result.Failure(new NullResultException().AsExn())); }
 
             [Test]
-            public void ToResult2_Int() { Test2(NotNullInt2.ToResult, Result.Success(42).CastFailure<Exception>()); }
+            public void ToResultFunc2_Int() { Test2(NotNullInt2.ToResultFunc, Result.Success(42).CastFailure<Exception>()); }
 
             [Test]
-            public void ToResult2_ErrorStr() { Test2<string>(ErrorStr2.ToResult, Result.Failure(new MyException().AsExn())); }
+            public void ToResultFunc2_ErrorStr() { Test2<string>(ErrorStr2.ToResultFunc, Result.Failure(new MyException().AsExn())); }
 
             [Test]
-            public void ToResult2_NullStr() { Test2<string>(NullStr2.ToResult, Result.Failure(new NullResultException().AsExn())); }
+            public void ToResultFunc2_NullStr() { Test2<string>(NullStr2.ToResultFunc, Result.Failure(new NullResultException().AsExn())); }
 
             [Test]
-            public void ToResult2_Str() { Test2(NotNullStr2.ToResult, Result.Success("hoge").CastFailure<Exception>()); }
+            public void ToResultFunc2_Str() { Test2(NotNullStr2.ToResultFunc, Result.Success("hoge").CastFailure<Exception>()); }
             #endregion
         }
     }

@@ -95,7 +95,7 @@ namespace LangExt
         /// <returns>関数が成功した場合、結果をSomeで包んだ値。失敗した場合、None。</returns>
         public static Option<T> FromFunc<T>(Func<T> f)
         {
-            return f.ToOption()();
+            return f.ToOptionFunc()();
         }
 
         /// <summary>
