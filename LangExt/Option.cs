@@ -16,7 +16,7 @@ namespace LangExt
         /// <typeparam name="T">生成するOptionの要素の型</typeparam>
         /// <param name="value">値</param>
         /// <returns>valueがnullの場合None、そうでない場合Some</returns>
-        public static Option<T> Option<T>(T value) where T : class
+        public static Option<T> Option<T>(T value)
         {
             return LangExt.Option.Create(value);
         }
@@ -46,7 +46,7 @@ namespace LangExt
         /// <typeparam name="T">生成するOptionの要素の型</typeparam>
         /// <param name="value">値</param>
         /// <returns>valueがnullの場合None、そうでない場合Some</returns>
-        public static Option<T> Create<T>(T value) where T : class
+        public static Option<T> Create<T>(T value)
         {
             return value == null ? Option<T>.None : new Option<T>(value);
         }

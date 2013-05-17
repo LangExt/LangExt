@@ -16,7 +16,7 @@ namespace LangExt
         /// <typeparam name="T">生成するResultのSuccess側の要素の型</typeparam>
         /// <param name="value">値</param>
         /// <returns>valueがnullの場合Failure、そうでない場合Success</returns>
-        public static Result<T, Unit> Result<T>(T value) where T : class
+        public static Result<T, Unit> Result<T>(T value)
         {
             return LangExt.Result.Create(value);
         }
@@ -46,7 +46,7 @@ namespace LangExt
         /// <typeparam name="T">生成するResultのSuccess側の要素の型</typeparam>
         /// <param name="value">値</param>
         /// <returns>valueがnullの場合Failure、そうでない場合Success</returns>
-        public static Result<T, Unit> Create<T>(T value) where T : class
+        public static Result<T, Unit> Create<T>(T value)
         {
             if (value == null)
                 return Result.Failure(Unit._);
