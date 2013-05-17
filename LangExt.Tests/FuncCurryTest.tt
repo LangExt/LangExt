@@ -1,0 +1,51 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\LangExt\T4Util.ttinclude" #>
+using System;
+using LangExt;
+using NUnit.Framework;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class FuncCurryTest
+    {
+        [Test]
+        public void TestCurried()
+        {
+<# for (int i = 2; i <= Max; i++) { #>
+            var f<#= i #> = new Func<<#= Repeat(", ", "int", i) #>, int>((<#= Repeat(", ", "i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>);
+            Assert.That(f<#= i #>.Curried().Uncurried()(<#= Repeat(", ", "1", i) #>), Is.EqualTo(<#= i #>));
+            Assert.That(Func.Uncurry(Func.Curry(f<#= i #>))(<#= Repeat(", ", "1", i) #>), Is.EqualTo(<#= i #>));
+<# } #>
+        }
+
+        [Test]
+        public void TestCurriedX()
+        {
+<# for (int i = 2; i <= Max; i++) { #>
+            var f<#= i #> = new Func<<#= TupleType(i, _ => "int") #>, int>(tpl => tpl.Match((<#= Repeat(", ", "i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>));
+            Assert.That(f<#= i #>.CurriedX().UncurriedX()(Create.Tuple(<#= Repeat(", ", "1", i) #>)), Is.EqualTo(<#= i #>));
+            Assert.That(Func.UncurryX(Func.CurryX(f<#= i #>))(Create.Tuple(<#= Repeat(", ", "1", i) #>)), Is.EqualTo(<#= i #>));
+<# } #>
+        }
+
+        [Test]
+        public void TestTupled()
+        {
+<# for (int i = 2; i <= Max; i++) { #>
+            var f<#= i #> = new Func<<#= Repeat(", ", "int", i) #>, int>((<#= Repeat(", ", "i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>);
+            Assert.That(f<#= i #>.Tupled().Untupled()(<#= Repeat(", ", "1", i) #>), Is.EqualTo(<#= i #>));
+            Assert.That(Func.Untuple(Func.Tuple(f<#= i #>))(<#= Repeat(", ", "1", i) #>), Is.EqualTo(<#= i #>));
+<# } #>
+        }
+    }
+}

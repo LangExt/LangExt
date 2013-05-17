@@ -54,6 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FuncCurryTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FuncCurryTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="FuncTest.cs" />
     <Compile Include="ObjectModuleTest.cs" />
     <Compile Include="OptionTest.cs" />
@@ -79,6 +84,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="FuncCurryTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FuncCurryTest.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="SeqZipTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
