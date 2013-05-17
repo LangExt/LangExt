@@ -157,6 +157,21 @@ namespace LangExt.Tests
             {
                 TestResultIsSuccess(() => value.FailureIfNull(), expectedIsSuccess, () => value);
             }
+
+            [TestCase("hoge", true, false)]
+            [TestCase(null, true, false)]
+            [TestCase("hoge", false, true)]
+            [TestCase(null, false, false)]
+            public void FromFunc(string value, bool thrownExn, bool expectedIsSuccess)
+            {
+                var f = new Func<string>(() => { if (thrownExn) throw new Exception(); else return value; });
+                if (expectedIsSuccess)
+                    Assert.That(Result.FromFunc(f), Is.EqualTo(Result.NewSuccess<string, Exception>(value)));
+                else if (!thrownExn && value.IsNull())
+                    Assert.That(Result.FromFunc(f).GetFailureValue(), Is.TypeOf<NullResultException>());
+                else
+                    Assert.That(Result.FromFunc(f).GetFailureValue(), Is.TypeOf<Exception>());
+            }
         }
 
         public class Success

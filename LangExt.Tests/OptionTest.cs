@@ -124,6 +124,16 @@ namespace LangExt.Tests
                     TestExn(() => str.NoneIf(predF), Throws.Exception);
             }
 
+            [TestCase(42, true, false)]
+            [TestCase(0, true, false)]
+            [TestCase(42, false, true)]
+            [TestCase(0, false, true)]
+            public void FromFunc(int value, bool thrownExn, bool expectedIsSome)
+            {
+                var f = new Func<int, string>(i => { if (thrownExn) throw new Exception(); else return i.ToString(); });
+                Assert.That(Option.FromFunc(() => f(value)).IsSome, Is.EqualTo(expectedIsSome));
+            }
+
             #region use static methods instead of these constructors.
             [Test]
             public void DefaultConstructor()

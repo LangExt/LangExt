@@ -87,6 +87,18 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 失敗しうる無引数関数からOptionを生成します。
+        /// この関数は、例外を使用するAPIとOptionを使ったAPIの橋渡しをします。
+        /// </summary>
+        /// <typeparam name="T">関数が成功した場合の型(戻り値の型)</typeparam>
+        /// <param name="f">実行する関数</param>
+        /// <returns>関数が成功した場合、結果をSomeで包んだ値。失敗した場合、None。</returns>
+        public static Option<T> FromFunc<T>(Func<T> f)
+        {
+            return f.ToOption()();
+        }
+
+        /// <summary>
         /// 保持している値を強制的に取得します。
         /// このメソッドはNoneの場合に意味のない値(default(T))を返すため、危険です。
         /// そのため、このメソッドは基本的には使用せず、
