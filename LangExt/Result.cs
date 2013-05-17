@@ -392,9 +392,9 @@ namespace LangExt
         public bool Equals(Result<TSuccess, TFailure> other)
         {
             if (this.IsSuccess && other.IsSuccess)
-                return Equals(this.success, other.success);
+                return this.success.Equals(other.success);
             if (this.IsFailure && other.IsFailure)
-                return Equals(this.failure, other.failure);
+                return this.failure.Equals(other.failure);
             return false;
         }
 
