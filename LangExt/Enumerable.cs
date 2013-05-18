@@ -184,7 +184,7 @@ namespace LangExt
         /// IEnumerableを、走査した要素をキャッシュするIEnumerableに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static IEnumerable<T> Cache<T>(this IEnumerable<T> self) { return new CachedEnumerable<T>(self); }
+        public static IEnumerable<T> Cache<T>(this IEnumerable<T> self) { return new CachedSeq<T>(self); }
 
         /// <summary>
         /// 指定した位置でIEnumerableを分割します。

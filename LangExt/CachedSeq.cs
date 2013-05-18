@@ -5,12 +5,12 @@ using System.Text;
 
 namespace LangExt
 {
-    sealed class CachedEnumerable<T> : IEnumerable<T>
+    sealed class CachedSeq<T> : ISeq<T>
     {
         IEnumerator<T> itor;
         readonly List<T> values = new List<T>();
 
-        internal CachedEnumerable(IEnumerable<T> src)
+        internal CachedSeq(IEnumerable<T> src)
         {
             this.itor = src.GetEnumerator();
         }
@@ -30,8 +30,8 @@ namespace LangExt
             static readonly IEnumerator<U> dummy = ((ICollection<U>)new U[0]).GetEnumerator();
 
             int index = -1;
-            readonly CachedEnumerable<U> src;
-            internal CachedEnumerator(CachedEnumerable<U> src) { this.src = src; }
+            readonly CachedSeq<U> src;
+            internal CachedEnumerator(CachedSeq<U> src) { this.src = src; }
 
             public U Current { get { return src.values[index]; } }
 

@@ -868,7 +868,7 @@ namespace LangExt
         /// シーケンスを、走査した要素をキャッシュするシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> Cache<T>(this ISeq<T> self) { return new Seq<T>(new CachedEnumerable<T>(self)); }
+        public static ISeq<T> Cache<T>(this ISeq<T> self) { return new CachedSeq<T>(self); }
 
         /// <summary>
         /// シーケンスを反転させたシーケンスを生成します。
