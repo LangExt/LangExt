@@ -119,9 +119,32 @@ namespace LangExt.Tests
             {
                 var predF = FuncResultToFunc(res);
                 if (res != FuncResult.Exception)
+                {
                     TestOptionIsSome(() => str.NoneIf(predF), expectedIsSome.Value, () => str);
+                    TestOptionIsSome(
+                        () => str.NoneIf(s => { Assert.That(s, Is.EqualTo(str)); return predF(); }),
+                        expectedIsSome.Value,
+                        () => str);
+                }
                 else
+                {
                     TestExn(() => str.NoneIf(predF), Throws.Exception);
+                }
+            }
+
+            [TestCase("", true)]
+            [TestCase(default(string), false)]
+            public void NoneIfNullStr(string value, bool expectedIsSome)
+            {
+                TestOptionIsSome(() => value.NoneIfNull(), expectedIsSome, () => value);
+            }
+
+            // 値型なので常にSomeを返す
+            [TestCase(42, true)]
+            [TestCase(default(int), true)]
+            public void NoneIfNullInt(int value, bool expectedIsSome)
+            {
+                TestOptionIsSome(() => value.NoneIfNull(), expectedIsSome, () => value);
             }
 
             [TestCase(42, true, false)]
