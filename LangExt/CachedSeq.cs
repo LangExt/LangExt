@@ -25,11 +25,25 @@ namespace LangExt
             return ((IEnumerable<T>)this).GetEnumerator();
         }
 
+        public override string ToString()
+        {
+            if (itor == CachedEnumerator<T>.Dummy)
+            {
+                if (values.Any())
+                    return "cached seq [" + string.Join(", ", values) + "]";
+                return "cached seq []";
+            }
+            if (values.Any())
+                return "cached seq [" + string.Join(", ", values) +", ...]";
+            return "cached seq [...]";
+        }
+
         class CachedEnumerator<U> : IEnumerator<U>
         {
-            static readonly IEnumerator<U> dummy = ((ICollection<U>)new U[0]).GetEnumerator();
+            internal static readonly IEnumerator<U> Dummy = ((ICollection<U>)new U[0]).GetEnumerator();
 
             int index = -1;
+            bool preMoveNext = false;
             readonly CachedSeq<U> src;
             internal CachedEnumerator(CachedSeq<U> src) { this.src = src; }
 
@@ -39,20 +53,16 @@ namespace LangExt
             {
                 lock (src.itor)
                 {
-                    if (src.values.Count == 0 || src.itor == dummy)
-                        return false;
-                    if (index < src.values.Count)
-                    {
-                        index++;
-                        return true;
-                    }
+                    if (++index < src.values.Count)
+                        return preMoveNext = true;
+                    if (src.itor == Dummy)
+                        return preMoveNext = false;
                     if (src.itor.MoveNext())
                     {
-                        index++;
                         src.values.Add(src.itor.Current);
-                        return true;
+                        return preMoveNext = true;
                     }
-                    return false;
+                    return preMoveNext = false;
                 }
             }
 
@@ -60,15 +70,15 @@ namespace LangExt
             {
                 lock (src.itor)
                 {
-                    if (src.itor != dummy)
+                    if (preMoveNext == false && src.itor != Dummy)
                     {
                         src.itor.Dispose();
-                        src.itor = dummy;
+                        src.itor = Dummy;
                     }
                 }
             }
 
-            public void Reset() { index = 0; }
+            public void Reset() { index = -1; }
 
             object System.Collections.IEnumerator.Current { get { return ((IEnumerator<U>)this).Current; } }
         }
