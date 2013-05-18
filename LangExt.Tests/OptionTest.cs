@@ -381,6 +381,14 @@ namespace LangExt.Tests
                 sut.Iter(v => { Assert.That(v, Is.EqualTo(value)); });
             }
 
+            [TestCase(10)]
+            [TestCase("hoge")]
+            public void Iter2<T>(T value)
+            {
+                var sut = Option.Some(value);
+                Assert.That(sut.Iter(v => { Assert.That(v, Is.EqualTo(value)); return Unit._; }), Is.EqualTo(Unit._));
+            }
+
             [Test]
             public void IsEmpty()
             {
@@ -591,6 +599,13 @@ namespace LangExt.Tests
             public void Iter()
             {
                 Option.None.Iter(_ => { throw new Exception("oops!"); });
+            }
+
+            [Test]
+            public void Iter2()
+            {
+                var sut = Option.None;
+                Assert.That(sut.Iter(v => { throw new Exception("oops!"); }), Is.EqualTo(Unit._));
             }
 
             [Test]
