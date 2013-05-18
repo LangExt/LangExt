@@ -7,7 +7,12 @@ namespace LangExt
     /// 関数がnullを返したことを表す例外です。
     /// この例外は、Func.ToResultの結果としてのみ使用されます。
     /// </summary>
-    public sealed class NullResultException : Exception { }
+    public sealed class NullResultException : Exception
+    {
+        public override bool Equals(object obj) { return obj is NullResultException; }
+        public override int GetHashCode() { return 11; }
+        public override string ToString() { return "NullResultException"; }
+    }
 
     partial class Func
     {

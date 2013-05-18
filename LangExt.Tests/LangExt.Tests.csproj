@@ -59,6 +59,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FuncCurryTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="FuncOptionTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FuncOptionTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="FuncTest.cs" />
     <Compile Include="ObjectModuleTest.cs" />
     <Compile Include="OptionTest.cs" />
@@ -76,6 +81,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TupleModuleTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="FuncResultTest.cs">
+      <DependentUpon>FuncResultTest.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LangExt\LangExt.csproj">
@@ -88,6 +98,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FuncCurryTest.cs</LastGenOutput>
     </None>
+    <None Include="FuncOptionTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FuncOptionTest.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="SeqZipTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -96,6 +110,10 @@
     <None Include="TupleModuleTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TupleModuleTest.cs</LastGenOutput>
+    </None>
+    <None Include="FuncResultTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FuncResultTest.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,91 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\LangExt\T4Util.ttinclude" #>
+using System;
+using LangExt;
+using NUnit.Framework;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class FuncResultTest
+    {
+        public class MyException : Exception
+        {
+            public override bool Equals(object o)
+            {
+                return o is MyException;
+            }
+        }
+
+        [Test]
+        public void ExnToResultFunc()
+        {
+<# for (int i = 0; i <= Max; i++) { #>
+            var f<#= i #> = new Func<<#= Repeat(", ", "int", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) #> + 0);
+            var g<#= i #> = f<#= i #>.ExnToResultFunc();
+            Assert.That(g<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Result.NewSuccess<int, Exception>(<#= Repeat(" + ", "{0}", i) #> + 0)));
+            f<#= i #> = new Func<<#= Repeat(", ", "int", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => { throw new MyException(); });
+            g<#= i #> = f<#= i #>.ExnToResultFunc();
+            Assert.That(g<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Result.NewFailure<int, Exception>(new MyException())));
+
+<# } #>
+        }
+
+        [Test]
+        public void NullToResultFunc()
+        {
+<# for (int i = 0; i <= Max; i++) { #>
+            var f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) + (i == 0 ? "\"\"" : "") #>);
+            var g1_<#= i #> = f1_<#= i #>.NullToResultFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Result.NewSuccess<string, Unit>("<#= Repeat("", "{0}", i) #>")));
+            f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g1_<#= i #> = f1_<#= i #>.NullToResultFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Result.NewFailure<string, Unit>(Unit._)));
+
+            var f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) #> + 0);
+            var g2_<#= i #> = f2_<#= i #>.NullToResultFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Result.NewSuccess<int, Unit>(<#= Repeat(" + ", "{0}", i) #> + 0)));
+            f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g2_<#= i #> = f2_<#= i #>.NullToResultFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Result.NewFailure<int, Unit>(Unit._)));
+
+<# } #>
+        }
+
+        [Test]
+        public void ToResultFunc()
+        {
+<# for (int i = 0; i <= Max; i++) { #>
+            var f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) + (i == 0 ? "\"\"" : "") #>);
+            var g1_<#= i #> = f1_<#= i #>.ToResultFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Result.NewSuccess<string, Exception>("<#= Repeat("", "{0}", i) #>")));
+            f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => { throw new MyException(); });
+            g1_<#= i #> = f1_<#= i #>.ToResultFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Result.NewFailure<string, Exception>(new MyException())));
+            f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g1_<#= i #> = f1_<#= i #>.ToResultFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Result.NewFailure<string, Exception>(new NullResultException())));
+
+            var f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) #> + 0);
+            var g2_<#= i #> = f2_<#= i #>.ToResultFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Result.NewSuccess<int, Exception>(<#= Repeat(" + ", "{0}", i) #> + 0)));
+            f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => { throw new MyException(); });
+            g2_<#= i #> = f2_<#= i #>.ToResultFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Result.NewFailure<int, Exception>(new MyException())));
+            f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g2_<#= i #> = f2_<#= i #>.ToResultFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Result.NewFailure<int, Exception>(new NullResultException())));
+
+<# } #>
+        }
+    }
+}

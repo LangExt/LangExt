@@ -1,0 +1,83 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\LangExt\T4Util.ttinclude" #>
+using System;
+using LangExt;
+using NUnit.Framework;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class FuncOptionTest
+    {
+        [Test]
+        public void ExnToOptionFunc()
+        {
+<# for (int i = 0; i <= Max; i++) { #>
+            var f<#= i #> = new Func<<#= Repeat(", ", "int", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) #> + 0);
+            var g<#= i #> = f<#= i #>.ExnToOptionFunc();
+            Assert.That(g<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Option.Some(<#= Repeat(" + ", "{0}", i) #> + 0)));
+            f<#= i #> = new Func<<#= Repeat(", ", "int", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => { throw new Exception("oops!"); });
+            g<#= i #> = f<#= i #>.ExnToOptionFunc();
+            Assert.That(g<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Option<int>.None));
+
+<# } #>
+        }
+
+        [Test]
+        public void NullToOptionFunc()
+        {
+<# for (int i = 0; i <= Max; i++) { #>
+            var f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) + (i == 0 ? "\"\"" : "") #>);
+            var g1_<#= i #> = f1_<#= i #>.NullToOptionFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Option.Some("<#= Repeat("", "{0}", i) #>")));
+            f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g1_<#= i #> = f1_<#= i #>.NullToOptionFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Option<string>.None));
+
+            var f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) #> + 0);
+            var g2_<#= i #> = f2_<#= i #>.NullToOptionFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Option.Some(<#= Repeat(" + ", "{0}", i) #> + 0)));
+            f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g2_<#= i #> = f2_<#= i #>.NullToOptionFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Option<int>.None));
+
+<# } #>
+        }
+
+        [Test]
+        public void ToOptionFunc()
+        {
+<# for (int i = 0; i <= Max; i++) { #>
+            var f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) + (i == 0 ? "\"\"" : "") #>);
+            var g1_<#= i #> = f1_<#= i #>.ToOptionFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Option.Some("<#= Repeat("", "{0}", i) #>")));
+            f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => { throw new Exception("oops!"); });
+            g1_<#= i #> = f1_<#= i #>.ToOptionFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Option<string>.None));
+            f1_<#= i #> = new Func<<#= Repeat(", ", "string", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g1_<#= i #> = f1_<#= i #>.ToOptionFunc();
+            Assert.That(g1_<#= i #>(<#= Repeat(", ", "\"{0}\"", i) #>), Is.EqualTo(Option<string>.None));
+
+            var f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => <#= Repeat(" + ", "a{0}", i) #> + 0);
+            var g2_<#= i #> = f2_<#= i #>.ToOptionFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Option.Some(<#= Repeat(" + ", "{0}", i) #> + 0)));
+            f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => { throw new Exception("oops!"); });
+            g2_<#= i #> = f2_<#= i #>.ToOptionFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Option<int>.None));
+            f2_<#= i #> = new Func<<#= Repeat(", ", "int?", i + 1) #>>((<#= Repeat(", ", "a{0}", i) #>) => null);
+            g2_<#= i #> = f2_<#= i #>.ToOptionFunc();
+            Assert.That(g2_<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(Option<int>.None));
+
+<# } #>
+        }
+    }
+}
