@@ -415,13 +415,23 @@ let ``LangExtSeq.MapWithIndex eq Seq.mapi``() =
   test (fun xs -> LangExtSeq.MapWithIndex(intSeq xs, fun x i -> (x, i))) eq (Seq.mapi (fun i x -> (x, i)))
 
 [<Test>]
-let ``LangExtSeq.Iter eq Seq.iter``() =
+let ``LangExtSeq.Iter eq Seq.iter (Action)``() =
   test (fun xs -> let n = ref 0 in LangExtSeq.Iter(intSeq xs, fun x -> n := !n + x); n)
     (=) (fun xs -> let n = ref 0 in Seq.iter (fun x -> n := !n + x) xs; n)
 
 [<Test>]
-let ``LangExtSeq.IterWithIndex eq Seq.iteri``() =
+let ``LangExtSeq.Iter eq Seq.iter (Func)``() =
+  test (fun xs -> let n = ref 0 in ignore <| LangExtSeq.Iter(intSeq xs, fun x -> n := !n + x; LangExt.Unit.``_``); n)
+    (=) (fun xs -> let n = ref 0 in Seq.iter (fun x -> n := !n + x) xs; n)
+
+[<Test>]
+let ``LangExtSeq.IterWithIndex eq Seq.iteri (Action)``() =
   test (fun xs -> let n = ref 0 in LangExtSeq.IterWithIndex(intSeq xs, fun x i -> n := !n + x + i); n)
+    (=) (fun xs -> let n = ref 0 in Seq.iteri (fun i x -> n := !n + x + i) xs; n)
+
+[<Test>]
+let ``LangExtSeq.IterWithIndex eq Seq.iteri (Func)``() =
+  test (fun xs -> let n = ref 0 in ignore <| LangExtSeq.IterWithIndex(intSeq xs, fun x i -> n := !n + x + i; LangExt.Unit.``_``); n)
     (=) (fun xs -> let n = ref 0 in Seq.iteri (fun i x -> n := !n + x + i) xs; n)
 
 [<Test>]
@@ -443,6 +453,11 @@ let ``LangExtSeq.Collect eq Seq.collect``() =
 let ``LangExtSeq.Choose eq Seq.choose``() =
   test (fun xs -> LangExtSeq.Choose(intSeq xs, fun x -> if even x then some(x * 2) else none()))
     eq (Seq.choose (fun x -> if even x then Some (x * 2) else None))
+
+[<Test>]
+let ``LangExtSeq.ChooseWithIndex``() =
+  test (fun xs -> LangExtSeq.ChooseWithIndex(intSeq xs, fun x i -> if even x then some(x * 2 + i) else none()))
+    eq (Seq.mapi (fun i x -> (x, i)) >> Seq.choose (fun (x, i) -> if even x then Some (x * 2 + i) else None))
 
 [<Test>]
 let ``LangExtSeq.Skip eq Seq.skip``() =
