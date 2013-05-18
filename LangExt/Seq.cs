@@ -33,6 +33,8 @@ namespace LangExt
         public IEnumerator<T> GetEnumerator() { return EmptyEnumerator.Instance; }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { return this.GetEnumerator(); }
+
+        public override string ToString() { return "seq []"; }
     }
 
     internal class Seq<T> : ISeq<T>
@@ -72,7 +74,7 @@ namespace LangExt
             int i = 0;
             foreach (var v in value)
             {
-                if (i == 5)
+                if (i++ == 5)
                 {
                     res.Append("..., ");
                     break;
