@@ -68,6 +68,7 @@
     <Compile Include="FuncTest.cs" />
     <Compile Include="ObjectModuleTest.cs" />
     <Compile Include="OptionTest.cs" />
+    <Compile Include="Playground\PatternMatching\Example.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryExprTest.cs" />
     <Compile Include="ResultTest.cs" />
