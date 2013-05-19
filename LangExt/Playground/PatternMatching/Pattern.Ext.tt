@@ -1,0 +1,63 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\..\T4Util.ttinclude" #>
+using System;
+
+namespace LangExt.Playground.PatternMatching
+{
+    partial class Pattern
+    {
+        /// <summary>
+        /// パターンを連結します。
+        /// </summary>
+        /// <typeparam name="T">シーケンスの要素の型</typeparam>
+        /// <typeparam name="U1">1つ目のパターンの結果の型</typeparam>
+        /// <typeparam name="U2">2つ目のパターンの結果の型</typeparam>
+        /// <param name="self">元となるパターン</param>
+        /// <param name="nextPat">連結するパターン</param>
+        /// <returns>連結されたパターン</returns>
+        public static SeqPattern<T, U1, U2> And<T, U1, U2>(this IPattern<ISeq<T>, U1> self, IPattern<ISeq<T>, U2> nextPat)
+        {
+            return new SeqPattern<T, U1, U2>(self, nextPat);
+        }
+
+        /// <summary>
+        /// パターンを連結します。
+        /// </summary>
+        /// <typeparam name="T">シーケンスの要素の型</typeparam>
+        /// <typeparam name="U1">1つ目のパターンの結果の型</typeparam>
+        /// <typeparam name="U2">2つ目のパターンの結果の型</typeparam>
+        /// <param name="self">元となるパターン</param>
+        /// <param name="nextPat">連結するパターン</param>
+        /// <returns>連結されたパターン</returns>
+        public static SeqPattern<T, U1, U2> And<T, U1, U2>(this SeqPattern<T, U1> self, IPattern<ISeq<T>, U2> nextPat)
+        {
+            return new SeqPattern<T, U1, U2>(self.Pat1, nextPat);
+        }
+<# for (int i = 3; i <= Max; i++) { #>
+
+        /// <summary>
+        /// パターンを連結します。
+        /// </summary>
+        /// <typeparam name="T">シーケンスの要素の型</typeparam>
+<# for (int j = 1; j <= i; j++) { #>
+        /// <typeparam name="U<#= j #>"><#= j #>個目のパターンの結果の型</typeparam>
+<# } #>
+        /// <param name="self">元となるパターン</param>
+        /// <param name="nextPat">連結するパターン</param>
+        /// <returns>連結されたパターン</returns>
+        public static SeqPattern<T, <#= Repeat(", ", "U{0}", i) #>> And<T, <#= Repeat(", ", "U{0}", i) #>>(this SeqPattern<T, <#= Repeat(", ", "U{0}", i - 1) #>> self, IPattern<ISeq<T>, U<#= i #>> nextPat)
+        {
+            return new SeqPattern<T, <#= Repeat(", ", "U{0}", i) #>>(<#= Repeat(", ", "self.Pat{0}", i - 1) #>, nextPat);
+        }
+<# } #>
+    }
+}

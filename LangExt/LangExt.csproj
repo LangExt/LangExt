@@ -73,6 +73,19 @@
       <DependentUpon>Func.Result.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderedSeq.cs" />
+    <Compile Include="Playground\PatternMatching\Pattern.cs" />
+    <Compile Include="Playground\PatternMatching\Pattern.Ext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pattern.Ext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Playground\PatternMatching\Seq.cs" />
+    <Compile Include="Playground\PatternMatching\SeqPattern.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SeqPattern.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Playground\PatternMatching\SeqPatternFactory.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Result.Module.cs">
       <DependentUpon>Result.cs</DependentUpon>
@@ -127,6 +140,14 @@
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Result.cs</LastGenOutput>
+    </None>
+    <None Include="Playground\PatternMatching\Pattern.Ext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Pattern.Ext.cs</LastGenOutput>
+    </None>
+    <None Include="Playground\PatternMatching\SeqPattern.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SeqPattern.cs</LastGenOutput>
     </None>
     <None Include="Seq.Zip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

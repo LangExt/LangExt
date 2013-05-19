@@ -1,0 +1,76 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\..\T4Util.ttinclude" #>
+using System;
+
+namespace LangExt.Playground.PatternMatching
+{
+<# for (int i = 1; i <= Max; i++) { #>
+    /// <summary>
+    /// シーケンスに対するパターンと、パターンが一致した際の処理を関連付けるためのクラスです。
+    /// </summary>
+    /// <typeparam name="T">シーケンスの要素の型</typeparam>
+<# for (int j = 1; j <= i; j++) { #>
+    /// <typeparam name="T<#= j #>">パターンが一致した際の処理が受け取る第<#= j #>引数の型</typeparam>
+<# } #>
+    public class SeqPattern<T, <#= Repeat(", ", "T{0}", i) #>>
+    {
+<# for (int j = 1; j <= i; j++) { #>
+        internal readonly IPattern<ISeq<T>, T<#= j #>> Pat<#= j #>;
+<# } #>
+
+        /// <summary>
+        /// シーケンスに対するパターンを元にオブジェクトを構築します。
+        /// </summary>
+<# for (int j = 1; j <= i; j++) { #>
+        /// <param name="pat<#= j #>"><#= j #>個目のパターン</param>
+<# } #>
+        public SeqPattern(<#=  Repeat(", ", "IPattern<ISeq<T>, T{0}> pat{0}", i) #>)
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            Pat<#= j #> = pat<#= j #>;
+<# } #>
+        }
+
+        /// <summary>
+        /// パターンが一致した際の処理を登録します。
+        /// </summary>
+        /// <typeparam name="U">処理の結果の型</typeparam>
+        /// <param name="f">パターンが一致した際の処理</param>
+        /// <returns>処理の結果の型(パターンが一致しなかった場合はNone)</returns>
+        public Func<ISeq<T>, Option<U>> Then<U>(Func<<#= Repeat(", ", "T{0}", i) #>, U> f)
+        {
+            return xs =>
+            {
+                return
+                    from _1 in Pat1.Match(xs)
+<# for (int j = 2; j <= i; j++) { #>
+                    from _<#= j #> in Pat<#= j #>.Match(_<#= j - 1 #>.Next)
+<# } #>
+                    select f(<#= Repeat(", ", "_{0}.Result", i) #>);
+            };
+        }
+
+        /// <summary>
+        /// パターンが一致した際の処理を登録します。
+        /// </summary>
+        /// <typeparam name="U">処理の結果の型</typeparam>
+        /// <param name="f">パターンが一致した際の処理</param>
+        /// <param name="otherwise">パターンが一致しなかった際の処理</param>
+        /// <returns>処理の結果の型</returns>
+        public Func<ISeq<T>, U> Then<U>(Func<<#= Repeat(", ", "T{0}", i) #>, U> f, Func<ISeq<T>, U> otherwise)
+        {
+            return xs => Then(f)(xs).Match(x => x, () => otherwise(xs));
+        }
+    }
+
+<# } #>
+}
