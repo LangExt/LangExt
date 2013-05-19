@@ -73,6 +73,10 @@
       <DependentUpon>Func.Result.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderedSeq.cs" />
+    <Compile Include="Playground\OperatorChain\Cmp.cs" />
+    <Compile Include="Playground\OperatorChain\LazyVal.cs" />
+    <Compile Include="Playground\OperatorChain\LazyVal.Module.cs" />
+    <Compile Include="Playground\OperatorChain\LazyVal.QueryExpr.cs" />
     <Compile Include="Playground\PatternMatching\Pattern.cs" />
     <Compile Include="Playground\PatternMatching\Pattern.Ext.cs">
       <AutoGen>True</AutoGen>
