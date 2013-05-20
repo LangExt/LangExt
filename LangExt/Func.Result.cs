@@ -9,8 +9,11 @@ namespace LangExt
     /// </summary>
     public sealed class NullResultException : Exception
     {
+        /// <summary>objがNullResultExceptionであればtrueを返します。</summary>
         public override bool Equals(object obj) { return obj is NullResultException; }
+        /// <summary>このオブジェクトのハッシュコードを返します。</summary>
         public override int GetHashCode() { return 11; }
+        /// <summary>このオブジェクトの文字列表現を返します。</summary>
         public override string ToString() { return "NullResultException"; }
     }
 

@@ -464,7 +464,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// <summary>
         /// 自身が値を持つ場合は自身を、そうでない場合はelsePartの結果を返します。
         /// Resultは短絡のor演算子を提供しているため、そちらを使用したほうが効率的です。
         /// </summary>
