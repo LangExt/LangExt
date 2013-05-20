@@ -7,8 +7,10 @@ Microsoft Visual Studio 2012 Visualization & Modeling SDK
 がインストールされた環境が必要です。
 
 後者に関しては、
-https://www.microsoft.com/en-us/download/details.aspx?id=30680
+[Download Center][dlcenter]
 からexeをダウンロードして、インストールしてください。
+
+[dlcenter]: https://www.microsoft.com/en-us/download/details.aspx?id=30680
 
 ビルド手順
 ----------
