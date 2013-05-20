@@ -1,5 +1,7 @@
 ﻿module SeqTest
 
+#nowarn "25"
+
 open System
 open NUnit.Framework
 open FsCheck

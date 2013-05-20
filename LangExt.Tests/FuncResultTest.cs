@@ -8,6 +8,7 @@ namespace LangExt.Tests
     [TestFixture]
     public class FuncResultTest
     {
+#pragma warning disable 659
         public class MyException : Exception
         {
             public override bool Equals(object o)
@@ -15,6 +16,7 @@ namespace LangExt.Tests
                 return o is MyException;
             }
         }
+#pragma warning restore 659
 
         [Test]
         public void ExnToResultFunc()

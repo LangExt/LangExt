@@ -159,10 +159,12 @@ namespace LangExt.Tests
             #endregion
         }
 
+#pragma warning disable 659
         public class MyException : Exception
         {
             public override bool Equals(object obj) { return obj is MyException; }
         }
+#pragma warning restore 659
 
         public static readonly Func<int?> ErrorInt0 = () => { throw new MyException(); };
         public static readonly Func<int?> NotErrorInt0 = () => 42;
