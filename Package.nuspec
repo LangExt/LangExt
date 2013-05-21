@@ -13,5 +13,6 @@
   </metadata>
   <files>
       <file src="LangExt\bin\Release\*" target="lib\portable-windows8+net40"/>
+      <file src="**\*.cs" target="src"/>
   </files>
 </package>

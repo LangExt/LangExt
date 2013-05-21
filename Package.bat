@@ -4,6 +4,6 @@ rmdir /S /Q bin
 rmdir /S /Q LangExt\obj
 msbuild LangExt.sln /t:Rebuild /p:Configuration=Release
 
-.nuget\nuget pack Package.nuspec
+.nuget\nuget pack Package.nuspec -Symbols
 mkdir bin
 move *.nupkg bin\
