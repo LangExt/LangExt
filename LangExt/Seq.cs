@@ -741,6 +741,16 @@ namespace LangExt
         #endregion
 
         /// <summary>
+        /// シーケンスの指定番目の要素を返します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Option<T> TryGet<T>(this ISeq<T> self, int index)
+        {
+            Func<ISeq<T>, int, T> f = Unsafe.Seq.Get;
+            return f.ToOptionFunc()(self, index);
+        }
+
+        /// <summary>
         /// シーケンスに別のシーケンスを連結したシーケンスを生成して返します。
         /// 標準クエリ演算子のConcatに対応します。
         /// </summary>

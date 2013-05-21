@@ -603,6 +603,21 @@ let ``LangExtSeq.ToArray eq Seq.toArray``() =
   test (intSeq >> LangExtSeq.ToArray) (=) Seq.toArray
 
 [<Test>]
+let ``LangExtSeq.Get eq Seq.nth``() =
+  testIf (fun (xs, n) -> nat n && (Seq.length xs) > n)
+    (fun (xs, n) -> UnsafeSeq.Get(intSeq xs, n)) (=) (fun (xs, n) -> Seq.nth n xs)
+
+[<Test>]
+let ``LangExtSeq.Get throws InvalidOperationException when len xs <= n``() =
+  throwIf (fun (xs, n) -> Seq.length xs <= n) (typeof<ArgumentOutOfRangeException>)
+    (fun (xs, n) -> UnsafeSeq.Get(intSeq xs, n))
+
+[<Test>]
+let ``LangExtSeq.TryGet``() =
+  test (fun (xs, n) -> LangExtSeq.TryGet(intSeq xs, n))
+    (=) (fun (xs, n) -> try some(Seq.nth n xs) with _ -> none())
+
+[<Test>]
 let ``LangExtSeq.Append eq Seq.append``() =
   test (fun (xs, ys) -> LangExtSeq.Append(intSeq xs, intSeq ys))
     eq (fun (xs, ys) -> Seq.append xs ys)

@@ -10,6 +10,12 @@ namespace LangExt.Unsafe
     public static class Seq
     {
         /// <summary>
+        /// シーケンスの指定番目の要素を取得します。
+        /// 標準クエリ演算子のElementAtに対応します。
+        /// </summary>
+        public static T Get<T>(this ISeq<T> self, int index) { return StdEnumerable.ElementAt(self, index); }
+
+        /// <summary>
         /// シーケンスの最大値を求めます。
         /// 標準クエリ演算子のMaxに対応します。
         /// </summary>
