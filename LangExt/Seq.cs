@@ -790,7 +790,7 @@ namespace LangExt
             {
                 if (x.IsNone)
                     return Option.None;
-                res.Add(x.GetValue());
+                res.Add(Unsafe.Option.GetValue(x)); // 上のifでNoneの場合を除外しているので、このGetValueの呼び出しは安全
             }
             return Option.Some<ISeq<T>>(new Seq<T>(res));
         }

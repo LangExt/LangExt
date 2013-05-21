@@ -36,6 +36,7 @@ namespace LangExt
 
     /// <summary>
     /// Optionに対する関数を提供します。
+    /// 例外を投げうる関数は、Unsafe名前空間のSeqモジュールで提供しています。
     /// </summary>
     public static partial class Option
     {
@@ -96,19 +97,6 @@ namespace LangExt
         public static Option<T> FromFunc<T>(Func<T> f)
         {
             return f.ToOptionFunc()();
-        }
-
-        /// <summary>
-        /// 保持している値を強制的に取得します。
-        /// このメソッドはNoneの場合に意味のない値(default(T))を返すため、危険です。
-        /// そのため、このメソッドは基本的には使用せず、
-        /// MatchメソッドやGetOrメソッドを使用するようにしてください。
-        /// </summary>
-        /// <returns>内部で保持している値</returns>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static T GetValue<T>(this Option<T> self)
-        {
-            return self.Value;
         }
 
         /// <summary>
