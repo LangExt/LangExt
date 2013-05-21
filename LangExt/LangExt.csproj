@@ -106,6 +106,7 @@
       <DependentUpon>TupleModule.tt</DependentUpon>
     </Compile>
     <Compile Include="Unsafe\Option.cs" />
+    <Compile Include="Unsafe\Result.cs" />
     <Compile Include="Unsafe\Seq.cs" />
   </ItemGroup>
   <ItemGroup>

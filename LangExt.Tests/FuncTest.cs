@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LangExt;
+using LangExt.Unsafe;
 using NUnit.Framework;
 
 namespace LangExt.Tests
