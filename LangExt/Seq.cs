@@ -65,6 +65,8 @@ namespace LangExt
 
     /// <summary>
     /// シーケンスに対する関数を提供します。
+    /// シーケンスの状態と引数によって例外を投げうる関数は、Unsafe名前空間のSeqモジュールで提供しています。
+    /// Initなどの、シーケンスの状態によらず、他の引数のみによって例外を投げうる関数はこのモジュールに定義しています。
     /// </summary>
     public static partial class Seq
     {
@@ -214,33 +216,12 @@ namespace LangExt
         #region Max系メソッド
         /// <summary>
         /// シーケンスの最大値を求めます。
-        /// 標準クエリ演算子のMaxに対応します。
-        /// </summary>
-        public static T Max<T>(this ISeq<T> self) where T : IComparable<T> { return StdEnumerable.Max(self); }
-
-        /// <summary>
-        /// シーケンスの最大値を求めます。
         /// シーケンスに要素が含まれなかった場合、Noneを返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
         public static Option<T> TryMax<T>(this ISeq<T> self) where T : IComparable<T>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Max(self));
-        }
-
-        /// <summary>
-        /// 任意の型のシーケンスの最大値を求めます。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
-        public static T MaxWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
-        {
-            return self.Reduce((a, b) =>
-            {
-                var r = comparer(a, b);
-                return r > 0 ? a :
-                       r < 0 ? b :
-                               a;
-            });
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.Max(self));
         }
 
         /// <summary>
@@ -250,20 +231,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMaxWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
-            return self.IsEmpty() ? Option.None : Option.Some(MaxWith(self, comparer));
-        }
-
-        /// <summary>
-        /// 任意の型のシーケンスの最大値を求めます。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
-        public static T MaxBy<T, U>(this ISeq<T> self, Func<T, U> f) where U : IComparable<U>
-        {
-            // Reduceでf(a).Cmp(f(b))してもよかったけど、fの呼び出し回数を減らすためにいったんMapすることにした
-            return self
-                .Map(x => Tuple.Create(x, f(x)))
-                .Reduce((a, b) => a._2().Cmp(b._2()).Match(() => b, () => a, () => a))
-                ._1();
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MaxWith(self, comparer));
         }
 
         /// <summary>
@@ -273,17 +241,11 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMaxBy<T, U>(this ISeq<T> self, Func<T, U> f) where U : IComparable<U>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(MaxBy(self, f));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MaxBy(self, f));
         }
         #endregion
 
         #region Min系メソッド
-        /// <summary>
-        /// シーケンスの最小値を求めます。
-        /// 標準クエリ演算子のMinに対応します。
-        /// </summary>
-        public static T Min<T>(this ISeq<T> self) where T : IComparable<T> { return StdEnumerable.Min(self); }
-
         /// <summary>
         /// シーケンスの最小値を求めます。
         /// シーケンスに要素が含まれなかった場合、Noneを返します。
@@ -291,22 +253,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMin<T>(this ISeq<T> self) where T : IComparable<T>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Min(self));
-        }
-
-        /// <summary>
-        /// 任意の型のシーケンスの最小値を求めます。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
-        public static T MinWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
-        {
-            return self.Reduce((a, b) =>
-            {
-                var r = comparer(a, b);
-                return r > 0 ? b :
-                       r < 0 ? a :
-                               a;
-            });
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.Min(self));
         }
 
         /// <summary>
@@ -316,20 +263,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMinWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
-            return self.IsEmpty() ? Option.None : Option.Some(MinWith(self, comparer));
-        }
-
-        /// <summary>
-        /// 任意の型のシーケンスの最小値を求めます。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
-        public static T MinBy<T, U>(this ISeq<T> self, Func<T, U> f) where U : IComparable<U>
-        {
-            // Reduceでf(a).Cmp(f(b))してもよかったけど、fの呼び出し回数を減らすためにいったんMapすることにした
-            return self
-                .Map(x => Tuple.Create(x, f(x)))
-                .Reduce((a, b) => a._2().Cmp(b._2()).Match(() => a, () => a, () => b))
-                ._1();
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MinWith(self, comparer));
         }
 
         /// <summary>
@@ -339,22 +273,16 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMinBy<T, U>(this ISeq<T> self, Func<T, U> f) where U : IComparable<U>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(MinBy(self, f));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MinBy(self, f));
         }
         #endregion
 
-        #region 畳み込み系メソッド(Fold/Reduce/TryReduce/FoldBack/ReduceBack/TryReduceBack/Scan/ScanBack/Scan1/Scan1Back)
+        #region 畳み込み系メソッド(Fold/TryReduce/FoldBack/TryReduceBack/Scan/ScanBack/Scan1/Scan1Back)
         /// <summary>
         /// シーケンスを先頭から畳み込みます。
         /// 標準クエリ演算子のAggregateに対応します。
         /// </summary>
         public static U Fold<T, U>(this ISeq<T> self, U init, Func<U, T, U> f) { return StdEnumerable.Aggregate(self, init, f); }
-
-        /// <summary>
-        /// シーケンスを先頭から畳み込みます。
-        /// 標準クエリ演算子のAggregateに対応します。
-        /// </summary>
-        public static T Reduce<T>(this ISeq<T> self, Func<T, T, T> f) { return StdEnumerable.Aggregate(self, f); }
 
         /// <summary>
         /// シーケンスを先頭から畳み込みます。
@@ -384,28 +312,10 @@ namespace LangExt
         /// シーケンスを末尾から畳み込みます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static T ReduceBack<T>(this ISeq<T> self, Func<T, T, T> f)
-        {
-            var xs = StdEnumerable.Reverse(self);
-            using (var itor = xs.GetEnumerator())
-            {
-                if (itor.MoveNext() == false)
-                    throw new InvalidOperationException(); // TODO : message
-                var res = itor.Current;
-                while (itor.MoveNext())
-                    res = f(itor.Current, res);
-                return res;
-            }
-        }
-
-        /// <summary>
-        /// シーケンスを末尾から畳み込みます。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
         public static Option<T> TryReduceBack<T>(this ISeq<T> self, Func<T, T, T> f)
         {
             if (self.IsEmpty()) return Option.None;
-            return Option.Some(self.ReduceBack(f));
+            return Option.Some(Unsafe.Seq.ReduceBack(self, f));
         }
 
         /// <summary>
@@ -449,28 +359,7 @@ namespace LangExt
         }
         #endregion
 
-        #region 探索系メソッド(Find/TryFind/Pick/TryPick)
-        /// <summary>
-        /// シーケンスから、predを満たす最初の要素を探索します。
-        /// 標準クエリ演算子のFirstに対応します。
-        /// </summary>
-        public static T Find<T>(this ISeq<T> self, Func<T, bool> pred) { return StdEnumerable.First(self, pred); }
-
-        /// <summary>
-        /// シーケンスから、fがSomeを返す最初の要素を探索し、Someの中身を返します。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
-        public static U Pick<T, U>(this ISeq<T> self, Func<T, Option<U>> f)
-        {
-            foreach (var x in self)
-            {
-                var res = f(x);
-                if (res.IsSome)
-                    return res.GetValue();
-            }
-            throw new InvalidOperationException();
-        }
-
+        #region 探索系メソッド(TryFind/TryPick)
         /// <summary>
         /// シーケンスから、predを満たす最初の要素を探索します。
         /// 対応する標準クエリ演算子はありません。

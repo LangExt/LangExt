@@ -1,5 +1,6 @@
 ﻿using System;
 using LangExt;
+using LangExt.Unsafe;
 using NUnit.Framework;
 
 namespace LangExt.Tests

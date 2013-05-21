@@ -13,6 +13,7 @@ open FsCheck.NUnit
 
 // F#のSeqと混ざってしまうので用意
 type LangExtSeq = LangExt.Seq
+type UnsafeSeq = LangExt.Unsafe.Seq
 
 // いちいちCreateするのは面倒なので用意
 let intSeq (xs: int[]) = LangExtSeq.Create(xs)
@@ -202,11 +203,11 @@ let ``LangExtSeq.SumBy(xs, SumStrategy.String) eq String.concat ""``() =
 
 [<Test>]
 let ``LangExtSeq.Max eq Seq.max``() =
-  testIf notEmpty (intSeq >> LangExtSeq.Max) (=) (Seq.max)
+  testIf notEmpty (intSeq >> UnsafeSeq.Max) (=) (Seq.max)
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.Max(emptySeq) throws InvalidOperationException``() =
-  LangExtSeq.Max(emptySeq<int>) |> ignore
+  UnsafeSeq.Max(emptySeq<int>) |> ignore
   Assert.Fail();
 
 [<Test>]
@@ -217,11 +218,11 @@ let ``LangExtSeq.TryMax`` () =
 [<Test>]
 let ``LangExtSeq.MaxWith<T>``() =
   testIf notEmpty
-    (fun strs -> LangExtSeq.MaxWith(strSeq strs, fun a b -> a.Length - b.Length)) (=) (Seq.maxBy String.length)
+    (fun strs -> UnsafeSeq.MaxWith(strSeq strs, fun a b -> a.Length - b.Length)) (=) (Seq.maxBy String.length)
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.MaxWith<T>(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.MaxWith(emptySeq<string>, fun a b -> a.Length - b.Length) |> ignore
+  UnsafeSeq.MaxWith(emptySeq<string>, fun a b -> a.Length - b.Length) |> ignore
   Assert.Fail();
 
 [<Test>]
@@ -232,12 +233,12 @@ let ``LangExtSeq.TryMaxWith<T>``() =
 [<Test>]
 let ``LangExtSeq.MaxBy``() =
   testIf notEmpty
-    (fun xs -> LangExtSeq.MaxBy(intSeq xs, fun i -> string i |> String.length)) // LangExt側はFuncを要求するのでラムダ式が必須
+    (fun xs -> UnsafeSeq.MaxBy(intSeq xs, fun i -> string i |> String.length)) // LangExt側はFuncを要求するのでラムダ式が必須
       (=) (Seq.maxBy (string >> String.length))
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.MaxBy<T>(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.MaxBy(emptySeq<int>, fun i -> string i |> String.length) |> ignore
+  UnsafeSeq.MaxBy(emptySeq<int>, fun i -> string i |> String.length) |> ignore
   Assert.Fail();
 
 [<Test>]
@@ -247,11 +248,11 @@ let ``LangExtSeq.TryMaxBy``() =
 
 [<Test>]
 let ``LangExtSeq.Min eq Seq.min``() =
-  testIf notEmpty (intSeq >> LangExtSeq.Min) (=) (Seq.min)
+  testIf notEmpty (intSeq >> UnsafeSeq.Min) (=) (Seq.min)
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.Min(emptySeq) throws InvalidOperationException``() =
-  LangExtSeq.Min(emptySeq<int>) |> ignore
+  UnsafeSeq.Min(emptySeq<int>) |> ignore
   Assert.Fail();
 
 [<Test>]
@@ -262,11 +263,11 @@ let ``LangExtSeq.TryMin`` () =
 [<Test>]
 let ``LangExtSeq.MinWith<T>``() =
   testIf notEmpty
-    (fun strs -> LangExtSeq.MinWith(strSeq strs, fun a b -> a.Length - b.Length)) (=) (Seq.minBy String.length)
+    (fun strs -> UnsafeSeq.MinWith(strSeq strs, fun a b -> a.Length - b.Length)) (=) (Seq.minBy String.length)
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.MinWith(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.MinWith(emptySeq<string>, fun a b -> a.Length - b.Length) |> ignore
+  UnsafeSeq.MinWith(emptySeq<string>, fun a b -> a.Length - b.Length) |> ignore
   Assert.Fail();
 
 [<Test>]
@@ -277,12 +278,12 @@ let ``LangExtSeq.TryMinWith<T>``() =
 [<Test>]
 let ``LangExtSeq.MinBy``() =
   testIf notEmpty
-    (fun xs -> LangExtSeq.MinBy(intSeq xs, fun i -> string i |> String.length)) // LangExt側はFuncを要求するのでラムダ式が必須
+    (fun xs -> UnsafeSeq.MinBy(intSeq xs, fun i -> string i |> String.length)) // LangExt側はFuncを要求するのでラムダ式が必須
       (=) (Seq.minBy (string >> String.length))
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.MinBy(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.MinBy(emptySeq<int>, fun i -> string i |> String.length) |> ignore
+  UnsafeSeq.MinBy(emptySeq<int>, fun i -> string i |> String.length) |> ignore
   Assert.Fail();
 
 [<Test>]
@@ -297,12 +298,12 @@ let ``LangExtSeq.Fold eq Seq.fold``() =
 [<Test>]
 let ``LangExtSeq.Reduce eq Seq.reduce``() =
   testIf notEmpty
-    (fun xs -> LangExtSeq.Reduce(strSeq xs, fun acc x -> acc + ", " + x))
+    (fun xs -> UnsafeSeq.Reduce(strSeq xs, fun acc x -> acc + ", " + x))
       (=) (Seq.reduce (fun acc x -> acc + ", " + x))
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.Reduce(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.Reduce(emptySeq<string>, fun acc x -> acc + ", " + x) |> ignore
+  UnsafeSeq.Reduce(emptySeq<string>, fun acc x -> acc + ", " + x) |> ignore
   Assert.Fail();
 
 [<Test>]
@@ -318,11 +319,11 @@ let ``LangExtSeq.FoldBack eq Array.foldBack``() =
 [<Test>]
 let ``LangExtSeq.ReduceBack eq Array.reduceBack``() =
   testIf notEmpty
-    (fun xs -> LangExtSeq.ReduceBack(intSeq xs, fun x acc -> x - acc)) (=) (Array.reduceBack (-)) // LangExt側はFuncを要求するのでラムダ式が必須
+    (fun xs -> UnsafeSeq.ReduceBack(intSeq xs, fun x acc -> x - acc)) (=) (Array.reduceBack (-)) // LangExt側はFuncを要求するのでラムダ式が必須
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.ReduceBack(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.ReduceBack(emptySeq<int>, fun x acc -> x - acc) |> ignore
+  UnsafeSeq.ReduceBack(emptySeq<int>, fun x acc -> x - acc) |> ignore
   Assert.Fail()
 
 [<Test>]
@@ -352,12 +353,12 @@ let ``LangExtSeq.ScanBack1``() =
 [<Test>]
 let ``LangExtSeq.Find eq Seq.find``() =
   testIf (fun (xs, x) -> xs |> Array.exists ((=)x))
-    (fun (xs, x) -> LangExtSeq.Find(intSeq xs, fun i -> i = x)) // LangExt側はFuncを要求するのでラムダ式が必須
+    (fun (xs, x) -> UnsafeSeq.Find(intSeq xs, fun i -> i = x)) // LangExt側はFuncを要求するのでラムダ式が必須
       (=) (fun (xs, x) -> Seq.find ((=)x) xs)
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.Find(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.Find(emptySeq<int>, fun i -> i = 42) |> ignore
+  UnsafeSeq.Find(emptySeq<int>, fun i -> i = 42) |> ignore
   Assert.Fail()
 
 [<Test>]
@@ -368,12 +369,12 @@ let ``LangExtSeq.TryFind eq Seq.tryFind``() =
 [<Test>]
 let ``LangExtSeq.Pick eq Seq.pick``() =
   testIf (Array.exists even)
-    (fun xs -> LangExtSeq.Pick(intSeq xs, fun x -> if even x then some(string x) else none()))
+    (fun xs -> UnsafeSeq.Pick(intSeq xs, fun x -> if even x then some(string x) else none()))
       (=) (Seq.pick (fun x -> if even x then Some (string x) else None))
 
 [<Test; ExpectedException(typeof<InvalidOperationException>)>]
 let ``LangExtSeq.Pick(emptySeq, f) throws InvalidOperationException``() =
-  LangExtSeq.Pick(emptySeq<int>, fun x -> if even x then some(string x) else none()) |> ignore
+  UnsafeSeq.Pick(emptySeq<int>, fun x -> if even x then some(string x) else none()) |> ignore
   Assert.Fail()
 
 [<Test>]

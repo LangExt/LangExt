@@ -105,6 +105,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TupleModule.tt</DependentUpon>
     </Compile>
+    <Compile Include="Unsafe\Seq.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Func.Curry.tt">
