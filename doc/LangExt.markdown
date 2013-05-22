@@ -23,7 +23,7 @@ LangExt以外で提供される型に対する関数の定義は、ジェネリ�
 例えば、`System.Tuple`などがこれに該当し、TupleModuleモジュールに関数を定義しています。
 
 また、インターフェイスに対するモジュールの場合、Iプレフィックスを取り除いた名前を使います。
-例えば、`System.IEnumerable`などがこれに該当し、Enumerableモジュールに関数を定義しています。
+例えば、`System.Collections.Generic.IEnumerable`などがこれに該当し、Enumerableモジュールに関数を定義しています。
 
 ### 型
 モジュール以外のクラスや、構造体、列挙型などをまとめて、型と記述しています。
