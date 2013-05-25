@@ -140,13 +140,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TupleModule.tt</DependentUpon>
     </Compile>
-    <Compile Include="Unsafe\Option.cs" />
-    <Compile Include="Unsafe\Result.cs" />
-    <Compile Include="Unsafe\Seq.cs" />
-    <Compile Include="Unsafe\Seq.Dragon.cs">
+    <Compile Include="Unsafe\OptionUnsafe.cs" />
+    <Compile Include="Unsafe\ResultUnsafe.cs" />
+    <Compile Include="Unsafe\SeqUnsafe.cs" />
+    <Compile Include="Unsafe\SeqUnsafe.Dragon.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Seq.Dragon.tt</DependentUpon>
+      <DependentUpon>SeqUnsafe.Dragon.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -215,10 +215,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TupleModule.cs</LastGenOutput>
     </None>
-    <None Include="Unsafe\Seq.Dragon.tt">
+    <None Include="Unsafe\SeqUnsafe.Dragon.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Seq.Dragon.cs</LastGenOutput>
-      <DependentUpon>Seq.cs</DependentUpon>
+      <LastGenOutput>SeqUnsafe.Dragon.cs</LastGenOutput>
+      <DependentUpon>SeqUnsafe.cs</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

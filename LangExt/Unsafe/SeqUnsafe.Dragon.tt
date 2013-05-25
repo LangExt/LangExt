@@ -25,7 +25,7 @@ using System.Collections.Generic;
 
 namespace LangExt.Unsafe
 {
-    partial class Seq
+    partial class SeqUnsafe
     {
 <#
     for (int i = 2; i <= Max; i++) {

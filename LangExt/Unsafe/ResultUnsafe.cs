@@ -5,7 +5,7 @@ namespace LangExt.Unsafe
     /// <summary>
     /// Resultに対する(例外を投げうる)関数を提供します。
     /// </summary>
-    public static class Result
+    public static class ResultUnsafe
     {
         /// <summary>
         /// 保持している成功の値を強制的に取得します。

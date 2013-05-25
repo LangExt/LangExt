@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace LangExt.Unsafe
 {
-    partial class Seq
+    partial class SeqUnsafe
     {
         #region 2要素タプルを扱う関数
 
