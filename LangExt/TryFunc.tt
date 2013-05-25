@@ -19,47 +19,26 @@ namespace LangExt
     /// </summary>
     public static partial class TryFunc { }
 
-<# for (int i = 1; i <= Max; i++) { #>
-<#
-        for (int j = 1; j <= i; j++) {
-            var normalParams = i - j;
-            var outParams = j;
-#>
+<# for (int i = 0; i < Max; i++) { #>
     /// <summary>
     /// 出力引数を伴う関数を表すデリゲートです。
     /// </summary>
-    public delegate bool TryFunc<#=
-             outParams #><<#= TypeParams("T", normalParams) + (normalParams == 0 ? "" : ", ") + TypeParams("TResult", outParams) #>>(<#=
-                 MethodDefArgs("T", "t", normalParams) + (normalParams == 0 ? "" : ", ") + MethodDefArgs("out TResult", "result", outParams) #>);
+    public delegate bool TryFunc<<#= TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult>(<#= MethodDefArgs("T", "t", i) + (i == 0 ? "" : ", ") #>out TResult result);
 
-<#
-         }
-#>
     partial class TryFunc
     {
-<#
-        for (int j = 1; j <= i; j++) {
-            var normalParams = i - j;
-            var outParams = j;
-#>
-        public static Func<<#= TypeParams("T", normalParams) + (normalParams == 0 ? "" : ", ") #>Option<<#=
-            outParams == 1 ? "TResult1" : TupleType(outParams, n => "TResult" + n) #>>> ToOptFunc<<#=
-                TypeParams("T", normalParams) + (normalParams == 0 ? "" : ", ") + TypeParams("TResult", outParams) #>>(this TryFunc<#= outParams #><<#=
-                    TypeParams("T", normalParams) + (normalParams == 0 ? "" : ", ") + TypeParams("TResult", outParams) #>> f)
+        public static Func<<#= TypeParams("T", i) + (i == 0 ? "" : ", ") #>Option<TResult>> ToOptFunc<<#=
+                TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult>(this TryFunc<<#=
+                    TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult> f)
         {
-            return (<#= MethodCallArgs("t", normalParams) #>) =>
+            return (<#= MethodCallArgs("t", i) #>) =>
             {
-<# for (var k = 1; k <= j; k++) { #>
-                TResult<#= k #> res<#= k #>;
-<# } #>
-                if (f(<#= MethodCallArgs("t", normalParams) + (normalParams == 0 ? "" : ", ") + MethodCallArgs("out res", outParams) #>))
-                    return Create.Option(<#= outParams == 1 ? "res1" : ("Create.Tuple(" + MethodCallArgs("res", outParams) + ")") #>);
+                TResult res;
+                if (f(<#= MethodCallArgs("t", i) + (i == 0 ? "" : ", ") #>out res))
+                    return Create.Option(res);
                 return Option.None;
             };
         }
-<#
-         }
-#>
     }
 
 <# } #>
