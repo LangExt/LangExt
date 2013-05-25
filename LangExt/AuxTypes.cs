@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -13,11 +14,49 @@ namespace LangExt
     /// <summary>
     /// 値がないことを表すための型です。
     /// </summary>
-    public enum Unit
+    public struct Unit
     {
         /// <summary>
-        /// Unit型の唯一の値として使用するための列挙子です。
+        /// Unitの値を取得します。
         /// </summary>
-        _
+        public readonly static Unit _ = new Unit();
+
+        /// <summary>
+        /// Unitは常に等しいため、この演算子は常にfalseを返します。
+        /// </summary>
+        public static bool operator ==(Unit lhs, Unit rhs) { return true; }
+
+        /// <summary>
+        /// Unitは常に等しいため、この演算子は常にfalseを返します。
+        /// </summary>
+        public static bool operator !=(Unit lhs, Unit rhs) { return false; }
+
+        /// <summary>
+        /// 引数がUnitかどうかを判定します。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool Equals(object obj) { return obj is Unit; }
+
+        /// <summary>
+        /// このオブジェクトを表すハッシュ値を取得します。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override int GetHashCode() { return 13; }
+
+        /// <summary>
+        /// このオブジェクトの文字列表現を取得します。
+        /// </summary>
+        public override string ToString() { return "()"; }
+    }
+
+    /// <summary>
+    /// Unitに対する関数を提供します。
+    /// </summary>
+    public static class UnitModule
+    {
+        /// <summary>
+        /// 値を無視してUnitを返します。
+        /// </summary>
+        public static Unit Ignore<T>(this T self) { return Unit._; }
     }
 }
