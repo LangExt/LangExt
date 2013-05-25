@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -110,6 +110,11 @@
       <DependentUpon>Seq.Zip.tt</DependentUpon>
     </Compile>
     <Compile Include="SumStrategy.cs" />
+    <Compile Include="TryFunc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TryFunc.tt</DependentUpon>
+    </Compile>
     <Compile Include="TupleModule.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -152,6 +157,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Seq.Zip.cs</LastGenOutput>
       <DependentUpon>Seq.cs</DependentUpon>
+    </None>
+    <None Include="TryFunc.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TryFunc.cs</LastGenOutput>
     </None>
     <None Include="TupleModule.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
