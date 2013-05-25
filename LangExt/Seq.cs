@@ -141,11 +141,33 @@ namespace LangExt
         }
         #endregion
 
-        #region 長さ取得系メソッド(Len/Count)
+        #region 長さ取得系メソッド(Size/Len/Count)
         /// <summary>
         /// シーケンスの長さを求めます。
         /// 標準クエリ演算子のCountに対応します。
         /// </summary>
+        /// <remarks>
+        /// Sizeは、Lenよりもより広範囲の対象に通用する名前です。
+        /// 例えば、集合の要素数を考えたとき(集合がシーケンスかどうかは置いておいたとして)に、
+        /// Lenは名前としては適しませんが、
+        /// Sizeは集合の要素数として使っても問題ない名前です。
+        /// そのため、Sizeを使うとより統一性を持ったコーディングが可能なので、
+        /// LenでもSizeでも問題ない場合はSizeを使うようにしてください。
+        /// </remarks>
+        public static int Size<T>(this ISeq<T> self) { return StdEnumerable.Count(self); }
+
+        /// <summary>
+        /// シーケンスの長さを求めます。
+        /// 標準クエリ演算子のCountに対応します。
+        /// </summary>
+        /// <remarks>
+        /// Sizeは、Lenよりもより広範囲の対象に通用する名前です。
+        /// 例えば、集合の要素数を考えたとき(集合がシーケンスかどうかは置いておいたとして)に、
+        /// Lenは名前としては適しませんが、
+        /// Sizeは集合の要素数として使っても問題ない名前です。
+        /// そのため、Sizeを使うとより統一性を持ったコーディングが可能なので、
+        /// LenでもSizeでも問題ない場合はSizeを使うようにしてください。
+        /// </remarks>
         public static int Len<T>(this ISeq<T> self) { return StdEnumerable.Count(self); }
 
         /// <summary>
