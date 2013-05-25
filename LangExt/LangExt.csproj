@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -48,6 +48,11 @@
     <Compile Include="Comparable.cs" />
     <Compile Include="Create.cs" />
     <Compile Include="Func.cs" />
+    <Compile Include="Func.Chain.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Func.Chain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Func.Curry.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -58,6 +63,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Func.Option.tt</DependentUpon>
     </Compile>
+    <Compile Include="Func.Result.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Func.Result.tt</DependentUpon>
+    </Compile>
     <Compile Include="Enumerable.QueryExpr.cs">
       <DependentUpon>Enumerable.cs</DependentUpon>
     </Compile>
@@ -65,11 +75,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Enumerable.Zip.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Func.Result.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Func.Result.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderedSeq.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -118,6 +123,11 @@
     <None Include="..\T4\T4Util.ttinclude">
       <Link>T4Util.ttinclude</Link>
     </None>
+    <None Include="Func.Chain.tt">
+      <DependentUpon>Func.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Func.Chain.cs</LastGenOutput>
+    </None>
     <None Include="Func.Curry.tt">
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -128,15 +138,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Option.cs</LastGenOutput>
     </None>
-    <None Include="Enumerable.Zip.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Enumerable.Zip.cs</LastGenOutput>
-      <DependentUpon>Enumerable.cs</DependentUpon>
-    </None>
     <None Include="Func.Result.tt">
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Result.cs</LastGenOutput>
+    </None>
+    <None Include="Enumerable.Zip.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Enumerable.Zip.cs</LastGenOutput>
+      <DependentUpon>Enumerable.cs</DependentUpon>
     </None>
     <None Include="Seq.Zip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
