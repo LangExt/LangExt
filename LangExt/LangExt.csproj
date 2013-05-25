@@ -178,6 +178,11 @@
       <DependentUpon>Seq.Zip.tt</DependentUpon>
     </Compile>
     <Compile Include="SumStrategy.cs" />
+    <Compile Include="TryFunc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TryFunc.tt</DependentUpon>
+    </Compile>
     <Compile Include="TupleModule.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -293,6 +298,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Seq.Zip.cs</LastGenOutput>
       <DependentUpon>Seq.cs</DependentUpon>
+    </None>
+    <None Include="TryFunc.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TryFunc.cs</LastGenOutput>
     </None>
     <None Include="TupleModule.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
