@@ -110,9 +110,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TupleModule.tt</DependentUpon>
     </Compile>
-    <Compile Include="Unsafe\Option.cs" />
-    <Compile Include="Unsafe\Result.cs" />
-    <Compile Include="Unsafe\Seq.cs" />
+    <Compile Include="Unsafe\OptionUnsafe.cs" />
+    <Compile Include="Unsafe\ResultUnsafe.cs" />
+    <Compile Include="Unsafe\SeqUnsafe.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\T4\T4Util.ttinclude">

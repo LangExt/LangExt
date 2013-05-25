@@ -13,7 +13,7 @@ open FsCheck.NUnit
 
 // F#のSeqと混ざってしまうので用意
 type LangExtSeq = LangExt.Seq
-type UnsafeSeq = LangExt.Unsafe.Seq
+type UnsafeSeq = LangExt.Unsafe.SeqUnsafe
 
 // いちいちCreateするのは面倒なので用意
 let intSeq (xs: int[]) = LangExtSeq.Create(xs)

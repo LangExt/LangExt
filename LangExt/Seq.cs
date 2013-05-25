@@ -221,7 +221,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMax<T>(this ISeq<T> self) where T : IComparable<T>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.Max(self));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.SeqUnsafe.Max(self));
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMaxWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MaxWith(self, comparer));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.SeqUnsafe.MaxWith(self, comparer));
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMaxBy<T, U>(this ISeq<T> self, Func<T, U> f) where U : IComparable<U>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MaxBy(self, f));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.SeqUnsafe.MaxBy(self, f));
         }
         #endregion
 
@@ -253,7 +253,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMin<T>(this ISeq<T> self) where T : IComparable<T>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.Min(self));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.SeqUnsafe.Min(self));
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMinWith<T>(this ISeq<T> self, Func<T, T, int> comparer)
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MinWith(self, comparer));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.SeqUnsafe.MinWith(self, comparer));
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryMinBy<T, U>(this ISeq<T> self, Func<T, U> f) where U : IComparable<U>
         {
-            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.Seq.MinBy(self, f));
+            return self.IsEmpty() ? Option.None : Option.Some(Unsafe.SeqUnsafe.MinBy(self, f));
         }
         #endregion
 
@@ -315,7 +315,7 @@ namespace LangExt
         public static Option<T> TryReduceBack<T>(this ISeq<T> self, Func<T, T, T> f)
         {
             if (self.IsEmpty()) return Option.None;
-            return Option.Some(Unsafe.Seq.ReduceBack(self, f));
+            return Option.Some(Unsafe.SeqUnsafe.ReduceBack(self, f));
         }
 
         /// <summary>
@@ -746,7 +746,7 @@ namespace LangExt
         /// </summary>
         public static Option<T> TryGet<T>(this ISeq<T> self, int index)
         {
-            Func<ISeq<T>, int, T> f = Unsafe.Seq.Get;
+            Func<ISeq<T>, int, T> f = Unsafe.SeqUnsafe.Get;
             return f.ToOptionFunc()(self, index);
         }
 
@@ -790,7 +790,7 @@ namespace LangExt
             {
                 if (x.IsNone)
                     return Option.None;
-                res.Add(Unsafe.Option.GetValue(x)); // 上のifでNoneの場合を除外しているので、このGetValueの呼び出しは安全
+                res.Add(Unsafe.OptionUnsafe.GetValue(x)); // 上のifでNoneの場合を除外しているので、このGetValueの呼び出しは安全
             }
             return Option.Some<ISeq<T>>(new Seq<T>(res));
         }

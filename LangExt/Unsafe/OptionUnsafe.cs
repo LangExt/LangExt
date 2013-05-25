@@ -5,7 +5,7 @@ namespace LangExt.Unsafe
     /// <summary>
     /// Optionに対する(例外を投げうる)関数を提供します。
     /// </summary>
-    public static class Option
+    public static class OptionUnsafe
     {
         /// <summary>
         /// 保持している値を強制的に取得します。
