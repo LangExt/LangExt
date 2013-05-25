@@ -39,6 +39,26 @@ namespace LangExt
                 return Option.None;
             };
         }
+
+        public static Func<<#= TypeParams("T", i) + (i == 0 ? "" : ", ") #>Result<TResult, Exception>> ToResultFunc<<#=
+                TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult>(this TryFunc<<#=
+                    TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult> f)
+        {
+            return (<#= MethodCallArgs("t", i) #>) =>
+            {
+                TResult res;
+                try
+                {
+                    if (f(<#= MethodCallArgs("t", i) + (i == 0 ? "" : ", ") #>out res))
+                        return Create.Result(res);
+                    return Result.Failure((Exception)new NullResultException());
+                }
+                catch (Exception e)
+                {
+                    return Result.Failure(e);
+                }
+            };
+        }
     }
 
 <# } #>
