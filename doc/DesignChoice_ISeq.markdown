@@ -39,7 +39,7 @@ ISeq[T]に対してできる操作の方が充実しています。
 ISeq[T]のみに対してできる操作には、例えば以下の関数があります。
 
 * Init/Repeat
-* Len/Count
+* Size/Len/Count
 * Exists/Forall
 * Fold/FoldBack/ScanBack/TryReduce/TryReduceBack
 * Filter/Partition
@@ -89,7 +89,7 @@ LangExtでは、LINQ to Objectsに関して
 
 LangExtでは、それぞれに別の名前を用意しています。
 標準クエリ演算子のAnyはLangExtのExistsとIsNotEmptyに、AggregateはFoldとReduce(Unsafe名前空間)に、
-CountはLenとCountにそれぞれ対応します。
+CountはSize/LenとCountにそれぞれ対応します。
 また、要素のインデックスを追加で取るバージョンは、メソッド名の後ろにWithIndexを付けています。
 
 ### LangExtのシーケンス操作関数の語彙
