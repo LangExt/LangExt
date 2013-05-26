@@ -28,7 +28,11 @@ namespace LangExt.Legacy.TypeMatches
         public static TResult TypeMatch<<#= TypeParams("T", i) #>, TResult>(this object self, <#=
             Repeat(", ", "Func<T{0}, TResult> ifT{0}", i) #>)
         {
-            return TypeMatch(self, <#= MethodCallArgs("ifT", i) #>, _ => { throw new Exception(); });
+            return TypeMatch(
+                self,
+                <#= MethodCallArgs("ifT", i) #>,
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [<#=
+                    Repeat(", ", "{{{0}}}", i) #>].", <#= Repeat(", ", "typeof(T{0}).Name", i) #>)); });
         }
 <# } #>
     }

@@ -41,6 +41,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MatchFailureException.cs" />
     <Compile Include="TypeMatches\LegacyObject.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
