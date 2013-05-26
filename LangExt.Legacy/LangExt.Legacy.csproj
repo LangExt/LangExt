@@ -34,6 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="CastMatches\LegacyObject.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LegacyObject.cs</LastGenOutput>
+    </None>
     <None Include="T4Util.ttinclude" />
     <None Include="TypeMatches\LegacyObject.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -41,6 +45,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CastMatches\LegacyObject.cs">
+      <DependentUpon>LegacyObject.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="MatchFailureException.cs" />
     <Compile Include="TypeMatches\LegacyObject.cs">
       <AutoGen>True</AutoGen>
