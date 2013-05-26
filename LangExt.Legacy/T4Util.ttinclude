@@ -1,0 +1,66 @@
+﻿<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+const int Max = 16;
+string Fold(string init, string format, int count)
+{
+    var result = init;
+    for (int i = 0; i < count; i++)
+    {
+        result = string.Format(format, result, count - i);
+    }
+    return result;
+}
+
+string Fold(string init, string format, int begin, int end)
+{
+    var result = init;
+    for (int i = begin; i < end; i++)
+    {
+        result = string.Format(format, result, (end - begin) - i);
+    }
+    return result;
+}
+
+string Repeat(string separator, string format, int begin, int end)
+{
+    return string.Join(separator, Enumerable.Range(begin, end - begin).Select(i => string.Format(format, i)));
+}
+
+string Repeat(string separator, string format, int count)
+{
+    return string.Join(separator, Enumerable.Range(1, count).Select(i => string.Format(format, i)));
+}
+
+string TypeParams(string prefix, int count)
+{
+    return Repeat(", ", prefix + "{0}", count);
+}
+
+string TypeParams(string prefix, int begin, int end)
+{
+    return Repeat(", ", prefix + "{0}", begin, end);
+}
+
+string MethodDefArgs(string typePrefix, string varPrefix, int count)
+{
+    return Repeat(", ", typePrefix + "{0} " + varPrefix + "{0}", count);
+}
+
+string MethodDefArgs(string typePrefix, string varPrefix, int begin, int end)
+{
+    return Repeat(", ", typePrefix + "{0} " + varPrefix + "{0}", begin, end);
+}
+
+string MethodCallArgs(string prefix, int count)
+{
+    return Repeat(", ", prefix + "{0}", count);
+}
+
+string MethodCallArgs(string prefix, int begin, int end)
+{
+    return Repeat(", ", prefix + "{0}", begin, end);
+}
+#>

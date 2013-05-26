@@ -34,9 +34,22 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="T4Util.ttinclude" />
+    <None Include="TypeMatches\LegacyObject.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LegacyObject.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TypeMatches\LegacyObject.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LegacyObject.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,35 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4Util.ttinclude" #>
+using System;
+
+namespace LangExt.Legacy.TypeMatches
+{
+    public static class LegacyObject
+    {
+<# for (int i = 1; i <= Max; i++) { #>
+        public static TResult TypeMatch<<#= TypeParams("T", i) #>, TResult>(this object self, <#=
+            Repeat(", ", "Func<T{0}, TResult> ifT{0}", i) #>, Func<object, TResult> Otherwise)
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            if (self is T<#= j #>) return ifT<#= j #>((T<#= j #>)self);
+<# } #>
+            return Otherwise(self);
+        }
+
+        public static TResult TypeMatch<<#= TypeParams("T", i) #>, TResult>(this object self, <#=
+            Repeat(", ", "Func<T{0}, TResult> ifT{0}", i) #>)
+        {
+            return TypeMatch(self, <#= MethodCallArgs("ifT", i) #>, _ => { throw new Exception(); });
+        }
+<# } #>
+    }
+}
