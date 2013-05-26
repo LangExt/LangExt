@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>LangExt</id>
+    <version>2.0.0.0</version>
+    <title>LangExt</title>
+    <authors>bleis-tift, otf</authors>
+    <owners>bleis-tift, otf</owners>
+    <licenseUrl>https://github.com/LangExt/LangExt/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/LangExt/LangExt</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This library supports functional programming using C#.</description>
+    <summary>This is a functional library for C#.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>functional c# library</tags>
+    <references>
+      <reference file="LangExt.dll" />
+    </references>
+  </metadata>
+</package>
