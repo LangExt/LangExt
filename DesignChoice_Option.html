@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<h1 id="optionの設計">Optionの設計</h1>
+<p>Optionの意味を理解していることを前提に、直和型をC#で実現する方法についてを説明し、 LangExtではどういう方針を採用しているのかと、その理由について明らかにします。</p>
+<h2 id="バリアント型のcでの設計方針">バリアント型のC#での設計方針</h2>
+<p>Optionなどのバリアント型(VBのVariant型のことでは<strong>ありません</strong>)をC#で実現する場合、大まかに次の2つの方針があります。</p>
+<ul>
+<li>型の階層で表現する</li>
+<li>タグを判別する値を持つようにする</li>
+</ul>
+<p>一つ目の方法は、Option(もしくはMaybe)型の実現方法としてよく使われている方法です。</p>
+<pre><code>     +-----------+
+     | Option[T] |
+     +-----------+
+           △
+           ｜
+     +-----＋-----+
+     |            |
++---------+  +---------+
+| Some[T] |  | None[T] |
++---------+  +---------+
+| - value |
++---------+</code></pre>
+<p>二つ目の方法は、LangExtのOption型が採用している方法です。</p>
+<pre><code>     +------------+
+     |  Option[T] |
+     +------------+
+     | - hasValue |
+     | -   value  |
+     +------------+</code></pre>
+<p>これらの特徴を、Option型を実現する場合を例に見ていきます。</p>
+<h3 id="型の階層で表現する方法">型の階層で表現する方法</h3>
+<p>バリアント型を型の階層で表現する方法は、実際にはOption型をinterfaceとして定義することが多いようです。 この方法では、Option型に対する操作はポリモーフィズムによって実現され、分岐は型階層に隠蔽されます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">interface</span> IOption&lt;<span class="kw">out</span> T&gt;
+{
+    <span class="dt">bool</span> HasValue { <span class="kw">get</span>; }
+    IOption&lt;U&gt; Map&lt;U&gt;(Func&lt;T, U&gt; f);
+    IOption&lt;U&gt; Bind&lt;U&gt;(Func&lt;T, IOption&lt;U&gt;&gt; f);
+    T <span class="fu">GetOr</span>(T defaultValue);
+}
+
+<span class="kw">public</span> <span class="kw">sealed</span> <span class="kw">class</span> Some&lt;T&gt; : IOption&lt;T&gt;
+{
+    <span class="kw">readonly</span> T value;
+    <span class="kw">public</span> <span class="fu">Some</span>(T value) { <span class="kw">this</span>.<span class="fu">value</span> = value; }
+
+    <span class="kw">public</span> <span class="dt">bool</span> HasValue { <span class="kw">get</span> { <span class="kw">return</span> <span class="kw">true</span>; } }
+    <span class="kw">public</span> IOption&lt;U&gt; Map&lt;U&gt;(Func&lt;T, U&gt; f)
+    {
+        <span class="kw">return</span> <span class="kw">new</span> Some&lt;U&gt;(<span class="fu">f</span>(<span class="kw">this</span>.<span class="fu">value</span>));
+    }
+    <span class="kw">public</span> IOption&lt;U&gt; Bind&lt;U&gt;(Func&lt;T, IOption&lt;U&gt;&gt; f)
+    {
+        <span class="kw">return</span> <span class="fu">f</span>(<span class="kw">this</span>.<span class="fu">value</span>);
+    }
+    <span class="kw">public</span> T <span class="fu">GetOr</span>(T defaultValue) { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">value</span>; }
+}
+
+<span class="kw">public</span> <span class="kw">sealed</span> <span class="kw">class</span> None&lt;T&gt; : IOption&lt;T&gt;
+{
+    <span class="kw">public</span> <span class="dt">bool</span> HasValue { <span class="kw">get</span> { <span class="kw">return</span> <span class="kw">false</span>; } }
+    <span class="kw">public</span> IOption&lt;U&gt; Map&lt;U&gt;(Func&lt;T, U&gt; f)
+    {
+        <span class="kw">return</span> <span class="kw">new</span> None&lt;T&gt;();
+    }
+    <span class="kw">public</span> IOption&lt;U&gt; Bind&lt;U&gt;(Func&lt;T, IOption&lt;U&gt;&gt; f)
+    {
+        <span class="kw">return</span> <span class="kw">new</span> None&lt;T&gt;();
+    }
+    <span class="kw">public</span> T <span class="fu">GetOr</span>(T defaultValue) { <span class="kw">return</span> defaultValue; }
+}</code></pre>
+<p>実際には拡張メソッドで提供するメソッドについては、その中で分岐が発生しますが、 一番コアの部分は<code>if</code>による分岐を(それがいいことかどうかは置いておいて)完全に排除できます。</p>
+<p>この方法は、オブジェクト指向プログラミング的な方法であり、 オブジェクト指向プログラマにとっては自然であり、美しい解決方法でしょう。</p>
+<h3 id="タグを判別する値を持つ方法">タグを判別する値を持つ方法</h3>
+<p>Option型には<code>Some</code>と<code>None</code>という2つのラベルがあります。 これを判別するのに必要な情報は1bitでいいため、boolを使えば十分です。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">struct</span> Option&lt;T&gt;
+{
+    <span class="kw">readonly</span> <span class="dt">bool</span> hasValue;
+    <span class="kw">readonly</span> T value;
+    <span class="kw">public</span> <span class="fu">Option</span>(T value)
+    {
+        <span class="kw">this</span>.<span class="fu">hasValue</span> = <span class="kw">true</span>;
+        <span class="kw">this</span>.<span class="fu">value</span> = value;
+    }
+
+    <span class="kw">public</span> <span class="dt">bool</span> HasValue { <span class="kw">get</span> { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">hasValue</span>; } }
+    <span class="kw">public</span> Option&lt;U&gt; Map&lt;U&gt;(Func&lt;T, U&gt; f)
+    {
+        <span class="kw">if</span> (<span class="kw">this</span>.<span class="fu">hasValue</span>)
+            <span class="kw">return</span> <span class="kw">new</span> Option&lt;U&gt;();
+        <span class="kw">return</span> <span class="kw">new</span> Option&lt;U&gt;(<span class="fu">f</span>(<span class="kw">this</span>.<span class="fu">value</span>));
+    }
+    <span class="kw">public</span> Option&lt;U&gt; Bind&lt;U&gt;(Func&lt;T, U&gt; f)
+    {
+        <span class="kw">if</span> (<span class="kw">this</span>.<span class="fu">hasValue</span>)
+            <span class="kw">return</span> <span class="kw">new</span> Option&lt;U&gt;();
+        <span class="kw">return</span> <span class="fu">f</span>(<span class="kw">this</span>.<span class="fu">value</span>);
+    }
+    <span class="kw">public</span> T <span class="fu">GetOr</span>(T defaultValue)
+    {
+        <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">hasValue</span> ? <span class="kw">this</span>.<span class="fu">value</span> : defaultValue;
+    }
+}</code></pre>
+<p>バリアント型をタグを判別する値を持つことによって表現する方法は、先の方法に比べると泥臭い方法に見えます。 LangExtでは、この2つの方法のメリットとデメリットを考えたうえで、泥臭く思える後者の方法を採用しています。</p>
+<h3 id="それぞれの利点と欠点">それぞれの利点と欠点</h3>
+<p>まずは、型の階層で表現する方法の利点を考えてみます。</p>
+<ol style="list-style-type: decimal">
+<li><code>None</code>の場合に余分なフィールドを持つ必要がない</li>
+<li><code>Some</code>や<code>None</code>にも型を与えることになるため、「<code>Some</code>だけを受け取れるような関数」のように、柔軟な関数を定義可能</li>
+<li>(Optionを<code>interface</code>とすることで)型パラメータに<code>out</code>が指定できる</li>
+<li>実装が綺麗に書ける</li>
+</ol>
+<p>特に、1つ目はラベルが多くなればなるほど効果を感じることができる利点でしょう。</p>
+<p>2つ目も、Optionではそれほどメリットを感じないかもしれませんが、 例えばファイルとディレクトリを扱う型階層を作った場合などは大きな利点になります。</p>
+<p>3つ目は<code>out</code>を付けることのできないようなものも考えられますが、Option型の場合には付けることができます。 TがSを継承している場合に、Option[T]がOption[S]として使えるというのは、オブジェクト指向言語においては非常に魅力的です。</p>
+<p>4つ目は、実際にミニマムな実装をしたコードを見ても、<code>if</code>が全く出てこないため、オブジェクト指向プログラミングとして綺麗なコードと言えるでしょう。</p>
+<p>では、タグを判別する値を持つことによって実現する方法の利点はどうでしょう。</p>
+<ol style="list-style-type: decimal">
+<li>Option型の変数に対して<code>null</code>を入れることを防げている(<code>struct</code>のため)</li>
+<li>勝手に独自のラベルを作ることができない(型階層で実現する方法の場合、IOptionを実装することで可能)</li>
+</ol>
+<p>の2つです。 後者は一概には利点/欠点と判断できるものではないですが、少なくともOption型には不要な機能であり、それができてしまうと色々面倒です。</p>
+<p>また、前者の利点は絶大です。 Option型が達成したいのは、「<strong><code>null</code>の排除</strong>」です。 にもかかわらず、型階層による実現方法では、「<code>IOption[T]</code>型の変数そのものに<code>null</code>を入れられてしまう」という可能性を排除できません。</p>
+<p>これは、別に</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">IOption&lt;<span class="dt">string</span>&gt; opt = <span class="kw">null</span>;</code></pre>
+<p>という直接的なコードが書かれてしまう、ということではありません。 そうではなく、例えば<code>IOption[T]</code>を受け取るような関数に「とりあえず」<code>null</code>を渡しておいて、「後で」直そう、と思って忘れていたような、 「うっかり<code>null</code>」の方を心配しています。</p>
+<p>LangExtの公開以前のかなり初期のバージョンでは、型階層によってOptionを実現していました。 しかし、この手のミスがそれなりに発生したため、設計方針を切り替えたという経緯があります。</p>
+<p>もちろん、これを単体テストやDbCによって排除すべきだ、という立場もあるでしょう。 しかし、単体テストで見つけるよりもコンパイル時に見つけた方が発見のコスト(単体テストではテストコードを書いたり、実行したりが必要)も修正のコストも小さくなりますし、 そもそも考慮漏れを起こす心配がありません。</p>
+<p>また、DbC(というかCode Contracts)で「この型の<strong>変数</strong>には<code>null</code>は格納できない」のような契約の書き方がわかりませんでした。 もしかすると方法はあるのかもしれないですが、LangExtではCode Contractsでどうこうする、という方向は諦めています。</p>
+<h3 id="どちらを採用するか">どちらを採用するか</h3>
+<p>これらの利点と欠点を考えたうえで、LangExtでは<code>null</code>を徹底的に排除するために、タグを判別する値を持つ方法を採用しました。 これにより、LangExtのOptionでは(変数にしろ、Optionの高階関数に渡された関数の引数にしろ)<code>null</code>が来ることは一切考慮する必要がないという安心感を獲得しています。</p>
+<h3 id="option以外のバリアント型">Option以外のバリアント型</h3>
+<p>これまで考えてきたのは、あくまでOption型を実現する場合についてです。 そのため、Option以外のバリアント型もすべてOption型と同じように実装するかどうかは別問題です。</p>
+<p>Option型に失敗時の原因も持たせることができるように拡張したResult型では、Option型と同じ方針を採用していますが、 Option型と違って<code>struct</code>にすることができませんので、今後のバージョンで型階層による実現方法に変更される可能性もあります。 ただし、あくまで実現方法のみの変更になるため、変更があった場合でもユーザコードは修正不要です。</p>
+<h2 id="option型の値の生成">Option型の値の生成</h2>
+<p>Option型の値を生成する方法としては、コンストラクタを呼び出すのが.NETプログラマとしては最もわかりやすいでしょう。 しかし、この方法では常に型パラメータを明示する必要があるため、面倒です。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">F</span>(Option&lt;<span class="dt">string</span>&gt; opt) { ... }
+
+<span class="fu">F</span>(<span class="kw">new</span> Option&lt;<span class="dt">string</span>&gt;(<span class="st">&quot;hoge&quot;</span>)); <span class="co">// Some &quot;hoge&quot;</span>
+<span class="fu">F</span>(<span class="kw">new</span> Option&lt;<span class="dt">string</span>&gt;());       <span class="co">// None</span></code></pre>
+<p>これを解決するために、ほとんどのライブラリのOptionと同様、staticメソッドを提供しています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="fu">F</span>(Option.<span class="fu">Some</span>(<span class="st">&quot;hoge&quot;</span>));</code></pre>
+<p>さらに、LangExtではこれに加えて、型引数なしで<code>None</code>を使うことができるようにしています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="fu">F</span>(Option.<span class="fu">None</span>);</code></pre>
+<p><code>Option.None</code>は<code>Option[Placeholder]</code>型の<code>None</code>を生成するようになっており、 <code>Option[Placeholder]</code>型から任意の<code>T</code>型のOption型への暗黙型変換を提供することでこれを実現しています。</p>
+<h3 id="それ以外の方法">それ以外の方法</h3>
+<p>それ以外の方法として、任意の<code>T</code>型から<code>Option[T]</code>への暗黙型変換を提供することも考えられます。 また、<code>null</code>を任意の<code>T</code>型のOption型の<code>None</code>に暗黙変換を提供するのも便利かもしれません。</p>
+<p>LangExtでは、これらの変換を提供することも考えましたが、どちらも却下しました。</p>
+<h3 id="任意のt型からoptiont型への暗黙の型変換を提供しない理由">任意の<code>T</code>型から<code>Option[T]</code>型への暗黙の型変換を提供しない理由</h3>
+<p>これを提供しないのは、<code>null</code>の扱いにあります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> Option&lt;<span class="dt">string</span>&gt; <span class="fu">F</span>(<span class="dt">string</span> str)
+{
+    <span class="kw">return</span> str;
+}</code></pre>
+<p>さて、単純なコードではありますが、<code>str</code>には<code>null</code>が格納されている可能性があります。 その場合にこのコードは何を返すべきでしょうか？<code>Some null</code>でしょうか？それとも、<code>None</code>でしょうか？</p>
+<p>これは暗黙の型変換の仕様さえ覚えてしまえばそれでいいのですが、 それを知らない人が「こっちだ」と思い込んでしまう可能性は捨てきれません。</p>
+<p>そのため、LangExtではこの変換を提供していません<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> Option&lt;<span class="dt">string</span>&gt; <span class="fu">F</span>(<span class="dt">string</span> str)
+{
+    <span class="kw">return</span> Option.<span class="fu">Some</span>(str);
+}
+<span class="co">// もしstrがnullの場合にNoneが返したい場合は、明示的に書く</span>
+<span class="kw">public</span> Option&lt;<span class="dt">string</span>&gt; <span class="fu">G</span>(<span class="dt">string</span> str)
+{
+    <span class="kw">if</span> (str == <span class="kw">null</span>)
+        <span class="kw">return</span> Option.<span class="fu">None</span>;
+    <span class="kw">return</span> Option.<span class="fu">Some</span>(str);
+}</code></pre>
+<h3 id="nullを任意のt型のoption型のnoneに暗黙変換しない理由"><code>null</code>を任意の<code>T</code>型のOption型の<code>None</code>に暗黙変換しない理由</h3>
+<p>これには、上の問題以上の問題があります。</p>
+<p>例えば、当初は<code>Option[string]</code>を受け取っていた関数Fの仕様が変わり、<code>string</code>を受け取ることになったとした場合、 <code>null</code>を<code>None</code>に暗黙変換している個所はコンパイルエラーにならずに単に<code>null</code>を渡してしまうことになります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// 暗黙の型変換を提供していれば、F(Option&lt;string&gt; opt)でもF(string str)でもコンパイルできてしまう</span>
+<span class="fu">F</span>(<span class="kw">null</span>);</code></pre>
+<p>実はこのような暗黙の型変換を公開前のLangExtは提供していたことがありました。 その当時はまだ<code>Option.None</code>とは書けず、<code>Option.None&lt;string&gt;()</code>のように書く必要があったこともあり、 手軽に書ける<code>null</code>からの変換を多用していました。 しかしというか、やはりというか、上のような問題がそれなりに発生し、 さらに<code>Option.None</code>という書き方ができるようになったため、<code>null</code>を<code>None</code>として扱う機能は削除しました。</p>
+<h2 id="クエリ式への対応">クエリ式への対応</h2>
+<p>Option型をクエリ式に対応させる最も手軽な方法は、<code>IEnumerable[T]</code>を実装することでしょう。 そうすれば、<code>IEnumerable[T]</code>に対して定義された<code>Select</code>や<code>SelectMany</code>によって、Optionをクエリ式で扱えるようになります。</p>
+<p>しかし、この方法では最終的に得られる型が<code>Option[T]</code>ではなく<code>IEnumerable[T]</code>になってしまいます。 そのため、LangExtではOption.QueryExpr.csでOption用のクエリ式用メソッドを提供しています。</p>
+<p><code>IEnumerable[T]</code>を実装していないのは、Option型を<code>IEnumerable[T]</code>として使いたいことがないからです。</p>
+<h2 id="match式の模倣">match式の模倣</h2>
+<p>探した限りはあまり他で同じようなことをやっているライブラリがなかったのですが、 LangExtは(F#のような)match式をある程度模倣するMatchメソッドを提供しています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">int</span> <span class="fu">F</span>(Option&lt;<span class="dt">string</span>&gt; opt)
+{
+    <span class="kw">return</span> opt.<span class="fu">Match</span>(
+        str =&gt; <span class="dt">int</span>.<span class="fu">Parse</span>(str), <span class="co">// 値があった場合の処理</span>
+        () =&gt; -<span class="dv">1</span>);             <span class="co">// 値がなかった場合の処理</span>
+}</code></pre>
+<p>また、名前付き引数を使って、以下のように記述することもできます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">int</span> <span class="fu">F</span>(Option&lt;<span class="dt">string</span>&gt; opt)
+{
+    <span class="kw">return</span> opt.<span class="fu">Match</span>(
+        Some: str =&gt; <span class="dt">int</span>.<span class="fu">Parse</span>(str), <span class="co">// 値があった場合の処理</span>
+        None: () =&gt; -<span class="dv">1</span>);             <span class="co">// 値がなかった場合の処理</span>
+}</code></pre>
+<p>名前付き引数なので、順番を入れ替えることもできます<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>。 このようなMatchメソッドは、Optionに限らず便利に使えるため、提供できる場合は提供しておくといいでしょう。</p>
+<p>LangExtでは、Optionのほかに、ResultやTupleでもMatchメソッドを提供しています。 シーケンスに対しては<a href="https://github.com/LangExt/LangExt/blob/2944308908ef644baaff6c155e0d9a739e9cd598/LangExt.Tests/Playground/PatternMatching/Example.cs">実験的に実装してみた</a> ものの、このままでは複雑すぎて使い物にならないので、アイディア募集中です。</p>
+<h2 id="optionから値を取り出す方法">Optionから値を取り出す方法</h2>
+<p>Option型のオブジェクトから値を取り出す操作(GetメソッドやValueプロパティ)を提供しているライブラリは多くあります。 しかし、これを提供してしまうと、せっかく「値がないことの考慮」を強制できるOptionの利点を損ねてしまいます。 そのため、LangExtではLangExt名前空間をusingしただけでは、Optionから直接値を取り出すことは出来ないようになっています。</p>
+<p>LangExtOptionから値を取り出すには、デフォルト値を指定するGetOrメソッド(もしくはその派生のGetOrElseメソッド)を使うか、 LangExt.Unsafe名前空間をusingして(危険なコードを書くと宣言したうえで)GetValueメソッドを使います。</p>
+<p>現在のバージョンのLangExtでは、Unsafe名前空間の中にOptionクラスを格納しているため、 Unsafe名前空間をusingしてしまうとOptionモジュールが解決できなくなってしまうという問題があります。 次のバージョンでは、Unsafe名前空間の中のOptionクラスは、UnsafeOptionという名前に変更予定です。</p>
+<p>また、現在のバージョンでは<code>None</code>の場合に例外を投げずに<code>default(T)</code>を返すものしか提供されていませんが、 今後のバージョンでは例外を投げるメソッドも追加予定です(名前はおそらくGetになります)。</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>さらに、LangExtでは<code>Option.Some(null)</code>は例外を投げるようになっており、<code>null</code>を格納する<code>Some</code>は作ることができません。 これによって、Optionの高階関数に渡す関数の引数に<code>null</code>が渡されることがないことも保証しています。 もし<code>Some null</code>のようなことがしたいのであれば、Optionをネストするか、別の型を作るようにしてください。<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Match関数で名前付き引数を使うアイディアは、<a href="https://twitter.com/koropicot/status/315132868915523586">ころくんのつぶやき</a>から借りています。<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+body {
+  line-height: 1.2em;
+}
+p {
+  margin: 4px 0px;
+}
+
+code {
+  border: 1px solid lightgray;
+  background-color: #fffbf0;
+  padding: 2px 1px;
+  margin: 0px 2px;
+}
+
+pre code {
+  border: none;
+  background-color: transparent;
+}
+pre {
+  border: 1px solid lightgray;
+  background-color: #fffbf0;
+  margin: 1em;
+  padding: 0.5em;
+}
+
+.footnotes {
+  font-size: small;
+}
