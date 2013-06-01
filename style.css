@@ -1,8 +1,36 @@
+h1 {
+  padding-bottom: 8px;
+  border-bottom: 2px solid black;
+}
+h2 {
+  padding: 4px;
+  border-left: 10px solid gray;
+  border-bottom: 1px solid gray;
+  background-color: #CCC;
+}
+h3 {
+  padding: 4px;
+  border-left: 10px solid #CCC;
+  border-bottom: 1px solid #CCC;
+}
+h4 {
+  padding: 4px;
+  padding-bottom: 1px;
+  border-left: 8px solid #CCC;
+}
+h5 {
+  padding: 4px;
+  padding-bottom: 1px;
+  padding-left: 8px;
+  border-left: 4px solid #CCC;
+}
+h6 { }
+
 body {
   line-height: 1.2em;
 }
 p {
-  margin: 4px 0px;
+  margin: 0.6em 1em;
 }
 
 code {
@@ -19,7 +47,7 @@ pre code {
 pre {
   border: 1px solid lightgray;
   background-color: #fffbf0;
-  margin: 1em;
+  margin: 1em 2em;
   padding: 0.5em;
 }
 
