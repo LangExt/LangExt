@@ -312,8 +312,10 @@ int F(Option<string> opt)
 }
 ```
 
-名前付き引数なので、順番を入れ替えることもできます。
+名前付き引数なので、順番を入れ替えることもできます[^match]。
 このようなMatchメソッドは、Optionに限らず便利に使えるため、提供できる場合は提供しておくといいでしょう。
+
+[^match]: Match関数で名前付き引数を使うアイディアは、[ころくんのつぶやき](https://twitter.com/koropicot/status/315132868915523586)から借りています。
 
 LangExtでは、Optionのほかに、ResultやTupleでもMatchメソッドを提供しています。
 シーケンスに対しては[実験的に実装してみた](https://github.com/LangExt/LangExt/blob/2944308908ef644baaff6c155e0d9a739e9cd598/LangExt.Tests/Playground/PatternMatching/Example.cs)
