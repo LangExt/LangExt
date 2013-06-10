@@ -16,7 +16,18 @@ LangExtについて
 ----------------
 '@ | Out-File index.markdown -Encoding UTF8 -Append
 
-ls DesignChoice_*.markdown -Exclude index.markdown, LangExt.markdown, HowToBuild.markdown  | %{
+ls DesignChoice_*.markdown | %{
+  $title = $(cat $_.Name -Encoding UTF8)[0]
+  "* [$title]($([System.IO.Path]::ChangeExtension($_.Name, '.html')))"
+} | Out-File index.markdown -Encoding UTF8 -Append
+
+@'
+
+標準ライブラリとの比較
+----------------------
+'@ | Out-File index.markdown -Encoding UTF8 -Append
+
+ls cmp_*.markdown | %{
   $title = $(cat $_.Name -Encoding UTF8)[0]
   "* [$title]($([System.IO.Path]::ChangeExtension($_.Name, '.html')))"
 } | Out-File index.markdown -Encoding UTF8 -Append
