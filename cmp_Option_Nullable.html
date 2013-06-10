@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<h1 id="nullableとoptionの違い">NullableとOptionの違い</h1>
+<p>Optionそのものについてのエントリは書く必要ない(世の中に有用なドキュメントが山ほどあるから)かな、 と思っていたのですが、Nullableとの違いについてはそれなりに需要がありそうなので書いておきます。</p>
+<p>ちなみに、個人的な嗜好によりOptionを持ち上げ、Nullableを下に扱う感じになっていますが、Nullableも(仕方なく)使うことはあります。 特別な理由がなければNullable使わずにOptionを使う、ということでもありますが、そこは一つよろしくお願いします。</p>
+<h2 id="nullableとは">Nullableとは</h2>
+<p>C#では<code>null</code>は参照型でしか使えませんでした。 Nullableは、この制限がない(ように見えるよう特別扱いされている)唯一の値型です。 ジェネリック型になっており、任意の値型を扱うことが出来ます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// Nullable&lt;int&gt;はint?と書ける</span>
+<span class="dt">int</span>? x = <span class="dv">42</span>;   <span class="co">// 値がある</span>
+<span class="dt">int</span>? y = <span class="kw">null</span>; <span class="co">// 値がない</span>
+
+<span class="co">// こちらは参照型なので、Nullable型ではない</span>
+<span class="dt">string</span> a = <span class="st">&quot;hoge&quot;</span>; <span class="co">// 値がある</span>
+<span class="dt">string</span> b = <span class="kw">null</span>;   <span class="co">// 値がない</span></code></pre>
+<h2 id="optionとは">Optionとは</h2>
+<p>Optionは、「<code>null</code>よりも安全に値がないことを表せる」ものです。 ジェネリック型になっており、任意の型を扱うことが出来ます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; x = Option.<span class="fu">Some</span>(<span class="dv">42</span>); <span class="co">// 値がある</span>
+Option&lt;<span class="dt">int</span>&gt; y = Option.<span class="fu">None</span>;     <span class="co">// 値がない</span>
+
+Option&lt;<span class="dt">string</span>&gt; a = Option.<span class="fu">Some</span>(<span class="st">&quot;hoge&quot;</span>); <span class="co">// 値がある</span>
+Option&lt;<span class="dt">string</span>&gt; b = Option.<span class="fu">None</span>;         <span class="co">// 値がない</span></code></pre>
+<p>このエントリでは、OptionはLangExtのOptionを指すものとします。</p>
+<h2 id="nullableとoptionの類似点">NullableとOptionの類似点</h2>
+<p>NullableもOptionも、structで実装されており、値を持っているかどうかを表すフラグと、値を保持しているという点で、構造は似ています。 しかし、似ているのは構造くらいで、目的や使い方などはかなり異なります。</p>
+<h2 id="nullableとoptionの違い-1">NullableとOptionの違い</h2>
+<h3 id="パラメータとして渡せる型の違い">パラメータとして渡せる型の違い</h3>
+<p>Nullableは値型でも<code>null</code>を扱えるようにするために作られたため、値型しか型パラメータに指定できません(参照型はそもそも最初から<code>null</code>を扱える)。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Nullable&lt;<span class="dt">int</span>&gt; i = <span class="kw">null</span>;
+<span class="co">// これはコンパイルエラー</span>
+<span class="co">//Nullable&lt;string&gt; s = null;</span>
+<span class="co">// そもそもこう書ける</span>
+<span class="dt">string</span> s = <span class="kw">null</span>;</code></pre>
+<p>それに対してOptionは、<code>null</code>を置き換えるために作られているため、値型であっても参照型であっても型パラメータに指定することができます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; i = Option.<span class="fu">None</span>;
+Option&lt;<span class="dt">string</span>&gt; s = Option.<span class="fu">None</span>;
+<span class="co">// もちろんこれはコンパイルエラー</span>
+<span class="co">//string s = Option.None;</span></code></pre>
+<p>また、Nullableはネストさせることができません(<code>Nullable&lt;Nullable&lt;int&gt;&gt;</code>や、<code>int??</code>はできない)が、Optionは出来る、という違いもあります。</p>
+<h3 id="表記上の違い">表記上の違い</h3>
+<p>Nullableは言語組み込みの機能なので、表記はとてもシンプルです。 また、値がある場合はその値が直接書けます。</p>
+<p>それに対してOptionは、値がある場合でも<code>Option.Some</code>の呼び出しが必須になるため、その分面倒です。 任意の型からそのOption型への暗黙の型変換を提供すればこれは解決できるのですが、 これには問題もあるため、LangExtでは提供していません。</p>
+<p>その理由については、 <a href="http://langext.github.io/LangExt/DesignChoice_Option.html#任意のt型からoptiont型への暗黙の型変換を提供しない理由">Optionの設計</a> で述べていますので、後で(NullableとOptionの違いを理解したうえで)読んでみてください。</p>
+<h3 id="設計方針の違い">設計方針の違い</h3>
+<p>Nullable型は値型で<code>null</code>を扱えるようにすることを目的としています。 単に値がない状態を表せればよく、それを<strong>どう扱うか</strong>には興味がありません。 そのため、Nullableが出来るのは基本的には</p>
+<ul>
+<li><code>null</code>かどうかのチェック</li>
+<li>値の取り出し</li>
+</ul>
+<p>の2つだけです。</p>
+<p>それに対して、Option型は<strong>どうやって値がない状態を上手に扱うか</strong>が最大の興味です。 そのため、Optionに対しては様々な操作が可能です。 しかし、Nullableには用意されている「値の取り出し」は、Optionでは簡単にはできないようになっています。</p>
+<p>値が取り出せるのは一見便利に見えます。 しかし、値がない場合に値を取り出そうとした場合にどうすればいいかを考える必要があります。 Nullableの場合、</p>
+<ul>
+<li>値がない場合に例外(InvalidOperationException)を投げるValueプロパティ</li>
+<li>値がない場合にデフォルト値を返すGetValueOrDefaultメソッド</li>
+<li>値がない場合に引数で指定した値を返すGetValueOrDefaultメソッド</li>
+</ul>
+<p>の3つの方法を用意しています。 Valueプロパティは一番使うのが簡単なので一番多用されがちな方法となりますが、<code>null</code>チェックが強制されるわけではないため、気を抜くと簡単に例外が投げられてしまいます。 Nullableは「どうやって値がない状態をうまく扱うか」に興味がないため、 この設計選択は妥当と言えるでしょう(ただ、Nullableの場合と参照型の場合とで投げられる例外が違うのがいいことなのかどうかは場合によると思います)。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">static</span> <span class="dt">string</span> <span class="fu">F</span>(<span class="dt">int</span>? x)
+{
+    <span class="kw">return</span> x.<span class="fu">Value</span>.<span class="fu">ToString</span>(); <span class="co">// xがnullならInvalidOperationExceptionが発生</span>
+}</code></pre>
+<p>しかし、「どうやって値がない状態をうまく扱うか」が最大の興味であるOptionでは、簡単に例外を投げるわけにはいきません。 そこで、Optionがとる方針はこうです。 <strong>「値の取得は禁止して、値を受け取った後の処理と、値がなかった(値が受け取れなかった)場合の処理を渡してもらいOptionの中でそれを振り分ければいい！」</strong></p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">static</span> <span class="dt">string</span> <span class="fu">F</span>(Option&lt;<span class="dt">int</span>&gt; x)
+{
+    <span class="co">// 値がない場合も考慮することを強制するAPI</span>
+    <span class="kw">return</span> x.<span class="fu">Match</span>(
+      Some: i =&gt; i.<span class="fu">ToString</span>(),
+      None: () =&gt; { <span class="kw">throw</span> <span class="kw">new</span> <span class="fu">Exception</span>(); }); <span class="co">// 今回は例外を投げるだけでいいので、Nullableより面倒</span>
+}</code></pre>
+<p>こうすることで、ついうっかり値がない考慮が漏れてしまうという失敗を防ぐことができるのが、OptionとNullableの最も大きな違いです。</p>
+<h3 id="値がないことの伝搬">値がないことの伝搬</h3>
+<p><code>T</code>と演算可能な<code>U</code>があった時、<code>T?</code>と<code>U</code>も演算可能です。 そのため、以下のプログラムは「42.1」を表示します。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">int</span>? x = <span class="dv">42</span>;
+<span class="dt">double</span>? y = x + <span class="fl">0.1</span>;
+<span class="kw">if</span> (y != <span class="kw">null</span>)
+    Console.<span class="fu">WriteLine</span>(y);</code></pre>
+<p>ここで、xが<code>null</code>だった場合はどうなるでしょうか。この場合、<code>null</code>が伝搬することになります(比較演算子の場合はまた違います)。 つまり、yも<code>null</code>になります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">int</span>? x = <span class="kw">null</span>;
+<span class="dt">double</span>? y = x + <span class="fl">0.1</span>;
+<span class="kw">if</span> (y != <span class="kw">null</span>)
+    Console.<span class="fu">WriteLine</span>(y); <span class="co">// yがnullなので表示されない</span></code></pre>
+<p>では、以下の例ではどうでしょう？</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">int</span>? x = <span class="kw">null</span>;
+<span class="dt">string</span> y = x + <span class="st">&quot;aaa&quot;</span>;
+<span class="kw">if</span> (y != <span class="kw">null</span>)
+    Console.<span class="fu">WriteLine</span>(y);</code></pre>
+<p>この場合、なんと「aaa」が表示されます。 参照型の場合、(自分で定義しない限り)<code>null</code>の伝搬は起こらなかったので、<code>null</code>に文字列を加えたときの動作は特別なものではありませんでした。 しかし、Nullableに<code>null</code>の伝搬を導入したせいで、Nullableに関しては<code>null</code>に文字列を加えたときの動作が特別なものに見えるようになってしまっています。</p>
+<p>Optionでどうなるかを見てみましょう。 Optionで同じことをするためには、Optionのままでは演算できないため、MapとIterを使います。 これらの関数は、内部でMatchを使って実装されています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">static</span> Option&lt;U&gt; Map&lt;T, U&gt;(<span class="kw">this</span> Option&lt;T&gt; self, Func&lt;T, U&gt; f)
+{
+    <span class="co">// fが呼び出されるのは値がある(Someの時)だけ</span>
+    <span class="kw">return</span> self.<span class="fu">Match</span>(
+      Some: v =&gt; Option.<span class="fu">Some</span>(<span class="fu">f</span>(v)),
+      None: () =&gt; Option.<span class="fu">None</span>);  <span class="co">// Noneは常に伝搬する(文字列が特別扱いされるなどはない)</span>
+}
+<span class="kw">public</span> <span class="kw">static</span> <span class="dt">void</span> Iter&lt;T&gt;(<span class="kw">this</span> Option&lt;T&gt; self, Action&lt;T&gt; act)
+{
+    <span class="co">// actが呼び出されるのは値がある(Someの時)だけ</span>
+    self.<span class="fu">Match</span>(
+      Some: v =&gt; <span class="fu">act</span>(v),
+      None: () =&gt; { });
+}</code></pre>
+<p>これらを使うと、「値があるかどうかわからないものに0.1を加え、値があればその結果を表示する」コードはこう書けます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; x = Option.<span class="fu">Some</span>(<span class="dv">42</span>);
+x.<span class="fu">Map</span>(_ =&gt; _ + <span class="fl">0.1</span>)
+ .<span class="fu">Iter</span>(y =&gt; Console.<span class="fu">WriteLine</span>(y)); <span class="co">// 「42.1」と表示される</span></code></pre>
+<pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; x = Option.<span class="fu">None</span>;
+x.<span class="fu">Map</span>(_ =&gt; _ + <span class="fl">0.1</span>)
+ .<span class="fu">Iter</span>(y =&gt; Console.<span class="fu">WriteLine</span>(y)); <span class="co">// 何も表示されない</span></code></pre>
+<p>値があるかどうかの判定をユーザーコード側で行っていない(MapとIter内部で行っている)という違いはありますが、ここまでの動作はNullableと同様です。 Nullableと違うのは、文字列の結合も他の場合と同じような動作をする点です。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; x = Option.<span class="fu">None</span>;
+x.<span class="fu">Map</span>(_ =&gt; _ + <span class="st">&quot;aaa&quot;</span>)
+ .<span class="fu">Iter</span>(y =&gt; Console.<span class="fu">WriteLine</span>(y)); <span class="co">// 何も表示されない</span></code></pre>
+<p>Nullableでは、<code>T</code>型でできることは、極力<code>T?</code>型でもできるように考えられています。 しかし、そのせいで統一性が崩れてしまっています。</p>
+<p>それに対して、Optionは<code>T</code>型にできる操作を<code>Option[T]</code>型に対して提供していません(提供できません)。 <code>T</code>型と<code>Option[T]</code>型は完全に別の型であり、Optionはあくまで「値があるかないかの表現」以上のことは行いません。 そのため、Optionが保持する値に対して処理を行いたい場合は、MapやIterのような高階関数を使って値を受け取る関数を渡すことになり、 すべての処理が統一性を保っています。</p>
+<h3 id="クエリ式の対象にできるかどうか">クエリ式の対象にできるかどうか</h3>
+<p>クエリ式でOptionを扱うと、「値がない場合」を意識せずに処理が記述でき、非常に便利です。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// Option&lt;int&gt; TryGet(string key); があったとする</span>
+var res =
+  from x <span class="kw">in</span> <span class="fu">TryGet</span>(<span class="st">&quot;x&quot;</span>)
+  from y <span class="kw">in</span> <span class="fu">TryGet</span>(<span class="st">&quot;y&quot;</span>)
+  select x + y;</code></pre>
+<p>この程度の例なら、Nullableでも問題なく扱えます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// int? TryGet(string key); があったとする</span>
+<span class="dt">var</span> x = <span class="fu">TryGet</span>(<span class="st">&quot;x&quot;</span>);
+<span class="dt">var</span> y = <span class="fu">TryGet</span>(<span class="st">&quot;y&quot;</span>);
+<span class="dt">var</span> res = x + y;</code></pre>
+<p>しかし、参照型が混じると途端に厳しくなります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// Optionの場合は特に何も変わらない</span>
+var res =
+  from x <span class="kw">in</span> <span class="fu">TryGetInt</span>(<span class="st">&quot;x&quot;</span>)
+  from y <span class="kw">in</span> <span class="fu">TryGetStr</span>(<span class="st">&quot;y&quot;</span>)
+  select x + y; <span class="co">// x(の文字列表現)とyを連結</span></code></pre>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// Nullableと参照型との演算ではnullが伝搬しないので、nullチェックが必要になる</span>
+<span class="dt">var</span> x = <span class="fu">TryGetInt</span>(<span class="st">&quot;x&quot;</span>);
+<span class="dt">var</span> y = <span class="fu">TryGetStr</span>(<span class="st">&quot;y&quot;</span>);
+var res =
+  <span class="co">// うっ・・・</span>
+  x == <span class="kw">null</span> || y == <span class="kw">null</span> ? <span class="kw">null</span>
+                         : x + y;</code></pre>
+<p>これを回避したくて、Nullableにもクエリ式を提供したくなります。 しかし、これらのケースすべてをカバーできるクエリ式を提供することは、C# のオーバーロード解決能力が低いため不可能です。 実際に実装してみると分かるのですが、<code>T?</code>だけを扱うようなクエリ式は提供可能です。 例えば、</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// int? TryGet(string key); があったとする</span>
+var res =
+  from x <span class="kw">in</span> <span class="fu">TryGet</span>(<span class="st">&quot;x&quot;</span>)
+  from y <span class="kw">in</span> <span class="fu">TryGet</span>(<span class="st">&quot;y&quot;</span>)
+  select x + y;</code></pre>
+<p>ここまでは可能です。 しかし、そこに<code>T when T : class</code>も扱えるようにしようとすると、オーバーロードが解決できないバージョンのSelectManyを書く必要が出てきてしまいます。</p>
+<h2 id="nullableとoptionの違い-2">NullableとOptionの違い</h2>
+<p>Nullableは、<code>null</code>チェックから逃れることを目的としていない時点で良くないアイディアです。 <a href="http://developers.slashdot.jp/story/09/03/05/0937219/null%E5%8F%82%E7%85%A7%E3%81%AE%E8%80%83%E6%A1%88%E3%81%AF10%E5%84%84%E3%83%89%E3%83%AB%E5%8D%98%E4%BD%8D%E3%81%AE%E9%81%8E%E3%81%A1%EF%BC%9F">null参照の考案は10億ドル単位の過ち</a>と、 考案者自らが認める過ちである<code>null</code>の適用範囲を広げてしまうNullableを、言語仕様(それどころかCLRにまで)に組み込んでしまうというのは、 個人的にはなんてセンスのない設計をしたんだ、と思ってしまいます。</p>
+<p>それに対してOptionは、OOPの側面からみると<a href="http://bleis-tift.hatenablog.com/entry/20120628/1340893265">NullObjectをジェネリックの力を借りて汎用化したもの</a>であり、 非常に好ましいものです。 シグネチャ上で「値がないかもしれない」ことを表すことができるのも、ありがたいです(Nullableは出来るが、参照型ではできない)。</p>
+<p>構造は同じなのに、ここまで正反対の意見になるというのは、ちょっと面白いですね。 この違いは、主に提供するAPIから来ており、「値を(簡単には)取り出せない」という制限がOptionの良さの根源にあるというのは、心に留めておいてほしいです。 何でもかんでもできるAPIが常によいというわけではないのです。</p>
+<h2 id="おまけoptionからの値の取り出し">(おまけ)Optionからの値の取り出し</h2>
+<p>・・・とは言うものの、Optionからさくっと値を取り出したい場合があるのも事実です。 例えば、「ここでは絶対値があることが分かりきっている」というような場合です。 そのような場合でも、通常は値がなかった場合の考慮が必要ですが、LangExt.Unsafe名前空間をusingすることで、Optionから直接値を取り出せる関数が使えるようになります。</p>
+<p>LangExtのOptionに限らず、たいていのOptionの実装には、このような「直接値を取り出す」関数が提供されています。 そればかりか、場合によっては他のAPIと一緒にこの関数を紹介してしまっている場合もあります。</p>
+<p>しかし、Optionの目的を「安全に値がないことを表す」と置くのであれば、この関数をそのように紹介するのはよくないことです。 これを先に教えてしまえば、<code>null</code>を知っている人の多くは「使いにくい<code>null</code>だ」と思いながらOptionを使ってしまうことでしょう。</p>
+<p>そういう事態を避けるためにも、Optionから直接値を取り出す関数は、Optionの目的や利点を語った後で教えるべきです。 場合によっては、教えないというのもアリでしょう。 それくらい、慎重に扱うべきものです。</p>
+</body>
+</html>
