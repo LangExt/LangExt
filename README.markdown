@@ -18,6 +18,6 @@ Visual Studio 2012の場合は、
 ドキュメント
 ------------
 docディレクトリに各種ドキュメントを作っていく予定です。
-現在、ビルド方法を記述した「HowToBuild.markdown」と、
-LangExt全体の概要を知るための「LangExt.markdown」を置いてあります。
-これらのドキュメントは、Pandocを対象に書かれています。
+これらのドキュメントは、GithubではなくPandocを対象に書かれています。
+[Github pages](http://langext.github.io/LangExt/)にて最新版が閲覧可能ですので、
+そちらを参照してください。
