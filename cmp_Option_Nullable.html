@@ -41,13 +41,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <span class="dt">string</span> a = <span class="st">&quot;hoge&quot;</span>; <span class="co">// 値がある</span>
 <span class="dt">string</span> b = <span class="kw">null</span>;   <span class="co">// 値がない</span></code></pre>
 <h2 id="optionとは">Optionとは</h2>
-<p>Optionは、「<code>null</code>よりも安全に値がないことを表せる」ものです。 ジェネリック型になっており、任意の型を扱うことが出来ます。</p>
+<p>Optionは、「<code>null</code>よりも安全に値がないことを表せる」ものです。 標準にはありませんが、様々なライブラリで提供されています。 このエントリでは、Optionは<a href="https://github.com/LangExt/LangExt">LangExt</a>のOptionを指すものとします。</p>
+<p>ジェネリック型になっており、任意の型を扱うことが出来ます。</p>
 <pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; x = Option.<span class="fu">Some</span>(<span class="dv">42</span>); <span class="co">// 値がある</span>
 Option&lt;<span class="dt">int</span>&gt; y = Option.<span class="fu">None</span>;     <span class="co">// 値がない</span>
 
 Option&lt;<span class="dt">string</span>&gt; a = Option.<span class="fu">Some</span>(<span class="st">&quot;hoge&quot;</span>); <span class="co">// 値がある</span>
 Option&lt;<span class="dt">string</span>&gt; b = Option.<span class="fu">None</span>;         <span class="co">// 値がない</span></code></pre>
-<p>このエントリでは、OptionはLangExtのOptionを指すものとします。</p>
 <h2 id="nullableとoptionの類似点">NullableとOptionの類似点</h2>
 <p>NullableもOptionも、structで実装されており、値を持っているかどうかを表すフラグと、値を保持しているという点で、構造は似ています。 しかし、似ているのは構造くらいで、目的や使い方などはかなり異なります。</p>
 <h2 id="nullableとoptionの違い-1">NullableとOptionの違い</h2>
@@ -139,6 +139,12 @@ x.<span class="fu">Map</span>(_ =&gt; _ + <span class="fl">0.1</span>)
 <pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; x = Option.<span class="fu">None</span>;
 x.<span class="fu">Map</span>(_ =&gt; _ + <span class="st">&quot;aaa&quot;</span>)
  .<span class="fu">Iter</span>(y =&gt; Console.<span class="fu">WriteLine</span>(y)); <span class="co">// 何も表示されない</span></code></pre>
+<p>値がなかった場合は空文字列として文字列を連結したい場合は、異なるコードになります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Option&lt;<span class="dt">int</span>&gt; x = Option.<span class="fu">None</span>;
+<span class="dt">var</span> y = x.<span class="fu">Map</span>(_ =&gt; _.<span class="fu">ToString</span>()) <span class="co">// 数値があれば文字列化</span>
+         .<span class="fu">GetOr</span>(<span class="st">&quot;&quot;</span>) + <span class="st">&quot;aaa&quot;</span>;     <span class="co">// 値があればそれを取得し、なければ空文字列を取得</span>
+                                 <span class="co">// 取得した文字列と&quot;aaa&quot;を連結</span>
+Console.<span class="fu">WriteLine</span>(y);</code></pre>
 <p>Nullableでは、<code>T</code>型でできることは、極力<code>T?</code>型でもできるように考えられています。 しかし、そのせいで統一性が崩れてしまっています。</p>
 <p>それに対して、Optionは<code>T</code>型にできる操作を<code>Option[T]</code>型に対して提供していません(提供できません)。 <code>T</code>型と<code>Option[T]</code>型は完全に別の型であり、Optionはあくまで「値があるかないかの表現」以上のことは行いません。 そのため、Optionが保持する値に対して処理を行いたい場合は、MapやIterのような高階関数を使って値を受け取る関数を渡すことになり、 すべての処理が統一性を保っています。</p>
 <h3 id="クエリ式の対象にできるかどうか">クエリ式の対象にできるかどうか</h3>
