@@ -25,6 +25,9 @@ string b = null;   // 値がない
 Optionとは
 ----------
 Optionは、「`null`よりも安全に値がないことを表せる」ものです。
+標準にはありませんが、様々なライブラリで提供されています。
+このエントリでは、Optionは[LangExt](https://github.com/LangExt/LangExt)のOptionを指すものとします。
+
 ジェネリック型になっており、任意の型を扱うことが出来ます。
 
 ```cs
@@ -34,8 +37,6 @@ Option<int> y = Option.None;     // 値がない
 Option<string> a = Option.Some("hoge"); // 値がある
 Option<string> b = Option.None;         // 値がない
 ```
-
-このエントリでは、OptionはLangExtのOptionを指すものとします。
 
 NullableとOptionの類似点
 ------------------------
