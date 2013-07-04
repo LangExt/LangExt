@@ -24,3 +24,17 @@ let LangExtのResultをmatch式で使える() =
   match Result.Failure("piyo") with
   | Success _ -> Assert.Fail()
   | Failure str -> Assert.AreEqual("piyo", str)
+
+[<Test>]
+let ``LangExtのOptionからF#のOptionに変換できる``() =
+  let res = Option.Some(42) |> Option.toFSharp
+  Assert.AreEqual(Some(42), res)
+
+  let res = Option.None |> Option.toFSharp
+  Assert.AreEqual(None, res)
+
+  let res = Option.ofLangExt (Option.Some(42))
+  Assert.AreEqual(Some(42), res)
+
+  let res = Option.ofLangExt Option.None
+  Assert.AreEqual(None, res)
