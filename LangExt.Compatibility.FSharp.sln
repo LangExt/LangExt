@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LangExt.Compatibility.FSharp", "LangExt.Compatibility.FSharp\LangExt.Compatibility.FSharp.fsproj", "{42862CA4-B394-4518-8D64-7B7E43FF56FF}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LangExt.Compatibility.FSharp.Tests", "LangExt.Compatibility.FSharp.Tests\LangExt.Compatibility.FSharp.Tests.fsproj", "{0A4B44AF-2635-42C7-ADA2-60885660549B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{42862CA4-B394-4518-8D64-7B7E43FF56FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42862CA4-B394-4518-8D64-7B7E43FF56FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42862CA4-B394-4518-8D64-7B7E43FF56FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A4B44AF-2635-42C7-ADA2-60885660549B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A4B44AF-2635-42C7-ADA2-60885660549B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A4B44AF-2635-42C7-ADA2-60885660549B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A4B44AF-2635-42C7-ADA2-60885660549B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
