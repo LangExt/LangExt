@@ -12,3 +12,19 @@ module Option =
     opt.Match(
       (fun v -> CsSome v),
       (fun () -> CsNone))
+
+  let toFSharp = function
+  | CsSome v -> Some v
+  | CsNone -> None
+
+  let ofFSharp = function
+  | Some v -> Option.Some v
+  | None -> Option<_>.None
+
+  let toLangExt = function
+  | Some v -> Option.Some v
+  | None -> Option<_>.None
+
+  let ofLangExt = function
+  | CsSome v -> Some v
+  | CsNone -> None
