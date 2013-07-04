@@ -28,6 +28,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
+<div id="header">
+    <a href="index.html">index</a>
+</div>
+<hr>
 <h1 id="nullableとoptionの違い">NullableとOptionの違い</h1>
 <p>Optionそのものについてのエントリは書く必要ない(世の中に有用なドキュメントが山ほどあるから)かな、 と思っていたのですが、Nullableとの違いについてはそれなりに需要がありそうなので書いておきます。</p>
 <p>ちなみに、個人的な嗜好によりOptionを持ち上げ、Nullableを下に扱う感じになっていますが、Nullableも(仕方なく)使うことはあります。 特別な理由がなければNullable使わずにOptionを使う、ということでもありますが、そこは一つよろしくお願いします。</p>
@@ -178,7 +182,7 @@ var res =
   from x <span class="kw">in</span> <span class="fu">TryGet</span>(<span class="st">&quot;x&quot;</span>)
   from y <span class="kw">in</span> <span class="fu">TryGet</span>(<span class="st">&quot;y&quot;</span>)
   select x + y;</code></pre>
-<p>ここまでは可能です。 しかし、そこに<code>T when T : class</code>も扱えるようにしようとすると、オーバーロードが解決できないバージョンのSelectManyを書く必要が出てきてしまいます。</p>
+<p>ここまでは可能です。 しかし、そこに<code>where T : class</code>も扱えるようにしようとすると、オーバーロードが解決できないバージョンのSelectManyを書く必要が出てきてしまいます。</p>
 <h2 id="nullableとoptionの違い-2">NullableとOptionの違い</h2>
 <p>Nullableは、<code>null</code>チェックから逃れることを目的としていない時点で良くないアイディアです。 <a href="http://developers.slashdot.jp/story/09/03/05/0937219/null%E5%8F%82%E7%85%A7%E3%81%AE%E8%80%83%E6%A1%88%E3%81%AF10%E5%84%84%E3%83%89%E3%83%AB%E5%8D%98%E4%BD%8D%E3%81%AE%E9%81%8E%E3%81%A1%EF%BC%9F">null参照の考案は10億ドル単位の過ち</a>と、 考案者自らが認める過ちである<code>null</code>の適用範囲を広げてしまうNullableを、言語仕様(それどころかCLRにまで)に組み込んでしまうというのは、 個人的にはなんてセンスのない設計をしたんだ、と思ってしまいます。</p>
 <p>それに対してOptionは、OOPの側面からみると<a href="http://bleis-tift.hatenablog.com/entry/20120628/1340893265">NullObjectをジェネリックの力を借りて汎用化したもの</a>であり、 非常に好ましいものです。 シグネチャ上で「値がないかもしれない」ことを表すことができるのも、ありがたいです(Nullableは出来るが、参照型ではできない)。</p>
@@ -188,5 +192,9 @@ var res =
 <p>LangExtのOptionに限らず、たいていのOptionの実装には、このような「直接値を取り出す」関数が提供されています。 そればかりか、場合によっては他のAPIと一緒にこの関数を紹介してしまっている場合もあります。</p>
 <p>しかし、Optionの目的を「安全に値がないことを表す」と置くのであれば、この関数をそのように紹介するのはよくないことです。 これを先に教えてしまえば、<code>null</code>を知っている人の多くは「使いにくい<code>null</code>だ」と思いながらOptionを使ってしまうことでしょう。</p>
 <p>そういう事態を避けるためにも、Optionから直接値を取り出す関数は、Optionの目的や利点を語った後で教えるべきです。 場合によっては、教えないというのもアリでしょう。 それくらい、慎重に扱うべきものです。</p>
+<hr>
+<div id="footer">
+    <a href="index.html">index</a>
+</div>
 </body>
 </html>

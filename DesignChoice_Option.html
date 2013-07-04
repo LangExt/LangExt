@@ -28,6 +28,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
+<div id="header">
+    <a href="index.html">index</a>
+</div>
+<hr>
 <h1 id="optionの設計">Optionの設計</h1>
 <p>Optionの意味を理解していることを前提に、直和型をC#で実現する方法についてを説明し、 LangExtではどういう方針を採用しているのかと、その理由について明らかにします。</p>
 <h2 id="バリアント型のcでの設計方針">バリアント型のC#での設計方針</h2>
@@ -232,6 +236,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li id="fn1"><p>さらに、LangExtでは<code>Option.Some(null)</code>は例外を投げるようになっており、<code>null</code>を格納する<code>Some</code>は作ることができません。 これによって、Optionの高階関数に渡す関数の引数に<code>null</code>が渡されることがないことも保証しています。 もし<code>Some null</code>のようなことがしたいのであれば、Optionをネストするか、別の型を作るようにしてください。<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>Match関数で名前付き引数を使うアイディアは、<a href="https://twitter.com/koropicot/status/315132868915523586">ころくんのつぶやき</a>から借りています。<a href="#fnref2">↩</a></p></li>
 </ol>
+</div>
+<hr>
+<div id="footer">
+    <a href="index.html">index</a>
 </div>
 </body>
 </html>
