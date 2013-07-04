@@ -2,6 +2,7 @@
 
 open LangExt
 
+/// LangExtの型をmatch式で使えるようにするためのアクティブパターンを提供するモジュールです。
 [<AutoOpen>]
 module ActivePatterns =
   /// <summary>LangExtのOptionをmatch式で使えるようにします。</summary>
