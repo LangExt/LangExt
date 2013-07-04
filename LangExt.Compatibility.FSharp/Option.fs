@@ -2,7 +2,6 @@
 
 open LangExt
 
-/// LangExtのOptionに対する操作を提供するモジュールです。
 module Option =
   let toFSharp = function
   | CsSome v -> Some v
