@@ -61,11 +61,47 @@ namespace LangExt.Properties {
         }
         
         /// <summary>
+        ///   element not found in {0}. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExMsgElementNotFound {
+            get {
+                return ResourceManager.GetString("ExMsgElementNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   invalid cast (from {0} to {1}). に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExMsgInvalidCast {
+            get {
+                return ResourceManager.GetString("ExMsgInvalidCast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   require non empty sequence but {0} is empty. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ExMsgSeqIsEmpty {
             get {
                 return ResourceManager.GetString("ExMsgSeqIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} must be greater than or equal to {1} but {2}. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExMsgTooSmall {
+            get {
+                return ResourceManager.GetString("ExMsgTooSmall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} must be greater than {1} but {2}. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExMsgTooSmall2 {
+            get {
+                return ResourceManager.GetString("ExMsgTooSmall2", resourceCulture);
             }
         }
     }

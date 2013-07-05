@@ -28,7 +28,7 @@ namespace LangExt
 
         internal static IEnumerable<T> Init<T>(int n, Func<int, T> f)
         {
-            if (n < 0) throw new ArgumentException("n", string.Format("n must be greater than or equal to 0 but {0}.", n));
+            if (n < 0) throw new ArgumentException("n", string.Format(Properties.Resources.ExMsgTooSmall, "n", 0, n));
             return InitImpl(n, f);
         }
 
@@ -44,7 +44,7 @@ namespace LangExt
 
         internal static IEnumerable<T> Repeat<T>(int n, T t)
         {
-            if (n < 0) throw new ArgumentException("n", string.Format("n must be greater than or equal to 0 but {0}.", n));
+            if (n < 0) throw new ArgumentException("n", string.Format(Properties.Resources.ExMsgTooSmall, "n", 0, n));
             return RepeatImpl(n, t);
         }
 
@@ -219,7 +219,7 @@ namespace LangExt
         public static IEnumerable<T[]> Windowed<T>(this IEnumerable<T> self, int windowSize)
         {
             if (windowSize < 1)
-                throw new ArgumentOutOfRangeException("windowSize", windowSize, "windowSize must be greater than 0.");
+                throw new ArgumentOutOfRangeException("windowSize", windowSize, string.Format(Properties.Resources.ExMsgTooSmall2, "windowSize", 0, windowSize));
             return WindowedImpl(self, windowSize);
         }
 

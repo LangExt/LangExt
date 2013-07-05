@@ -270,7 +270,10 @@ namespace LangExt
         public Result<TSuccess2, TFailure> Cast<TSuccess2>()
         {
             return this.Match(
-                s => { throw new InvalidOperationException(); },
+                s => { throw new InvalidOperationException(string.Format(
+                    Properties.Resources.ExMsgInvalidCast,
+                    "Result<" + typeof(TSuccess).Name + ", " + typeof(TFailure).Name + ">.Success",
+                    "Result<" + typeof(TSuccess2).Name + ", " + typeof(TFailure).Name + ">")); },
                 e => Result.Failure(e));
         }
 
@@ -293,7 +296,10 @@ namespace LangExt
         {
             return this.Match(
                 s => Result.Success(s),
-                e => { throw new InvalidOperationException(); });
+                e => { throw new InvalidOperationException(string.Format(
+                    Properties.Resources.ExMsgInvalidCast,
+                    "Result<" + typeof(TSuccess).Name + ", " + typeof(TFailure).Name + ">.Failure",
+                    "Result<" + typeof(TSuccess).Name + ", " + typeof(TFailure2).Name + ">")); });
         }
 
         /// <summary>

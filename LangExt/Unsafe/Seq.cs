@@ -99,7 +99,7 @@ namespace LangExt.Unsafe
             using (var itor = xs.GetEnumerator())
             {
                 if (itor.MoveNext() == false)
-                    throw new InvalidOperationException(); // TODO : message
+                    throw new InvalidOperationException(string.Format(Properties.Resources.ExMsgSeqIsEmpty, "self"));
                 var res = itor.Current;
                 while (itor.MoveNext())
                     res = f(itor.Current, res);
@@ -125,7 +125,7 @@ namespace LangExt.Unsafe
                 if (res.IsSome)
                     return res.GetValue();
             }
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(string.Format(Properties.Resources.ExMsgElementNotFound, "self"));
         }
     }
 }

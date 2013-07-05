@@ -109,7 +109,7 @@ namespace LangExt
         /// </summary>
         public static ISeq<T> Init<T>(int n, Func<int, T> f)
         {
-            if (n < 0) throw new ArgumentOutOfRangeException("n", n, "n must be greater than or equal to 0.");
+            if (n < 0) throw new ArgumentOutOfRangeException("n", n, string.Format(Properties.Resources.ExMsgTooSmall, "n", 0, n));
             return new Seq<T>(Enumerable.Init(n, f));
         }
 
@@ -123,7 +123,7 @@ namespace LangExt
         /// </summary>
         public static ISeq<T> Repeat<T>(int n, T t)
         {
-            if (n < 0) throw new ArgumentOutOfRangeException("n", n, "n must be greater than or equal to 0.");
+            if (n < 0) throw new ArgumentOutOfRangeException("n", n, string.Format(Properties.Resources.ExMsgTooSmall, "n", 0, n));
             return new Seq<T>(Enumerable.Repeat(n, t));
         }
 

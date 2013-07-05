@@ -117,7 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ExMsgElementNotFound" xml:space="preserve">
+    <value>{0}内に、条件に該当する要素は見つかりませんでした。</value>
+  </data>
+  <data name="ExMsgInvalidCast" xml:space="preserve">
+    <value>{0}から{1}へのキャストは有効ではありません。</value>
+  </data>
   <data name="ExMsgSeqIsEmpty" xml:space="preserve">
     <value>シーケンスは空でない必要がありますが、空のシーケンス({0})が渡されました。</value>
+  </data>
+  <data name="ExMsgTooSmall" xml:space="preserve">
+    <value>{0}は{1}以上({1}を含む)でなければなりませんが、{2}でした。</value>
+  </data>
+  <data name="ExMsgTooSmall2" xml:space="preserve">
+    <value>{0}は{1}より大きい({1}は含まない)必要がありますが、{2}でした。</value>
   </data>
 </root>
