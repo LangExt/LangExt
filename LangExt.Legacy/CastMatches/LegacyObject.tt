@@ -13,9 +13,29 @@ using System;
 
 namespace LangExt.Legacy.CastMatches
 {
+    /// <summary>
+    /// オブジェクトに対して型による擬似的なパターンマッチを提供するためのクラスです。
+    /// TypeMatchとは異なり、実際にキャストを試みて、例外によって成功と失敗を判定します。
+    /// CastMatchに渡した処理が例外を投げた場合にもキャストに失敗したとみなすため、CastMatchに渡す処理は例外を投げないようにしてください。
+    /// 上記の理由から、通常は、CastMatchではなくTypeMatchを使用してください。
+    /// </summary>
     public static class LegacyObject
     {
 <# for (int i = 1; i <= Max; i++) { #>
+        /// <summary>
+        /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
+        /// どの型にも変換できなかった場合、オブジェクトをそのままOtherwiseに渡します。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">変換を試みる <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <typeparam name="TResult">処理の戻り値の型。</typeparam>
+        /// <param name="self">変換対象。</param>
+<# for (int j = 0; j < i; j++) { #>
+        /// <param name="ifT<#= j + 1 #>">T<#= j + 1 #> つ目の型に変換できた場合に実行される処理。</param>
+<# } #>
+        /// <param name="Otherwise">どの型にも変換できなかった場合に実行される処理。</param>
+        /// <returns>処理の結果。</returns>
         public static TResult CastMatch<<#= TypeParams("T", i) #>, TResult>(this object self, <#=
             Repeat(", ", "Func<T{0}, TResult> ifT{0}", i) #>, Func<object, TResult> Otherwise)
         {
@@ -25,6 +45,19 @@ namespace LangExt.Legacy.CastMatches
             return Otherwise(self);
         }
 
+        /// <summary>
+        /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
+        /// どの型にも変換できなかった場合、例外を送出します。
+        /// </summary>
+<# for (int j = 0; j < i; j++) { #>
+        /// <typeparam name="T<#= j + 1 #>">変換を試みる <#= j + 1 #> つ目の型。</typeparam>
+<# } #>
+        /// <typeparam name="TResult">処理の戻り値の型。</typeparam>
+        /// <param name="self">変換対象。</param>
+<# for (int j = 0; j < i; j++) { #>
+        /// <param name="ifT<#= j + 1 #>">T<#= j + 1 #> つ目の型に変換できた場合に実行される処理。</param>
+<# } #>
+        /// <returns>処理の結果。</returns>
         public static TResult CastMatch<<#= TypeParams("T", i) #>, TResult>(this object self, <#=
             Repeat(", ", "Func<T{0}, TResult> ifT{0}", i) #>)
         {
