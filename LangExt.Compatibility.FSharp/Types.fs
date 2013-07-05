@@ -7,7 +7,7 @@ type CsOption<'a> = LangExt.Option<'a>
 type CsOption = LangExt.Option
 
 /// LangExtのResultの別名です。
-type Result<'TSuccess, 'TFailure> = LangExt.Result<'TSuccess, 'TFailure>
+type CsResult<'TSuccess, 'TFailure> = LangExt.Result<'TSuccess, 'TFailure>
 
 /// LangExtのResultモジュールの別名です。
-type Result = LangExt.Result
+type CsResult = LangExt.Result

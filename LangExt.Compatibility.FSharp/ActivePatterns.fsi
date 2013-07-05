@@ -13,4 +13,4 @@ module ActivePatterns =
   /// <returns>入力が成功を表すオブジェクトの場合Success、失敗を表すオブジェクトの場合Failure</returns>
   /// <remarks>このアクティブパターンは、ResultのMatchメソッドのビューです。</remarks>
   [<CompiledName "ResultPattern">]
-  val (|Success|Failure|) : result: Result<'a, 'b> -> Choice<'a, 'b>
+  val (|CsSuccess|CsFailure|) : result: CsResult<'a, 'b> -> Choice<'a, 'b>

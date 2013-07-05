@@ -1,7 +1,6 @@
 ﻿[<NUnit.Framework.TestFixture>]
 module Test
 
-open LangExt
 open LangExt.Compatibility.FSharp
 open NUnit.Framework
 
@@ -17,13 +16,13 @@ let LangExtのOptionをmatch式で使える() =
 
 [<Test>]
 let LangExtのResultをmatch式で使える() =
-  match Result.Success("hoge") with
-  | Success str -> Assert.AreEqual("hoge", str)
-  | Failure _ -> Assert.Fail()
+  match CsResult.Success("hoge") with
+  | CsSuccess str -> Assert.AreEqual("hoge", str)
+  | CsFailure _ -> Assert.Fail()
 
-  match Result.Failure("piyo") with
-  | Success _ -> Assert.Fail()
-  | Failure str -> Assert.AreEqual("piyo", str)
+  match CsResult.Failure("piyo") with
+  | CsSuccess _ -> Assert.Fail()
+  | CsFailure str -> Assert.AreEqual("piyo", str)
 
 [<Test>]
 let ``LangExtのOptionからF#のOptionに変換できる``() =

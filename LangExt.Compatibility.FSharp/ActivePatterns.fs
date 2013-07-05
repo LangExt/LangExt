@@ -8,7 +8,7 @@ module ActivePatterns =
       (fun () -> CsNone))
 
   [<CompiledName "ResultPattern">]
-  let (|Success|Failure|) (result: Result<_, _>) =
+  let (|CsSuccess|CsFailure|) (result: CsResult<_, _>) =
     result.Match(
-      (fun v -> Success v),
-      (fun v -> Failure v))
+      (fun v -> CsSuccess v),
+      (fun v -> CsFailure v))
