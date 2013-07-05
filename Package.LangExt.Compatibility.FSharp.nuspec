@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LangExt.Compatibility.FSharp</id>
+    <version>2.0.0.0</version>
+    <authors>bleis-tift,otf</authors>
+    <licenseUrl>https://github.com/LangExt/LangExt/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/LangExt/LangExt</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>This is a functional library for C#.</summary>
+    <description>This library supports functional programming using C#.</description>
+    <tags>functional c# f# csharp fsharp library</tags>
+    <dependencies>
+      <dependency id="LangExt" version="2.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+      <file src="LangExt.Compatibility.FSharp\bin\Release\LangExt.Compatibility.FSharp.dll" target="lib\net40"/>
+      <file src="LangExt.Compatibility.FSharp\bin\Release\LangExt.Compatibility.FSharp.xml" target="lib\net40"/>
+      <file src="LangExt.Compatibility.FSharp\bin\Release\LangExt.Compatibility.FSharp.pdb" target="lib\net40"/>
+      <file src="**\*.fs" target="src"/>
+  </files>
+</package>
