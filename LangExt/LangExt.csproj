@@ -115,6 +115,9 @@
     <Compile Include="Unsafe\Seq.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\T4\T4Util.ttinclude">
+      <Link>T4Util.ttinclude</Link>
+    </None>
     <None Include="Func.Curry.tt">
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -140,7 +143,6 @@
       <LastGenOutput>Seq.Zip.cs</LastGenOutput>
       <DependentUpon>Seq.cs</DependentUpon>
     </None>
-    <None Include="T4Util.ttinclude" />
     <None Include="TupleModule.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TupleModule.cs</LastGenOutput>
