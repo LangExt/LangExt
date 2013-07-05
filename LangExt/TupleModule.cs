@@ -119,6 +119,11 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), t);
         }
+        /// <summary>2要素タプルに要素を追加し、3要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2> AddFirst<T0, T1, T2>(this Tuple<T1, T2> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2());
+        }
 
 
         /// <summary>2要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -160,11 +165,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), t);
         }
+        /// <summary>3要素タプルに要素を追加し、4要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3> AddFirst<T0, T1, T2, T3>(this Tuple<T1, T2, T3> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3());
+        }
 
         /// <summary>3要素タプルから末尾要素を削除し、2要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2> RemoveLast<T1, T2, T3>(this Tuple<T1, T2, T3> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2());
+        }
+        /// <summary>3要素タプルから末尾要素を削除し、2要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3> RemoveFirst<T1, T2, T3>(this Tuple<T1, T2, T3> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3());
         }
 
         /// <summary>3要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -214,11 +229,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), t);
         }
+        /// <summary>4要素タプルに要素を追加し、5要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4> AddFirst<T0, T1, T2, T3, T4>(this Tuple<T1, T2, T3, T4> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4());
+        }
 
         /// <summary>4要素タプルから末尾要素を削除し、3要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3> RemoveLast<T1, T2, T3, T4>(this Tuple<T1, T2, T3, T4> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3());
+        }
+        /// <summary>4要素タプルから末尾要素を削除し、3要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4> RemoveFirst<T1, T2, T3, T4>(this Tuple<T1, T2, T3, T4> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4());
         }
 
         /// <summary>4要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -276,11 +301,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), t);
         }
+        /// <summary>5要素タプルに要素を追加し、6要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5> AddFirst<T0, T1, T2, T3, T4, T5>(this Tuple<T1, T2, T3, T4, T5> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5());
+        }
 
         /// <summary>5要素タプルから末尾要素を削除し、4要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4> RemoveLast<T1, T2, T3, T4, T5>(this Tuple<T1, T2, T3, T4, T5> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4());
+        }
+        /// <summary>5要素タプルから末尾要素を削除し、4要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5> RemoveFirst<T1, T2, T3, T4, T5>(this Tuple<T1, T2, T3, T4, T5> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5());
         }
 
         /// <summary>5要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -346,11 +381,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), t);
         }
+        /// <summary>6要素タプルに要素を追加し、7要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6> AddFirst<T0, T1, T2, T3, T4, T5, T6>(this Tuple<T1, T2, T3, T4, T5, T6> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6());
+        }
 
         /// <summary>6要素タプルから末尾要素を削除し、5要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5> RemoveLast<T1, T2, T3, T4, T5, T6>(this Tuple<T1, T2, T3, T4, T5, T6> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5());
+        }
+        /// <summary>6要素タプルから末尾要素を削除し、5要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6> RemoveFirst<T1, T2, T3, T4, T5, T6>(this Tuple<T1, T2, T3, T4, T5, T6> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6());
         }
 
         /// <summary>6要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -424,11 +469,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), t);
         }
+        /// <summary>7要素タプルに要素を追加し、8要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7>(this Tuple<T1, T2, T3, T4, T5, T6, T7> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7());
+        }
 
         /// <summary>7要素タプルから末尾要素を削除し、6要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6> RemoveLast<T1, T2, T3, T4, T5, T6, T7>(this Tuple<T1, T2, T3, T4, T5, T6, T7> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6());
+        }
+        /// <summary>7要素タプルから末尾要素を削除し、6要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7> RemoveFirst<T1, T2, T3, T4, T5, T6, T7>(this Tuple<T1, T2, T3, T4, T5, T6, T7> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7());
         }
 
         /// <summary>7要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -510,11 +565,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), t);
         }
+        /// <summary>8要素タプルに要素を追加し、9要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8());
+        }
 
         /// <summary>8要素タプルから末尾要素を削除し、7要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7());
+        }
+        /// <summary>8要素タプルから末尾要素を削除し、7要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8());
         }
 
         /// <summary>8要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -604,11 +669,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), t);
         }
+        /// <summary>9要素タプルに要素を追加し、10要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9());
+        }
 
         /// <summary>9要素タプルから末尾要素を削除し、8要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8());
+        }
+        /// <summary>9要素タプルから末尾要素を削除し、8要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9());
         }
 
         /// <summary>9要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -706,11 +781,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), t);
         }
+        /// <summary>10要素タプルに要素を追加し、11要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10());
+        }
 
         /// <summary>10要素タプルから末尾要素を削除し、9要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9());
+        }
+        /// <summary>10要素タプルから末尾要素を削除し、9要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9, T10>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10());
         }
 
         /// <summary>10要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -816,11 +901,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), t);
         }
+        /// <summary>11要素タプルに要素を追加し、12要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11());
+        }
 
         /// <summary>11要素タプルから末尾要素を削除し、10要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10());
+        }
+        /// <summary>11要素タプルから末尾要素を削除し、10要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9, T10, T11>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11());
         }
 
         /// <summary>11要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -934,11 +1029,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), t);
         }
+        /// <summary>12要素タプルに要素を追加し、13要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12());
+        }
 
         /// <summary>12要素タプルから末尾要素を削除し、11要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11());
+        }
+        /// <summary>12要素タプルから末尾要素を削除し、11要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9, T10, T11, T12>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12());
         }
 
         /// <summary>12要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -1060,11 +1165,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), t);
         }
+        /// <summary>13要素タプルに要素を追加し、14要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13());
+        }
 
         /// <summary>13要素タプルから末尾要素を削除し、12要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12());
+        }
+        /// <summary>13要素タプルから末尾要素を削除し、12要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9, T10, T11, T12, T13>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13());
         }
 
         /// <summary>13要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -1194,11 +1309,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), t);
         }
+        /// <summary>14要素タプルに要素を追加し、15要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13, Tuple<T14>>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14());
+        }
 
         /// <summary>14要素タプルから末尾要素を削除し、13要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13());
+        }
+        /// <summary>14要素タプルから末尾要素を削除し、13要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9, T10, T11, T12, T13, T14>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14());
         }
 
         /// <summary>14要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -1336,11 +1461,21 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15(), t);
         }
+        /// <summary>15要素タプルに要素を追加し、16要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T0, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13, Tuple<T14, T15>>> AddFirst<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15());
+        }
 
         /// <summary>15要素タプルから末尾要素を削除し、14要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14());
+        }
+        /// <summary>15要素タプルから末尾要素を削除し、14要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9, T10, T11, T12, T13, T14, T15>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15());
         }
 
         /// <summary>15要素タプルに対して、擬似的にパターンマッチを行います。</summary>
@@ -1486,6 +1621,11 @@ namespace LangExt
         public static Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> RemoveLast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>> self)
         {
             return LangExt.Create.Tuple(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15());
+        }
+        /// <summary>16要素タプルから末尾要素を削除し、15要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<T2, T3, T4, T5, T6, T7, T8, Tuple<T9, T10, T11, T12, T13, T14, T15, Tuple<T16>>> RemoveFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>> self)
+        {
+            return LangExt.Create.Tuple(self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15(), self._16());
         }
 
         /// <summary>16要素タプルに対して、擬似的にパターンマッチを行います。</summary>

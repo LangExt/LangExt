@@ -62,6 +62,11 @@ namespace LangExt
         {
             return LangExt.Create.Tuple(<#= Repeat(", ", "self._{0}()", i) #>, t);
         }
+        /// <summary><#= i #>要素タプルに要素を追加し、<#= i + 1 #>要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<<#= TupleTypeArgs(0, i) #>> AddFirst<T0, <#= TypeParams("T", i) #>>(this <#= tplType #> self, T0 t)
+        {
+            return LangExt.Create.Tuple(t, <#= Repeat(", ", "self._{0}()", i) #>);
+        }
 <# } #>
 
 <# if (i > 2) { #>
@@ -69,6 +74,11 @@ namespace LangExt
         public static Tuple<<#= TupleTypeArgs(1, i - 1) #>> RemoveLast<<#= types #>>(this <#= tplType #> self)
         {
             return LangExt.Create.Tuple(<#= Repeat(", ", "self._{0}()", i - 1) #>);
+        }
+        /// <summary><#= i #>要素タプルから末尾要素を削除し、<#= i - 1 #>要素タプルを生成します。主にコードの自動生成用に使用されます。</summary>
+        public static Tuple<<#= TupleTypeArgs(2, i) #>> RemoveFirst<<#= types #>>(this <#= tplType #> self)
+        {
+            return LangExt.Create.Tuple(<#= Repeat(", ", "self._{0}()", 2, i + 1) #>);
         }
 <# } #>
 
