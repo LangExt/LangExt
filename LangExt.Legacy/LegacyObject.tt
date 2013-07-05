@@ -61,8 +61,8 @@ namespace LangExt.Legacy
             return TypeMatch(
                 self,
                 <#= MethodCallArgs("ifT", i) #>,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [<#=
-                    Repeat(", ", "{{{0}}}", 0, i) #>].", <#= Repeat(", ", "typeof(T{0}).Name", i) #>)); });
+                _ => { throw new MatchFailureException(string.Format(Properties.Resources.ExMsgMatchFailure, string.Join(", ", <#=
+                    Repeat(", ", "typeof(T{0}).Name", i) #>), self == null ? "Null" : self.GetType().Name)); });
         }
 <# } #>
     }
