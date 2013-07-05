@@ -27,14 +27,14 @@ let LangExtのResultをmatch式で使える() =
 
 [<Test>]
 let ``LangExtのOptionからF#のOptionに変換できる``() =
-  let res = Option.Some(42) |> Option.toFSharp
+  let res = Option.Some(42) |> CsOption.toFsOption
   Assert.AreEqual(Some(42), res)
 
-  let res = Option.None |> Option.toFSharp
+  let res = Option.None |> CsOption.toFsOption
   Assert.AreEqual(None, res)
 
-  let res = Option.ofLangExt (Option.Some(42))
+  let res = FsOption.ofCsOption (Option.Some(42))
   Assert.AreEqual(Some(42), res)
 
-  let res = Option.ofLangExt Option.None
+  let res = FsOption.ofCsOption Option.None
   Assert.AreEqual(None, res)

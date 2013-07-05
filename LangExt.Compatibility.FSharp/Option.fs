@@ -2,19 +2,20 @@
 
 open LangExt
 
-module Option =
-  let toFSharp = function
+module CsOption =
+  let toFsOption = function
   | CsSome v -> Some v
   | CsNone -> None
 
-  let ofFSharp = function
+  let ofFsOption = function
   | Some v -> Option.Some v
   | None -> Option<_>.None
 
-  let toLangExt = function
+module FsOption =
+  let toCsOption = function
   | Some v -> Option.Some v
   | None -> Option<_>.None
 
-  let ofLangExt = function
+  let ofCsOption = function
   | CsSome v -> Some v
   | CsNone -> None
