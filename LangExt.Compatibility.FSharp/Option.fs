@@ -1,8 +1,5 @@
 ﻿namespace LangExt.Compatibility.FSharp
 
-type CsOption<'a> = LangExt.Option<'a>
-type CsOption = LangExt.Option
-
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module CsOption =
   let some x = CsOption<_>(x)

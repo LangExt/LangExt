@@ -1,11 +1,5 @@
 ﻿namespace LangExt.Compatibility.FSharp
 
-/// LangExtのOptionの別名です。
-type CsOption<'a> = LangExt.Option<'a>
-
-/// LangExtのOptionモジュールの別名です。
-type CsOption = LangExt.Option
-
 /// LangExtのOptionに対する操作を提供するモジュールです。
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module CsOption =

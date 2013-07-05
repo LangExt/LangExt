@@ -1,10 +1,8 @@
 ﻿namespace LangExt.Compatibility.FSharp
 
-open LangExt
-
 module ActivePatterns =
   [<CompiledName "OptionPattern">]
-  let (|CsSome|CsNone|) (opt: Option<_>) =
+  let (|CsSome|CsNone|) (opt: CsOption<_>) =
     opt.Match(
       (fun v -> CsSome v),
       (fun () -> CsNone))
