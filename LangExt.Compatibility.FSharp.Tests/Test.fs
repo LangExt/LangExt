@@ -7,11 +7,11 @@ open NUnit.Framework
 
 [<Test>]
 let LangExtのOptionをmatch式で使える() =
-  match Option.Some(42) with
+  match CsOption.Some(42) with
   | CsSome x -> Assert.AreEqual(42, x)
   | CsNone -> Assert.Fail()
 
-  match Option.None with
+  match CsOption.None with
   | CsSome _ -> Assert.Fail()
   | CsNone -> Assert.Pass()
 
@@ -27,14 +27,14 @@ let LangExtのResultをmatch式で使える() =
 
 [<Test>]
 let ``LangExtのOptionからF#のOptionに変換できる``() =
-  let res = Option.Some(42) |> CsOption.toFsOption
+  let res = CsOption.Some(42) |> CsOption.toFsOption
   Assert.AreEqual(Some(42), res)
 
-  let res = Option.None |> CsOption.toFsOption
+  let res = CsOption.None |> CsOption.toFsOption
   Assert.AreEqual(None, res)
 
-  let res = FsOption.ofCsOption (Option.Some(42))
+  let res = FsOption.ofCsOption (CsOption.Some(42))
   Assert.AreEqual(Some(42), res)
 
-  let res = FsOption.ofCsOption Option.None
+  let res = FsOption.ofCsOption CsOption.None
   Assert.AreEqual(None, res)
