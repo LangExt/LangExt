@@ -1,0 +1,157 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#
+    var methods = new[] {
+        new MethodTemplate("int", "Count", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("long", "LongCount", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("int", "SumBy", "", "Func<$(typeParams), int> f"),
+        new MethodTemplate("long", "LongSumBy", "", "Func<$(typeParams), long> f"),
+        new MethodTemplate("U", "SumBy", "U", "Func<$(typeParams), U> f, ISumStrategy<U> strategy", "tpl => f($(access)), strategy"),
+        new MethodTemplate("Option<$(tupleType)>", "TryMaxBy", "U", "Func<$(typeParams), U> f", "where U : IComparable<U>", "tpl => f($(access))"),
+        new MethodTemplate("Option<$(tupleType)>", "TryMinBy", "U", "Func<$(typeParams), U> f", "where U : IComparable<U>", "tpl => f($(access))"),
+        new MethodTemplate("U", "Fold", "U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
+        new MethodTemplate("Option<$(tupleType)>", "TryReduce", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
+        new MethodTemplate("U", "FoldBack", "U", "U init, Func<$(typeParams), U, U> f", "init, (tpl, xs) => f($(access), xs)").WithMax(15),
+        new MethodTemplate("Option<$(tupleType)>", "TryReduceBack", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(tpl, xs) => f($(access), $(access,xs))").WithMax(8),
+        new MethodTemplate("ISeq<U>", "Scan", "U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
+        new MethodTemplate("ISeq<U>", "ScanBack", "U", "U init, Func<$(typeParams), U, U> f", "init, (tpl, xs) => f($(access), xs)").WithMax(15),
+        new MethodTemplate("ISeq<$(tupleType)>", "Scan1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
+        new MethodTemplate("ISeq<$(tupleType)>", "ScanBack1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(tpl, xs) => f($(access), $(access,xs))").WithMax(8),
+        new MethodTemplate("Option<$(tupleType)>", "TryFind", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Option<U>", "TryPick", "U", "Func<$(typeParams), Option<U>> f"),
+        new MethodTemplate("bool", "Forall", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("bool", "Exists", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("ISeq<$(tupleType)>", "Filter", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("ISeq<$(tupleType)>", "FilterWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("ISeq<U>", "Map", "U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("ISeq<U>", "MapWithIndex", "U", "Func<$(typeParams), int, U> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("void", "Iter", "", "Action<$(typeParams)> f"),
+        new MethodTemplate("void", "IterWithIndex", "", "Action<$(typeParams), int> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("ISeq<U>", "Bind", "U", "Func<$(typeParams), ISeq<U>> f"),
+        new MethodTemplate("ISeq<U>", "BindWithIndex", "U", "Func<$(typeParams), int, ISeq<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
+//        new MethodTemplate("ISeq<U>", "Collect", "U, V", "Func<$(typeParams), V> f", "where V : ISeq<U>", "tpl => f($(access))"),
+        new MethodTemplate("ISeq<U>", "Choose", "U", "Func<$(typeParams), Option<U>> f"),
+        new MethodTemplate("ISeq<U>", "ChooseWithIndex", "U", "Func<$(typeParams), int, Option<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("ISeq<$(tupleType)>", "SkipWhile", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("ISeq<$(tupleType)>", "TakeWhile", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("ISeq<$(tupleType)>", "SkipWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("ISeq<$(tupleType)>", "TakeWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("Tuple<ISeq<$(tupleType)>, ISeq<$(tupleType)>>", "Partition", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Tuple<ISeq<$(tupleType)>, ISeq<$(tupleType)>>", "Span", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Tuple<ISeq<$(tupleType)>, ISeq<$(tupleType)>>", "Break", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("IOrderedSeq<$(tupleType)>", "SortBy", "U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("IOrderedSeq<$(tupleType)>", "RevSortBy", "U", "Func<$(typeParams), U> f"),
+    };
+#>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt
+{
+    partial class Seq
+    {
+<#
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱う関数
+<#
+        if (i < Max) {
+#>
+        /// <summary>
+        /// <#= i #>要素タプルの各要素を展開して関数に渡すUnfoldです。
+        /// </summary>
+        public static ISeq<U> Unfold<<#= TypeParams("T", i) #>, U>(this <#= TupleType(i) #> self, Func<<#= TypeParams("T", i) #>, Option<<#= TupleType(i + 1, n => n == 1 ? "U" : "T" + (n - 1)) #>>> f)
+        {
+            return Unfold(self, tpl =>
+                from res in tpl.Match(f)
+                select Tuple.Create(res.Fst(), res.RemoveFirst()));
+        }
+<#
+        }
+        foreach (var m in methods) {
+            if (i <= m.Max) {
+#>
+
+        /// <summary>
+        /// <#= i #>要素タプルのシーケンスの各要素を展開して関数に渡す<#= m.Name #>です。
+        /// </summary>
+        <#= m.CreateSignature(typeParam, tupleType, access) #>
+        {
+            <#= m.CreateBody(typeParam, tupleType, access) #>
+        }
+<# } } #>
+        #endregion
+
+<# } #>
+    }
+}
+<#+
+class MethodTemplate {
+    public readonly string ReturnType;
+    public readonly string Name;
+    public readonly string AdditionalTypeParams;
+    public readonly string Args;
+    public readonly string Constraints;
+    public readonly string Body;
+    public readonly int Max;
+
+    static string AddPrefix(string prefix, string str) {
+        return str.StartsWith(prefix) || str == "" ? str : (prefix +  str);
+    }
+
+    public MethodTemplate(string retType, string name, string additionalTypeParams, string args, string body = "tpl => f($(access))")
+         : this(retType, name, additionalTypeParams, args, "", body) { }
+    public MethodTemplate(string retType, string name, string additionalTypeParams, string args, string constraints, string body, int max = 16) {
+        this.ReturnType = retType;
+        this.Name = name;
+        this.AdditionalTypeParams = AddPrefix(", ", additionalTypeParams);
+        this.Args = args;
+        this.Constraints = AddPrefix(" ", constraints);
+        this.Body = body;
+        this.Max = max;
+    }
+
+    public MethodTemplate WithMax(int max) {
+        return new MethodTemplate(ReturnType, Name, AdditionalTypeParams, Args, Constraints, Body, max);
+    }
+
+    public string CreateSignature(string typeParams, string tupleType, string access) {
+        Func<string, string> expand =
+            str => str.Replace("$(typeParams)", typeParams).Replace("$(tupleType)", tupleType).Replace("$(access)", access);
+        return string.Format(
+            "public static {0} {1}<{2}>(this ISeq<{3}> self, {4}){5}",
+            expand(ReturnType),
+            Name,
+            typeParams + AdditionalTypeParams,
+            tupleType,
+            expand(Args),
+            Constraints);
+    }
+
+    public string CreateBody(string typeParams, string tupleType, string access) {
+        Func<string, string> expand = str => {
+            var regex = new System.Text.RegularExpressions.Regex(@"\$\(access,\s*([a-zA-Z0-9]+)\)");
+            var simpleReplaced =
+                str.Replace("$(typeParams)", typeParams)
+                   .Replace("$(tupleType)", tupleType)
+                   .Replace("$(access)", access);
+            var res = regex.Match(simpleReplaced);
+            return res.Success ? simpleReplaced.Replace(res.Value, access.Replace("tpl", res.Groups[1].Value))
+                               : simpleReplaced;
+        };
+        return (ReturnType != "void" ? "return " : "") + string.Format("self.{0}({1});", Name, expand(Body));
+    }
+}
+#>

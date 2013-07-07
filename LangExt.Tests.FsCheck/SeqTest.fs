@@ -719,7 +719,7 @@ let ``LangExtSeq.OnlyFailure eq (Seq.choose conv)``() =
 
 [<Test>]
 let ``LangExtSeq.MapOption (class) eq (Seq.map (function null -> none() | x -> some(x)))``() =
-  let strSeq xs = LangExtSeq.Map(strSeq xs, fun x -> if x.Length = 1 then null else x)
+  let strSeq xs = LangExtSeq.Map(strSeq xs, fun (x: string) -> if x.Length = 1 then null else x)
   test (strSeq >> LangExtSeq.MapOption) eq (strSeq >> (Seq.map (function null -> none() | x -> some(x))))
 
 open Microsoft.FSharp.Linq
@@ -734,7 +734,7 @@ let ``LangExtSeq.MapOption (nullable struct) eq (Seq.Map (function Null -> none(
 
 [<Test>]
 let ``LangExtSeq.MapResult (class) eq (Seq.map (function null -> failure(()) | x -> success(x)))``() =
-  let strSeq xs = LangExtSeq.Map(strSeq xs, fun x -> if x.Length = 1 then null else x)
+  let strSeq xs = LangExtSeq.Map(strSeq xs, fun (x: string) -> if x.Length = 1 then null else x)
   test (strSeq >> LangExtSeq.MapResult) eq (strSeq >> (Seq.map (function null -> failure(LangExt.Unit.``_``) | x -> success(x))))
 
 [<Test>]
