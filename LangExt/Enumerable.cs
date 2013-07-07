@@ -75,7 +75,7 @@ namespace LangExt
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のWhereに対応します。
         /// </summary>
-        public static IEnumerable<T> FilterWitIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return StdEnumerable.Where(self, pred); }
+        public static IEnumerable<T> FilterWithIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return StdEnumerable.Where(self, pred); }
 
         /// <summary>
         /// IEnumerableのすべての要素に対してfを適用したIEnumerableを生成して返します。
