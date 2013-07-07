@@ -406,7 +406,7 @@ let (|Even|_|) (x, i) = if even (x + i) then Some x else None
 
 [<Test>]
 let ``LangExtSeq.FilterWithIndex``() =
-  test (fun xs -> LangExtSeq.FilterWitIndex(intSeq xs, fun x i -> even (x + i)))
+  test (fun xs -> LangExtSeq.FilterWithIndex(intSeq xs, fun x i -> even (x + i)))
     eq (fun xs -> Seq.zip xs (Seq.initInfinite id) |> Seq.choose (function Even i -> Some i | _ -> None))
 
 [<Test>]

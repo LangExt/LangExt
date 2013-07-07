@@ -428,7 +428,7 @@ namespace LangExt
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のWhereに対応します。
         /// </summary>
-        public static ISeq<T> FilterWitIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new Seq<T>(StdEnumerable.Where(self, pred)); }
+        public static ISeq<T> FilterWithIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new Seq<T>(StdEnumerable.Where(self, pred)); }
         #endregion
 
         #region Map系メソッド
