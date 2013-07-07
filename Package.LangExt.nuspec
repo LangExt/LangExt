@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LangExt</id>
-    <version>2.0.0.0</version>
+    <version>2.0.1.0</version>
     <authors>bleis-tift,otf</authors>
     <licenseUrl>https://github.com/LangExt/LangExt/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/LangExt/LangExt</projectUrl>
