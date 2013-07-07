@@ -38,7 +38,7 @@ namespace LangExt
     /// <summary>
     /// 並び替えられたシーケンスに対する関数を提供します。
     /// </summary>
-    public static class OrderedSeq
+    public static partial class OrderedSeq
     {
         /// <summary>
         /// 並び替えられたシーケンスをさらに別のキーで安定ソートします。

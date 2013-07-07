@@ -72,6 +72,11 @@
       <DependentUpon>Func.Result.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderedSeq.cs" />
+    <Compile Include="OrderedSeq.Dragon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderedSeq.Dragon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,6 +147,11 @@
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Result.cs</LastGenOutput>
+    </None>
+    <None Include="OrderedSeq.Dragon.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OrderedSeq.Dragon.cs</LastGenOutput>
+      <DependentUpon>OrderedSeq.cs</DependentUpon>
     </None>
     <None Include="Seq.Dragon.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

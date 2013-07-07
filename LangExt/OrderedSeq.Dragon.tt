@@ -1,0 +1,44 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt
+{
+    partial class OrderedSeq
+    {
+<#
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱うThenBy
+        /// <summary>
+        /// <#= i #>要素タプルの各要素を展開して関数に渡すThenByです。
+        /// </summary>
+        public static IOrderedSeq<<#= tupleType #>> ThenBy<<#= typeParam #>, U>(this IOrderedSeq<<#= tupleType #>> self, Func<<#= typeParam #>, U> f)
+        {
+            return self.ThenBy(tpl => f(<#= Repeat(", ", "tpl._{0}()", i) #>));
+        }
+
+        /// <summary>
+        /// <#= i #>要素タプルの各要素を展開して関数に渡すRevThenByです。
+        /// </summary>
+        public static IOrderedSeq<<#= tupleType #>> RevThenBy<<#= typeParam #>, U>(this IOrderedSeq<<#= tupleType #>> self, Func<<#= typeParam #>, U> f)
+        {
+            return self.RevThenBy(tpl => f(<#= Repeat(", ", "tpl._{0}()", i) #>));
+        }
+        #endregion
+<# } #>
+    }
+}
