@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LangExt.Legacy</id>
+    <version>1.0.0.0</version>
+    <authors>bleis-tift,otf</authors>
+    <licenseUrl>https://github.com/LangExt/LangExt/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/LangExt/LangExt</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>This is a functional library for C#.</summary>
+    <description>This library supports functional programming using C#.</description>
+    <tags>functional c# library</tags>
+  </metadata>
+  <files>
+      <file src="LangExt.Legacy\bin\Release\*" target="lib\portable-windows8+net40"/>
+      <file src="**\*.cs" target="src"/>
+  </files>
+</package>
