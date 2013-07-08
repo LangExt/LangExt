@@ -125,8 +125,11 @@
     <Compile Include="Unsafe\Seq.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\T4\DragonUtil.ttinclude">
+      <Link>T4\DragonUtil.ttinclude</Link>
+    </None>
     <None Include="..\T4\T4Util.ttinclude">
-      <Link>T4Util.ttinclude</Link>
+      <Link>T4\T4Util.ttinclude</Link>
     </None>
     <None Include="Func.Curry.tt">
       <DependentUpon>Func.cs</DependentUpon>

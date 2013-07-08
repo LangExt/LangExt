@@ -1,0 +1,64 @@
+﻿<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+class MethodTemplate {
+    public static string SelfType = "ISeq";
+
+    public readonly string ReturnType;
+    public readonly string Name;
+    public readonly string AdditionalTypeParams;
+    public readonly string Args;
+    public readonly string Constraints;
+    public readonly string Body;
+    public readonly int Max;
+
+    static string AddPrefix(string prefix, string str) {
+        return str.StartsWith(prefix) || str == "" ? str : (prefix +  str);
+    }
+
+    public MethodTemplate(string retType, string name, string additionalTypeParams, string args, string body = "tpl => f($(access))")
+         : this(retType, name, additionalTypeParams, args, "", body) { }
+    public MethodTemplate(string retType, string name, string additionalTypeParams, string args, string constraints, string body, int max = 16) {
+        this.ReturnType = retType;
+        this.Name = name;
+        this.AdditionalTypeParams = AddPrefix(", ", additionalTypeParams);
+        this.Args = args;
+        this.Constraints = AddPrefix(" ", constraints);
+        this.Body = body;
+        this.Max = max;
+    }
+
+    public MethodTemplate WithMax(int max) {
+        return new MethodTemplate(ReturnType, Name, AdditionalTypeParams, Args, Constraints, Body, max);
+    }
+
+    public string CreateSignature(string typeParams, string tupleType, string access) {
+        Func<string, string> expand =
+            str => str.Replace("$(typeParams)", typeParams).Replace("$(tupleType)", tupleType).Replace("$(access)", access);
+        return string.Format(
+            "public static {0} {1}<{2}>(this " + SelfType + "<{3}> self, {4}){5}",
+            expand(ReturnType),
+            Name,
+            typeParams + AdditionalTypeParams,
+            tupleType,
+            expand(Args),
+            Constraints);
+    }
+
+    public string CreateBody(string typeParams, string tupleType, string access) {
+        Func<string, string> expand = str => {
+            var regex = new System.Text.RegularExpressions.Regex(@"\$\(access,\s*([a-zA-Z0-9]+)\)");
+            var simpleReplaced =
+                str.Replace("$(typeParams)", typeParams)
+                   .Replace("$(tupleType)", tupleType)
+                   .Replace("$(access)", access);
+            var res = regex.Match(simpleReplaced);
+            return res.Success ? simpleReplaced.Replace(res.Value, access.Replace("tpl", res.Groups[1].Value))
+                               : simpleReplaced;
+        };
+        return (ReturnType != "void" ? "return " : "") + string.Format("self.{0}({1});", Name, expand(Body));
+    }
+}
+#>
