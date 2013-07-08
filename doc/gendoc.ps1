@@ -7,6 +7,7 @@
 LangExtについて
 ---------------
 * [LangExtの概要](LangExt.html)
+* [LangExt.Legacyの概要](LangExt.Legacy.html)
 * [ビルド方法](HowToBuild.html)
 '@ | Out-File index.markdown -Encoding UTF8 -Append
  
