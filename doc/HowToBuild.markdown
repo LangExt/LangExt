@@ -15,4 +15,4 @@ Microsoft Visual Studio 2012 Visualization & Modeling SDK
 ビルド手順
 ----------
 上記の環境さえ導入済みであれば、
-一番トップのディレクトリのPackage.batを実行することでビルドされます。
+一番トップのディレクトリの`Package.Xxx.bat`を実行することでビルドされます。
