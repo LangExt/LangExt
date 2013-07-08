@@ -65,7 +65,7 @@ namespace LangExt.Legacy.CastMatches
                 self,
                 <#= MethodCallArgs("ifT", i) #>,
                 _ => { throw new MatchFailureException(string.Format("Doesn't match any of [<#=
-                    Repeat(", ", "{{{0}}}", i) #>].", <#= Repeat(", ", "typeof(T{0}).Name", i) #>)); });
+                    Repeat(", ", "{{{0}}}", 0, i) #>].", <#= Repeat(", ", "typeof(T{0}).Name", i) #>)); });
         }
 <# } #>
     }

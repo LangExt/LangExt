@@ -41,7 +41,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}].", typeof(T1).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}].", typeof(T1).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -78,7 +78,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}].", typeof(T1).Name, typeof(T2).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}].", typeof(T1).Name, typeof(T2).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -120,7 +120,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -167,7 +167,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -219,7 +219,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -276,7 +276,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -338,7 +338,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -405,7 +405,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -477,7 +477,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -554,7 +554,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9, ifT10,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -636,7 +636,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9, ifT10, ifT11,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -723,7 +723,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9, ifT10, ifT11, ifT12,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -815,7 +815,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9, ifT10, ifT11, ifT12, ifT13,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -912,7 +912,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9, ifT10, ifT11, ifT12, ifT13, ifT14,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name, typeof(T14).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name, typeof(T14).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -1014,7 +1014,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9, ifT10, ifT11, ifT12, ifT13, ifT14, ifT15,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name, typeof(T14).Name, typeof(T15).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name, typeof(T14).Name, typeof(T15).Name)); });
         }
         /// <summary>
         /// 型パラメータの先頭から順にキャストを試し、キャストできた型に対応する処理を実行して返します。
@@ -1121,7 +1121,7 @@ namespace LangExt.Legacy.CastMatches
             return CastMatch(
                 self,
                 ifT1, ifT2, ifT3, ifT4, ifT5, ifT6, ifT7, ifT8, ifT9, ifT10, ifT11, ifT12, ifT13, ifT14, ifT15, ifT16,
-                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name, typeof(T14).Name, typeof(T15).Name, typeof(T16).Name)); });
+                _ => { throw new MatchFailureException(string.Format("Doesn't match any of [{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}].", typeof(T1).Name, typeof(T2).Name, typeof(T3).Name, typeof(T4).Name, typeof(T5).Name, typeof(T6).Name, typeof(T7).Name, typeof(T8).Name, typeof(T9).Name, typeof(T10).Name, typeof(T11).Name, typeof(T12).Name, typeof(T13).Name, typeof(T14).Name, typeof(T15).Name, typeof(T16).Name)); });
         }
     }
 }
