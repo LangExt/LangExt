@@ -15,6 +15,14 @@ Visual Studio 2012の場合は、
 「NuGetパッケージの管理」から「オンラインの検索」に「LangExt」と入力すれば見つかるので、
 そこからインストールするのが手軽です。
 
+また、サブプロジェクトとして、
+
+* [LangExt.Compatibility.FSharp](https://nuget.org/packages/LangExt.Compatibility.FSharp/)
+* LangExt.Legacy
+
+があります。
+これらも、NuGetで導入できます。
+
 ドキュメント
 ------------
 docディレクトリに各種ドキュメントを作っていく予定です。
