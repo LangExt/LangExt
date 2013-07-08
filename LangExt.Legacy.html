@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+    <a href="index.html">index</a>
+</div>
+<hr>
+<h1 id="langext.legacy">LangExt.Legacy</h1>
+<p>これは、LangExt.Legacyの概要を説明するドキュメントです。</p>
+<h2 id="langext.legacyとは">LangExt.Legacyとは</h2>
+<p>LangExt.Legacyは、レガシーコードを扱うための仕組みを提供するライブラリです。 LangExtとともに使うことが想定されていますが、現在のところLangExt.Legacy自体は単独でも使用可能です。</p>
+<h2 id="langext.legacyが提供する主な機能">LangExt.Legacyが提供する主な機能</h2>
+<p>LangExt.Legacyが提供する主な機能について、その役割や意味を簡単に説明します。 実際の使い方に関しては、ドキュメンテーションコメント等を参考にしてください。</p>
+<h3 id="typematch">TypeMatch</h3>
+<p>TypeMatchは、objectに対する拡張として提供されています。 TypeMatchは、何らかの処理の結果をobject型として返すような旧時代のAPIを扱う場合に、便利に使えます。</p>
+<p>例えば、実際にはintかstringを返すため、戻り値の型としてはobjectになっているようなメソッドがあったとします。 そういう場合に、TypeMatchを使わない場合は型チェックとキャストが必要になります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">var</span> obj = <span class="fu">DoSomething</span>();
+<span class="kw">if</span> (obj <span class="kw">is</span> <span class="dt">int</span>)
+{
+    var i = (<span class="dt">int</span>)obj;
+    <span class="co">// intの場合の処理</span>
+}
+<span class="kw">else</span>
+{
+    var str = (<span class="dt">string</span>)obj;
+    <span class="co">// stringの場合の処理</span>
+}</code></pre>
+<p>これに対して、TypeMatchを使った場合は型チェックとキャストはTypeMatch内に隠ぺいされるため、 より宣言的な記述が可能になります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">return</span> <span class="fu">DoSomething</span>().<span class="fu">TypeMatch</span>(
+    (<span class="dt">int</span> i) =&gt; <span class="co">/* intの場合の処理 */</span>,
+    (<span class="dt">string</span> str) =&gt; <span class="co">/* stringの場合の処理 */</span>);</code></pre>
+<p>TypeMatchは16個の型まで対応していますが、それより多い型の分岐もTypeMatchをネストすることで可能です。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">return</span> <span class="fu">DoSomething</span>().<span class="fu">TypeMatch</span>(
+    (T1 t1) =&gt; <span class="co">/* T1の場合の処理 */</span>,
+    (T2 t2) =&gt; <span class="co">/* T2の場合の処理 */</span>,
+    <span class="co">// ...</span>
+    (T16 t16) =&gt; <span class="co">/* T16の場合の処理 */</span>,
+    other =&gt;
+        other.<span class="fu">TypeMatch</span>(
+            (T17 t17) =&gt; <span class="co">/* T17の場合の処理 */</span>,
+            (T18 t18) =&gt; <span class="co">/* T18の場合の処理 */</span>,
+            <span class="co">// ...</span>
+        )
+    );</code></pre>
+<p>さすがにここまで多様な型をobjectという単一の型にまとめてしまう例に遭遇したことは無いですが、 もしこのような状況に遭遇した場合は、元のAPIをラップした方が効果的でしょう。</p>
+<p>TypeMatchはobjectに対する拡張として提供されているため、 任意の型階層を扱うことが出来ます。 例えば、Aを継承したB, C, Dがあった場合に、Aを返すメソッドに対して、</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">return</span> <span class="fu">DoSomething</span>().<span class="fu">TypeMatch</span>(
+    (B b) =&gt; <span class="co">/* Bの場合の処理 */</span>,
+    (C c) =&gt; <span class="co">/* Cの場合の処理 */</span>,
+    (D d) =&gt; <span class="co">/* Dの場合の処理 */</span>);</code></pre>
+<p>のような使い方も可能です。</p>
+<h4 id="注意すべき点">注意すべき点</h4>
+<p>TypeMatchはあくまで型チェックとキャストを隠ぺいしているだけ、という点に注意してください。 例えば、Aを継承したBがあった場合に、</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">class</span> A {}
+<span class="kw">class</span> B : A {}</code></pre>
+<p>Aを返すDoSomethingに対してAを先に記述してしまうと、B固有の処理が実行されることはありません。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">return</span> <span class="fu">DoSomething</span>().<span class="fu">TypeMatch</span>(
+    (A a) =&gt; <span class="co">/* Aの場合の処理 */</span>,
+    (B b) =&gt; <span class="co">/* Bの場合の処理 */</span>  <span class="co">// この処理は実行されない</span>
+);</code></pre>
+<p>この場合に、コンパイラはエラーにすることも警告を出すこともできません。 型階層を扱う場合は、この挙動に十分に注意して扱ってください。</p>
+<hr>
+<div id="footer">
+    <a href="index.html">index</a>
+</div>
+</body>
+</html>
