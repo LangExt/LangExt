@@ -8,10 +8,10 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ include file="..\..\T4\T4Util.ttinclude" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
 using System;
 
-namespace LangExt.Legacy.TypeMatches
+namespace LangExt.Legacy
 {
     /// <summary>
     /// オブジェクトに対して型による擬似的なパターンマッチを提供するためのクラスです。

@@ -47,24 +47,15 @@
     <None Include="..\T4\T4Util.ttinclude">
       <Link>T4Util.ttinclude</Link>
     </None>
-    <None Include="CastMatches\LegacyObject.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LegacyObject.cs</LastGenOutput>
-    </None>
-    <None Include="TypeMatches\LegacyObject.tt">
+    <None Include="LegacyObject.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LegacyObject.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CastMatches\LegacyObject.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LegacyObject.tt</DependentUpon>
-    </Compile>
     <Compile Include="MatchFailureException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeMatches\LegacyObject.cs">
+    <Compile Include="LegacyObject.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LegacyObject.tt</DependentUpon>

@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace LangExt.Legacy.TypeMatches
+namespace LangExt.Legacy
 {
     /// <summary>
     /// オブジェクトに対して型による擬似的なパターンマッチを提供するためのクラスです。
