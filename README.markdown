@@ -18,7 +18,7 @@ Visual Studio 2012の場合は、
 また、サブプロジェクトとして、
 
 * [LangExt.Compatibility.FSharp](https://nuget.org/packages/LangExt.Compatibility.FSharp/)
-* LangExt.Legacy
+* [LangExt.Legacy](https://nuget.org/packages/LangExt.Legacy/)
 
 があります。
 これらも、NuGetで導入できます。

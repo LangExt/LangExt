@@ -38,7 +38,10 @@ ls cmp_*.markdown | %{
 外部リンク
 ----------
 * [ソースコード(Github)](https://github.com/LangExt/LangExt)
-* [NuGetパッケージ](https://nuget.org/packages/LangExt/)
+* NuGetパッケージ
+    * [LangExt](https://nuget.org/packages/LangExt/)
+    * [LangExt.Compatibility.FSharp](https://nuget.org/packages/LangExt.Compatibility.FSharp/)
+    * [LangExt.Legacy](https://nuget.org/packages/LangExt.Legacy/)
 * [Qiitaでの記事](http://qiita.com/tags/LangExt)
 '@ | Out-File index.markdown -Encoding UTF8 -Append
  
