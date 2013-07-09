@@ -1,0 +1,78 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#@ include file="..\T4\DragonUtil.ttinclude" #>
+<#
+    MethodTemplate.SelfType = "IEnumerable";
+    var methods = new[] {
+        new MethodTemplate("IEnumerable<U>", "Scan", "U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
+        new MethodTemplate("IEnumerable<$(tupleType)>", "Scan1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
+        new MethodTemplate("IEnumerable<$(tupleType)>", "Filter", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("IEnumerable<$(tupleType)>", "FilterWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("IEnumerable<U>", "Map", "U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("IEnumerable<U>", "MapWithIndex", "U", "Func<$(typeParams), int, U> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("IEnumerable<U>", "Bind", "U", "Func<$(typeParams), IEnumerable<U>> f"),
+        new MethodTemplate("IEnumerable<U>", "BindWithIndex", "U", "Func<$(typeParams), int, IEnumerable<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("IEnumerable<U>", "Choose", "U", "Func<$(typeParams), Option<U>> f"),
+        new MethodTemplate("IEnumerable<U>", "ChooseWithIndex", "U", "Func<$(typeParams), int, Option<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("IEnumerable<$(tupleType)>", "SkipWhile", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("IEnumerable<$(tupleType)>", "TakeWhile", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("IEnumerable<$(tupleType)>", "SkipWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("IEnumerable<$(tupleType)>", "TakeWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("Tuple<IEnumerable<$(tupleType)>, IEnumerable<$(tupleType)>>", "Span", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Tuple<IEnumerable<$(tupleType)>, IEnumerable<$(tupleType)>>", "Break", "", "Func<$(typeParams), bool> f"),
+    };
+#>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt
+{
+    partial class Enumerable
+    {
+<#
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱う関数
+<#
+        if (i < Max) {
+#>
+        /// <summary>
+        /// <#= i #>要素タプルの各要素を展開して関数に渡すUnfoldです。
+        /// </summary>
+        public static IEnumerable<U> Unfold<<#= TypeParams("T", i) #>, U>(this <#= TupleType(i) #> self, Func<<#= TypeParams("T", i) #>, Option<<#= TupleType(i + 1, n => n == 1 ? "U" : "T" + (n - 1)) #>>> f)
+        {
+            return Unfold(self, tpl =>
+                from res in tpl.Match(f)
+                select Tuple.Create(res.Fst(), res.RemoveFirst()));
+        }
+<#
+        }
+        foreach (var m in methods) {
+            if (i <= m.Max) {
+#>
+
+        /// <summary>
+        /// <#= i #>要素タプルのIEnumerableの各要素を展開して関数に渡す<#= m.Name #>です。
+        /// </summary>
+        <#= m.CreateSignature(typeParam, tupleType, access) #>
+        {
+            <#= m.CreateBody(typeParam, tupleType, access) #>
+        }
+<# } } #>
+        #endregion
+
+<# } #>
+    }
+}

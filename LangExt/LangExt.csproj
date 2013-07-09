@@ -47,6 +47,11 @@
     <Compile Include="CachedSeq.cs" />
     <Compile Include="Comparable.cs" />
     <Compile Include="Create.cs" />
+    <Compile Include="Enumerable.Dragon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Enumerable.Dragon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Func.cs" />
     <Compile Include="Func.Curry.cs">
       <AutoGen>True</AutoGen>
@@ -130,6 +135,11 @@
     </None>
     <None Include="..\T4\T4Util.ttinclude">
       <Link>T4\T4Util.ttinclude</Link>
+    </None>
+    <None Include="Enumerable.Dragon.tt">
+      <DependentUpon>Enumerable.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Enumerable.Dragon.cs</LastGenOutput>
     </None>
     <None Include="Func.Curry.tt">
       <DependentUpon>Func.cs</DependentUpon>
