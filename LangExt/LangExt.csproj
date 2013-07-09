@@ -115,6 +115,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TryFunc.tt</DependentUpon>
     </Compile>
+    <Compile Include="TupleComparer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TupleComparer.tt</DependentUpon>
+    </Compile>
     <Compile Include="TupleModule.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -161,6 +166,10 @@
     <None Include="TryFunc.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TryFunc.cs</LastGenOutput>
+    </None>
+    <None Include="TupleComparer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TupleComparer.cs</LastGenOutput>
     </None>
     <None Include="TupleModule.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

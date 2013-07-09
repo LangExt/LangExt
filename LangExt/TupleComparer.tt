@@ -1,0 +1,143 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt
+{
+    public static class TupleComparer
+    {
+        sealed class Cmp<T> : IComparer<T>
+            where T : IComparable<T>
+        {
+            public static readonly Cmp<T> Instance = new Cmp<T>();
+            public int Compare(T x, T y) { return x.RawCmp(y); }
+        }
+
+        static class Comparer
+        {
+<#
+    var max = 7;
+    for (int i = 2; i <= max; i++) {
+        var typeParams = TypeParams("T", i);
+        for (int j = 0; j < Math.Pow(2, i); j++) {
+            var args = Args(j);
+            var constraints = Constraints((int)Math.Pow(2, i) - j - 1);
+            var args2 = Args2(j, i);
+#>
+            internal static Comparer<<#= typeParams #>> Create<<#= typeParams #>>(<#= args #>)<#= constraints #>
+            {
+                return new Comparer<<#= typeParams #>>(<#= args2 #>);
+            }
+<# } } #>
+        }
+
+<#
+    for (int i = 2; i <= max; i++) {
+        var typeParams = TypeParams("T", i);
+        var tupleType = TupleType(i);
+#>
+        class Comparer<<#= typeParams #>> : IComparer<<#= tupleType #>>
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            readonly IComparer<T<#= j #>> cmp<#= j #>;
+<# } #>
+            internal Comparer(<#= Repeat(", ", "IComparer<T{0}> cmp{0}", i) #>)
+            {
+<# for (int j = 1; j <= i; j++) { #>
+                this.cmp<#= j #> = cmp<#= j #>;
+<# } #>
+            }
+
+            public int Compare(<#= tupleType #> x, <#= tupleType #> y)
+            {
+                return
+                    x.Match((<#= Repeat(", ", "x{0}", i) #>) =>
+                        y.Match((<#= Repeat(", ", "y{0}", i) #>) =>
+                        {
+<# for (int j = 1; j <= i; j++) { #>
+                            var res<#= j #> = cmp<#= j #>.Compare(x<#= j #>, y<#= j #>); if (res<#= j #> != 0) return res<#= j #>;
+<# } #>
+                            return 0;
+                        }));
+            }
+        }
+<# } #>
+<#
+    for (int i = 2; i <= max; i++) {
+        var typeParams = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        for (int j = 0; j < Math.Pow(2, i); j++) {
+            var args = Args(j);
+            var constraints = Constraints((int)Math.Pow(2, i) - j - 1);
+            var args3 = Args3(j);
+#>
+        public static IComparer<<#= tupleType #>> Create<<#= typeParams #>>(<#= args #>)<#= constraints #>
+        { return Comparer.Create<<#= typeParams #>>(<#= args3 #>); }
+<# } } #>
+    }
+
+    partial class Create
+    {
+<#
+    for (int i = 2; i <= max; i++) {
+        var typeParams = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        for (int j = 0; j < Math.Pow(2, i); j++) {
+            var args = Args(j);
+            var constraints = Constraints((int)Math.Pow(2, i) - j - 1);
+            var args3 = Args3(j);
+#>
+        public static IComparer<<#= tupleType #>> TupleComparer<<#= typeParams #>>(<#= args #>)<#= constraints #>
+        { return LangExt.TupleComparer.Create<<#= typeParams #>>(<#= args3 #>); }
+<# } } #>
+    }
+}
+<#+
+string Args(int n) {
+    var res = new List<string>();
+    for (int i = 0; i < 32; i++) {
+        if (((n >> i) & 1) == 1)
+            res.Add("IComparer<T" + (i + 1) + "> cmp" + (i + 1));
+    }
+    return string.Join(", ", res);
+}
+
+string Constraints(int n) {
+    var res = new List<string>();
+    for (int i = 0; i < 32; i++) {
+        if (((n >> i) & 1) == 1)
+            res.Add(" where T" + (i + 1) + " : IComparable<T" + (i + 1) + ">");
+    }
+    return string.Join("", res);
+}
+
+string Args2(int n, int bits) {
+    var res = new List<string>();
+    for (int i = 0; i < bits; i++) {
+        if (((n >> i) & 1) == 1)
+            res.Add("cmp" + (i + 1));
+        else
+            res.Add("Cmp<T" + (i + 1) + ">.Instance");
+    }
+    return string.Join(", ", res);
+}
+
+string Args3(int n) {
+    var res = new List<string>();
+    for (int i = 0; i < 32; i++) {
+        if (((n >> i) & 1) == 1)
+            res.Add("cmp" + (i + 1));
+    }
+    return string.Join(", ", res);
+}
+#>
