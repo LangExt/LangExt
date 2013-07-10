@@ -4,7 +4,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#+
 class MethodTemplate {
-    public static string SelfType = "ISeq";
+    public static string SelfType = "ISeq<{0}>";
 
     public readonly string ReturnType;
     public readonly string Name;
@@ -38,7 +38,7 @@ class MethodTemplate {
         Func<string, string> expand =
             str => str.Replace("$(typeParams)", typeParams).Replace("$(tupleType)", tupleType).Replace("$(access)", access);
         return string.Format(
-            "public static {0} {1}<{2}>(this " + SelfType + "<{3}> self, {4}){5}",
+            "public static {0} {1}<{2}>(this " + SelfType.Replace("{0}", "{3}") + " self, {4}){5}",
             expand(ReturnType),
             Name,
             typeParams + AdditionalTypeParams,

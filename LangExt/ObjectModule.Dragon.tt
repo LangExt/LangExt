@@ -1,0 +1,51 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#@ include file="..\T4\DragonUtil.ttinclude" #>
+<#
+    MethodTemplate.SelfType = "{0}";
+    var methods = new[] {
+        new MethodTemplate("Option<$(tupleType)>", "NoneIf", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Result<$(tupleType), Unit>", "FailureIf", "", "Func<$(typeParams), bool> f"),
+    };
+#>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt
+{
+    partial class ObjectModule
+    {
+<#
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱う関数
+<#
+        foreach (var m in methods) {
+            if (i <= m.Max) {
+#>
+
+        /// <summary>
+        /// <#= i #>要素タプルの各要素を展開して関数に渡す<#= m.Name #>です。
+        /// </summary>
+        <#= m.CreateSignature(typeParam, tupleType, access) #>
+        {
+            <#= m.CreateBody(typeParam, tupleType, access) #>
+        }
+<# } } #>
+        #endregion
+
+<# } #>
+    }
+}

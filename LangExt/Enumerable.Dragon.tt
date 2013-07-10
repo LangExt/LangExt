@@ -11,7 +11,7 @@
 <#@ include file="..\T4\T4Util.ttinclude" #>
 <#@ include file="..\T4\DragonUtil.ttinclude" #>
 <#
-    MethodTemplate.SelfType = "IEnumerable";
+    MethodTemplate.SelfType = "IEnumerable<{0}>";
     var methods = new[] {
         new MethodTemplate("IEnumerable<U>", "Scan", "U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
         new MethodTemplate("IEnumerable<$(tupleType)>", "Scan1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),

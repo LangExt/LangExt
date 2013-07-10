@@ -8,7 +8,7 @@ namespace LangExt
     /// <summary>
     /// Objectに対する関数を提供します。
     /// </summary>
-    public static class ObjectModule
+    public static partial class ObjectModule
     {
         /// <summary>
         /// オブジェクトがnullかどうかを判定します。
