@@ -1,0 +1,54 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\..\T4\T4Util.ttinclude" #>
+<#@ include file="..\..\T4\DragonUtil.ttinclude" #>
+<#
+    MethodTemplate.SelfType = "ISeq<{0}>";
+    var methods = new[] {
+        new MethodTemplate("$(tupleType)", "MaxBy", "U", "Func<$(typeParams), U> f", "where U : IComparable<U>", "tpl => f($(access))"),
+        new MethodTemplate("$(tupleType)", "MinBy", "U", "Func<$(typeParams), U> f", "where U : IComparable<U>", "tpl => f($(access))"),
+        new MethodTemplate("$(tupleType)", "Reduce", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
+        new MethodTemplate("$(tupleType)", "ReduceBack", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(tpl, xs) => f($(access), $(access,xs))").WithMax(8),
+        new MethodTemplate("$(tupleType)", "Find", "", "Func<$(typeParams), bool> f"),
+    };
+#>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt.Unsafe
+{
+    partial class Seq
+    {
+<#
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱う関数
+<#
+        foreach (var m in methods) {
+            if (i <= m.Max) {
+#>
+
+        /// <summary>
+        /// <#= i #>要素タプルのシーケンスの各要素を展開して関数に渡す<#= m.Name #>です。
+        /// </summary>
+        <#= m.CreateSignature(typeParam, tupleType, access) #>
+        {
+            <#= m.CreateBody(typeParam, tupleType, access) #>
+        }
+<# } } #>
+        #endregion
+
+<# } #>
+    }
+}

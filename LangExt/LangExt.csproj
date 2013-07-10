@@ -143,6 +143,11 @@
     <Compile Include="Unsafe\Option.cs" />
     <Compile Include="Unsafe\Result.cs" />
     <Compile Include="Unsafe\Seq.cs" />
+    <Compile Include="Unsafe\Seq.Dragon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Seq.Dragon.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\T4\DragonUtil.ttinclude">
@@ -209,6 +214,11 @@
     <None Include="TupleModule.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TupleModule.cs</LastGenOutput>
+    </None>
+    <None Include="Unsafe\Seq.Dragon.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Seq.Dragon.cs</LastGenOutput>
+      <DependentUpon>Seq.cs</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

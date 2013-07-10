@@ -7,7 +7,7 @@ namespace LangExt.Unsafe
     /// <summary>
     /// シーケンスに対する(例外を投げうる)関数を提供します。
     /// </summary>
-    public static class Seq
+    public static partial class Seq
     {
         /// <summary>
         /// シーケンスの指定番目の要素を取得します。
