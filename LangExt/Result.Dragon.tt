@@ -1,0 +1,89 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#@ include file="..\T4\DragonUtil.ttinclude" #>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt
+{
+    partial class Result
+    {
+<#
+    MethodTemplate.SelfType = "Result<{0}, TFailure>";
+    var methods = new[] {
+        new MethodTemplate("Result<TSuccess2, TFailure>", "SafeCast", "TFailure, TSuccess2", "Func<$(typeParams), TSuccess2> f"),
+        new MethodTemplate("int", "Count", "TFailure", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("U", "Fold", "TFailure, U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
+        new MethodTemplate("bool", "Forall", "TFailure", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("bool", "Exists", "TFailure", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Result<U, TFailure>", "Map", "TFailure, U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("void", "Iter", "TFailure", "Action<$(typeParams)> f"),
+        new MethodTemplate("Result<U, TFailure>", "Bind", "TFailure, U", "Func<$(typeParams), Result<U, TFailure>> f"),
+    };
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱うSuccess側の関数
+<#
+        foreach (var m in methods) {
+            if (i <= m.Max) {
+#>
+
+        /// <summary>
+        /// <#= i #>要素タプルのResultの各要素を展開して関数に渡す<#= m.Name #>です。
+        /// </summary>
+        <#= m.CreateSignature(typeParam, tupleType, access) #>
+        {
+            <#= m.CreateBody(typeParam, tupleType, access) #>
+        }
+<# } } #>
+        #endregion
+
+<# } #>
+<#
+    MethodTemplate.SelfType = "Result<TSuccess, {0}>";
+    methods = new[] {
+        new MethodTemplate("Result<TSuccess, TFailure2>", "SafeCastFailure", "TSuccess, TFailure2", "Func<$(typeParams), TFailure2> f"),
+        new MethodTemplate("int", "CountFailure", "TSuccess", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("U", "FoldFailure", "TSuccess, U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
+        new MethodTemplate("bool", "ForallFailure", "TSuccess", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("bool", "ExistsFailure", "TSuccess", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Result<TSuccess, U>", "MapFailure", "TSuccess, U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("void", "IterFailure", "TSuccess", "Action<$(typeParams)> f"),
+        new MethodTemplate("Result<TSuccess, U>", "BindFailure", "TSuccess, U", "Func<$(typeParams), Result<TSuccess, U>> f"),
+    };
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱うFailure側の関数
+<#
+        foreach (var m in methods) {
+            if (i <= m.Max) {
+#>
+
+        /// <summary>
+        /// <#= i #>要素タプルのResultの各要素を展開して関数に渡す<#= m.Name #>です。
+        /// </summary>
+        <#= m.CreateSignature(typeParam, tupleType, access) #>
+        {
+            <#= m.CreateBody(typeParam, tupleType, access) #>
+        }
+<# } } #>
+        #endregion
+
+<# } #>
+    }
+}

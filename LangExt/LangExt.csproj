@@ -98,6 +98,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Result.cs" />
+    <Compile Include="Result.Dragon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Result.Dragon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Result.Module.cs">
       <DependentUpon>Result.cs</DependentUpon>
     </Compile>
@@ -185,6 +190,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OrderedSeq.Dragon.cs</LastGenOutput>
       <DependentUpon>OrderedSeq.cs</DependentUpon>
+    </None>
+    <None Include="Result.Dragon.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Result.Dragon.cs</LastGenOutput>
+      <DependentUpon>Result.cs</DependentUpon>
     </None>
     <None Include="Seq.Dragon.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
