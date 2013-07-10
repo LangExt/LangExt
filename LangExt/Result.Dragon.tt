@@ -17,6 +17,25 @@ namespace LangExt
 {
     partial class Result
     {
+        #region Match
+<#
+    for (int i = 1; i <= Max; i++) {
+        var typeParam = TypeParams("TSuccess", i);
+        var tupleType = i == 1 ? "TSuccess1" : TupleType(i).Replace("Tuple", "tuple").Replace("T", "TSuccess").Replace("tuple", "Tuple");
+        var access = i == 1 ? "tpl" : Repeat(", ", "tpl._{0}()", i);
+        for (int j = 1; j <= Max; j++) {
+            if (i == 1 && j == 1) continue;
+            var typeParam2 = TypeParams("TFailure", j);
+            var tupleType2 = j == 1 ? "TFailure1" : TupleType(j).Replace("Tuple", "tuple").Replace("T", "TFailure").Replace("tuple", "Tuple");
+            var access2 = j == 1 ? "tpl" : Repeat(", ", "tpl._{0}()", j);
+#>
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<<#= typeParam #>, <#= typeParam2 #>, U>(this Result<<#= tupleType #>, <#= tupleType2 #>> self, Func<<#= typeParam #>, U> Success, Func<<#= typeParam2 #>, U> Failure)
+        {
+            return self.Match(tpl => Success(<#= access #>), tpl => Failure(<#= access2 #>));
+        }
+<# } } #>
+        #endregion
 <#
     MethodTemplate.SelfType = "Result<{0}, TFailure>";
     var methods = new[] {

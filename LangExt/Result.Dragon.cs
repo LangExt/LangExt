@@ -7,6 +7,1283 @@ namespace LangExt
 {
     partial class Result
     {
+        #region Match
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<TSuccess1, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2>, TFailure1> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, TFailure1> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+        /// <summary>タプルの要素を展開して関数に渡すMatchです。</summary>
+        public static U Match<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U>(this Result<Tuple<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, Tuple<TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, Tuple<TSuccess15, TSuccess16>>>, Tuple<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, Tuple<TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, Tuple<TFailure15, TFailure16>>>> self, Func<TSuccess1, TSuccess2, TSuccess3, TSuccess4, TSuccess5, TSuccess6, TSuccess7, TSuccess8, TSuccess9, TSuccess10, TSuccess11, TSuccess12, TSuccess13, TSuccess14, TSuccess15, TSuccess16, U> Success, Func<TFailure1, TFailure2, TFailure3, TFailure4, TFailure5, TFailure6, TFailure7, TFailure8, TFailure9, TFailure10, TFailure11, TFailure12, TFailure13, TFailure14, TFailure15, TFailure16, U> Failure)
+        {
+            return self.Match(tpl => Success(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()), tpl => Failure(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+        #endregion
         #region 2要素タプルを扱うSuccess側の関数
 
         /// <summary>
