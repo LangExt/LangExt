@@ -1,0 +1,60 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#@ include file="..\T4\DragonUtil.ttinclude" #>
+<#
+    MethodTemplate.SelfType = "Option<{0}>";
+    var methods = new[] {
+        new MethodTemplate("U", "Match", "U", "Func<$(typeParams), U> Some, Func<U> None", "tpl => Some($(access)), None"),
+        new MethodTemplate("void", "Match", "", "Action<$(typeParams)> Some, Action None", "tpl => Some($(access)), None"),
+        new MethodTemplate("U", "Maybe", "U", "U defaultValue, Func<$(typeParams), U> f", "defaultValue, tpl => f($(access))"),
+        new MethodTemplate("int", "Count", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("U", "Fold", "U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
+        new MethodTemplate("bool", "Forall", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("bool", "Exists", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Option<$(tupleType)>", "Filter", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Option<U>", "Map", "U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("void", "Iter", "", "Action<$(typeParams)> f"),
+        new MethodTemplate("Option<U>", "Bind", "U", "Func<$(typeParams), Option<U>> f"),
+    };
+#>
+using System;
+using System.Collections.Generic;
+
+namespace LangExt
+{
+    partial class Option
+    {
+<#
+    for (int i = 2; i <= Max; i++) {
+        var typeParam = TypeParams("T", i);
+        var tupleType = TupleType(i);
+        var access = Repeat(", ", "tpl._{0}()", i);
+#>
+        #region <#= i #>要素タプルを扱う関数
+<#
+        foreach (var m in methods) {
+            if (i <= m.Max) {
+#>
+
+        /// <summary>
+        /// <#= i #>要素タプルのOptionの各要素を展開して関数に渡す<#= m.Name #>です。
+        /// </summary>
+        <#= m.CreateSignature(typeParam, tupleType, access) #>
+        {
+            <#= m.CreateBody(typeParam, tupleType, access) #>
+        }
+<# } } #>
+        #endregion
+
+<# } #>
+    }
+}
