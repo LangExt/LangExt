@@ -63,6 +63,38 @@ namespace LangExt.Tests
         }
 #endregion
 
+#region AddFirst / RemoveFirst
+        [Test]
+        public void _2要素タプルにはRemoveFirstが存在しない()
+        {
+            dynamic pair = Create.Tuple(1, 2);
+            try
+            {
+                var _ = pair.RemoveFirst();
+                Assert.Fail();
+            }
+            catch (RuntimeBinderException)
+            {
+                Assert.Pass();
+            }
+        }
+
+        [Test]
+        public void _<#= Max #>要素タプルにはAddFirstが存在しない()
+        {
+            dynamic tpl = Create.Tuple(<#= MethodCallArgs("", 1, Max + 1) #>);
+            try
+            {
+                var _ = tpl.AddFirst("hoge");
+                Assert.Fail();
+            }
+            catch (RuntimeBinderException)
+            {
+                Assert.Pass();
+            }
+        }
+#endregion
+
 #region Match
 <# for (int i = 1; i <= Max; i++) { #>
         [Test]

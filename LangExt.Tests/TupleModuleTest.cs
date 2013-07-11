@@ -156,6 +156,38 @@ namespace LangExt.Tests
         }
 #endregion
 
+#region AddFirst / RemoveFirst
+        [Test]
+        public void _2要素タプルにはRemoveFirstが存在しない()
+        {
+            dynamic pair = Create.Tuple(1, 2);
+            try
+            {
+                var _ = pair.RemoveFirst();
+                Assert.Fail();
+            }
+            catch (RuntimeBinderException)
+            {
+                Assert.Pass();
+            }
+        }
+
+        [Test]
+        public void _16要素タプルにはAddFirstが存在しない()
+        {
+            dynamic tpl = Create.Tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            try
+            {
+                var _ = tpl.AddFirst("hoge");
+                Assert.Fail();
+            }
+            catch (RuntimeBinderException)
+            {
+                Assert.Pass();
+            }
+        }
+#endregion
+
 #region Match
         [Test]
         public void _16要素タプルをMatchさせると1番目の引数に1番目の要素が入ってくる()
