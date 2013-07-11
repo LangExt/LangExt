@@ -33,33 +33,33 @@ namespace LangExt.Tests
 
 #region Add / RemoveLast
         [Test]
-    public void _2要素タプルにはRemoveLastが存在しない()
+        public void _2要素タプルにはRemoveLastが存在しない()
         {
             dynamic pair = Create.Tuple(1, 2);
-        try
-        {
-            var _ = pair.RemoveLast();
-            Assert.Fail();
-        }
-        catch (RuntimeBinderException)
-        {
-            Assert.Pass();
-        }
+            try
+            {
+                var _ = pair.RemoveLast();
+                Assert.Fail();
+            }
+            catch (RuntimeBinderException)
+            {
+                Assert.Pass();
+            }
         }
 
-    [Test]
-    public void _<#= Max #>要素タプルにはAddが存在しない()
+        [Test]
+        public void _<#= Max #>要素タプルにはAddが存在しない()
         {
             dynamic tpl = Create.Tuple(<#= MethodCallArgs("", 1, Max + 1) #>);
-        try
-        {
-            var _ = tpl.Add("hoge");
-            Assert.Fail();
-        }
-        catch (RuntimeBinderException)
-        {
-            Assert.Pass();
-        }
+            try
+            {
+                var _ = tpl.Add("hoge");
+                Assert.Fail();
+            }
+            catch (RuntimeBinderException)
+            {
+                Assert.Pass();
+            }
         }
 #endregion
 
@@ -72,7 +72,7 @@ namespace LangExt.Tests
             Assert.That(
             tpl.Match((<#= MethodCallArgs("t", 1, Max + 1) #>) => t<#= i #>),
             Is.EqualTo(<#= i #>));
-    }
+        }
 
 <# } #>
 #endregion
@@ -83,13 +83,13 @@ namespace LangExt.Tests
         public void _<#= Max #>要素タプルの<#= i #>番目の要素に対してMapできる()
         {
             var tpl = Create.Tuple(<#= MethodCallArgs("", 1, Max + 1) #>);
-        var mapped = tpl.Map<#= i #>(x => x * 2);
+            var mapped = tpl.Map<#= i #>(x => x * 2);
         
-        Assert.That(mapped._<#= i #>(), Is.EqualTo(<#= i #> * 2));
+            Assert.That(mapped._<#= i #>(), Is.EqualTo(<#= i #> * 2));
 <# for (int j = 1; j <= Max; j++) if (j != i) { #>
-        Assert.That(mapped._<#= j #>(), Is.EqualTo(<#= j #>));
+            Assert.That(mapped._<#= j #>(), Is.EqualTo(<#= j #>));
 <# } #>
-    }
+        }
 
 <# } #>
 #endregion
