@@ -70,6 +70,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryExprTest.cs" />
     <Compile Include="ResultTest.cs" />
+    <Compile Include="SeqDragonTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SeqDragonTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="SeqTest.cs" />
     <Compile Include="SeqZipTest.cs">
       <AutoGen>True</AutoGen>
@@ -103,6 +108,10 @@
       <LastGenOutput>FuncOptionTest.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="SeqDragonTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SeqDragonTest.cs</LastGenOutput>
+    </None>
     <None Include="SeqZipTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SeqZipTest.cs</LastGenOutput>

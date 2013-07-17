@@ -1,0 +1,165 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#
+// TODO : あとでまとめる
+var predMethods = new[] {
+    "Count", "LongCount", "TryFind", "Forall", "Exists", "Filter", "SkipWhile", "TakeWhile", "Partition", "Span", "Break"
+};
+var convMethods = new[] {
+    "SumBy", "LongSumBy", "TryMaxBy", "TryMinBy", "SortBy", "RevSortBy"
+};
+var foldMethods = new[] {
+    "Fold", "FoldBack", "Scan", "ScanBack"
+};
+var reduceMethods = new[] {
+    "TryReduce", "TryReduceBack", "Scan1", "ScanBack1"
+};
+var transMethods = new[] {
+    "TryPick", "Map", "Choose"
+};
+var iterMethods = new[] {
+    "Iter"
+};
+var bindMethods = new[] {
+    "Bind"
+};
+#>
+using System;
+using LangExt;
+using NUnit.Framework;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class SeqDragonTest
+    {
+<# foreach (var m in predMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleSeq(i, 3) #>;
+            Assert.That(
+                sut.<#= m #>((<#= Repeat(", ", "i{0}", i) #>) => <#= Repeat(" && ", "i1 == i{0}", 2, i + 1) #>).ToString(),
+                Is.EqualTo(sut.<#= m #>(tpl => <#= Repeat(" && ", "tpl._1() == tpl._{0}()", 2, i + 1) #>).ToString()));
+        }
+<# } #>
+#endregion
+<# } #>
+<# foreach (var m in convMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleSeq(i, 3) #>;
+            Assert.That(
+                sut.<#= m #>((<#= Repeat(", ", "i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>).ToString(),
+                Is.EqualTo(sut.<#= m #>(tpl => <#= Repeat(" + ", "tpl._{0}()", i) #>).ToString()));
+        }
+<# } #>
+#endregion
+<# } #>
+<# foreach (var m in foldMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max - 1; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleSeq(i, 3) #>;
+            Assert.That(
+                sut.<#= m #>(0, (<#= m.Contains("Back") ? "" : "acc, " #><#= Repeat(", ", "i{0}", i) #><#= m.Contains("Back") ? ", acc" : "" #>) => acc + <#= Repeat(" + ", "i{0}", i) #>),
+                Is.EqualTo(sut.<#= m #>(0, (<#= m.Contains("Back") ? "" : "acc, " #>tpl<#= m.Contains("Back") ? ", acc" : "" #>) => acc + <#= Repeat(" + ", "tpl._{0}()", i) #>)));
+        }
+<# } #>
+#endregion
+<# } #>
+<# foreach (var m in reduceMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max / 2; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleSeq(i, 3) #>;
+            Assert.That(
+                sut.<#= m #>((<#= Repeat(", ", "i{0}", i) #>, <#= Repeat(", ", "j{0}", i) #>) => Create.Tuple(<#= Repeat(", ", "i{0} + j{0}", i) #>)),
+                Is.EqualTo(sut.<#= m #>((tpl, tpl2) => Create.Tuple(<#= Repeat(", ", "tpl._{0}() + tpl2._{0}()", i) #>))));
+        }
+<# } #>
+#endregion
+<# } #>
+<# foreach (var m in transMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleSeq(i, 3) #>;
+            Assert.That(
+                sut.<#= m #>((<#= Repeat(", ", "i{0}", i) #>) => <#= Repeat(" && ", "i1 == i{0}", 2, i + 1) #> ? Option.Some(i<#= i #>) : Option.None).ToString(),
+                Is.EqualTo(sut.<#= m #>(tpl => <#= Repeat(" && ", "tpl._1() == tpl._{0}()", 2, i + 1) #> ? Option.Some(tpl._<#= i #>()) : Option.None).ToString()));
+        }
+<# } #>
+#endregion
+<# } #>
+<# foreach (var m in iterMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleSeq(i, 3) #>;
+            var res1 = 0;
+            var res2 = 10;
+            sut.<#= m #>((<#= Repeat(", ", "i{0}", i) #>) => { res1 = <#= Repeat(" + ", "i{0}", i) #>; });
+            sut.<#= m #>(tpl => { res2 = <#= Repeat(" + ", "tpl._{0}()", i) #>; });
+            Assert.That(res1, Is.EqualTo(res2));
+        }
+<# } #>
+#endregion
+<# } #>
+<# foreach (var m in bindMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleSeq(i, 3) #>;
+            Assert.That(
+                sut.<#= m #>((<#= Repeat(", ", "i{0}", i) #>) => Seq.Repeat(i2, i<#= i #>)).ToString(),
+                Is.EqualTo(sut.<#= m #>(tpl => Seq.Repeat(tpl._2(), tpl._<#= i #>())).ToString()));
+        }
+<# } #>
+#endregion
+<# } #>
+    }
+}
+<#+
+string CreateTuple(int n, int elem) {
+    var elems = new List<string>();
+    for (int i = 0; i < n; i++) {
+        if (elem == 2 && i == 1)
+            elems.Add("1");
+        else
+            elems.Add(elem.ToString());
+    }
+    return "Create.Tuple(" + string.Join(", ", elems) + ")";
+}
+string CreateTupleSeq(int n, int elems) {
+    var tuples = new List<string>();
+    for (int i = 0; i < elems; i++) {
+        tuples.Add(CreateTuple(n, i + 1));
+    }
+    return "Create.Seq(" + string.Join(", ", tuples) + ");";
+}
+#>
