@@ -65,6 +65,11 @@
       <DependentUpon>FuncOptionTest.tt</DependentUpon>
     </Compile>
     <Compile Include="FuncTest.cs" />
+    <Compile Include="ObjectModuleDragonTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectModuleDragonTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="ObjectModuleTest.cs" />
     <Compile Include="OptionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +111,10 @@
     <None Include="FuncOptionTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FuncOptionTest.cs</LastGenOutput>
+    </None>
+    <None Include="ObjectModuleDragonTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectModuleDragonTest.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="SeqDragonTest.tt">
