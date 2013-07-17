@@ -1,0 +1,53 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#
+var predMethods = new[] {
+    "Count", "Forall", "Exists", "Filter"
+};
+#>
+using System;
+using LangExt;
+using NUnit.Framework;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class OptionDragonTest
+    {
+<# foreach (var m in predMethods) { #>
+#region <#= m #>
+<# for (int i = 2; i <= Max; i++) { #>
+        [Test]
+        public void _<#= i #>要素タプルのドラゴンパターンマッチ版<#= m #>が通常の<#= m #>と同じ動作をする()
+        {
+            var sut = <#= CreateTupleOption(i, 3) #>;
+            Assert.That(
+                sut.<#= m #>((<#= Repeat(", ", "i{0}", i) #>) => <#= Repeat(" && ", "i1 == i{0}", 2, i + 1) #>).ToString(),
+                Is.EqualTo(sut.<#= m #>(tpl => <#= Repeat(" && ", "tpl._1() == tpl._{0}()", 2, i + 1) #>).ToString()));
+        }
+<# } #>
+#endregion
+<# } #>
+    }
+}
+<#+
+string CreateTupleOption(int n, int elem) {
+    var elems = new List<string>();
+    for (int i = 0; i < n; i++) {
+        if (elem == 2 && i == 1)
+            elems.Add("1");
+        else
+            elems.Add(elem.ToString());
+    }
+    return "Option.Some(Create.Tuple(" + string.Join(", ", elems) + "))";
+}
+#>
