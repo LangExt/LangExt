@@ -17,6 +17,8 @@
         new MethodTemplate("IEnumerable<$(tupleType)>", "Scan1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
         new MethodTemplate("IEnumerable<U>", "Map", "U", "Func<$(typeParams), U> f"),
         new MethodTemplate("IEnumerable<U>", "MapWithIndex", "U", "Func<$(typeParams), int, U> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("void", "Iter", "", "Action<$(typeParams)> f"),
+        new MethodTemplate("void", "IterWithIndex", "", "Action<$(typeParams), int> f", "(tpl, i) => f($(access), i)").WithMax(15),
         new MethodTemplate("IEnumerable<U>", "Bind", "U", "Func<$(typeParams), IEnumerable<U>> f"),
         new MethodTemplate("IEnumerable<U>", "BindWithIndex", "U", "Func<$(typeParams), int, IEnumerable<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
         new MethodTemplate("IEnumerable<$(tupleType)>", "SkipWhile", "", "Func<$(typeParams), bool> f"),

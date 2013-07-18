@@ -51,6 +51,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2>(this IEnumerable<Tuple<T1, T2>> self, Action<T1, T2> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2()));
+        }
+
+        /// <summary>
+        /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2>(this IEnumerable<Tuple<T1, T2>> self, Action<T1, T2, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
+        }
+
+        /// <summary>
         /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, U>(this IEnumerable<Tuple<T1, T2>> self, Func<T1, T2, IEnumerable<U>> f)
@@ -156,6 +172,22 @@ namespace LangExt
         public static IEnumerable<U> MapWithIndex<T1, T2, T3, U>(this IEnumerable<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
+        }
+
+        /// <summary>
+        /// 3要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3>(this IEnumerable<Tuple<T1, T2, T3>> self, Action<T1, T2, T3> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3()));
+        }
+
+        /// <summary>
+        /// 3要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3>(this IEnumerable<Tuple<T1, T2, T3>> self, Action<T1, T2, T3, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
 
         /// <summary>
@@ -267,6 +299,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Action<T1, T2, T3, T4> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+
+        /// <summary>
+        /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Action<T1, T2, T3, T4, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
+        }
+
+        /// <summary>
         /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, T3, T4, U>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, IEnumerable<U>> f)
@@ -372,6 +420,22 @@ namespace LangExt
         public static IEnumerable<U> MapWithIndex<T1, T2, T3, T4, T5, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
+        }
+
+        /// <summary>
+        /// 5要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Action<T1, T2, T3, T4, T5> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+
+        /// <summary>
+        /// 5要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Action<T1, T2, T3, T4, T5, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
 
         /// <summary>
@@ -483,6 +547,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Action<T1, T2, T3, T4, T5, T6> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+
+        /// <summary>
+        /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Action<T1, T2, T3, T4, T5, T6, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
+        }
+
+        /// <summary>
         /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, T3, T4, T5, T6, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, IEnumerable<U>> f)
@@ -588,6 +668,22 @@ namespace LangExt
         public static IEnumerable<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
+        }
+
+        /// <summary>
+        /// 7要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Action<T1, T2, T3, T4, T5, T6, T7> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+
+        /// <summary>
+        /// 7要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Action<T1, T2, T3, T4, T5, T6, T7, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
 
         /// <summary>
@@ -699,6 +795,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+
+        /// <summary>
+        /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
+        }
+
+        /// <summary>
         /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, IEnumerable<U>> f)
@@ -796,6 +908,22 @@ namespace LangExt
         public static IEnumerable<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
+        }
+
+        /// <summary>
+        /// 9要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+
+        /// <summary>
+        /// 9要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
 
         /// <summary>
@@ -899,6 +1027,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+
+        /// <summary>
+        /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
+        }
+
+        /// <summary>
         /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, IEnumerable<U>> f)
@@ -996,6 +1140,22 @@ namespace LangExt
         public static IEnumerable<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
+        }
+
+        /// <summary>
+        /// 11要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+
+        /// <summary>
+        /// 11要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
 
         /// <summary>
@@ -1099,6 +1259,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+
+        /// <summary>
+        /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
+        }
+
+        /// <summary>
         /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, IEnumerable<U>> f)
@@ -1196,6 +1372,22 @@ namespace LangExt
         public static IEnumerable<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
+        }
+
+        /// <summary>
+        /// 13要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+
+        /// <summary>
+        /// 13要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
 
         /// <summary>
@@ -1299,6 +1491,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+
+        /// <summary>
+        /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
+        }
+
+        /// <summary>
         /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, IEnumerable<U>> f)
@@ -1399,6 +1607,22 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+
+        /// <summary>
+        /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すIterWithIndexです。
+        /// </summary>
+        public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int> f)
+        {
+            self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
+        }
+
+        /// <summary>
         /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すBindです。
         /// </summary>
         public static IEnumerable<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, IEnumerable<U>> f)
@@ -1471,6 +1695,14 @@ namespace LangExt
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+
+        /// <summary>
+        /// 16要素タプルのIEnumerableの各要素を展開して関数に渡すIterです。
+        /// </summary>
+        public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> f)
+        {
+            self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
 
         /// <summary>

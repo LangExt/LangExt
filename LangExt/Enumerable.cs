@@ -88,6 +88,46 @@ namespace LangExt
         public static IEnumerable<U> MapWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, U> f) { return StdEnumerable.Select(self, f); }
 
         /// <summary>
+        /// Enumerableのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static void Iter<T>(this IEnumerable<T> self, Action<T> act)
+        {
+            foreach (var x in self) act(x);
+        }
+
+        /// <summary>
+        /// Enumerableのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Unit IterF<T>(this IEnumerable<T> self, Func<T, Unit> act)
+        {
+            foreach (var x in self) act(x);
+            return Unit._;
+        }
+
+        /// <summary>
+        /// Enumerableのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static void IterWithIndex<T>(this IEnumerable<T> self, Action<T, int> act)
+        {
+            var i = 0;
+            foreach (var x in self) act(x, i++);
+        }
+
+        /// <summary>
+        /// Enumerableのすべての要素に対してactを実行します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Unit IterFWithIndex<T>(this IEnumerable<T> self, Func<T, int, Unit> act)
+        {
+            var i = 0;
+            foreach (var x in self) act(x, i++);
+            return Unit._;
+        }
+
+        /// <summary>
         /// IEnumerableの各要素を順番にfの引数に対して渡し、fから返された各IEnumerableを平坦化したIEnumerableを生成して返します。
         /// 標準クエリ演算子のSelectManyに対応します。
         /// </summary>
