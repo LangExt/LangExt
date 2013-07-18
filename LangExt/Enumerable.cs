@@ -65,19 +65,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// IEnumerableから、predを満たす要素のみを含むIEnumerableを生成して返します。
-        /// 標準クエリ演算子のWhereに対応します。
-        /// </summary>
-        public static IEnumerable<T> Filter<T>(this IEnumerable<T> self, Func<T, bool> pred) { return self.Where(pred); }
-
-        /// <summary>
-        /// IEnumerableから、predを満たす要素のみを含むIEnumerableを生成して返します。
-        /// predには、要素のほかに要素のインデックスも渡されます。
-        /// 標準クエリ演算子のWhereに対応します。
-        /// </summary>
-        public static IEnumerable<T> FilterWithIndex<T>(this IEnumerable<T> self, Func<T, int, bool> pred) { return StdEnumerable.Where(self, pred); }
-
-        /// <summary>
         /// IEnumerableのすべての要素に対してfを適用したIEnumerableを生成して返します。
         /// 標準クエリ演算子のSelectに対応します。
         /// </summary>
@@ -102,22 +89,6 @@ namespace LangExt
         /// 標準クエリ演算子のSelectManyに対応します。
         /// </summary>
         public static IEnumerable<U> BindWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, IEnumerable<U>> f) { return StdEnumerable.SelectMany(self, f); }
-
-        /// <summary>
-        /// IEnumerableのすべての要素に対してfを適用し、Someを返した要素のみを集めたIEnumerableを生成して返します。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
-        public static IEnumerable<U> Choose<T, U>(this IEnumerable<T> self, Func<T, Option<U>> f) { return self.Bind(t => f(t).ToArray()); }
-
-        /// <summary>
-        /// IEnumerableのすべての要素に対してfを適用し、Someを返した要素のみを集めたIEnumerableを生成して返します。
-        /// fには、要素のほかに要素のインデックスも渡されます。
-        /// 対応する標準クエリ演算子はありません。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T, U>(this IEnumerable<T> self, Func<T, int, Option<U>> f)
-        {
-            return self.BindWithIndex((t, i) => f(t, i).ToArray());
-        }
 
         /// <summary>
         /// 非ジェネリック型のIEnumerableを、IEnumerable[T]に変換します。

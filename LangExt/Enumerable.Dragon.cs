@@ -35,22 +35,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2>> Filter<T1, T2>(this IEnumerable<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2()));
-        }
-
-        /// <summary>
-        /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2>> FilterWithIndex<T1, T2>(this IEnumerable<Tuple<T1, T2>> self, Func<T1, T2, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
-        }
-
-        /// <summary>
         /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, U>(this IEnumerable<Tuple<T1, T2>> self, Func<T1, T2, U> f)
@@ -80,22 +64,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, U>(this IEnumerable<Tuple<T1, T2>> self, Func<T1, T2, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
-        }
-
-        /// <summary>
-        /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, U>(this IEnumerable<Tuple<T1, T2>> self, Func<T1, T2, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2()));
-        }
-
-        /// <summary>
-        /// 2要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, U>(this IEnumerable<Tuple<T1, T2>> self, Func<T1, T2, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
 
         /// <summary>
@@ -175,22 +143,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 3要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3>> Filter<T1, T2, T3>(this IEnumerable<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3()));
-        }
-
-        /// <summary>
-        /// 3要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3>> FilterWithIndex<T1, T2, T3>(this IEnumerable<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
-        }
-
-        /// <summary>
         /// 3要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, U>(this IEnumerable<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, U> f)
@@ -220,22 +172,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, U>(this IEnumerable<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
-        }
-
-        /// <summary>
-        /// 3要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, U>(this IEnumerable<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3()));
-        }
-
-        /// <summary>
-        /// 3要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, U>(this IEnumerable<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
 
         /// <summary>
@@ -315,22 +251,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4>> Filter<T1, T2, T3, T4>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
-        }
-
-        /// <summary>
-        /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4>> FilterWithIndex<T1, T2, T3, T4>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
-        }
-
-        /// <summary>
         /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, U>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, U> f)
@@ -360,22 +280,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, U>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
-        }
-
-        /// <summary>
-        /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, U>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
-        }
-
-        /// <summary>
-        /// 4要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, U>(this IEnumerable<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
 
         /// <summary>
@@ -455,22 +359,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 5要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5>> Filter<T1, T2, T3, T4, T5>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
-        }
-
-        /// <summary>
-        /// 5要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5>> FilterWithIndex<T1, T2, T3, T4, T5>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
-        }
-
-        /// <summary>
         /// 5要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, U> f)
@@ -500,22 +388,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
-        }
-
-        /// <summary>
-        /// 5要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
-        }
-
-        /// <summary>
-        /// 5要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
 
         /// <summary>
@@ -595,22 +467,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> Filter<T1, T2, T3, T4, T5, T6>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
-        }
-
-        /// <summary>
-        /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> FilterWithIndex<T1, T2, T3, T4, T5, T6>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
-        }
-
-        /// <summary>
         /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, U> f)
@@ -640,22 +496,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
-        }
-
-        /// <summary>
-        /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
-        }
-
-        /// <summary>
-        /// 6要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
 
         /// <summary>
@@ -735,22 +575,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 7要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> Filter<T1, T2, T3, T4, T5, T6, T7>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
-        }
-
-        /// <summary>
-        /// 7要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
-        }
-
-        /// <summary>
         /// 7要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
@@ -780,22 +604,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
-        }
-
-        /// <summary>
-        /// 7要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
-        }
-
-        /// <summary>
-        /// 7要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
 
         /// <summary>
@@ -875,22 +683,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
-        }
-
-        /// <summary>
-        /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
-        }
-
-        /// <summary>
         /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
@@ -920,22 +712,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
-        }
-
-        /// <summary>
-        /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
-        }
-
-        /// <summary>
-        /// 8要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
 
         /// <summary>
@@ -1007,22 +783,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 9要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
-        }
-
-        /// <summary>
-        /// 9要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
-        }
-
-        /// <summary>
         /// 9要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
@@ -1052,22 +812,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
-        }
-
-        /// <summary>
-        /// 9要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
-        }
-
-        /// <summary>
-        /// 9要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
 
         /// <summary>
@@ -1139,22 +883,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
-        }
-
-        /// <summary>
-        /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
-        }
-
-        /// <summary>
         /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
@@ -1184,22 +912,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
-        }
-
-        /// <summary>
-        /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
-        }
-
-        /// <summary>
-        /// 10要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
 
         /// <summary>
@@ -1271,22 +983,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 11要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
-        }
-
-        /// <summary>
-        /// 11要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
-        }
-
-        /// <summary>
         /// 11要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
@@ -1316,22 +1012,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
-        }
-
-        /// <summary>
-        /// 11要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
-        }
-
-        /// <summary>
-        /// 11要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
 
         /// <summary>
@@ -1403,22 +1083,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
-        }
-
-        /// <summary>
-        /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
-        }
-
-        /// <summary>
         /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
@@ -1448,22 +1112,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
-        }
-
-        /// <summary>
-        /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
-        }
-
-        /// <summary>
-        /// 12要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
 
         /// <summary>
@@ -1535,22 +1183,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 13要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
-        }
-
-        /// <summary>
-        /// 13要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
-        }
-
-        /// <summary>
         /// 13要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
@@ -1580,22 +1212,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
-        }
-
-        /// <summary>
-        /// 13要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
-        }
-
-        /// <summary>
-        /// 13要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
 
         /// <summary>
@@ -1667,22 +1283,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
-        }
-
-        /// <summary>
-        /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
-        }
-
-        /// <summary>
         /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
@@ -1712,22 +1312,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
-        }
-
-        /// <summary>
-        /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
-        }
-
-        /// <summary>
-        /// 14要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
 
         /// <summary>
@@ -1799,22 +1383,6 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
-        }
-
-        /// <summary>
-        /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すFilterWithIndexです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, bool> f)
-        {
-            return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
-        }
-
-        /// <summary>
         /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
@@ -1844,22 +1412,6 @@ namespace LangExt
         public static IEnumerable<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, IEnumerable<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
-        }
-
-        /// <summary>
-        /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
-        }
-
-        /// <summary>
-        /// 15要素タプルのIEnumerableの各要素を展開して関数に渡すChooseWithIndexです。
-        /// </summary>
-        public static IEnumerable<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, Option<U>> f)
-        {
-            return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
 
         /// <summary>
@@ -1914,14 +1466,6 @@ namespace LangExt
         #region 16要素タプルを扱う関数
 
         /// <summary>
-        /// 16要素タプルのIEnumerableの各要素を展開して関数に渡すFilterです。
-        /// </summary>
-        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
-        {
-            return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
-        }
-
-        /// <summary>
         /// 16要素タプルのIEnumerableの各要素を展開して関数に渡すMapです。
         /// </summary>
         public static IEnumerable<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
@@ -1935,14 +1479,6 @@ namespace LangExt
         public static IEnumerable<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, IEnumerable<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
-        }
-
-        /// <summary>
-        /// 16要素タプルのIEnumerableの各要素を展開して関数に渡すChooseです。
-        /// </summary>
-        public static IEnumerable<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Option<U>> f)
-        {
-            return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
 
         /// <summary>

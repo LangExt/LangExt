@@ -42,7 +42,7 @@ ISeq[T]のみに対してできる操作には、例えば以下の関数があ�
 * Len/Count
 * Exists/Forall
 * Fold/FoldBack/ScanBack/TryReduce/TryReduceBack
-* Partition
+* Filter/Partition
 * Reverse
 * Sort/RevSort
 * TryFind/TryPick
