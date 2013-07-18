@@ -65,6 +65,16 @@ namespace LangExt
         }
 
         /// <summary>
+        /// IEnumerableの指定番目の要素を返します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Option<T> TryGet<T>(this IEnumerable<T> self, int index)
+        {
+            Func<IEnumerable<T>, int, T> f = Unsafe.EnumerableUnsafe.Get;
+            return f.ToOptionFunc()(self, index);
+        }
+
+        /// <summary>
         /// IEnumerableのすべての要素に対してfを適用したIEnumerableを生成して返します。
         /// 標準クエリ演算子のSelectに対応します。
         /// </summary>

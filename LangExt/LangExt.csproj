@@ -140,6 +140,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TupleModule.tt</DependentUpon>
     </Compile>
+    <Compile Include="Unsafe\EnumerableUnsafe.cs" />
     <Compile Include="Unsafe\OptionUnsafe.cs" />
     <Compile Include="Unsafe\ResultUnsafe.cs" />
     <Compile Include="Unsafe\SeqUnsafe.cs" />
