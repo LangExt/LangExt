@@ -266,6 +266,9 @@ namespace LangExt
         /// <summary>
         /// Result[TSuccess, TFailure]型のFailureを、Result[TSuccess2, TFailure]に変換します。
         /// オブジェクトがSuccessの場合、InvalidOperationExceptionが投げられます。
+        /// このメソッドは拡張メソッドでは提供不可能なため、例外を投げる可能性があるにもかかわらず、Unsafe名前空間で定義されていません。
+        /// このメソッドを使用する場合は、注意して使用してください。
+        /// 可能であれば、Successの場合の処理を指定できるSafeCastを使用してください。
         /// </summary>
         public Result<TSuccess2, TFailure> Cast<TSuccess2>()
         {
@@ -291,6 +294,9 @@ namespace LangExt
         /// <summary>
         /// Result[TSuccess, TFailure]型のFailureを、Result[TSuccess, TFailure2]に変換します。
         /// オブジェクトがFailureの場合、InvalidOperationExceptionが投げられます。
+        /// このメソッドは拡張メソッドでは提供不可能なため、例外を投げる可能性があるにもかかわらず、Unsafe名前空間で定義されていません。
+        /// このメソッドを使用する場合は、注意して使用してください。
+        /// 可能であれば、Failureの場合の処理を指定できるSafeCastFailureを使用してください。
         /// </summary>
         public Result<TSuccess, TFailure2> CastFailure<TFailure2>()
         {
