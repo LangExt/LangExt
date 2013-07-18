@@ -423,8 +423,8 @@ let ``LangExtSeq.Iter eq Seq.iter (Action)``() =
     (=) (fun xs -> let n = ref 0 in Seq.iter (fun x -> n := !n + x) xs; n)
 
 [<Test>]
-let ``LangExtSeq.Iter eq Seq.iter (Func)``() =
-  test (fun xs -> let n = ref 0 in ignore <| LangExtSeq.Iter(intSeq xs, fun x -> n := !n + x; LangExt.Unit.``_``); n)
+let ``LangExtSeq.IterF eq Seq.iter (Func)``() =
+  test (fun xs -> let n = ref 0 in ignore <| LangExtSeq.IterF(intSeq xs, fun x -> n := !n + x; LangExt.Unit.``_``); n)
     (=) (fun xs -> let n = ref 0 in Seq.iter (fun x -> n := !n + x) xs; n)
 
 [<Test>]
@@ -433,8 +433,8 @@ let ``LangExtSeq.IterWithIndex eq Seq.iteri (Action)``() =
     (=) (fun xs -> let n = ref 0 in Seq.iteri (fun i x -> n := !n + x + i) xs; n)
 
 [<Test>]
-let ``LangExtSeq.IterWithIndex eq Seq.iteri (Func)``() =
-  test (fun xs -> let n = ref 0 in ignore <| LangExtSeq.IterWithIndex(intSeq xs, fun x i -> n := !n + x + i; LangExt.Unit.``_``); n)
+let ``LangExtSeq.IterFWithIndex eq Seq.iteri (Func)``() =
+  test (fun xs -> let n = ref 0 in ignore <| LangExtSeq.IterFWithIndex(intSeq xs, fun x i -> n := !n + x + i; LangExt.Unit.``_``); n)
     (=) (fun xs -> let n = ref 0 in Seq.iteri (fun i x -> n := !n + x + i) xs; n)
 
 [<Test>]

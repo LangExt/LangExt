@@ -15,7 +15,7 @@ namespace LangExt.Tests
                 // キャッシュしたシーケンスをそのまま使うパターン
                 Assert.That(Seq.Empty<int>().Cache().Len(), Is.EqualTo(0));
                 Assert.That(Seq.Empty<int>().Cache().Map<int, int>(_ => { throw new Exception("oops!"); }), Is.EqualTo(Seq.Empty<int>()));
-                Assert.That(Seq.Empty<int>().Cache().Iter(_ => { throw new Exception("oops!"); }), Is.EqualTo(Unit._));
+                Assert.That(Seq.Empty<int>().Cache().IterF(_ => { throw new Exception("oops!"); }), Is.EqualTo(Unit._));
                 // ToStringは走査しないので、空かどうかは回してみるまではわからない。
                 // Seq.Emptyで得られる型を特別扱いという手もあるけど、統一性がなくなるのでしない。
                 Assert.That(Seq.Empty<int>().Cache().ToString(), Is.EqualTo("cached seq [...]"));
@@ -24,7 +24,7 @@ namespace LangExt.Tests
                 var cached = Seq.Empty<int>().Cache();
                 Assert.That(cached.Len(), Is.EqualTo(0));
                 Assert.That(cached.Map<int, int>(_ => { throw new Exception("oops!"); }), Is.EqualTo(Seq.Empty<int>()));
-                Assert.That(cached.Iter(_ => { throw new Exception("oops!"); }), Is.EqualTo(Unit._));
+                Assert.That(cached.IterF(_ => { throw new Exception("oops!"); }), Is.EqualTo(Unit._));
                 // 最初のLenで、空であることが確定したシーケンスなので、「...」が消えている。
                 Assert.That(cached.ToString(), Is.EqualTo("cached seq []"));
             }

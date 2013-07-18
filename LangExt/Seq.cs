@@ -460,7 +460,7 @@ namespace LangExt
         /// シーケンスのすべての要素に対してactを実行します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Unit Iter<T>(this ISeq<T> self, Func<T, Unit> act)
+        public static Unit IterF<T>(this ISeq<T> self, Func<T, Unit> act)
         {
             foreach (var x in self) act(x);
             return Unit._;
@@ -480,7 +480,7 @@ namespace LangExt
         /// シーケンスのすべての要素に対してactを実行します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Unit IterWithIndex<T>(this ISeq<T> self, Func<T, int, Unit> act)
+        public static Unit IterFWithIndex<T>(this ISeq<T> self, Func<T, int, Unit> act)
         {
             var i = 0;
             foreach (var x in self) act(x, i++);
