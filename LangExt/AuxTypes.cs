@@ -11,7 +11,7 @@ namespace LangExt
     /// <summary>
     /// 値がないことを表すための型です。
     /// </summary>
-    public struct Unit
+    public struct Unit : IEquatable<Unit>, IComparable<Unit>
     {
         /// <summary>
         /// Unitの値を取得します。
@@ -19,7 +19,7 @@ namespace LangExt
         public readonly static Unit _ = new Unit();
 
         /// <summary>
-        /// Unitは常に等しいため、この演算子は常にfalseを返します。
+        /// Unitは常に等しいため、この演算子は常にtrueを返します。
         /// </summary>
         public static bool operator ==(Unit lhs, Unit rhs) { return true; }
 
@@ -29,10 +29,40 @@ namespace LangExt
         public static bool operator !=(Unit lhs, Unit rhs) { return false; }
 
         /// <summary>
+        /// Unitは常に等しいため、この演算子は常にfalseを返します。
+        /// </summary>
+        public static bool operator <(Unit lhs, Unit rhs) { return false; }
+
+        /// <summary>
+        /// Unitは常に等しいため、この演算子は常にfalseを返します。
+        /// </summary>
+        public static bool operator >(Unit lhs, Unit rhs) { return false; }
+
+        /// <summary>
+        /// Unitは常に等しいため、この演算子は常にtrueを返します。
+        /// </summary>
+        public static bool operator <=(Unit lhs, Unit rhs) { return true; }
+
+        /// <summary>
+        /// Unitは常に等しいため、この演算子は常にtrueを返します。
+        /// </summary>
+        public static bool operator >=(Unit lhs, Unit rhs) { return true; }
+
+        /// <summary>
+        /// Unitは常に等しいため、このメソッドは常にtrueを返します。
+        /// </summary>
+        public bool Equals(Unit other) { return true; }
+
+        /// <summary>
         /// 引数がUnitかどうかを判定します。
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) { return obj is Unit; }
+
+        /// <summary>
+        /// Unitは常に等しいため、このメソッドは常に0を返します。
+        /// </summary>
+        public int CompareTo(Unit other) { return 0; }
 
         /// <summary>
         /// このオブジェクトを表すハッシュ値を取得します。
