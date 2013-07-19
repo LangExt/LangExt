@@ -71,6 +71,35 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 自身がxと等しい場合Someを返し、そうでない場合Noneを返します。
+        /// 自身もxもnullだった場合のみ、このメソッドは例外を投げます。
+        /// </summary>
+        public static Option<T> SomeIf<T>(this T self, T x)
+        {
+            return self.IsEqualTo(x) ? Option.Some(self) : Option.None;
+        }
+
+        /// <summary>
+        /// predがtrueを返す場合Noneを返し、falseを返す場合Someを返します。
+        /// 自身がnullかつpredがtrueを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// </summary>
+        public static Option<T> SomeIf<T>(this T self, Func<bool> pred)
+        {
+            return pred() ? Option.Some(self) : Option.None;
+        }
+
+        /// <summary>
+        /// predがtrueを返す場合Noneを返し、falseを返す場合Someを返します。
+        /// 自身がnullかつpredがtrueを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// </summary>
+        public static Option<T> SomeIf<T>(this T self, Func<T, bool> pred)
+        {
+            return pred(self) ? Option.Some(self) : Option.None;
+        }
+
+        /// <summary>
         /// 自身がxと等しい場合Noneを返し、そうでない場合Someを返します。
         /// 自身がnullかつxがnullではなかったときのみ、このメソッドは例外を投げます。
         /// 自身もxもnullだった場合は、Noneを返します。
