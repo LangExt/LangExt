@@ -73,6 +73,15 @@ namespace LangExt
         }
 
         /// <summary>
+        /// Unitを格納するOptionを生成します。
+        /// </summary>
+        /// <returns>Some(Unit._)</returns>
+        public static Option<Unit> Some()
+        {
+            return new Option<Unit>(Unit._);
+        }
+
+        /// <summary>
         /// 値がないことを表すOption型の値(None)を取得します。 
         /// </summary>
         public static Option<Placeholder> None
