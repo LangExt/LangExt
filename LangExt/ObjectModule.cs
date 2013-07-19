@@ -140,13 +140,42 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 自身がxと等しい場合Successを返し、そうでない場合Failureを返します。
+        /// 自身もxもnullだった場合のみ、このメソッドは例外を投げます。
+        /// </summary>
+        public static Result<T, Unit> SuccessIf<T>(this T self, T x)
+        {
+            return self.IsEqualTo(x) ? Result.NewSuccess<T, Unit>(self) : Result.NewFailure<T>();
+        }
+
+        /// <summary>
+        /// predがtrueを返す場合Successを返し、falseを返す場合Failureを返します。
+        /// 自身がnullかつpredがtrueを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// </summary>
+        public static Result<T, Unit> SuccessIf<T>(this T self, Func<bool> pred)
+        {
+            return pred() ? Result.NewSuccess<T, Unit>(self) : Result.NewFailure<T>();
+        }
+
+        /// <summary>
+        /// predがtrueを返す場合Successを返し、falseを返す場合Failureを返します。
+        /// 自身がnullかつpredがtrueを返した場合は、例外を投げます。
+        /// また、predが例外を投げた場合も例外を投げます。
+        /// </summary>
+        public static Result<T, Unit> SuccessIf<T>(this T self, Func<T, bool> pred)
+        {
+            return pred(self) ? Result.NewSuccess<T, Unit>(self) : Result.NewFailure<T>();
+        }
+
+        /// <summary>
         /// 自身がxと等しい場合Failureを返し、そうでない場合Successを返します。
         /// 自身がnullかつxがnullではなかったときのみ、このメソッドは例外を投げます。
         /// 自身もxもnullだった場合は、Failureを返します。
         /// </summary>
         public static Result<T, Unit> FailureIf<T>(this T self, T x)
         {
-            return self.IsEqualTo(x) ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
+            return self.IsEqualTo(x) ? Result.NewFailure<T>() : Result.NewSuccess<T, Unit>(self);
         }
 
         /// <summary>
@@ -157,7 +186,7 @@ namespace LangExt
         /// </summary>
         public static Result<T, Unit> FailureIf<T>(this T self, Func<bool> pred)
         {
-            return pred() ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
+            return pred() ? Result.NewFailure<T>() : Result.NewSuccess<T, Unit>(self);
         }
 
         /// <summary>
@@ -168,7 +197,7 @@ namespace LangExt
         /// </summary>
         public static Result<T, Unit> FailureIf<T>(this T self, Func<T, bool> pred)
         {
-            return pred(self) ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
+            return pred(self) ? Result.NewFailure<T>() : Result.NewSuccess<T, Unit>(self);
         }
 
         /// <summary>
@@ -176,7 +205,7 @@ namespace LangExt
         /// </summary>
         public static Result<T, Unit> FailureIfNull<T>(this T self)
         {
-            return self.IsNull() ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
+            return self.IsNull() ? Result.NewFailure<T>() : Result.NewSuccess<T, Unit>(self);
         }
         
         /// <summary>
