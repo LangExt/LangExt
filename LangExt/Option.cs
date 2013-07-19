@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace LangExt
 {
@@ -115,6 +111,24 @@ namespace LangExt
         public static bool IsNone<T>(Option<T> self)
         {
             return self.IsNone;
+        }
+        
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 
@@ -248,6 +262,7 @@ namespace LangExt
         /// </summary>
         /// <param name="obj">このオブジェクトと比較するオブジェクト</param>
         /// <returns>現在のオブジェクトがobjで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj)
         {
             if (obj.IsNull())
@@ -393,6 +408,24 @@ namespace LangExt
         public override string ToString()
         {
             return this.hasValue ? string.Concat("Some(", this.value, ")") : "None";
+        }
+        
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }

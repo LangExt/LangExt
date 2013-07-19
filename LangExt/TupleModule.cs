@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.ComponentModel;
 
 namespace LangExt
 {
@@ -1730,5 +1731,23 @@ namespace LangExt
             return TupleModule.Create(self._1(), self._2(), self._3(), self._4(), self._5(), self._6(), self._7(), self._8(), self._9(), self._10(), self._11(), self._12(), self._13(), self._14(), self._15(), f(self._16()));
         }
 
+        
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
+        }
     }
 }

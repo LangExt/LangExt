@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.ComponentModel;
 
 namespace LangExt
 {
@@ -10,11 +11,31 @@ namespace LangExt
     public sealed class NullResultException : Exception
     {
         /// <summary>objがNullResultExceptionであればtrueを返します。</summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj) { return obj is NullResultException; }
         /// <summary>このオブジェクトのハッシュコードを返します。</summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() { return 11; }
         /// <summary>このオブジェクトの文字列表現を返します。</summary>
         public override string ToString() { return "NullResultException"; }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
+        }
     }
 
     partial class Func

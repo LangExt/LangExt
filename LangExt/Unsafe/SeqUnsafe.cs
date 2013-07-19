@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace LangExt.Unsafe
 {
@@ -126,6 +127,24 @@ namespace LangExt.Unsafe
                     return res.GetValue();
             }
             throw new InvalidOperationException(string.Format(Properties.Resources.ExMsgElementNotFound, "self"));
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }

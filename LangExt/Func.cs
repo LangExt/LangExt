@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
 
 namespace LangExt
 {
@@ -21,6 +19,24 @@ namespace LangExt
         public static Func<T2, Func<T1, U>> Flip<T1, T2, U>(this Func<T1, Func<T2, U>> f)
         {
             return t2 => t1 => f(t1)(t2);
+        }
+        
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }

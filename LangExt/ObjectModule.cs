@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
 
 namespace LangExt
 {
@@ -150,6 +148,24 @@ namespace LangExt
         public static Result<T, Unit> FailureIfNull<T>(this T self)
         {
             return self.IsNull() ? Result.NewFailure<T, Unit>(Unit._) : Result.NewSuccess<T, Unit>(self);
+        }
+        
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }

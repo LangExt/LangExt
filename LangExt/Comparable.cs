@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace LangExt
 {
@@ -103,6 +100,42 @@ namespace LangExt
             {
                 return this.Match(() => "LT", () => "EQ", () => "GT");
             }
+
+            /// <summary>
+            /// 使用しません。
+            /// </summary>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static new bool Equals(object a, object b)
+            {
+                return object.Equals(a, b);
+            }
+
+            /// <summary>
+            /// 使用しません。
+            /// </summary>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static new bool ReferenceEquals(object a, object b)
+            {
+                return object.ReferenceEquals(a, b);
+            }
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LangExt
 {
+    using System.ComponentModel;
     using StdEnumerable = System.Linq.Enumerable;
 
     /// <summary>
@@ -56,6 +56,24 @@ namespace LangExt
         public static IOrderedSeq<T> RevThenBy<T, U>(this IOrderedSeq<T> self, Func<T, U> f)
         {
             return new OrderedSeq<T>(StdEnumerable.ThenByDescending(self, f));
+        }
+        
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }
