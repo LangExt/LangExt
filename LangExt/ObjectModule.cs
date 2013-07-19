@@ -64,10 +64,20 @@ namespace LangExt
 
         /// <summary>
         /// null安全にToStringを呼び出します。
+        /// レシーバがnullだった場合、空文字列を返します。
         /// </summary>
         public static string ToStr(this object self)
         {
-            return (self ?? "").ToString();
+            return self == null ? "" : self.ToString();
+        }
+
+        /// <summary>
+        /// null安全にToStringを呼び出します。
+        /// レシーバがnullだった場合、defaultStrで指定した文字列を返します。
+        /// </summary>
+        public static string ToStrOr(this object self, string defaultStr)
+        {
+            return self == null ? defaultStr : self.ToString();
         }
 
         /// <summary>
