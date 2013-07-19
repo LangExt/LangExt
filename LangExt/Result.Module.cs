@@ -106,6 +106,22 @@ namespace LangExt
         /// <summary>
         /// Result[T, U] → int
         /// </summary>
+        public static int Size<T, U>(this Result<T, U> self)
+        {
+            return self.Match(s => 1, e => 0);
+        }
+
+        /// <summary>
+        /// Result[T, U] → int
+        /// </summary>
+        public static int SizeFailure<T, U>(this Result<T, U> self)
+        {
+            return self.Match(s => 0, e => 1);
+        }
+
+        /// <summary>
+        /// Result[T, U] → int
+        /// </summary>
         public static int Len<T, U>(this Result<T, U> self)
         {
             return self.Match(s => 1, e => 0);

@@ -95,6 +95,14 @@ namespace LangExt
         /// <summary>
         /// Option[T] → int
         /// </summary>
+        public static int Size<T>(this Option<T> self)
+        {
+            return self.Match(_ => 1, () => 0);
+        }
+
+        /// <summary>
+        /// Option[T] → int
+        /// </summary>
         public static int Len<T>(this Option<T> self)
         {
             return self.Match(_ => 1, () => 0);
