@@ -78,6 +78,18 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 成功した結果としてUnitを格納するResultを生成します。
+        /// 通常は、NewSuccessではなく、Successを使用します。
+        /// このメソッドは、失敗側の型も指定したい場合に使用します。
+        /// </summary>
+        /// <typeparam name="TFailure">Resultに保持する失敗の型</typeparam>
+        /// <returns>Success(Unit._)</returns>
+        public static Result<Unit, TFailure> NewSuccess<TFailure>()
+        {
+            return new Result<Unit, TFailure>(Option.Some(Unit._), Option<TFailure>.None);
+        }
+
+        /// <summary>
         /// 成功した結果としてvalueを格納するResultを生成します。
         /// </summary>
         /// <typeparam name="TSuccess">Resultに保持する成功の型</typeparam>
@@ -86,6 +98,15 @@ namespace LangExt
         public static Result<TSuccess, Placeholder> Success<TSuccess>(TSuccess value)
         {
             return new Result<TSuccess, Placeholder>(Option.Some(value), Option.None);
+        }
+
+        /// <summary>
+        /// 成功した結果としてUnitを格納するResultを生成します。
+        /// </summary>
+        /// <returns>Success(Unit._)</returns>
+        public static Result<Unit, Placeholder> Success()
+        {
+            return new Result<Unit, Placeholder>(Option.Some(Unit._), Option.None);
         }
 
         /// <summary>
@@ -103,6 +124,18 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 失敗した結果としてUnitを格納するResultを生成します。
+        /// 通常は、NewFailureではなく、Failureを使用します。
+        /// このメソッドは、成功側の型も指定したい場合に使用します。
+        /// </summary>
+        /// <typeparam name="TSuccess">Resultに保持する成功の型</typeparam>
+        /// <returns>Failure(Unit._)</returns>
+        public static Result<TSuccess, Unit> NewFailure<TSuccess>()
+        {
+            return new Result<TSuccess, Unit>(Option<TSuccess>.None, Option.Some(Unit._));
+        }
+
+        /// <summary>
         /// 失敗した結果としてvalueを格納するResultを生成します。
         /// </summary>
         /// <typeparam name="TFailure">Resultに格納する失敗の型</typeparam>
@@ -111,6 +144,15 @@ namespace LangExt
         public static Result<Placeholder, TFailure> Failure<TFailure>(TFailure value)
         {
             return new Result<Placeholder, TFailure>(Option.None, Option.Some(value));
+        }
+
+        /// <summary>
+        /// 失敗した結果としてUnitを格納するResultを生成します。
+        /// </summary>
+        /// <returns>Failure(Unit._)</returns>
+        public static Result<Placeholder, Unit> Failure()
+        {
+            return new Result<Placeholder, Unit>(Option.None, Option.Some(Unit._));
         }
 
         /// <summary>
