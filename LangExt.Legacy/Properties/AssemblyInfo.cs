@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("LangExt.Legacy")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This library provides type matching.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("LangExt.Legacy")]

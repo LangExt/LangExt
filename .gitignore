@@ -18,7 +18,7 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
-[Bb]in
+[Bb]in/
 [Dd]ebug*/
 *.lib
 *.sbr
@@ -26,3 +26,4 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult.xml
+*.nupkg
