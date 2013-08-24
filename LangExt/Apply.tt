@@ -42,9 +42,9 @@ namespace LangExt
     var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ", TArgOfMonad>", "m", i);
     var monadicCallArgs = MethodCallArgs("m", i);
     var callArgs = MethodCallArgs("arg", i);
-    var monadicDefFields = DefFields("\r\n\t\t\t" + monad +"<TArg", ", TArgOfMonad>", "m", i);
-    var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
-    var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
+    var monadicDefFields = DefFields("\r\n            " + monad +"<TArg", ", TArgOfMonad>", "m", i);
+    var assignments = Repeat(";", "\r\n                this.m{0} = m{0}", i) + ";";
+    var froms = Repeat("", "\r\n                    from arg{0} in m{0}", i);
 #>
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
@@ -81,9 +81,9 @@ namespace LangExt
     var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ">", "m", i);
     var monadicCallArgs = MethodCallArgs("m", i);
     var callArgs = MethodCallArgs("arg", i);
-    var monadicDefFields = DefFields("\r\n\t\t\t" + monad +"<TArg", ">", "m", i);
-    var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
-    var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
+    var monadicDefFields = DefFields("\r\n            " + monad +"<TArg", ">", "m", i);
+    var assignments = Repeat(";", "\r\n                this.m{0} = m{0}", i) + ";";
+    var froms = Repeat("", "\r\n                    from arg{0} in m{0}", i);
 #>
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
