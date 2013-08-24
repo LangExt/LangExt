@@ -7,7 +7,7 @@ using System.Text;
 namespace LangExt.Tests
 {
     [TestFixture]
-    public class ApplicativeTest
+    public class ApplyTest
     {
         [TestCase()]
         public void ApplyToTheOption()
