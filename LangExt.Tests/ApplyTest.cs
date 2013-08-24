@@ -40,5 +40,30 @@ namespace LangExt.Tests
                 .By((x1, x2) => x1 + x2); // [0 + 0; 0 + 1; 1 + 0; 1 + 1]
             Assert.That(applied, Is.EqualTo(new[] { 0, 1, 1, 2 }.ToSeq()));
         }
+
+        [TestCase()]
+        public void ApplyToTheResult()
+        {
+            var applied = Apply.To(Result.Success(23))
+                .By(i => i.ToString());
+            Assert.That(applied, Is.EqualTo(Result.Success("23")));
+        }
+
+        [TestCase()]
+        public void ApplyToTwoResultWithFailed()
+        {
+            var applied = Apply.To((Result<int, string>)Result.Success(23), Result.Failure("Fail!"))
+                .By((x1, x2) => x1);
+            Assert.That(applied, Is.EqualTo((Result<int, string>)Result.Failure("Fail!")));
+        }
+
+
+        [TestCase()]
+        public void ApplyToTwoResultWithSuccess()
+        {
+            var applied = Apply.To(Result.Success(23), Result.Success("Success"))
+                .By((x1, x2) => x1.ToString() + x2);
+            Assert.That(applied, Is.EqualTo(Result.Success("23Success")));
+        }
     }
 }

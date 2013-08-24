@@ -13,24 +13,64 @@ using System;
 using System.Collections.Generic;
 
 <#
-  var monads = new []{ "Option", "ISeq" };
+    // (NameOfTheMonad, HasArgment)
+    var monadInfos = new []{ 
+            Tuple.Create("Option", false),
+            Tuple.Create("Result", true),
+            Tuple.Create("ISeq", false)
+            };
 #>
 
 namespace LangExt
 {
     public static class Apply
     {
-<# foreach (var monad in monads) { #>
-        #region for the <#= monad #>
+<# foreach (var monadInfo in monadInfos) { #>
 <#
-    for (int i = 1; i <= Max; i++) {
-        var types = TypeParams("TArg", i);
-        var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ">", "m", i);
-        var monadicCallArgs = MethodCallArgs("m", i);
-        var callArgs = MethodCallArgs("arg", i);
-        var monadicDefFields = DefFields("\r\n\t\t\t" + monad +"<TArg", ">", "m", i);
-        var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
-        var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
+        var monad = monadInfo.Item1;
+        var hasArg = monadInfo.Item2;
+#>
+        #region for the <#= monad #>
+<# for (int i = 1; i <= Max; i++) { #>
+<# if(hasArg){ #>
+<#
+    var types = TypeParams("TArg", i);
+    var typesWithArgOfMonad = TypeParams("TArg", i) + ", TArgOfMonad";
+    var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ", TArgOfMonad>", "m", i);
+    var monadicCallArgs = MethodCallArgs("m", i);
+    var callArgs = MethodCallArgs("arg", i);
+    var monadicDefFields = DefFields("\r\n\t\t\t" + monad +"<TArg", ", TArgOfMonad>", "m", i);
+    var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
+    var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
+#>
+        public class Applicative<#= monad #><<#= typesWithArgOfMonad #>>
+        {<#= monadicDefFields #>
+
+            internal Applicative<#= monad #>(<#= monadicDefArgs #>)
+            {<#= assignments #>
+            }
+
+            public <#= monad #><TResult, TArgOfMonad> By<TResult>(Func<<#= types #>, TResult> f)
+            {
+                return <#= froms #>
+                    select f(<#= callArgs #>);
+            }
+        }
+
+        public static Applicative<#= monad #><<#= typesWithArgOfMonad #>> To<<#= typesWithArgOfMonad #>>(<#= monadicDefArgs #>)
+        {
+            return new Applicative<#= monad #><<#= typesWithArgOfMonad #>>(<#= monadicCallArgs #>);
+        }
+<#          } #>
+<# else { #>
+<#
+    var types = TypeParams("TArg", i);
+    var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ">", "m", i);
+    var monadicCallArgs = MethodCallArgs("m", i);
+    var callArgs = MethodCallArgs("arg", i);
+    var monadicDefFields = DefFields("\r\n\t\t\t" + monad +"<TArg", ">", "m", i);
+    var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
+    var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
 #>
         public class Applicative<#= monad #><<#= types #>>
         {<#= monadicDefFields #>
@@ -50,8 +90,8 @@ namespace LangExt
         {
             return new Applicative<#= monad #><<#= types #>>(<#= monadicCallArgs #>);
         }
-
-<#      } #>
+<#          } #>
+<#      }#>
         #endregion
 
 <# } #>
