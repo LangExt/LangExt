@@ -54,6 +54,16 @@ string TypeParams(string prefix, int begin, int end)
     return Repeat(", ", prefix + "{0}", begin, end);
 }
 
+string TypeParams(string prefix, string postfix, int count)
+{
+    return Repeat(", ", prefix + "{0}" + postfix, count);
+}
+
+string TypeParams(string prefix, string postfix, int begin, int end)
+{
+    return Repeat(", ", prefix + "{0}" + postfix, begin, end);
+}
+
 string MethodDefArgs(string typePrefix, string varPrefix, int count)
 {
     return Repeat(", ", typePrefix + "{0} " + varPrefix + "{0}", count);
@@ -64,6 +74,16 @@ string MethodDefArgs(string typePrefix, string varPrefix, int begin, int end)
     return Repeat(", ", typePrefix + "{0} " + varPrefix + "{0}", begin, end);
 }
 
+string MethodDefArgs(string typePrefix, string typePostfix, string varPrefix, int count)
+{
+    return Repeat(", ", typePrefix + "{0}" + typePostfix +" " + varPrefix + "{0}", count);
+}
+
+string MethodDefArgs(string typePrefix, string typePostfix, string varPrefix, int begin, int end)
+{
+    return Repeat(", ", typePrefix + "{0}" + typePostfix +" "  + varPrefix + "{0}", begin, end);
+}
+
 string MethodCallArgs(string prefix, int count)
 {
     return Repeat(", ", prefix + "{0}", count);
@@ -72,6 +92,11 @@ string MethodCallArgs(string prefix, int count)
 string MethodCallArgs(string prefix, int begin, int end)
 {
     return Repeat(", ", prefix + "{0}", begin, end);
+}
+
+string DefFields(string typePrefix, string typePostfix, string varPrefix, int count)
+{
+    return Repeat(";", typePrefix + "{0}" + typePostfix + " " + varPrefix + "{0}", count) + ";";
 }
 
 string TupleType(int elems, Func<int, string> f)

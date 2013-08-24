@@ -1,0 +1,59 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+using System.Collections.Generic;
+
+<#
+  var monads = new []{ "Option", "ISeq" };
+#>
+
+namespace LangExt
+{
+    public static class Apply
+    {
+<# foreach (var monad in monads) { #>
+        #region for the <#= monad #>
+<#
+    for (int i = 1; i <= Max; i++) {
+        var types = TypeParams("TArg", i);
+        var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ">", "m", i);
+        var monadicCallArgs = MethodCallArgs("m", i);
+        var callArgs = MethodCallArgs("arg", i);
+        var monadicDefFields = DefFields("\r\n\t\t\t" + monad +"<TArg", ">", "m", i);
+        var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
+        var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
+#>
+        public class Applicative<#= monad #><<#= types #>>
+        {<#= monadicDefFields #>
+
+            internal Applicative<#= monad #>(<#= monadicDefArgs #>)
+            {<#= assignments #>
+            }
+
+            public <#= monad #><TResult> By<TResult>(Func<<#= types #>, TResult> f)
+            {
+                return <#= froms #>
+                    select f(<#= callArgs #>);
+            }
+        }
+
+        public static Applicative<#= monad #><<#= types #>> To<<#= types #>>(<#= monadicDefArgs #>)
+        {
+            return new Applicative<#= monad #><<#= types #>>(<#= monadicCallArgs #>);
+        }
+
+<#      } #>
+        #endregion
+
+<# } #>
+    }
+}
