@@ -23,6 +23,9 @@ using System.Collections.Generic;
 
 namespace LangExt
 {
+    /// <summary>
+    /// 任意のモナドに対して関数を適用できる形式（Applicative）に変換する機能を提供するクラスです。
+    /// </summary>
     public static class Apply
     {
 <# foreach (var monadInfo in monadInfos) { #>
@@ -43,6 +46,9 @@ namespace LangExt
     var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
     var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
 #>
+        /// <summary>
+        /// 関数を適用できる形式のモナドを表すクラスです。
+        /// </summary>
         public class Applicative<#= monad #><<#= typesWithArgOfMonad #>>
         {<#= monadicDefFields #>
 
@@ -50,6 +56,9 @@ namespace LangExt
             {<#= assignments #>
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public <#= monad #><TResult, TArgOfMonad> By<TResult>(Func<<#= types #>, TResult> f)
             {
                 return <#= froms #>
@@ -57,10 +66,14 @@ namespace LangExt
             }
         }
 
+        /// <summary>
+        /// 指定された複数のモナドを適用可能（Applicative）にします。
+        /// </summary>
         public static Applicative<#= monad #><<#= typesWithArgOfMonad #>> To<<#= typesWithArgOfMonad #>>(<#= monadicDefArgs #>)
         {
             return new Applicative<#= monad #><<#= typesWithArgOfMonad #>>(<#= monadicCallArgs #>);
         }
+
 <#          } #>
 <# else { #>
 <#
@@ -72,6 +85,9 @@ namespace LangExt
     var assignments = Repeat(";", "\r\n\t\t\t\tthis.m{0} = m{0}", i) + ";";
     var froms = Repeat("", "\r\n\t\t\t\t\tfrom arg{0} in m{0}", i);
 #>
+        /// <summary>
+        /// 関数を適用できる形式のモナドを表すクラスです。
+        /// </summary>
         public class Applicative<#= monad #><<#= types #>>
         {<#= monadicDefFields #>
 
@@ -86,10 +102,14 @@ namespace LangExt
             }
         }
 
+        /// <summary>
+        /// 指定された複数のモナドを適用可能（Applicative）にします。
+        /// </summary>
         public static Applicative<#= monad #><<#= types #>> To<<#= types #>>(<#= monadicDefArgs #>)
         {
             return new Applicative<#= monad #><<#= types #>>(<#= monadicCallArgs #>);
         }
+        
 <#          } #>
 <#      }#>
         #endregion
