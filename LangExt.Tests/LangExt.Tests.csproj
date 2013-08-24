@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicativeTest.cs" />
     <Compile Include="CachedSeqTest.cs" />
     <Compile Include="ChoiceTest.cs" />
     <Compile Include="FuncConvTest.cs">

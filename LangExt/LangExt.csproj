@@ -44,6 +44,7 @@
     <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Applicative.cs" />
     <Compile Include="CachedSeq.cs" />
     <Compile Include="Choice.cs">
       <AutoGen>True</AutoGen>
