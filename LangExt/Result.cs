@@ -403,7 +403,7 @@ namespace LangExt
         }
 
         /// <summary>
-        /// Option[TSuccess, TFailure]をOption[TSuccess2, TFailure]型に変換します。
+        /// Result[TSuccess, TFailure]をResult[TSuccess2, TFailure]型に変換します。
         /// Successの場合のみに変換を適用します。
         /// 変換は、TSuccess型を受け取りResult[TSuccess2, TFailure]を返す関数として指定します。
         /// </summary>
@@ -416,7 +416,7 @@ namespace LangExt
         }
 
         /// <summary>
-        /// Option[TSuccess, TFailure]をOption[TSuccess, TFailure2]型に変換します。
+        /// Result[TSuccess, TFailure]をResult[TSuccess, TFailure2]型に変換します。
         /// Failureの場合のみに変換を適用します。
         /// 変換は、TFailure型を受け取りResult[TSuccess, TFailure2]を返す関数として指定します。
         /// </summary>
@@ -431,7 +431,7 @@ namespace LangExt
         /// <summary>
         /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを判定します。
         /// </summary>
-        /// <param name="other">このオブジェクトと比較するOption</param>
+        /// <param name="other">このオブジェクトと比較するResult</param>
         /// <returns>現在のオブジェクトがotherで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
         public bool Equals(Result<TSuccess, TFailure> other)
         {
