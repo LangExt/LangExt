@@ -28,7 +28,7 @@ function RemoveIfExists($path) {
 function Build([string] $target) {
   RemoveIfExists $([System.IO.Path]::Combine($target, 'bin'))
   RemoveIfExists $([System.IO.Path]::Combine($target, 'obj'))
-  &$msbuild $($target + '.sln') /t:Rebuild /p:Configuration=Release /p:VisualStudioVersion=11.0 /m:$processors
+  &$msbuild $($target + '.sln') /t:Build /p:Configuration=Release /p:VisualStudioVersion=11.0 /m:$processors
 }
 
 function Pack($target) {
