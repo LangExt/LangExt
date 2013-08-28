@@ -43,6 +43,7 @@
     <Compile Include="ActivePatterns.fs" />
     <Compile Include="Option.fsi" />
     <Compile Include="Option.fs" />
+    <Compile Include="AssemblyInfo.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
