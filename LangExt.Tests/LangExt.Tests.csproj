@@ -65,6 +65,7 @@
       <DependentUpon>FuncOptionTest.tt</DependentUpon>
     </Compile>
     <Compile Include="FuncTest.cs" />
+    <Compile Include="IntWithUnitTest.cs" />
     <Compile Include="ObjectModuleDragonTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

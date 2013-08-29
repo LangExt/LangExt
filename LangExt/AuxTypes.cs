@@ -122,4 +122,10 @@ namespace LangExt
             return object.ReferenceEquals(a, b);
         }
     }
+
+    /// <summary>
+    /// 単位を表すマーカーインターフェイスです。
+    /// このインターフェイスはIntWithUnit[T]などの型パラメータの制約のためだけに使われます。
+    /// </summary>
+    public interface IUnit { }
 }
