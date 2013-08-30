@@ -1,50 +1,115 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace LangExt
 {
     namespace RangeUnit
     {
-        public sealed class Length : IUnit { Length() { } }
-        public sealed class Index : IUnit { Index() { } }
+        /// <summary>Rangeの長さを表す単位クラスです。</summary>
+        public sealed class Length : IUnit
+        {
+            Length() { }
 
+            /// <summary>使用しません。</summary>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static new bool Equals(object a, object b)
+            {
+                return object.Equals(a, b);
+            }
+
+            /// <summary>使用しません。</summary>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static new bool ReferenceEquals(object a, object b)
+            {
+                return object.ReferenceEquals(a, b);
+            }
+        }
+        
+        /// <summary>Rangeで終点の位置を表す単位クラスです。</summary>
+        public sealed class Index : IUnit
+        {
+            Index() { }
+
+            /// <summary>使用しません。</summary>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static new bool Equals(object a, object b)
+            {
+                return object.Equals(a, b);
+            }
+
+            /// <summary>使用しません。</summary>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static new bool ReferenceEquals(object a, object b)
+            {
+                return object.ReferenceEquals(a, b);
+            }
+        }
+
+        /// <summary>
+        /// intに単位を扱う操作を追加するための拡張メソッドを提供します。
+        /// </summary>
         public static class Int
         {
+            /// <summary>数値を長さを表す数値に変換します。</summary>
             public static IntWithUnit<Length> ToLen(this int self) { return new IntWithUnit<Length>(self); }
+            /// <summary>数値を位置を表す数値に変換します。</summary>
             public static IntWithUnit<Index> ToIdx(this int self) { return new IntWithUnit<Index>(self); }
         }
     }
 
     partial class Create
     {
+        /// <summary>
+        /// 指定された長さを持つ、0から始まるRangeを生成します。
+        /// 長さに負の数を指定することはできません。
+        /// </summary>
         public static Range Range(IntWithUnit<RangeUnit.Length> len)
         {
-            return new Range(len.Value);
+            return LangExt.Range.Create(len);
         }
 
+        /// <summary>
+        /// 指定された開始位置と長さを持つRangeを生成します。
+        /// 長さに負の数を指定することはできません。
+        /// </summary>
         public static Range Range(int from, IntWithUnit<RangeUnit.Length> len)
         {
-            return new Range(from, len.Value);
+            return LangExt.Range.Create(from, len);
         }
 
+        /// <summary>
+        /// 指定された終了位置を持つ、0から始まるRangeを生成します。
+        /// </summary>
         public static Range Range(IntWithUnit<RangeUnit.Index> to)
         {
-            return new Range(0, to.Value + 1);
+            return LangExt.Range.Create(to);
         }
 
+        /// <summary>
+        /// 指定された開始位置と終了位置を持つRangeを生成します。
+        /// </summary>
         public static Range Range(int from, IntWithUnit<RangeUnit.Index> to)
         {
-            return new Range(from, to.Value - from + 1);
+            return LangExt.Range.Create(from, to);
         }
     }
 
+    /// <summary>
+    /// 範囲を表すクラスです。
+    /// </summary>
     public struct Range : IEquatable<Range>
     {
+        /// <summary>
+        /// 範囲の開始位置を表すインデックスです。。
+        /// </summary>
         public readonly int From;
+        /// <summary>
+        /// 範囲の終了位置を表すインデックスです。
+        /// </summary>
         public readonly int To;
+        /// <summary>
+        /// 範囲の長さを表す数値を取得します。
+        /// </summary>
         public int Length
         {
             get
@@ -62,35 +127,69 @@ namespace LangExt
                 throw new ArgumentOutOfRangeException("from, to", string.Format(Properties.Resources.ExMsgTooSmall, "(to - from + 1)", 0, this.Length));
         }
 
+        /// <summary>
+        /// 開始位置と長さを指定してRangeオブジェクトを構築します。
+        /// 長さに負の数を指定することはできません。
+        /// </summary>
+        /// <param name="from">範囲の開始位置</param>
+        /// <param name="len">範囲の開始位置からの長さ</param>
         public Range(int from, int len) : this(from, from + len - 1, false) { }
 
+        /// <summary>
+        /// 長さを指定してRangeオブジェクトを構築します。
+        /// 長さに負の数を指定することはできません。
+        /// 開始位置は0を指定したことになります。
+        /// </summary>
+        /// <param name="len">範囲の開始位置からの長さ</param>
         public Range(int len) : this(0, len - 1, false) { }
 
+        /// <summary>
+        /// 指定された長さを持つ、0から始まるRangeを生成します。
+        /// 長さに負の数を指定することはできません。
+        /// </summary>
         public static Range Create(IntWithUnit<RangeUnit.Length> len)
         {
             return new Range(len.Value);
         }
 
+        /// <summary>
+        /// 指定された開始位置と長さを持つRangeを生成します。
+        /// 長さに負の数を指定することはできません。
+        /// </summary>
         public static Range Create(int from, IntWithUnit<RangeUnit.Length> len)
         {
             return new Range(from, len.Value);
         }
 
+        /// <summary>
+        /// 指定された終了位置を持つ、0から始まるRangeを生成します。
+        /// </summary>
         public static Range Create(IntWithUnit<RangeUnit.Index> to)
         {
-            return new Range(0, to.Value + 1);
+            return new Range(0, to.Value, true);
         }
 
+        /// <summary>
+        /// 指定された開始位置と終了位置を持つRangeを生成します。
+        /// </summary>
         public static Range Create(int from, IntWithUnit<RangeUnit.Index> to)
         {
-            return new Range(from, to.Value - from + 1);
+            return new Range(from, to.Value, true);
         }
 
+        /// <summary>
+        /// 指定された開始位置と終了位置を持つRangeを生成します。
+        /// </summary>
+        /// <param name="from">生成する範囲の開始位置</param>
+        /// <param name="to">生成する範囲の終了位置</param>
         public static Range FromTo(int from, int to)
         {
             return new Range(from, to, true);
         }
 
+        /// <summary>
+        /// 範囲をシーケンスに変換します。
+        /// </summary>
         public ISeq<int> ToSeq()
         {
             var from = this.From;
@@ -99,11 +198,21 @@ namespace LangExt
             return Seq.Init(this.Length, i => from - i);
         }
 
+        /// <summary>
+        /// 現在のオブジェクトと、同じ型の別のオブジェクトが等しいかどうかを判定します。
+        /// </summary>
+        /// <param name="other">このオブジェクトと比較するRange</param>
+        /// <returns>現在のオブジェクトがotherで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
         public bool Equals(Range other)
         {
             return this.From == other.From && this.Length == other.Length;
         }
 
+        /// <summary>
+        /// 現在のオブジェクトが、別のオブジェクトと等しいかどうかを判定します。
+        /// </summary>
+        /// <param name="obj">このオブジェクトと比較するオブジェクト</param>
+        /// <returns>現在のオブジェクトがobjで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object obj)
         {
@@ -112,15 +221,41 @@ namespace LangExt
             return this.Equals((Range)obj);
         }
 
+        /// <summary>
+        /// オブジェクトのハッシュコードを取得します。
+        /// </summary>
+        /// <returns>ハッシュコード</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
         {
             return 31 ^ this.From.GetHashCode() ^ this.To.GetHashCode();
         }
 
+        /// <summary>
+        /// このオブジェクトを文字列表現に変換します。
+        /// </summary>
+        /// <returns>このオブジェクトの文字列表現</returns>
         public override string ToString()
         {
             return string.Format("Range(From={0}, To={1}, Length={2})", this.From, this.To, this.Length);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }
