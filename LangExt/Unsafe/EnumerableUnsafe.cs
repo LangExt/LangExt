@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace LangExt.Unsafe
 {
+    /// <summary>
+    /// IEnumerable[T]に対する(例外を投げうる)関数を提供します。
+    /// </summary>
     public static class EnumerableUnsafe
     {
         /// <summary>
