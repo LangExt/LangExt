@@ -205,9 +205,9 @@ namespace LangExt.Tests
             }
         }
 
-        [TestCase(null, null, null)]
-        [TestCase(10, null, null)]
-        [TestCase(null, 20, null)]
+        [TestCase(null, null, null, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(10, null, null, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(null, 20, null, ExpectedException=typeof(InvalidOperationException))]
         [TestCase(10, 20, 30)]
         public void 加算が出来る(int? a, int? b, int? expected)
         {
@@ -217,9 +217,9 @@ namespace LangExt.Tests
             Assert.That(width1 + width2, Is.EqualTo(expectedWidth));
         }
 
-        [TestCase(null, null, null)]
-        [TestCase(10, null, null)]
-        [TestCase(null, 20, null)]
+        [TestCase(null, null, null, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(10, null, null, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(null, 20, null, ExpectedException=typeof(InvalidOperationException))]
         [TestCase(10, 20, -10)]
         public void 減算が出来る(int? a, int? b, int? expected)
         {
@@ -229,11 +229,9 @@ namespace LangExt.Tests
             Assert.That(width1 - width2, Is.EqualTo(expectedWidth));
         }
 
-        [TestCase(null, null, null)]
-        [TestCase(10, null, null)]
-        [TestCase(null, 20, null)]
+        [TestCase(null, 20, null, ExpectedException=typeof(InvalidOperationException))]
         [TestCase(10, 20, 200)]
-        public void 乗算が出来る(int? a, int? b, int? expected)
+        public void 乗算が出来る(int? a, int b, int? expected)
         {
             var width1 = a.WithUnit<Width>();
             var expectedWidth = expected.WithUnit<Width>();
@@ -241,29 +239,47 @@ namespace LangExt.Tests
             Assert.That(b * width1, Is.EqualTo(expectedWidth));
         }
 
-        [TestCase(null, null, null)]
-        [TestCase(10, null, null)]
-        [TestCase(null, 20, null)]
+        [TestCase(null, 20, null, ExpectedException=typeof(InvalidOperationException))]
         [TestCase(20, 10, 2)]
-        public void 除算が出来る(int? a, int? b, int? expected)
+        public void 除算が出来る(int? a, int b, int? expected)
         {
             var width1 = a.WithUnit<Width>();
             var expectedWidth = expected.WithUnit<Width>();
             Assert.That(width1 / b, Is.EqualTo(expectedWidth));
         }
 
-        [TestCase(null, null, null)]
-        [TestCase(10, null, null)]
-        [TestCase(null, 20, null)]
+        [TestCase(null, null, 0, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(20, null, 0, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(null, 20, 0, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(20, 10, 2)]
+        public void 単位付き数値どうしの除算が出来る(int? a, int? b, int expected)
+        {
+            var width1 = a.WithUnit<Width>();
+            var width2 = b.WithUnit<Width>();
+            Assert.That(width1 / width2, Is.EqualTo(expected));
+        }
+
+        [TestCase(null, 20, null, ExpectedException=typeof(InvalidOperationException))]
         [TestCase(20, 9, 2)]
-        public void 余りを計算できる(int? a, int? b, int? expected)
+        public void 余りを計算できる(int? a, int b, int? expected)
         {
             var width1 = a.WithUnit<Width>();
             var expectedWidth = expected.WithUnit<Width>();
             Assert.That(width1 % b, Is.EqualTo(expectedWidth));
         }
 
-        [TestCase(null, null)]
+        [TestCase(null, null, 0, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(20, null, 0, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(null, 20, 0, ExpectedException=typeof(InvalidOperationException))]
+        [TestCase(20, 9, 2)]
+        public void 単位付き数値どうしの余りを計算できる(int? a, int? b, int expected)
+        {
+            var width1 = a.WithUnit<Width>();
+            var width2 = b.WithUnit<Width>();
+            Assert.That(width1 % width2, Is.EqualTo(expected));
+        }
+
+        [TestCase(null, null, ExpectedException=typeof(InvalidOperationException))]
         [TestCase(10, -10)]
         [TestCase(-20, 20)]
         public void 符号が反転できる(int? value, int? expected)

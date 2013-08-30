@@ -218,7 +218,7 @@ namespace LangExt
         /// <returns>2つの単位付き数値を足し合わせた単位付き数値</returns>
         public static IntWithUnit<T> operator +(IntWithUnit<T> lhs, IntWithUnit<T> rhs)
         {
-            if (!lhs.HasValue || !rhs.HasValue) return IntWithUnit<T>.NoValue;
+            if (!lhs.HasValue || !rhs.HasValue) throw new InvalidOperationException();
             return new IntWithUnit<T>(lhs.Value + rhs.Value);
         }
         /// <summary>
@@ -229,7 +229,7 @@ namespace LangExt
         /// <returns>1つ目の単位付き数値から2つ目の単位付き数値を引いた単位付き数値</returns>
         public static IntWithUnit<T> operator -(IntWithUnit<T> lhs, IntWithUnit<T> rhs)
         {
-            if (!lhs.HasValue || !rhs.HasValue) return IntWithUnit<T>.NoValue;
+            if (!lhs.HasValue || !rhs.HasValue) throw new InvalidOperationException();
             return new IntWithUnit<T>(lhs.Value - rhs.Value);
         }
 
@@ -242,7 +242,7 @@ namespace LangExt
         /// <returns>単位付き数値に数値をかけた数値</returns>
         public static IntWithUnit<T> operator *(IntWithUnit<T> lhs, int rhs)
         {
-            if (!lhs.HasValue) return IntWithUnit<T>.NoValue;
+            if (!lhs.HasValue) throw new InvalidOperationException();
             return new IntWithUnit<T>(lhs.Value * rhs);
         }
         /// <summary>
@@ -251,10 +251,10 @@ namespace LangExt
         /// <param name="lhs">数値</param>
         /// <param name="rhs">単位付き数値</param>
         /// <returns>数値に単位付き数値をかけた数値</returns>
-        public static IntWithUnit<T> operator *(int? lhs, IntWithUnit<T> rhs)
+        public static IntWithUnit<T> operator *(int lhs, IntWithUnit<T> rhs)
         {
-            if (!lhs.HasValue || !rhs.HasValue) return IntWithUnit<T>.NoValue;
-            return new IntWithUnit<T>(lhs.Value * rhs.Value);
+            if (!rhs.HasValue) throw new InvalidOperationException();
+            return new IntWithUnit<T>(lhs * rhs.Value);
         }
         /// <summary>
         /// 単位付き数値を数値で割ります。
@@ -262,10 +262,21 @@ namespace LangExt
         /// <param name="lhs">単位付き数値</param>
         /// <param name="rhs">数値</param>
         /// <returns>単位付き数値を数値で割った単位付き数値</returns>
-        public static IntWithUnit<T> operator /(IntWithUnit<T> lhs, int? rhs)
+        public static IntWithUnit<T> operator /(IntWithUnit<T> lhs, int rhs)
         {
-            if (!lhs.HasValue || !rhs.HasValue) return IntWithUnit<T>.NoValue;
-            return new IntWithUnit<T>(lhs.Value / rhs.Value);
+            if (!lhs.HasValue) throw new InvalidOperationException();
+            return new IntWithUnit<T>(lhs.Value / rhs);
+        }
+        /// <summary>
+        /// 単位付き数値を単位付き数値で割ります。
+        /// </summary>
+        /// <param name="lhs">1つ目の単位付き数値</param>
+        /// <param name="rhs">2つ目の単位付き数値</param>
+        /// <returns>単位付き数値を単位付き数値で割った数値</returns>
+        public static int operator /(IntWithUnit<T> lhs, IntWithUnit<T> rhs)
+        {
+            if (!lhs.HasValue || !rhs.HasValue) throw new InvalidOperationException();
+            return lhs.Value / rhs.Value;
         }
         /// <summary>
         /// 単位付き数値を数値で割った余りを計算します。
@@ -273,10 +284,21 @@ namespace LangExt
         /// <param name="lhs">単位付き数値</param>
         /// <param name="rhs">数値</param>
         /// <returns>単位付き数値を数値で割った余りの単位付き数値</returns>
-        public static IntWithUnit<T> operator %(IntWithUnit<T> lhs, int? rhs)
+        public static IntWithUnit<T> operator %(IntWithUnit<T> lhs, int rhs)
         {
-            if (!lhs.HasValue || !rhs.HasValue) return IntWithUnit<T>.NoValue;
-            return new IntWithUnit<T>(lhs.Value % rhs.Value);
+            if (!lhs.HasValue) throw new InvalidOperationException();
+            return new IntWithUnit<T>(lhs.Value % rhs);
+        }
+        /// <summary>
+        /// 単位付き数値を単位付き数値で割った余りを計算します。
+        /// </summary>
+        /// <param name="lhs">1つ目の単位付き数値</param>
+        /// <param name="rhs">2つ目の単位付き数値</param>
+        /// <returns>単位付き数値を単位付き数値で割った余りの数値</returns>
+        public static int operator %(IntWithUnit<T> lhs, IntWithUnit<T> rhs)
+        {
+            if (!lhs.HasValue || !rhs.HasValue) throw new InvalidOperationException();
+            return lhs.Value % rhs.Value;
         }
 
         /// <summary>
@@ -286,7 +308,7 @@ namespace LangExt
         /// <returns>符号を反転した単位付き数値</returns>
         public static IntWithUnit<T> operator -(IntWithUnit<T> value)
         {
-            if (!value.HasValue) return value;
+            if (!value.HasValue) throw new InvalidOperationException();
             return new IntWithUnit<T>(-value.Value);
         }
 
