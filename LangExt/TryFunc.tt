@@ -25,8 +25,14 @@ namespace LangExt
     /// </summary>
     public delegate bool TryFunc<<#= TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult>(<#= MethodDefArgs("T", "t", i) + (i == 0 ? "" : ", ") #>out TResult result);
 
+    // <#= i #>引数版
     partial class TryFunc
     {
+        /// <summary>
+        /// 出力引数を伴う関数を、Optionを返す関数に変換します。
+        /// fがtrueを返す場合にSome(ただし、出力引数にnullが設定された場合はNone)を、fがfalseを返す場合にNoneを返す関数に変換します。
+        /// fが例外を投げうる場合、ToResultFuncの使用を検討してください。
+        /// </summary>
         public static Func<<#= TypeParams("T", i) + (i == 0 ? "" : ", ") #>Option<TResult>> ToOptFunc<<#=
                 TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult>(this TryFunc<<#=
                     TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult> f)
@@ -40,6 +46,13 @@ namespace LangExt
             };
         }
 
+        /// <summary>
+        /// 出力引数を伴う関数を、Resultを返す関数に変換します。
+        /// fがtrueを返す場合にSuccess(ただし、出力引数にnullが設定された場合はFailure)を、
+        /// fがfalseを返す場合とfが例外を投げた場合にFailureを返す関数に変換します。
+        /// fがfalseを返した場合と、出力引数にnullが指定された場合、NullResultExceptionがFailureの値として設定されます。
+        /// fが例外を投げない場合、ToOptFuncの使用を検討してください。
+        /// </summary>
         public static Func<<#= TypeParams("T", i) + (i == 0 ? "" : ", ") #>Result<TResult, Exception>> ToResultFunc<<#=
                 TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult>(this TryFunc<<#=
                     TypeParams("T", i) + (i == 0 ? "" : ", ") #>TResult> f)
@@ -50,7 +63,8 @@ namespace LangExt
                 try
                 {
                     if (f(<#= MethodCallArgs("t", i) + (i == 0 ? "" : ", ") #>out res))
-                        return Create.Result(res);
+                        return res == null ? Result.Failure((Exception)new NullResultException())
+                                           : Result.NewSuccess<TResult, Exception>(res);
                     return Result.Failure((Exception)new NullResultException());
                 }
                 catch (Exception e)
