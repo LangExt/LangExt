@@ -131,6 +131,22 @@ namespace LangExt
             }
         }
 
+        /// <summary>
+        /// BeginからEndへ値が増えていくRangeかどうかを取得します。
+        /// </summary>
+        public bool Increasing
+        {
+            get { return Begin < End; }
+        }
+
+        /// <summary>
+        /// BeginからEndへ値が減っていくRangeかどうかを取得します。
+        /// </summary>
+        public bool Decreasing
+        {
+            get { return End < Begin; }
+        }
+
         Range(int begin, int end)
         {
             this.Begin = begin;
@@ -202,9 +218,29 @@ namespace LangExt
         public ISeq<int> ToSeq()
         {
             var from = this.Begin;
-            if (from < this.End)
+            if (this.Increasing)
                 return Seq.Init(this.Length, i => from + i);
             return Seq.Init(this.Length, i => from - i);
+        }
+
+        System.Collections.Generic.IEnumerable<int> ToSeqImpl(int step)
+        {
+            for (int crnt = this.Begin; crnt < this.End; crnt += step)
+                yield return crnt;
+        }
+
+        /// <summary>
+        /// stepを指定して範囲をシーケンスに変換します。
+        /// </summary>
+        public ISeq<int> ToSeq(int step)
+        {
+            if (step == 0)
+                throw new ArgumentOutOfRangeException("step", string.Format(Properties.Resources.ExMsgInvalidValue, 0));
+            if (this.Increasing && step < 0)
+                throw new ArgumentException("step", string.Format(Properties.Resources.ExMsgTooSmall2, "step", 0, step));
+            if (this.Decreasing && step > 0)
+                throw new ArgumentException("step", string.Format(Properties.Resources.ExMsgTooBig2, "step", 0, step));
+            return ToSeqImpl(step).ToSeq();
         }
 
         /// <summary>

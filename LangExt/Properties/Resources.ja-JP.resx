@@ -123,8 +123,17 @@
   <data name="ExMsgInvalidCast" xml:space="preserve">
     <value>{0}から{1}へのキャストは有効ではありません。</value>
   </data>
+  <data name="ExMsgInvalidValue" xml:space="preserve">
+    <value>{0}は無効な値です。</value>
+  </data>
   <data name="ExMsgSeqIsEmpty" xml:space="preserve">
     <value>シーケンスは空でない必要がありますが、空のシーケンス({0})が渡されました。</value>
+  </data>
+  <data name="ExMsgTooBig" xml:space="preserve">
+    <value>{0}は{1}以下({1}を含む)でなければなりませんが、{2}でした。</value>
+  </data>
+  <data name="ExMsgTooBig2" xml:space="preserve">
+    <value>{0}は{1}より小さい({1}は含まない)必要がありますが、{2}でした。</value>
   </data>
   <data name="ExMsgTooSmall" xml:space="preserve">
     <value>{0}は{1}以上({1}を含む)でなければなりませんが、{2}でした。</value>

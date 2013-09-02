@@ -121,5 +121,17 @@ namespace LangExt.Tests
             var range = Range.FromUntil(begin, end);
             Assert.That(range.ToSeq(), Is.EqualTo(Seq.Create(expected)));
         }
+
+        [TestCase(0, 5, 1, new[] { 0, 1, 2, 3, 4 })]
+        [TestCase(0, 5, 2, new[] { 0, 2, 4 })]
+        [TestCase(0, 5, 3, new[] { 0, 3 })]
+        [TestCase(0, 5, 0, null, ExpectedException=typeof(ArgumentOutOfRangeException))]
+        [TestCase(0, 5, -1, null, ExpectedException=typeof(ArgumentException))]
+        [TestCase(5, 0, 1, null, ExpectedException=typeof(ArgumentException))]
+        public void Stepを指定してSeqに変換できる(int begin, int end, int step, int[] expected)
+        {
+            var range = Range.FromUntil(begin, end);
+            Assert.That(range.ToSeq(step), Is.EqualTo(Seq.Create(expected)));
+        }
     }
 }
