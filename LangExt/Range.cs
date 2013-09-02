@@ -131,29 +131,11 @@ namespace LangExt
             }
         }
 
-        Range(int begin, int end, bool canNegLen)
+        Range(int begin, int end)
         {
             this.Begin = begin;
             this.End = end;
-            if (!canNegLen && this.Length < 0)
-                throw new ArgumentOutOfRangeException("from, until", string.Format(Properties.Resources.ExMsgTooSmall, "(until - from + 1)", 0, this.Length));
         }
-
-        /// <summary>
-        /// 開始位置と長さを指定してRangeオブジェクトを構築します。
-        /// 長さに負の数を指定することはできません。
-        /// </summary>
-        /// <param name="begin">範囲の開始位置</param>
-        /// <param name="len">範囲の開始位置からの長さ</param>
-        public Range(int begin, int len) : this(begin, begin + len, false) { }
-
-        /// <summary>
-        /// 長さを指定してRangeオブジェクトを構築します。
-        /// 長さに負の数を指定することはできません。
-        /// 開始位置は0を指定したことになります。
-        /// </summary>
-        /// <param name="len">範囲の開始位置からの長さ</param>
-        public Range(int len) : this(0, len, false) { }
 
         /// <summary>
         /// 指定された長さを持つ、0から始まるRangeを生成します。
@@ -161,7 +143,9 @@ namespace LangExt
         /// </summary>
         public static Range Create(IntWithUnit<RangeUnit.Length> len)
         {
-            return new Range(len.Value);
+            if (len < 0)
+                throw new ArgumentOutOfRangeException("len", string.Format(Properties.Resources.ExMsgTooSmall2, "len", 0, len));
+            return new Range(0, len.Value);
         }
 
         /// <summary>
@@ -170,7 +154,9 @@ namespace LangExt
         /// </summary>
         public static Range Create(int from, IntWithUnit<RangeUnit.Length> len)
         {
-            return new Range(from, len.Value);
+            if (len < 0)
+                throw new ArgumentOutOfRangeException("len", string.Format(Properties.Resources.ExMsgTooSmall2, "len", 0, len));
+            return new Range(from, from + len.Value);
         }
 
         /// <summary>
@@ -178,7 +164,7 @@ namespace LangExt
         /// </summary>
         public static Range Create(IntWithUnit<RangeUnit.Index> end)
         {
-            return new Range(0, end.Value, true);
+            return new Range(0, end.Value);
         }
 
         /// <summary>
@@ -186,7 +172,7 @@ namespace LangExt
         /// </summary>
         public static Range Create(int begin, IntWithUnit<RangeUnit.Index> end)
         {
-            return new Range(begin, end.Value, true);
+            return new Range(begin, end.Value);
         }
 
         /// <summary>
@@ -196,8 +182,8 @@ namespace LangExt
         /// <param name="to">生成する範囲の終了位置(自身を含む)</param>
         public static Range FromTo(int from, int to)
         {
-            return from <= to ? new Range(from, to + 1, true)
-                              : new Range(from, to - 1, true);
+            return from <= to ? new Range(from, to + 1)
+                              : new Range(from, to - 1);
         }
 
         /// <summary>
@@ -207,7 +193,7 @@ namespace LangExt
         /// <param name="until">生成する範囲の終了位置(自身を含まない)</param>
         public static Range FromUntil(int from, int until)
         {
-            return new Range(from, until, true);
+            return new Range(from, until);
         }
 
         /// <summary>

@@ -8,6 +8,22 @@ namespace LangExt.Tests
     public class RangeTest
     {
         [Test]
+        public void 長さ0のRangeを生成できる()
+        {
+            var range = Range.Create((0).ToLen());
+            Assert.That(range.Begin, Is.EqualTo(0));
+            Assert.That(range.End, Is.EqualTo(0));
+            Assert.That(() => range.Last, Throws.Exception.TypeOf<InvalidOperationException>());
+            Assert.That(range.Length, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void 長さが負のRangeは生成できない()
+        {
+            Assert.That(() => Range.Create((-1).ToLen()), Throws.Exception);
+        }
+
+        [Test]
         public void 長さを指定してRangeを生成できる()
         {
             var range = Range.Create((10).ToLen());
