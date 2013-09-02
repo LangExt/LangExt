@@ -78,7 +78,7 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 指定された終了位置を持つ、0から始まるRangeを生成します。
+        /// 指定された終了位置(自身は含まない)を持つ、0から始まるRangeを生成します。
         /// </summary>
         public static Range Range(IntWithUnit<RangeUnit.Index> to)
         {
@@ -86,7 +86,7 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 指定された開始位置と終了位置を持つRangeを生成します。
+        /// 指定された開始位置と終了位置(自身は含まない)を持つRangeを生成します。
         /// </summary>
         public static Range Range(int from, IntWithUnit<RangeUnit.Index> to)
         {
@@ -102,11 +102,23 @@ namespace LangExt
         /// <summary>
         /// 範囲の開始位置を表すインデックスです。。
         /// </summary>
-        public readonly int From;
+        public readonly int Begin;
         /// <summary>
-        /// 範囲の終了位置を表すインデックスです。
+        /// 範囲の終了地点の直前を表すインデックスです。
         /// </summary>
-        public readonly int To;
+        public readonly int End;
+        /// <summary>
+        /// 範囲の終了位置を表すインデックスを取得します。
+        /// </summary>
+        public int Last
+        {
+            get
+            {
+                if (Begin < End) return End - 1;
+                if (Begin > End) return End + 1;
+                throw new InvalidOperationException();
+            }
+        }
         /// <summary>
         /// 範囲の長さを表す数値を取得します。
         /// </summary>
@@ -114,26 +126,26 @@ namespace LangExt
         {
             get
             {
-                if (From <= To) return To - From + 1;
-                return From - To + 1;
+                if (Begin < End) return End - Begin;
+                return Begin - End;
             }
         }
 
-        Range(int from, int to, bool canNegLen)
+        Range(int begin, int end, bool canNegLen)
         {
-            this.From = from;
-            this.To = to;
+            this.Begin = begin;
+            this.End = end;
             if (!canNegLen && this.Length < 0)
-                throw new ArgumentOutOfRangeException("from, to", string.Format(Properties.Resources.ExMsgTooSmall, "(to - from + 1)", 0, this.Length));
+                throw new ArgumentOutOfRangeException("from, until", string.Format(Properties.Resources.ExMsgTooSmall, "(until - from + 1)", 0, this.Length));
         }
 
         /// <summary>
         /// 開始位置と長さを指定してRangeオブジェクトを構築します。
         /// 長さに負の数を指定することはできません。
         /// </summary>
-        /// <param name="from">範囲の開始位置</param>
+        /// <param name="begin">範囲の開始位置</param>
         /// <param name="len">範囲の開始位置からの長さ</param>
-        public Range(int from, int len) : this(from, from + len - 1, false) { }
+        public Range(int begin, int len) : this(begin, begin + len, false) { }
 
         /// <summary>
         /// 長さを指定してRangeオブジェクトを構築します。
@@ -141,7 +153,7 @@ namespace LangExt
         /// 開始位置は0を指定したことになります。
         /// </summary>
         /// <param name="len">範囲の開始位置からの長さ</param>
-        public Range(int len) : this(0, len - 1, false) { }
+        public Range(int len) : this(0, len, false) { }
 
         /// <summary>
         /// 指定された長さを持つ、0から始まるRangeを生成します。
@@ -162,29 +174,40 @@ namespace LangExt
         }
 
         /// <summary>
-        /// 指定された終了位置を持つ、0から始まるRangeを生成します。
+        /// 指定された終了位置(自身は含まない)を持つ、0から始まるRangeを生成します。
         /// </summary>
-        public static Range Create(IntWithUnit<RangeUnit.Index> to)
+        public static Range Create(IntWithUnit<RangeUnit.Index> end)
         {
-            return new Range(0, to.Value, true);
+            return new Range(0, end.Value, true);
         }
 
         /// <summary>
-        /// 指定された開始位置と終了位置を持つRangeを生成します。
+        /// 指定された開始位置と終了位置(自身は含まない)を持つRangeを生成します。
         /// </summary>
-        public static Range Create(int from, IntWithUnit<RangeUnit.Index> to)
+        public static Range Create(int begin, IntWithUnit<RangeUnit.Index> end)
         {
-            return new Range(from, to.Value, true);
+            return new Range(begin, end.Value, true);
         }
 
         /// <summary>
-        /// 指定された開始位置と終了位置を持つRangeを生成します。
+        /// 指定された開始位置と終了位置(自身を含む)を持つRangeを生成します。
         /// </summary>
         /// <param name="from">生成する範囲の開始位置</param>
-        /// <param name="to">生成する範囲の終了位置</param>
+        /// <param name="to">生成する範囲の終了位置(自身を含む)</param>
         public static Range FromTo(int from, int to)
         {
-            return new Range(from, to, true);
+            return from <= to ? new Range(from, to + 1, true)
+                              : new Range(from, to - 1, true);
+        }
+
+        /// <summary>
+        /// 指定された開始位置と終了位置(自身を含まない)を持つRangeを生成します。
+        /// </summary>
+        /// <param name="from">生成する範囲の開始位置</param>
+        /// <param name="until">生成する範囲の終了位置(自身を含まない)</param>
+        public static Range FromUntil(int from, int until)
+        {
+            return new Range(from, until, true);
         }
 
         /// <summary>
@@ -192,8 +215,8 @@ namespace LangExt
         /// </summary>
         public ISeq<int> ToSeq()
         {
-            var from = this.From;
-            if (from <= this.To)
+            var from = this.Begin;
+            if (from < this.End)
                 return Seq.Init(this.Length, i => from + i);
             return Seq.Init(this.Length, i => from - i);
         }
@@ -205,7 +228,7 @@ namespace LangExt
         /// <returns>現在のオブジェクトがotherで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
         public bool Equals(Range other)
         {
-            return this.From == other.From && this.Length == other.Length;
+            return this.Begin == other.Begin && this.End == other.End;
         }
 
         /// <summary>
@@ -228,7 +251,7 @@ namespace LangExt
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
         {
-            return 31 ^ this.From.GetHashCode() ^ this.To.GetHashCode();
+            return 31 ^ this.Begin.GetHashCode() ^ this.End.GetHashCode();
         }
 
         /// <summary>
@@ -237,7 +260,7 @@ namespace LangExt
         /// <returns>このオブジェクトの文字列表現</returns>
         public override string ToString()
         {
-            return string.Format("Range(From={0}, To={1}, Length={2})", this.From, this.To, this.Length);
+            return string.Format("Range(Begin={0}, End={1}, Length={2})", this.Begin, this.End, this.Length);
         }
 
         /// <summary>
