@@ -1,0 +1,37 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+
+namespace LangExt
+{
+    partial class Result
+    {
+<# for (int i = 2; i <= Max; i++) { #>
+        /// <summary>
+        /// Result[Tuple[...], Placeholder]のSuccessを生成します。
+        /// </summary>
+        public static Result<<#= TupleType(i) #>, Placeholder> Success<<#= TypeParams("T", i) #>>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            return Result.Success(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
+        }
+<# } #>
+<# for (int i = 2; i <= Max; i++) { #>
+        /// <summary>
+        /// Result[Placeholder, Tuple[...]]のFailureを生成します。
+        /// </summary>
+        public static Result<Placeholder, <#= TupleType(i) #>> Failure<<#= TypeParams("T", i) #>>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            return Result.Failure(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
+        }
+<# } #>
+    }
+}

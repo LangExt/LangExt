@@ -121,6 +121,11 @@
     <Compile Include="Result.QueryExpr.cs">
       <DependentUpon>Result.cs</DependentUpon>
     </Compile>
+    <Compile Include="Result.Tuple.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Result.Tuple.tt</DependentUpon>
+    </Compile>
     <Compile Include="Seq.cs" />
     <Compile Include="ObjectModule.cs" />
     <Compile Include="Option.cs" />
@@ -217,6 +222,11 @@
     <None Include="Result.Dragon.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Result.Dragon.cs</LastGenOutput>
+      <DependentUpon>Result.cs</DependentUpon>
+    </None>
+    <None Include="Result.Tuple.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Result.Tuple.cs</LastGenOutput>
       <DependentUpon>Result.cs</DependentUpon>
     </None>
     <None Include="Seq.Dragon.tt">
