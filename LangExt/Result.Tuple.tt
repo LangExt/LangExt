@@ -33,5 +33,23 @@ namespace LangExt
             return Result.Failure(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
         }
 <# } #>
+<# for (int i = 2; i <= Max; i++) { #>
+        /// <summary>
+        /// Result[Tuple[...], TFailure]のSuccessを生成します。
+        /// </summary>
+        public static Result<<#= TupleType(i) #>, TFailure> NewSuccess<<#= TypeParams("T", i) #>, TFailure>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            return Result.NewSuccess<<#= TupleType(i) #>, TFailure>(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
+        }
+<# } #>
+<# for (int i = 2; i <= Max; i++) { #>
+        /// <summary>
+        /// Result[TSuccess, Tuple[...]]のFailureを生成します。
+        /// </summary>
+        public static Result<TSuccess, <#= TupleType(i) #>> NewSuccess<TSuccess, <#= TypeParams("T", i) #>, TFailure>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            return Result.NewFailure<TSuccess, <#= TupleType(i) #>>(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
+        }
+<# } #>
     }
 }
