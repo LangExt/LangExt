@@ -72,25 +72,25 @@ namespace LangExt
         /// 指定された開始位置と長さを持つRangeを生成します。
         /// 長さに負の数を指定することはできません。
         /// </summary>
-        public static Range Range(int from, IntWithUnit<RangeUnit.Length> len)
+        public static Range Range(int begin, IntWithUnit<RangeUnit.Length> len)
         {
-            return LangExt.Range.Create(from, len);
+            return LangExt.Range.Create(begin, len);
         }
 
         /// <summary>
         /// 指定された終了位置(自身は含まない)を持つ、0から始まるRangeを生成します。
         /// </summary>
-        public static Range Range(IntWithUnit<RangeUnit.Index> to)
+        public static Range Range(IntWithUnit<RangeUnit.Index> end)
         {
-            return LangExt.Range.Create(to);
+            return LangExt.Range.Create(end);
         }
 
         /// <summary>
         /// 指定された開始位置と終了位置(自身は含まない)を持つRangeを生成します。
         /// </summary>
-        public static Range Range(int from, IntWithUnit<RangeUnit.Index> to)
+        public static Range Range(int begin, IntWithUnit<RangeUnit.Index> end)
         {
-            return LangExt.Range.Create(from, to);
+            return LangExt.Range.Create(begin, end);
         }
     }
 
@@ -168,11 +168,11 @@ namespace LangExt
         /// 指定された開始位置と長さを持つRangeを生成します。
         /// 長さに負の数を指定することはできません。
         /// </summary>
-        public static Range Create(int from, IntWithUnit<RangeUnit.Length> len)
+        public static Range Create(int begin, IntWithUnit<RangeUnit.Length> len)
         {
             if (len < 0)
                 throw new ArgumentOutOfRangeException("len", string.Format(Properties.Resources.ExMsgTooSmall2, "len", 0, len));
-            return new Range(from, from + len.Value);
+            return new Range(begin, begin + len.Value);
         }
 
         /// <summary>
@@ -217,10 +217,10 @@ namespace LangExt
         /// </summary>
         public ISeq<int> ToSeq()
         {
-            var from = this.Begin;
+            var begin = this.Begin;
             if (this.Increasing)
-                return Seq.Init(this.Length, i => from + i);
-            return Seq.Init(this.Length, i => from - i);
+                return Seq.Init(this.Length, i => begin + i);
+            return Seq.Init(this.Length, i => begin - i);
         }
 
         System.Collections.Generic.IEnumerable<int> ToSeqImpl(int step)
