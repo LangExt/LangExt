@@ -48,6 +48,6 @@ string CreateTupleOption(int n, int elem) {
         else
             elems.Add(elem.ToString());
     }
-    return "Option.Some(Create.Tuple(" + string.Join(", ", elems) + "))";
+    return "Option.Some(" + string.Join(", ", elems) + ")";
 }
 #>

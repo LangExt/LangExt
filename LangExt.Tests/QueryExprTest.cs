@@ -132,7 +132,7 @@ namespace LangExt.Tests
                     from y in Option.Some(20)
                     from z in Option.Some(30)
                     select Create.Tuple(x, y, z);
-                Assert.That(res, Is.EqualTo(Option.Some(Create.Tuple(10, 20, 30))));
+                Assert.That(res, Is.EqualTo(Option.Some(10, 20, 30)));
             }
 
             [Test]

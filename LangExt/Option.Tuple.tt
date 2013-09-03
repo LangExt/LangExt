@@ -1,0 +1,28 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+
+namespace LangExt
+{
+    partial class Option
+    {
+<# for (int i = 2; i <= Max; i++) { #>
+        /// <summary>
+        /// Option[Tuple[...]]のSomeを生成します。
+        /// </summary>
+        public static Option<<#= TupleType(i) #>> Some<<#= TypeParams("T", i) #>>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            return Option.Some(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
+        }
+<# } #>
+    }
+}
