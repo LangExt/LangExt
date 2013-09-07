@@ -539,3 +539,21 @@ var res2 = f(self, arg1, arg2);
 ```
 
 ToFunctionalしてToObjectiveする、もしくはToObjectiveしてToFunctionalすると、元の関数に戻ります。
+
+### Applyモジュール
+Applyモジュールは、OptionやResultに対して関数を適用できる機能を提供します。
+
+通常、OptionやResultに対して関数を適用するには、Bind関数やクエリ式を使用する必要があります。
+これは、束縛を含む複雑な関数適用には便利ですが、単に`(T → U)`から`M[T] → M[U]`に変換が必要になるだけの関数適用にはオーバースペックです。
+そのような単純な関数適用には、Applyモジュールを使用します。
+
+次のサンプルは複数のOption（o1, o2, ..., o16）に対してfuncを適用しています。
+
+```cs
+Apply.To(o1, o2, ..., o16).By(func)
+```
+
+funcの型は、To関数に渡される引数の型によって決定されます。
+例えば、To関数に渡される引数の型が`(Option[string], Option[int])`だった場合、By関数に渡す関数の型は`(string, int) → T`になります（Tは任意の型）。
+
+`Result[T, U]`のように複数の型引数が存在する場合、To関数に渡す`Result[T, U]`の型パラメータ`U`は、すべてが同一である必要があります。
