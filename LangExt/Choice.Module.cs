@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace LangExt
@@ -25,6 +26,12 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2>> Comparer<T1, T2>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+        {
+            return new Comparer<Choice<T1, T2>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T>(Choice<T1, T2, T3> a, Choice<T1, T2, T3> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -46,6 +53,13 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3>> Comparer<T1, T2, T3>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+        {
+            return new Comparer<Choice<T1, T2, T3>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T>(Choice<T1, T2, T3, T4> a, Choice<T1, T2, T3, T4> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -69,6 +83,14 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4>> Comparer<T1, T2, T3, T4>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T>(Choice<T1, T2, T3, T4, T5> a, Choice<T1, T2, T3, T4, T5> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -94,6 +116,15 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5>> Comparer<T1, T2, T3, T4, T5>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T>(Choice<T1, T2, T3, T4, T5, T6> a, Choice<T1, T2, T3, T4, T5, T6> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -121,6 +152,16 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6>> Comparer<T1, T2, T3, T4, T5, T6>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T>(Choice<T1, T2, T3, T4, T5, T6, T7> a, Choice<T1, T2, T3, T4, T5, T6, T7> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -150,6 +191,17 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7>> Comparer<T1, T2, T3, T4, T5, T6, T7>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -181,6 +233,18 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -214,6 +278,19 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -249,6 +326,20 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+            where T10 : IComparable<T10>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -286,6 +377,21 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+            where T10 : IComparable<T10>
+            where T11 : IComparable<T11>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -325,6 +431,22 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+            where T10 : IComparable<T10>
+            where T11 : IComparable<T11>
+            where T12 : IComparable<T12>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -366,6 +488,23 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+            where T10 : IComparable<T10>
+            where T11 : IComparable<T11>
+            where T12 : IComparable<T12>
+            where T13 : IComparable<T13>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -409,6 +548,24 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+            where T10 : IComparable<T10>
+            where T11 : IComparable<T11>
+            where T12 : IComparable<T12>
+            where T13 : IComparable<T13>
+            where T14 : IComparable<T14>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -454,6 +611,25 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+            where T10 : IComparable<T10>
+            where T11 : IComparable<T11>
+            where T12 : IComparable<T12>
+            where T13 : IComparable<T13>
+            where T14 : IComparable<T14>
+            where T15 : IComparable<T15>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<T16, T16, T> Case16, Func<int, int, T> Otherwise)
         {
             if (a.TagIndex == 1 && b.TagIndex == 1) return Case1(a.Case1.Value, b.Case1.Value);
@@ -501,5 +677,25 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
+            where T1 : IComparable<T1>
+            where T2 : IComparable<T2>
+            where T3 : IComparable<T3>
+            where T4 : IComparable<T4>
+            where T5 : IComparable<T5>
+            where T6 : IComparable<T6>
+            where T7 : IComparable<T7>
+            where T8 : IComparable<T8>
+            where T9 : IComparable<T9>
+            where T10 : IComparable<T10>
+            where T11 : IComparable<T11>
+            where T12 : IComparable<T12>
+            where T13 : IComparable<T13>
+            where T14 : IComparable<T14>
+            where T15 : IComparable<T15>
+            where T16 : IComparable<T16>
+        {
+            return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
     }
 }

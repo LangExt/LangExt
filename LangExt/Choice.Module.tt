@@ -10,6 +10,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ include file="..\T4\T4Util.ttinclude" #>
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace LangExt
@@ -41,6 +42,13 @@ for (int i = 2; i <= Max; i++) {
             return BinOp(self, other, <#= Repeat(", ", "(a, b) => a.Cmp(b)", i + 1) #>);
         }
 
+        public static IComparer<Choice<<#= types #>>> Comparer<<#= types #>>()
+<# for (int j = 0; j < i; j++) { #>
+            where T<#= j + 1 #> : IComparable<T<#= j +1 #>>
+<# } #>
+        {
+            return new Comparer<Choice<<#= types #>>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
 <# } #>
     }
 }

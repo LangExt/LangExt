@@ -56,6 +56,7 @@
       <DependentUpon>Choice.Module.tt</DependentUpon>
     </Compile>
     <Compile Include="Comparable.cs" />
+    <Compile Include="Comparer.cs" />
     <Compile Include="Create.cs" />
     <Compile Include="Enumerable.Dragon.cs">
       <AutoGen>True</AutoGen>
