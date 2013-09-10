@@ -45,6 +45,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CachedSeq.cs" />
+    <Compile Include="Choice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Choice.tt</DependentUpon>
+    </Compile>
     <Compile Include="Comparable.cs" />
     <Compile Include="Create.cs" />
     <Compile Include="Enumerable.Dragon.cs">
@@ -173,6 +178,10 @@
     </None>
     <None Include="..\T4\T4Util.ttinclude">
       <Link>T4\T4Util.ttinclude</Link>
+    </None>
+    <None Include="Choice.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Choice.cs</LastGenOutput>
     </None>
     <None Include="Enumerable.Dragon.tt">
       <DependentUpon>Enumerable.cs</DependentUpon>
