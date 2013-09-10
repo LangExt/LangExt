@@ -50,6 +50,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Choice.tt</DependentUpon>
     </Compile>
+    <Compile Include="Choice.Module.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Choice.Module.tt</DependentUpon>
+    </Compile>
     <Compile Include="Comparable.cs" />
     <Compile Include="Create.cs" />
     <Compile Include="Enumerable.Dragon.cs">
@@ -178,6 +183,11 @@
     </None>
     <None Include="..\T4\T4Util.ttinclude">
       <Link>T4\T4Util.ttinclude</Link>
+    </None>
+    <None Include="Choice.Module.tt">
+      <DependentUpon>Choice.tt</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Choice.Module.cs</LastGenOutput>
     </None>
     <None Include="Choice.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

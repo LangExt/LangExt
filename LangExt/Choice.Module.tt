@@ -1,0 +1,46 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+using System.ComponentModel;
+
+namespace LangExt
+{
+    public static partial class Choice
+    {
+<#
+for (int i = 2; i <= Max; i++) {
+    var types = TypeParams("T", i);
+#>
+        public static T BinOp<<#= types #>, T>(Choice<<#= types #>> a, Choice<<#= types #>> b, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>, Func<int, int, T> Otherwise)
+        {
+<# for (int j = 0; j < i; j++) { #>
+            if (a.TagIndex == <#= j + 1 #> && b.TagIndex == <#= j + 1 #>) return Case<#= j + 1 #>(a.Case<#= j + 1 #>.Value, b.Case<#= j + 1 #>.Value);
+<# } #>
+            return Otherwise(a.TagIndex, b.TagIndex);
+        }
+
+        public static T BinOp<<#= types #>, T>(this Tuple<Choice<<#= types #>>, Choice<<#= types #>>> self, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>, Func<int, int, T> Otherwise)
+        {
+            return BinOp(self.Item1, self.Item2, <#= Repeat(", ", "Case{0}", i) #>, Otherwise);
+        }
+
+        public static Comparable.CompareResult CompareTo<<#= types #>>(this Choice<<#= types #>> self, Choice<<#= types #>> other)
+<# for (int j = 0; j < i; j++) { #>
+            where T<#= j + 1 #> : IComparable<T<#= j +1 #>>
+<# } #>
+        {
+            return BinOp(self, other, <#= Repeat(", ", "(a, b) => a.Cmp(b)", i + 1) #>);
+        }
+
+<# } #>
+    }
+}

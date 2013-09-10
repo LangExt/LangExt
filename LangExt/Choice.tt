@@ -21,11 +21,13 @@ for (int i = 2; i <= Max; i++) {
     public sealed class Choice<<#= types #>> : IEquatable<Choice<<#= types #>>>
     {
 <# for (int j = 0; j < i; j++) { #>
-        readonly Option<T<#= j + 1 #>> t<#= j + 1 #>;
+        internal readonly Option<T<#= j + 1 #>> Case<#= j + 1 #>;
 <# } #>
 
+        public int TagIndex { get { return this.Match(<#= Repeat(", ", "_ => {0}", i) #>); } }
+
 <# for (int j = 0; j < i; j++) { #>
-        public Choice(T<#= j + 1 #> value) { t<#= j + 1 #> = new Option<T<#= j + 1 #>>(value); }
+        public Choice(T<#= j + 1 #> value) { Case<#= j + 1 #> = new Option<T<#= j + 1 #>>(value); }
 
         public static implicit operator Choice<<#= types #>>(T<#= j + 1 #> value) { return new Choice<<#= types #>>(value); }
 
@@ -34,12 +36,12 @@ for (int i = 2; i <= Max; i++) {
         public T Match<T>(<#= Repeat(", ", "Func<T{0}, T> Case{0}", i) #>)
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
-            return <#= Fold("() => t" + i + ".Match<T>(Case" + i + ", thrower)", "() => t{1}.Match<T>(Case{1}, {0})", i - 1).Substring("() => ".Length) #>;
+            return <#= Fold("() => this.Case" + i + ".Match<T>(Case" + i + ", thrower)", "() => this.Case{1}.Match<T>(Case{1}, {0})", i - 1).Substring("() => ".Length) #>;
         }
 
         public bool Equals(Choice<<#= types #>> other)
         {
-            return other.IsNotNull() && <#= Repeat(" && ", "t{0} == other.t{0}", i) #>;
+            return other.IsNotNull() && <#= Repeat(" && ", "Case{0} == other.Case{0}", i) #>;
         }
 
         public static bool operator ==(Choice<<#= types #>> a, Choice<<#= types #>> b)
@@ -68,7 +70,7 @@ for (int i = 2; i <= Max; i++) {
         {
             var result = 31;
 <# for (int j = 0; j < i; j++) { #>
-            result ^= t<#= j + 1 #>.GetHashCode();
+            result ^= Case<#= j + 1 #>.GetHashCode();
 <# } #>
             return result;
         }
