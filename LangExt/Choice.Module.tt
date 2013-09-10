@@ -23,10 +23,12 @@ for (int i = 2; i <= Max; i++) {
 #>
         public static T BinOp<<#= types #>, T>(Choice<<#= types #>> a, Choice<<#= types #>> b, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>, Func<int, int, T> Otherwise)
         {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
 <# for (int j = 0; j < i; j++) { #>
-            if (a.TagIndex == <#= j + 1 #> && b.TagIndex == <#= j + 1 #>) return Case<#= j + 1 #>(a.Case<#= j + 1 #>.Value, b.Case<#= j + 1 #>.Value);
+            if (aTag == <#= j + 1 #> && bTag == <#= j + 1 #>) return Case<#= j + 1 #>(a.Case<#= j + 1 #>.Value, b.Case<#= j + 1 #>.Value);
 <# } #>
-            return Otherwise(a.TagIndex, b.TagIndex);
+            return Otherwise(aTag, bTag);
         }
 
         public static T BinOp<<#= types #>, T>(this Tuple<Choice<<#= types #>>, Choice<<#= types #>>> self, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>, Func<int, int, T> Otherwise)
