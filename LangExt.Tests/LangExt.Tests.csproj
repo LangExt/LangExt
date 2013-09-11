@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachedSeqTest.cs" />
+    <Compile Include="ChoiceTest.cs" />
     <Compile Include="FuncCurryTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
