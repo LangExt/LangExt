@@ -50,6 +50,15 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, thrower));
+        }
+
+        /// <summary>
         /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを判定します。
         /// </summary>
         /// <param name="other">このオブジェクトと比較するChoice</param>
@@ -175,6 +184,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, thrower)));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, thrower)));
         }
 
         /// <summary>
@@ -316,6 +334,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, thrower))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, thrower))));
         }
 
         /// <summary>
@@ -470,6 +497,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, thrower)))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, thrower)))));
         }
 
         /// <summary>
@@ -637,6 +673,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, thrower))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, thrower))))));
         }
 
         /// <summary>
@@ -817,6 +862,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, thrower)))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, thrower)))))));
         }
 
         /// <summary>
@@ -1010,6 +1064,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, thrower))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, thrower))))))));
         }
 
         /// <summary>
@@ -1216,6 +1279,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, thrower)))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, thrower)))))))));
         }
 
         /// <summary>
@@ -1435,6 +1507,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, () => this.Case10.Match<T>(Case10, thrower))))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9, Action<T10> Case10)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, () => this.Case10.Match(Case10, thrower))))))))));
         }
 
         /// <summary>
@@ -1667,6 +1748,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, () => this.Case10.Match<T>(Case10, () => this.Case11.Match<T>(Case11, thrower)))))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9, Action<T10> Case10, Action<T11> Case11)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, () => this.Case10.Match(Case10, () => this.Case11.Match(Case11, thrower)))))))))));
         }
 
         /// <summary>
@@ -1912,6 +2002,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, () => this.Case10.Match<T>(Case10, () => this.Case11.Match<T>(Case11, () => this.Case12.Match<T>(Case12, thrower))))))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9, Action<T10> Case10, Action<T11> Case11, Action<T12> Case12)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, () => this.Case10.Match(Case10, () => this.Case11.Match(Case11, () => this.Case12.Match(Case12, thrower))))))))))));
         }
 
         /// <summary>
@@ -2170,6 +2269,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, () => this.Case10.Match<T>(Case10, () => this.Case11.Match<T>(Case11, () => this.Case12.Match<T>(Case12, () => this.Case13.Match<T>(Case13, thrower)))))))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9, Action<T10> Case10, Action<T11> Case11, Action<T12> Case12, Action<T13> Case13)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, () => this.Case10.Match(Case10, () => this.Case11.Match(Case11, () => this.Case12.Match(Case12, () => this.Case13.Match(Case13, thrower)))))))))))));
         }
 
         /// <summary>
@@ -2441,6 +2549,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, () => this.Case10.Match<T>(Case10, () => this.Case11.Match<T>(Case11, () => this.Case12.Match<T>(Case12, () => this.Case13.Match<T>(Case13, () => this.Case14.Match<T>(Case14, thrower))))))))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9, Action<T10> Case10, Action<T11> Case11, Action<T12> Case12, Action<T13> Case13, Action<T14> Case14)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, () => this.Case10.Match(Case10, () => this.Case11.Match(Case11, () => this.Case12.Match(Case12, () => this.Case13.Match(Case13, () => this.Case14.Match(Case14, thrower))))))))))))));
         }
 
         /// <summary>
@@ -2725,6 +2842,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, () => this.Case10.Match<T>(Case10, () => this.Case11.Match<T>(Case11, () => this.Case12.Match<T>(Case12, () => this.Case13.Match<T>(Case13, () => this.Case14.Match<T>(Case14, () => this.Case15.Match<T>(Case15, thrower)))))))))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9, Action<T10> Case10, Action<T11> Case11, Action<T12> Case12, Action<T13> Case13, Action<T14> Case14, Action<T15> Case15)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, () => this.Case10.Match(Case10, () => this.Case11.Match(Case11, () => this.Case12.Match(Case12, () => this.Case13.Match(Case13, () => this.Case14.Match(Case14, () => this.Case15.Match(Case15, thrower)))))))))))))));
         }
 
         /// <summary>
@@ -3022,6 +3148,15 @@ namespace LangExt
         {
             Func<T> thrower = () => { throw new InvalidOperationException(); };
             return this.Case1.Match<T>(Case1, () => this.Case2.Match<T>(Case2, () => this.Case3.Match<T>(Case3, () => this.Case4.Match<T>(Case4, () => this.Case5.Match<T>(Case5, () => this.Case6.Match<T>(Case6, () => this.Case7.Match<T>(Case7, () => this.Case8.Match<T>(Case8, () => this.Case9.Match<T>(Case9, () => this.Case10.Match<T>(Case10, () => this.Case11.Match<T>(Case11, () => this.Case12.Match<T>(Case12, () => this.Case13.Match<T>(Case13, () => this.Case14.Match<T>(Case14, () => this.Case15.Match<T>(Case15, () => this.Case16.Match<T>(Case16, thrower))))))))))))))));
+        }
+
+        /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(Action<T1> Case1, Action<T2> Case2, Action<T3> Case3, Action<T4> Case4, Action<T5> Case5, Action<T6> Case6, Action<T7> Case7, Action<T8> Case8, Action<T9> Case9, Action<T10> Case10, Action<T11> Case11, Action<T12> Case12, Action<T13> Case13, Action<T14> Case14, Action<T15> Case15, Action<T16> Case16)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            this.Case1.Match(Case1, () => this.Case2.Match(Case2, () => this.Case3.Match(Case3, () => this.Case4.Match(Case4, () => this.Case5.Match(Case5, () => this.Case6.Match(Case6, () => this.Case7.Match(Case7, () => this.Case8.Match(Case8, () => this.Case9.Match(Case9, () => this.Case10.Match(Case10, () => this.Case11.Match(Case11, () => this.Case12.Match(Case12, () => this.Case13.Match(Case13, () => this.Case14.Match(Case14, () => this.Case15.Match(Case15, () => this.Case16.Match(Case16, thrower))))))))))))))));
         }
 
         /// <summary>

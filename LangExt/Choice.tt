@@ -59,6 +59,15 @@ for (int i = 2; i <= Max; i++) {
         }
 
         /// <summary>
+        /// 擬似的にパターンマッチを行います。
+        /// </summary>
+        public void Match(<#= Repeat(", ", "Action<T{0}> Case{0}", i) #>)
+        {
+            Action thrower = () => { throw new InvalidOperationException(); };
+            <#= Fold("() => this.Case" + i + ".Match(Case" + i + ", thrower)", "() => this.Case{1}.Match(Case{1}, {0})", i - 1).Substring("() => ".Length) #>;
+        }
+
+        /// <summary>
         /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを判定します。
         /// </summary>
         /// <param name="other">このオブジェクトと比較するChoice</param>
