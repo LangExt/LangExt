@@ -24,6 +24,16 @@ namespace LangExt
 for (int i = 2; i <= Max; i++) {
     var types = TypeParams("T", i);
 #>
+<# for (int j = 0; j < i; j++) { #>
+        /// <summary>
+        /// T<#= j + 1 #>を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<<#= types #>> Create<<#= types #>>(T<#= j + 1 #> value)
+        {
+            return new Choice<<#= types #>>(value);
+        }
+
+<# } #>
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。

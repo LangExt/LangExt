@@ -26,19 +26,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2>(T1 value) { return new Choice<T1, T2>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2>(T2 value) { return new Choice<T1, T2>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -153,29 +143,14 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3>(T1 value) { return new Choice<T1, T2, T3>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
 
         /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3>(T2 value) { return new Choice<T1, T2, T3>(value); }
-
-        /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
-
-        /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3>(T3 value) { return new Choice<T1, T2, T3>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -293,19 +268,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4>(T1 value) { return new Choice<T1, T2, T3, T4>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4>(T2 value) { return new Choice<T1, T2, T3, T4>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -313,19 +278,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4>(T3 value) { return new Choice<T1, T2, T3, T4>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4>(T4 value) { return new Choice<T1, T2, T3, T4>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -446,19 +401,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5>(T1 value) { return new Choice<T1, T2, T3, T4, T5>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5>(T2 value) { return new Choice<T1, T2, T3, T4, T5>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -466,29 +411,14 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5>(T3 value) { return new Choice<T1, T2, T3, T4, T5>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
 
         /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5>(T4 value) { return new Choice<T1, T2, T3, T4, T5>(value); }
-
-        /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
-
-        /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5>(T5 value) { return new Choice<T1, T2, T3, T4, T5>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -612,19 +542,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -632,19 +552,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -652,19 +562,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -791,19 +691,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -811,19 +701,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -831,29 +711,14 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
 
         /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7>(value); }
-
-        /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
-
-        /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -983,19 +848,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -1003,19 +858,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -1023,19 +868,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -1043,19 +878,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -1188,19 +1013,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -1208,19 +1023,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -1228,19 +1033,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -1248,29 +1043,14 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
 
         /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
-
-        /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
-
-        /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -1406,19 +1186,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -1426,19 +1196,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -1446,19 +1206,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -1466,19 +1216,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
 
         /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
@@ -1486,19 +1226,9 @@ namespace LangExt
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
 
         /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
-
-        /// <summary>
         /// T10を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T10 value) { Case10 = new Option<T10>(value); }
-
-        /// <summary>
-        /// T10型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -1637,19 +1367,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -1657,19 +1377,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -1677,19 +1387,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -1697,19 +1397,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
 
         /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
@@ -1717,29 +1407,14 @@ namespace LangExt
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
 
         /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
-
-        /// <summary>
         /// T10を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T10 value) { Case10 = new Option<T10>(value); }
 
         /// <summary>
-        /// T10型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
-
-        /// <summary>
         /// T11を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T11 value) { Case11 = new Option<T11>(value); }
-
-        /// <summary>
-        /// T11型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -1881,19 +1556,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -1901,19 +1566,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -1921,19 +1576,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -1941,19 +1586,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
 
         /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
@@ -1961,19 +1596,9 @@ namespace LangExt
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
 
         /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
-
-        /// <summary>
         /// T10を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T10 value) { Case10 = new Option<T10>(value); }
-
-        /// <summary>
-        /// T10型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
 
         /// <summary>
         /// T11を保持するChoice[...]オブジェクトを生成します。
@@ -1981,19 +1606,9 @@ namespace LangExt
         public Choice(T11 value) { Case11 = new Option<T11>(value); }
 
         /// <summary>
-        /// T11型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
-
-        /// <summary>
         /// T12を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T12 value) { Case12 = new Option<T12>(value); }
-
-        /// <summary>
-        /// T12型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -2138,19 +1753,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -2158,19 +1763,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -2178,19 +1773,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -2198,19 +1783,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
 
         /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
@@ -2218,19 +1793,9 @@ namespace LangExt
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
 
         /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
-
-        /// <summary>
         /// T10を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T10 value) { Case10 = new Option<T10>(value); }
-
-        /// <summary>
-        /// T10型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
 
         /// <summary>
         /// T11を保持するChoice[...]オブジェクトを生成します。
@@ -2238,29 +1803,14 @@ namespace LangExt
         public Choice(T11 value) { Case11 = new Option<T11>(value); }
 
         /// <summary>
-        /// T11型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
-
-        /// <summary>
         /// T12を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T12 value) { Case12 = new Option<T12>(value); }
 
         /// <summary>
-        /// T12型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
-
-        /// <summary>
         /// T13を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T13 value) { Case13 = new Option<T13>(value); }
-
-        /// <summary>
-        /// T13型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -2408,19 +1958,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -2428,19 +1968,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -2448,19 +1978,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -2468,19 +1988,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
 
         /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
@@ -2488,19 +1998,9 @@ namespace LangExt
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
 
         /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
-
-        /// <summary>
         /// T10を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T10 value) { Case10 = new Option<T10>(value); }
-
-        /// <summary>
-        /// T10型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
 
         /// <summary>
         /// T11を保持するChoice[...]オブジェクトを生成します。
@@ -2508,19 +2008,9 @@ namespace LangExt
         public Choice(T11 value) { Case11 = new Option<T11>(value); }
 
         /// <summary>
-        /// T11型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
-
-        /// <summary>
         /// T12を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T12 value) { Case12 = new Option<T12>(value); }
-
-        /// <summary>
-        /// T12型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
 
         /// <summary>
         /// T13を保持するChoice[...]オブジェクトを生成します。
@@ -2528,19 +2018,9 @@ namespace LangExt
         public Choice(T13 value) { Case13 = new Option<T13>(value); }
 
         /// <summary>
-        /// T13型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
-
-        /// <summary>
         /// T14を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T14 value) { Case14 = new Option<T14>(value); }
-
-        /// <summary>
-        /// T14型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -2691,19 +2171,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -2711,19 +2181,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -2731,19 +2191,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -2751,19 +2201,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
 
         /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
@@ -2771,19 +2211,9 @@ namespace LangExt
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
 
         /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T10を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T10 value) { Case10 = new Option<T10>(value); }
-
-        /// <summary>
-        /// T10型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
 
         /// <summary>
         /// T11を保持するChoice[...]オブジェクトを生成します。
@@ -2791,19 +2221,9 @@ namespace LangExt
         public Choice(T11 value) { Case11 = new Option<T11>(value); }
 
         /// <summary>
-        /// T11型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T12を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T12 value) { Case12 = new Option<T12>(value); }
-
-        /// <summary>
-        /// T12型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
 
         /// <summary>
         /// T13を保持するChoice[...]オブジェクトを生成します。
@@ -2811,29 +2231,14 @@ namespace LangExt
         public Choice(T13 value) { Case13 = new Option<T13>(value); }
 
         /// <summary>
-        /// T13型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T14を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T14 value) { Case14 = new Option<T14>(value); }
 
         /// <summary>
-        /// T14型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
-
-        /// <summary>
         /// T15を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T15 value) { Case15 = new Option<T15>(value); }
-
-        /// <summary>
-        /// T15型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -2987,19 +2392,9 @@ namespace LangExt
         public Choice(T1 value) { Case1 = new Option<T1>(value); }
 
         /// <summary>
-        /// T1型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T2を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T2 value) { Case2 = new Option<T2>(value); }
-
-        /// <summary>
-        /// T2型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// T3を保持するChoice[...]オブジェクトを生成します。
@@ -3007,19 +2402,9 @@ namespace LangExt
         public Choice(T3 value) { Case3 = new Option<T3>(value); }
 
         /// <summary>
-        /// T3型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T4を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T4 value) { Case4 = new Option<T4>(value); }
-
-        /// <summary>
-        /// T4型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// T5を保持するChoice[...]オブジェクトを生成します。
@@ -3027,19 +2412,9 @@ namespace LangExt
         public Choice(T5 value) { Case5 = new Option<T5>(value); }
 
         /// <summary>
-        /// T5型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T6を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T6 value) { Case6 = new Option<T6>(value); }
-
-        /// <summary>
-        /// T6型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// T7を保持するChoice[...]オブジェクトを生成します。
@@ -3047,19 +2422,9 @@ namespace LangExt
         public Choice(T7 value) { Case7 = new Option<T7>(value); }
 
         /// <summary>
-        /// T7型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T8を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T8 value) { Case8 = new Option<T8>(value); }
-
-        /// <summary>
-        /// T8型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// T9を保持するChoice[...]オブジェクトを生成します。
@@ -3067,19 +2432,9 @@ namespace LangExt
         public Choice(T9 value) { Case9 = new Option<T9>(value); }
 
         /// <summary>
-        /// T9型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T10を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T10 value) { Case10 = new Option<T10>(value); }
-
-        /// <summary>
-        /// T10型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// T11を保持するChoice[...]オブジェクトを生成します。
@@ -3087,19 +2442,9 @@ namespace LangExt
         public Choice(T11 value) { Case11 = new Option<T11>(value); }
 
         /// <summary>
-        /// T11型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T12を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T12 value) { Case12 = new Option<T12>(value); }
-
-        /// <summary>
-        /// T12型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// T13を保持するChoice[...]オブジェクトを生成します。
@@ -3107,19 +2452,9 @@ namespace LangExt
         public Choice(T13 value) { Case13 = new Option<T13>(value); }
 
         /// <summary>
-        /// T13型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T14を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T14 value) { Case14 = new Option<T14>(value); }
-
-        /// <summary>
-        /// T14型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// T15を保持するChoice[...]オブジェクトを生成します。
@@ -3127,19 +2462,9 @@ namespace LangExt
         public Choice(T15 value) { Case15 = new Option<T15>(value); }
 
         /// <summary>
-        /// T15型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
-
-        /// <summary>
         /// T16を保持するChoice[...]オブジェクトを生成します。
         /// </summary>
         public Choice(T16 value) { Case16 = new Option<T16>(value); }
-
-        /// <summary>
-        /// T16型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T16 value) { return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value); }
 
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -3261,4 +2586,1087 @@ namespace LangExt
         }
     }
 
+    partial class Create
+    {
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2> Choice<T1, T2>(T1 value)
+        {
+            return new Choice<T1, T2>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2> Choice<T1, T2>(T2 value)
+        {
+            return new Choice<T1, T2>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3> Choice<T1, T2, T3>(T1 value)
+        {
+            return new Choice<T1, T2, T3>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3> Choice<T1, T2, T3>(T2 value)
+        {
+            return new Choice<T1, T2, T3>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3> Choice<T1, T2, T3>(T3 value)
+        {
+            return new Choice<T1, T2, T3>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Choice<T1, T2, T3, T4>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Choice<T1, T2, T3, T4>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Choice<T1, T2, T3, T4>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Choice<T1, T2, T3, T4>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Choice<T1, T2, T3, T4, T5>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Choice<T1, T2, T3, T4, T5>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Choice<T1, T2, T3, T4, T5>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Choice<T1, T2, T3, T4, T5>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Choice<T1, T2, T3, T4, T5>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Choice<T1, T2, T3, T4, T5, T6>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Choice<T1, T2, T3, T4, T5, T6>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Choice<T1, T2, T3, T4, T5, T6>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Choice<T1, T2, T3, T4, T5, T6>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Choice<T1, T2, T3, T4, T5, T6>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Choice<T1, T2, T3, T4, T5, T6>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Choice<T1, T2, T3, T4, T5, T6, T7>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Choice<T1, T2, T3, T4, T5, T6, T7>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Choice<T1, T2, T3, T4, T5, T6, T7>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Choice<T1, T2, T3, T4, T5, T6, T7>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Choice<T1, T2, T3, T4, T5, T6, T7>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Choice<T1, T2, T3, T4, T5, T6, T7>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Choice<T1, T2, T3, T4, T5, T6, T7>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Choice<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T15を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T15を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T16を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T16 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+    }
 }

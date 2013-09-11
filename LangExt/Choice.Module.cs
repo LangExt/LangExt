@@ -11,6 +11,22 @@ namespace LangExt
     public static partial class Choice
     {
         /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2> Create<T1, T2>(T1 value)
+        {
+            return new Choice<T1, T2>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2> Create<T1, T2>(T2 value)
+        {
+            return new Choice<T1, T2>(value);
+        }
+
+        /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
         /// </summary>
@@ -73,6 +89,30 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3> Create<T1, T2, T3>(T1 value)
+        {
+            return new Choice<T1, T2, T3>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3> Create<T1, T2, T3>(T2 value)
+        {
+            return new Choice<T1, T2, T3>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3> Create<T1, T2, T3>(T3 value)
+        {
+            return new Choice<T1, T2, T3>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -140,6 +180,38 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -211,6 +283,46 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -286,6 +398,54 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -365,6 +525,62 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -448,6 +664,70 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -535,6 +815,78 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -626,6 +978,86 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -721,6 +1153,94 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -820,6 +1340,102 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -923,6 +1539,110 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -1030,6 +1750,118 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -1141,6 +1973,126 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// T15を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
@@ -1256,6 +2208,134 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T15を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// T16を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T16 value)
+        {
+            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
         /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。

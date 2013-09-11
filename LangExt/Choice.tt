@@ -43,11 +43,6 @@ for (int i = 2; i <= Max; i++) {
         /// </summary>
         public Choice(T<#= j + 1 #> value) { Case<#= j + 1 #> = new Option<T<#= j + 1 #>>(value); }
 
-        /// <summary>
-        /// T<#= j + 1 #>型のオブジェクトをChoice[...]に変換します。
-        /// </summary>
-        public static implicit operator Choice<<#= types #>>(T<#= j + 1 #> value) { return new Choice<<#= types #>>(value); }
-
 <# } #>
         /// <summary>
         /// 擬似的にパターンマッチを行います。
@@ -144,4 +139,21 @@ for (int i = 2; i <= Max; i++) {
     }
 
 <# } #>
+    partial class Create
+    {
+<#
+for (int i = 2; i <= Max; i++) {
+    var types = TypeParams("T", i);
+#>
+<# for (int j = 0; j < i; j++) { #>
+        /// <summary>
+        /// T<#= j + 1 #>を含むChoice[...]オブジェクトを生成します。
+        /// </summary>
+        public static Choice<<#= types #>> Choice<<#= types #>>(T<#= j + 1 #> value)
+        {
+            return new Choice<<#= types #>>(value);
+        }
+
+<# } } #>
+    }
 }
