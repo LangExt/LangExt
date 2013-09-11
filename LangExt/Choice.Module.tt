@@ -25,6 +25,29 @@ for (int i = 2; i <= Max; i++) {
     var types = TypeParams("T", i);
 #>
         /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<<#= types #>, T>(Choice<<#= types #>> a, Choice<<#= types #>> b, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+<# for (int j = 0; j < i; j++) { #>
+            if (aTag == <#= j + 1 #> && bTag == <#= j + 1 #>) return Option.Some(Case<#= j + 1 #>(a.Case<#= j + 1 #>.Value, b.Case<#= j + 1 #>.Value));
+<# } #>
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<<#= types #>, T>(this Tuple<Choice<<#= types #>>, Choice<<#= types #>>> self, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>)
+        {
+            return TryBinOp(self.Item1, self.Item2, <#= Repeat(", ", "Case{0}", i) #>);
+        }
+
+        /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
         /// </summary>

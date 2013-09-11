@@ -11,6 +11,28 @@ namespace LangExt
     public static partial class Choice
     {
         /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T>(Choice<T1, T2> a, Choice<T1, T2> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T>(this Tuple<Choice<T1, T2>, Choice<T1, T2>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2);
+        }
+
+        /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
         /// </summary>
@@ -51,6 +73,29 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T>(Choice<T1, T2, T3> a, Choice<T1, T2, T3> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T>(this Tuple<Choice<T1, T2, T3>, Choice<T1, T2, T3>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -95,6 +140,30 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T>(Choice<T1, T2, T3, T4> a, Choice<T1, T2, T3, T4> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T>(this Tuple<Choice<T1, T2, T3, T4>, Choice<T1, T2, T3, T4>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -142,6 +211,31 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T>(Choice<T1, T2, T3, T4, T5> a, Choice<T1, T2, T3, T4, T5> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T>(this Tuple<Choice<T1, T2, T3, T4, T5>, Choice<T1, T2, T3, T4, T5>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -192,6 +286,32 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T>(Choice<T1, T2, T3, T4, T5, T6> a, Choice<T1, T2, T3, T4, T5, T6> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6>, Choice<T1, T2, T3, T4, T5, T6>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -245,6 +365,33 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T>(Choice<T1, T2, T3, T4, T5, T6, T7> a, Choice<T1, T2, T3, T4, T5, T6, T7> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7>, Choice<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -301,6 +448,34 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8>, Choice<T1, T2, T3, T4, T5, T6, T7, T8>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -360,6 +535,35 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -422,6 +626,36 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            if (aTag == 10 && bTag == 10) return Option.Some(Case10(a.Case10.Value, b.Case10.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -487,6 +721,37 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            if (aTag == 10 && bTag == 10) return Option.Some(Case10(a.Case10.Value, b.Case10.Value));
+            if (aTag == 11 && bTag == 11) return Option.Some(Case11(a.Case11.Value, b.Case11.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -555,6 +820,38 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            if (aTag == 10 && bTag == 10) return Option.Some(Case10(a.Case10.Value, b.Case10.Value));
+            if (aTag == 11 && bTag == 11) return Option.Some(Case11(a.Case11.Value, b.Case11.Value));
+            if (aTag == 12 && bTag == 12) return Option.Some(Case12(a.Case12.Value, b.Case12.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -626,6 +923,39 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            if (aTag == 10 && bTag == 10) return Option.Some(Case10(a.Case10.Value, b.Case10.Value));
+            if (aTag == 11 && bTag == 11) return Option.Some(Case11(a.Case11.Value, b.Case11.Value));
+            if (aTag == 12 && bTag == 12) return Option.Some(Case12(a.Case12.Value, b.Case12.Value));
+            if (aTag == 13 && bTag == 13) return Option.Some(Case13(a.Case13.Value, b.Case13.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -700,6 +1030,40 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            if (aTag == 10 && bTag == 10) return Option.Some(Case10(a.Case10.Value, b.Case10.Value));
+            if (aTag == 11 && bTag == 11) return Option.Some(Case11(a.Case11.Value, b.Case11.Value));
+            if (aTag == 12 && bTag == 12) return Option.Some(Case12(a.Case12.Value, b.Case12.Value));
+            if (aTag == 13 && bTag == 13) return Option.Some(Case13(a.Case13.Value, b.Case13.Value));
+            if (aTag == 14 && bTag == 14) return Option.Some(Case14(a.Case14.Value, b.Case14.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13, Case14);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -777,6 +1141,41 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            if (aTag == 10 && bTag == 10) return Option.Some(Case10(a.Case10.Value, b.Case10.Value));
+            if (aTag == 11 && bTag == 11) return Option.Some(Case11(a.Case11.Value, b.Case11.Value));
+            if (aTag == 12 && bTag == 12) return Option.Some(Case12(a.Case12.Value, b.Case12.Value));
+            if (aTag == 13 && bTag == 13) return Option.Some(Case13(a.Case13.Value, b.Case13.Value));
+            if (aTag == 14 && bTag == 14) return Option.Some(Case14(a.Case14.Value, b.Case14.Value));
+            if (aTag == 15 && bTag == 15) return Option.Some(Case15(a.Case15.Value, b.Case15.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13, Case14, Case15);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
@@ -857,6 +1256,42 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<T16, T16, T> Case16)
+        {
+            var aTag = a.TagIndex;
+            var bTag = b.TagIndex;
+            if (aTag == 1 && bTag == 1) return Option.Some(Case1(a.Case1.Value, b.Case1.Value));
+            if (aTag == 2 && bTag == 2) return Option.Some(Case2(a.Case2.Value, b.Case2.Value));
+            if (aTag == 3 && bTag == 3) return Option.Some(Case3(a.Case3.Value, b.Case3.Value));
+            if (aTag == 4 && bTag == 4) return Option.Some(Case4(a.Case4.Value, b.Case4.Value));
+            if (aTag == 5 && bTag == 5) return Option.Some(Case5(a.Case5.Value, b.Case5.Value));
+            if (aTag == 6 && bTag == 6) return Option.Some(Case6(a.Case6.Value, b.Case6.Value));
+            if (aTag == 7 && bTag == 7) return Option.Some(Case7(a.Case7.Value, b.Case7.Value));
+            if (aTag == 8 && bTag == 8) return Option.Some(Case8(a.Case8.Value, b.Case8.Value));
+            if (aTag == 9 && bTag == 9) return Option.Some(Case9(a.Case9.Value, b.Case9.Value));
+            if (aTag == 10 && bTag == 10) return Option.Some(Case10(a.Case10.Value, b.Case10.Value));
+            if (aTag == 11 && bTag == 11) return Option.Some(Case11(a.Case11.Value, b.Case11.Value));
+            if (aTag == 12 && bTag == 12) return Option.Some(Case12(a.Case12.Value, b.Case12.Value));
+            if (aTag == 13 && bTag == 13) return Option.Some(Case13(a.Case13.Value, b.Case13.Value));
+            if (aTag == 14 && bTag == 14) return Option.Some(Case14(a.Case14.Value, b.Case14.Value));
+            if (aTag == 15 && bTag == 15) return Option.Some(Case15(a.Case15.Value, b.Case15.Value));
+            if (aTag == 16 && bTag == 16) return Option.Some(Case16(a.Case16.Value, b.Case16.Value));
+            return Option.None;
+        }
+
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算の適用を試みます。
+        /// 保持する型が2つのオブジェクトで異なる場合、Noneが返されます。
+        /// </summary>
+        public static Option<T> TryBinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<T16, T16, T> Case16)
+        {
+            return TryBinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13, Case14, Case15, Case16);
+        }
+
         /// <summary>
         /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
         /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
