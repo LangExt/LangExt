@@ -15,12 +15,19 @@ using System.ComponentModel;
 
 namespace LangExt
 {
+    /// <summary>
+    /// Choiceに対する操作を提供します。
+    /// </summary>
     public static partial class Choice
     {
 <#
 for (int i = 2; i <= Max; i++) {
     var types = TypeParams("T", i);
 #>
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<<#= types #>, T>(Choice<<#= types #>> a, Choice<<#= types #>> b, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -31,11 +38,18 @@ for (int i = 2; i <= Max; i++) {
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<<#= types #>, T>(this Tuple<Choice<<#= types #>>, Choice<<#= types #>>> self, <#= Repeat(", ", "Func<T{0}, T{0}, T> Case{0}", i) #>, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, <#= Repeat(", ", "Case{0}", i) #>, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<<#= types #>>(this Choice<<#= types #>> self, Choice<<#= types #>> other)
 <# for (int j = 0; j < i; j++) { #>
             where T<#= j + 1 #> : IComparable<T<#= j +1 #>>
@@ -44,6 +58,9 @@ for (int i = 2; i <= Max; i++) {
             return BinOp(self, other, <#= Repeat(", ", "(a, b) => a.Cmp(b)", i + 1) #>);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<<#= types #>>> Comparer<<#= types #>>()
 <# for (int j = 0; j < i; j++) { #>
             where T<#= j + 1 #> : IComparable<T<#= j +1 #>>
@@ -52,5 +69,23 @@ for (int i = 2; i <= Max; i++) {
             return new Comparer<Choice<<#= types #>>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
 <# } #>
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
+        }
     }
 }

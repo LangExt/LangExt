@@ -5,8 +5,15 @@ using System.ComponentModel;
 
 namespace LangExt
 {
+    /// <summary>
+    /// Choiceに対する操作を提供します。
+    /// </summary>
     public static partial class Choice
     {
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T>(Choice<T1, T2> a, Choice<T1, T2> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -16,11 +23,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T>(this Tuple<Choice<T1, T2>, Choice<T1, T2>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2>(this Choice<T1, T2> self, Choice<T1, T2> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -28,12 +42,19 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2>> Comparer<T1, T2>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
         {
             return new Comparer<Choice<T1, T2>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T>(Choice<T1, T2, T3> a, Choice<T1, T2, T3> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -44,11 +65,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T>(this Tuple<Choice<T1, T2, T3>, Choice<T1, T2, T3>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3>(this Choice<T1, T2, T3> self, Choice<T1, T2, T3> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -57,6 +85,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3>> Comparer<T1, T2, T3>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -64,6 +95,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T>(Choice<T1, T2, T3, T4> a, Choice<T1, T2, T3, T4> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -75,11 +110,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T>(this Tuple<Choice<T1, T2, T3, T4>, Choice<T1, T2, T3, T4>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4>(this Choice<T1, T2, T3, T4> self, Choice<T1, T2, T3, T4> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -89,6 +131,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4>> Comparer<T1, T2, T3, T4>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -97,6 +142,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T>(Choice<T1, T2, T3, T4, T5> a, Choice<T1, T2, T3, T4, T5> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -109,11 +158,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T>(this Tuple<Choice<T1, T2, T3, T4, T5>, Choice<T1, T2, T3, T4, T5>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5>(this Choice<T1, T2, T3, T4, T5> self, Choice<T1, T2, T3, T4, T5> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -124,6 +180,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5>> Comparer<T1, T2, T3, T4, T5>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -133,6 +192,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T>(Choice<T1, T2, T3, T4, T5, T6> a, Choice<T1, T2, T3, T4, T5, T6> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -146,11 +209,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6>, Choice<T1, T2, T3, T4, T5, T6>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6>(this Choice<T1, T2, T3, T4, T5, T6> self, Choice<T1, T2, T3, T4, T5, T6> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -162,6 +232,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6>> Comparer<T1, T2, T3, T4, T5, T6>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -172,6 +245,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T>(Choice<T1, T2, T3, T4, T5, T6, T7> a, Choice<T1, T2, T3, T4, T5, T6, T7> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -186,11 +263,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7>, Choice<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7>(this Choice<T1, T2, T3, T4, T5, T6, T7> self, Choice<T1, T2, T3, T4, T5, T6, T7> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -203,6 +287,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7>> Comparer<T1, T2, T3, T4, T5, T6, T7>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -214,6 +301,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -229,11 +320,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8>, Choice<T1, T2, T3, T4, T5, T6, T7, T8>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -247,6 +345,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -259,6 +360,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -275,11 +380,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -294,6 +406,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -307,6 +422,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -324,11 +443,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -344,6 +470,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -358,6 +487,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -376,11 +509,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -397,6 +537,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -412,6 +555,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -431,11 +578,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -453,6 +607,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -469,6 +626,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -489,11 +650,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -512,6 +680,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -529,6 +700,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -550,11 +725,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13, Case14, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -574,6 +756,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -592,6 +777,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -614,11 +803,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13, Case14, Case15, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -639,6 +835,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -658,6 +857,10 @@ namespace LangExt
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]に対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T>(Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> a, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> b, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<T16, T16, T> Case16, Func<int, int, T> Otherwise)
         {
             var aTag = a.TagIndex;
@@ -681,11 +884,18 @@ namespace LangExt
             return Otherwise(aTag, bTag);
         }
 
+        /// <summary>
+        /// 2つの同じ型パラメータを持つChoice[...]のタプルに対して、二項演算を適用します。
+        /// 保持する型が2つのオブジェクトで異なる場合、保持する型のインデックスが渡される関数が呼び出されます。
+        /// </summary>
         public static T BinOp<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T>(this Tuple<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> self, Func<T1, T1, T> Case1, Func<T2, T2, T> Case2, Func<T3, T3, T> Case3, Func<T4, T4, T> Case4, Func<T5, T5, T> Case5, Func<T6, T6, T> Case6, Func<T7, T7, T> Case7, Func<T8, T8, T> Case8, Func<T9, T9, T> Case9, Func<T10, T10, T> Case10, Func<T11, T11, T> Case11, Func<T12, T12, T> Case12, Func<T13, T13, T> Case13, Func<T14, T14, T> Case14, Func<T15, T15, T> Case15, Func<T16, T16, T> Case16, Func<int, int, T> Otherwise)
         {
             return BinOp(self.Item1, self.Item2, Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9, Case10, Case11, Case12, Case13, Case14, Case15, Case16, Otherwise);
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]どうしの大小関係を判断して返します。
+        /// </summary>
         public static Comparable.CompareResult CompareTo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> self, Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> other)
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -707,6 +917,9 @@ namespace LangExt
             return BinOp(self, other, (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b), (a, b) => a.Cmp(b));
         }
 
+        /// <summary>
+        /// 全ての型パラメータがIComparable[T]を実装するChoice[...]を比較するためのIComparer[Choice[...]]を取得します。
+        /// </summary>
         public static IComparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> Comparer<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
             where T1 : IComparable<T1>
             where T2 : IComparable<T2>
@@ -726,6 +939,24 @@ namespace LangExt
             where T16 : IComparable<T16>
         {
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool Equals(object a, object b)
+        {
+            return object.Equals(a, b);
+        }
+
+        /// <summary>
+        /// 使用しません。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static new bool ReferenceEquals(object a, object b)
+        {
+            return object.ReferenceEquals(a, b);
         }
     }
 }
