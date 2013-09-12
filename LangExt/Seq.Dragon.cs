@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 
+#pragma warning disable 618
+
 namespace LangExt
 {
     partial class Seq
@@ -11,7 +13,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, U>(this Tuple<T1, T2> self, Func<T1, T2, Option<Tuple<U, T1, T2>>> f)
+        public static Seq<U> Unfold<T1, T2, U>(this Tuple<T1, T2> self, Func<T1, T2, Option<Tuple<U, T1, T2>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -109,7 +111,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, U init, Func<U, T1, T2, U> f)
+        public static Seq<U> Scan<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, U init, Func<U, T1, T2, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2()));
         }
@@ -117,7 +119,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, U init, Func<T1, T2, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, U init, Func<T1, T2, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), xs));
         }
@@ -125,7 +127,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すScan1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> Scan1<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, T1, T2, Tuple<T1, T2>> f)
+        public static Seq<Tuple<T1, T2>> Scan1<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, T1, T2, Tuple<T1, T2>> f)
         {
             return self.Scan1((acc, tpl) => f(acc._1(), acc._2(), tpl._1(), tpl._2()));
         }
@@ -133,7 +135,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すScanBack1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> ScanBack1<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, T1, T2, Tuple<T1, T2>> f)
+        public static Seq<Tuple<T1, T2>> ScanBack1<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, T1, T2, Tuple<T1, T2>> f)
         {
             return self.ScanBack1((tpl, xs) => f(tpl._1(), tpl._2(), xs._1(), xs._2()));
         }
@@ -173,7 +175,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> Filter<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
+        public static Seq<Tuple<T1, T2>> Filter<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2()));
         }
@@ -181,7 +183,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> FilterWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, bool> f)
+        public static Seq<Tuple<T1, T2>> FilterWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
@@ -189,7 +191,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, U> f)
+        public static Seq<U> Map<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2()));
         }
@@ -197,7 +199,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
@@ -221,7 +223,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2()));
         }
@@ -229,7 +231,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
@@ -237,7 +239,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2()));
         }
@@ -245,7 +247,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
@@ -253,7 +255,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> SkipWhile<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
+        public static Seq<Tuple<T1, T2>> SkipWhile<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2()));
         }
@@ -261,7 +263,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> TakeWhile<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
+        public static Seq<Tuple<T1, T2>> TakeWhile<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2()));
         }
@@ -269,7 +271,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> SkipWhileWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, bool> f)
+        public static Seq<Tuple<T1, T2>> SkipWhileWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
@@ -277,7 +279,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2>> TakeWhileWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, bool> f)
+        public static Seq<Tuple<T1, T2>> TakeWhileWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
@@ -285,7 +287,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2>>, ISeq<Tuple<T1, T2>>> Partition<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2>>, Seq<Tuple<T1, T2>>> Partition<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2()));
         }
@@ -293,7 +295,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2>>, ISeq<Tuple<T1, T2>>> Span<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2>>, Seq<Tuple<T1, T2>>> Span<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2()));
         }
@@ -301,7 +303,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2>>, ISeq<Tuple<T1, T2>>> Break<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2>>, Seq<Tuple<T1, T2>>> Break<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2()));
         }
@@ -309,7 +311,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2>> SortBy<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, U> f)
+        public static OrderedSeq<Tuple<T1, T2>> SortBy<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2()));
         }
@@ -317,7 +319,7 @@ namespace LangExt
         /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2>> RevSortBy<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, U> f)
+        public static OrderedSeq<Tuple<T1, T2>> RevSortBy<T1, T2, U>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2()));
         }
@@ -327,7 +329,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, U>(this Tuple<T1, T2, T3> self, Func<T1, T2, T3, Option<Tuple<U, T1, T2, T3>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, U>(this Tuple<T1, T2, T3> self, Func<T1, T2, T3, Option<Tuple<U, T1, T2, T3>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -425,7 +427,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, U init, Func<U, T1, T2, T3, U> f)
+        public static Seq<U> Scan<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, U init, Func<U, T1, T2, T3, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3()));
         }
@@ -433,7 +435,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, U init, Func<T1, T2, T3, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, U init, Func<T1, T2, T3, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), xs));
         }
@@ -441,7 +443,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すScan1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> Scan1<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, T1, T2, T3, Tuple<T1, T2, T3>> f)
+        public static Seq<Tuple<T1, T2, T3>> Scan1<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, T1, T2, T3, Tuple<T1, T2, T3>> f)
         {
             return self.Scan1((acc, tpl) => f(acc._1(), acc._2(), acc._3(), tpl._1(), tpl._2(), tpl._3()));
         }
@@ -449,7 +451,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すScanBack1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> ScanBack1<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, T1, T2, T3, Tuple<T1, T2, T3>> f)
+        public static Seq<Tuple<T1, T2, T3>> ScanBack1<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, T1, T2, T3, Tuple<T1, T2, T3>> f)
         {
             return self.ScanBack1((tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), xs._1(), xs._2(), xs._3()));
         }
@@ -489,7 +491,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> Filter<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
+        public static Seq<Tuple<T1, T2, T3>> Filter<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -497,7 +499,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> FilterWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3>> FilterWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
@@ -505,7 +507,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, U> f)
+        public static Seq<U> Map<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -513,7 +515,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
@@ -537,7 +539,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -545,7 +547,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
@@ -553,7 +555,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -561,7 +563,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
@@ -569,7 +571,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> SkipWhile<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
+        public static Seq<Tuple<T1, T2, T3>> SkipWhile<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -577,7 +579,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> TakeWhile<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
+        public static Seq<Tuple<T1, T2, T3>> TakeWhile<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -585,7 +587,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> SkipWhileWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3>> SkipWhileWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
@@ -593,7 +595,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3>> TakeWhileWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3>> TakeWhileWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
@@ -601,7 +603,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3>>, ISeq<Tuple<T1, T2, T3>>> Partition<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3>>, Seq<Tuple<T1, T2, T3>>> Partition<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -609,7 +611,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3>>, ISeq<Tuple<T1, T2, T3>>> Span<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3>>, Seq<Tuple<T1, T2, T3>>> Span<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -617,7 +619,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3>>, ISeq<Tuple<T1, T2, T3>>> Break<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3>>, Seq<Tuple<T1, T2, T3>>> Break<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -625,7 +627,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3>> SortBy<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3>> SortBy<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -633,7 +635,7 @@ namespace LangExt
         /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3>> RevSortBy<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3>> RevSortBy<T1, T2, T3, U>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3()));
         }
@@ -643,7 +645,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, U>(this Tuple<T1, T2, T3, T4> self, Func<T1, T2, T3, T4, Option<Tuple<U, T1, T2, T3, T4>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, U>(this Tuple<T1, T2, T3, T4> self, Func<T1, T2, T3, T4, Option<Tuple<U, T1, T2, T3, T4>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -741,7 +743,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, U init, Func<U, T1, T2, T3, T4, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, U init, Func<U, T1, T2, T3, T4, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -749,7 +751,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, U init, Func<T1, T2, T3, T4, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, U init, Func<T1, T2, T3, T4, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), xs));
         }
@@ -757,7 +759,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すScan1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> Scan1<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, T1, T2, T3, T4, Tuple<T1, T2, T3, T4>> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> Scan1<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, T1, T2, T3, T4, Tuple<T1, T2, T3, T4>> f)
         {
             return self.Scan1((acc, tpl) => f(acc._1(), acc._2(), acc._3(), acc._4(), tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -765,7 +767,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すScanBack1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> ScanBack1<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, T1, T2, T3, T4, Tuple<T1, T2, T3, T4>> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> ScanBack1<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, T1, T2, T3, T4, Tuple<T1, T2, T3, T4>> f)
         {
             return self.ScanBack1((tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), xs._1(), xs._2(), xs._3(), xs._4()));
         }
@@ -805,7 +807,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> Filter<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> Filter<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -813,7 +815,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> FilterWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> FilterWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
@@ -821,7 +823,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -829,7 +831,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
@@ -853,7 +855,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -861,7 +863,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
@@ -869,7 +871,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -877,7 +879,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
@@ -885,7 +887,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> SkipWhile<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> SkipWhile<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -893,7 +895,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> TakeWhile<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> TakeWhile<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -901,7 +903,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> SkipWhileWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> SkipWhileWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
@@ -909,7 +911,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4>> TakeWhileWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4>> TakeWhileWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
@@ -917,7 +919,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4>>, ISeq<Tuple<T1, T2, T3, T4>>> Partition<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4>>, Seq<Tuple<T1, T2, T3, T4>>> Partition<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -925,7 +927,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4>>, ISeq<Tuple<T1, T2, T3, T4>>> Span<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4>>, Seq<Tuple<T1, T2, T3, T4>>> Span<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -933,7 +935,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4>>, ISeq<Tuple<T1, T2, T3, T4>>> Break<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4>>, Seq<Tuple<T1, T2, T3, T4>>> Break<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -941,7 +943,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4>> SortBy<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4>> SortBy<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -949,7 +951,7 @@ namespace LangExt
         /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4>> RevSortBy<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4>> RevSortBy<T1, T2, T3, T4, U>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
         }
@@ -959,7 +961,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, U>(this Tuple<T1, T2, T3, T4, T5> self, Func<T1, T2, T3, T4, T5, Option<Tuple<U, T1, T2, T3, T4, T5>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, U>(this Tuple<T1, T2, T3, T4, T5> self, Func<T1, T2, T3, T4, T5, Option<Tuple<U, T1, T2, T3, T4, T5>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -1057,7 +1059,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, U init, Func<U, T1, T2, T3, T4, T5, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, U init, Func<U, T1, T2, T3, T4, T5, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1065,7 +1067,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, U init, Func<T1, T2, T3, T4, T5, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, U init, Func<T1, T2, T3, T4, T5, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), xs));
         }
@@ -1073,7 +1075,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すScan1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> Scan1<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, T1, T2, T3, T4, T5, Tuple<T1, T2, T3, T4, T5>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> Scan1<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, T1, T2, T3, T4, T5, Tuple<T1, T2, T3, T4, T5>> f)
         {
             return self.Scan1((acc, tpl) => f(acc._1(), acc._2(), acc._3(), acc._4(), acc._5(), tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1081,7 +1083,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すScanBack1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> ScanBack1<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, T1, T2, T3, T4, T5, Tuple<T1, T2, T3, T4, T5>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> ScanBack1<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, T1, T2, T3, T4, T5, Tuple<T1, T2, T3, T4, T5>> f)
         {
             return self.ScanBack1((tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), xs._1(), xs._2(), xs._3(), xs._4(), xs._5()));
         }
@@ -1121,7 +1123,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> Filter<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> Filter<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1129,7 +1131,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> FilterWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> FilterWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
@@ -1137,7 +1139,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1145,7 +1147,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
@@ -1169,7 +1171,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1177,7 +1179,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
@@ -1185,7 +1187,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1193,7 +1195,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
@@ -1201,7 +1203,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> SkipWhile<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> SkipWhile<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1209,7 +1211,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> TakeWhile<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> TakeWhile<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1217,7 +1219,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> SkipWhileWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> SkipWhileWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
@@ -1225,7 +1227,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5>> TakeWhileWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5>> TakeWhileWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
@@ -1233,7 +1235,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5>>, ISeq<Tuple<T1, T2, T3, T4, T5>>> Partition<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5>>, Seq<Tuple<T1, T2, T3, T4, T5>>> Partition<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1241,7 +1243,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5>>, ISeq<Tuple<T1, T2, T3, T4, T5>>> Span<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5>>, Seq<Tuple<T1, T2, T3, T4, T5>>> Span<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1249,7 +1251,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5>>, ISeq<Tuple<T1, T2, T3, T4, T5>>> Break<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5>>, Seq<Tuple<T1, T2, T3, T4, T5>>> Break<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1257,7 +1259,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5>> SortBy<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5>> SortBy<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1265,7 +1267,7 @@ namespace LangExt
         /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5>> RevSortBy<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5>> RevSortBy<T1, T2, T3, T4, T5, U>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
         }
@@ -1275,7 +1277,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, U>(this Tuple<T1, T2, T3, T4, T5, T6> self, Func<T1, T2, T3, T4, T5, T6, Option<Tuple<U, T1, T2, T3, T4, T5, T6>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, U>(this Tuple<T1, T2, T3, T4, T5, T6> self, Func<T1, T2, T3, T4, T5, T6, Option<Tuple<U, T1, T2, T3, T4, T5, T6>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -1373,7 +1375,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1381,7 +1383,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, U init, Func<T1, T2, T3, T4, T5, T6, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, U init, Func<T1, T2, T3, T4, T5, T6, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), xs));
         }
@@ -1389,7 +1391,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すScan1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> Scan1<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, T1, T2, T3, T4, T5, T6, Tuple<T1, T2, T3, T4, T5, T6>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> Scan1<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, T1, T2, T3, T4, T5, T6, Tuple<T1, T2, T3, T4, T5, T6>> f)
         {
             return self.Scan1((acc, tpl) => f(acc._1(), acc._2(), acc._3(), acc._4(), acc._5(), acc._6(), tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1397,7 +1399,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すScanBack1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> ScanBack1<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, T1, T2, T3, T4, T5, T6, Tuple<T1, T2, T3, T4, T5, T6>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> ScanBack1<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, T1, T2, T3, T4, T5, T6, Tuple<T1, T2, T3, T4, T5, T6>> f)
         {
             return self.ScanBack1((tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), xs._1(), xs._2(), xs._3(), xs._4(), xs._5(), xs._6()));
         }
@@ -1437,7 +1439,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> Filter<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> Filter<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1445,7 +1447,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> FilterWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> FilterWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
@@ -1453,7 +1455,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1461,7 +1463,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
@@ -1485,7 +1487,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1493,7 +1495,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
@@ -1501,7 +1503,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1509,7 +1511,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
@@ -1517,7 +1519,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> SkipWhile<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> SkipWhile<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1525,7 +1527,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> TakeWhile<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> TakeWhile<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1533,7 +1535,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
@@ -1541,7 +1543,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
@@ -1549,7 +1551,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6>>> Partition<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6>>, Seq<Tuple<T1, T2, T3, T4, T5, T6>>> Partition<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1557,7 +1559,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6>>> Span<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6>>, Seq<Tuple<T1, T2, T3, T4, T5, T6>>> Span<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1565,7 +1567,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6>>> Break<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6>>, Seq<Tuple<T1, T2, T3, T4, T5, T6>>> Break<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1573,7 +1575,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6>> SortBy<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6>> SortBy<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1581,7 +1583,7 @@ namespace LangExt
         /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6>> RevSortBy<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6>> RevSortBy<T1, T2, T3, T4, T5, T6, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
         }
@@ -1591,7 +1593,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7> self, Func<T1, T2, T3, T4, T5, T6, T7, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7> self, Func<T1, T2, T3, T4, T5, T6, T7, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -1689,7 +1691,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1697,7 +1699,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), xs));
         }
@@ -1705,7 +1707,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すScan1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> Scan1<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, T1, T2, T3, T4, T5, T6, T7, Tuple<T1, T2, T3, T4, T5, T6, T7>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> Scan1<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, T1, T2, T3, T4, T5, T6, T7, Tuple<T1, T2, T3, T4, T5, T6, T7>> f)
         {
             return self.Scan1((acc, tpl) => f(acc._1(), acc._2(), acc._3(), acc._4(), acc._5(), acc._6(), acc._7(), tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1713,7 +1715,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すScanBack1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> ScanBack1<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, T1, T2, T3, T4, T5, T6, T7, Tuple<T1, T2, T3, T4, T5, T6, T7>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> ScanBack1<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, T1, T2, T3, T4, T5, T6, T7, Tuple<T1, T2, T3, T4, T5, T6, T7>> f)
         {
             return self.ScanBack1((tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), xs._1(), xs._2(), xs._3(), xs._4(), xs._5(), xs._6(), xs._7()));
         }
@@ -1753,7 +1755,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> Filter<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> Filter<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1761,7 +1763,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
@@ -1769,7 +1771,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1777,7 +1779,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
@@ -1801,7 +1803,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1809,7 +1811,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
@@ -1817,7 +1819,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1825,7 +1827,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
@@ -1833,7 +1835,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> SkipWhile<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> SkipWhile<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1841,7 +1843,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> TakeWhile<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> TakeWhile<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1849,7 +1851,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
@@ -1857,7 +1859,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
@@ -1865,7 +1867,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>>> Partition<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>>> Partition<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1873,7 +1875,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>>> Span<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>>> Span<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1881,7 +1883,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>>> Break<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7>>> Break<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1889,7 +1891,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> SortBy<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> SortBy<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1897,7 +1899,7 @@ namespace LangExt
         /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
         }
@@ -1907,7 +1909,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -2005,7 +2007,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2013,7 +2015,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), xs));
         }
@@ -2021,7 +2023,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すScan1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> Scan1<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T1, T2, T3, T4, T5, T6, T7, T8, Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> Scan1<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T1, T2, T3, T4, T5, T6, T7, T8, Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> f)
         {
             return self.Scan1((acc, tpl) => f(acc._1(), acc._2(), acc._3(), acc._4(), acc._5(), acc._6(), acc._7(), acc._8(), tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2029,7 +2031,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すScanBack1です。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> ScanBack1<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T1, T2, T3, T4, T5, T6, T7, T8, Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> ScanBack1<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T1, T2, T3, T4, T5, T6, T7, T8, Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> f)
         {
             return self.ScanBack1((tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), xs._1(), xs._2(), xs._3(), xs._4(), xs._5(), xs._6(), xs._7(), xs._8()));
         }
@@ -2069,7 +2071,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2077,7 +2079,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
@@ -2085,7 +2087,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2093,7 +2095,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
@@ -2117,7 +2119,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2125,7 +2127,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
@@ -2133,7 +2135,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2141,7 +2143,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
@@ -2149,7 +2151,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2157,7 +2159,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2165,7 +2167,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
@@ -2173,7 +2175,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
@@ -2181,7 +2183,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2189,7 +2191,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2197,7 +2199,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2205,7 +2207,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2213,7 +2215,7 @@ namespace LangExt
         /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
         }
@@ -2223,7 +2225,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -2305,7 +2307,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2313,7 +2315,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), xs));
         }
@@ -2353,7 +2355,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2361,7 +2363,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
@@ -2369,7 +2371,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2377,7 +2379,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
@@ -2401,7 +2403,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2409,7 +2411,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
@@ -2417,7 +2419,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2425,7 +2427,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
@@ -2433,7 +2435,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2441,7 +2443,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2449,7 +2451,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
@@ -2457,7 +2459,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
@@ -2465,7 +2467,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2473,7 +2475,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2481,7 +2483,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2489,7 +2491,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2497,7 +2499,7 @@ namespace LangExt
         /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
         }
@@ -2507,7 +2509,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -2589,7 +2591,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2597,7 +2599,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), xs));
         }
@@ -2637,7 +2639,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2645,7 +2647,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
@@ -2653,7 +2655,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2661,7 +2663,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
@@ -2685,7 +2687,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2693,7 +2695,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
@@ -2701,7 +2703,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2709,7 +2711,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
@@ -2717,7 +2719,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2725,7 +2727,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2733,7 +2735,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
@@ -2741,7 +2743,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
@@ -2749,7 +2751,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2757,7 +2759,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2765,7 +2767,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2773,7 +2775,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2781,7 +2783,7 @@ namespace LangExt
         /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
         }
@@ -2791,7 +2793,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -2873,7 +2875,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -2881,7 +2883,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), xs));
         }
@@ -2921,7 +2923,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -2929,7 +2931,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
@@ -2937,7 +2939,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -2945,7 +2947,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
@@ -2969,7 +2971,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -2977,7 +2979,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
@@ -2985,7 +2987,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -2993,7 +2995,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
@@ -3001,7 +3003,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -3009,7 +3011,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -3017,7 +3019,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
@@ -3025,7 +3027,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
@@ -3033,7 +3035,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -3041,7 +3043,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -3049,7 +3051,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -3057,7 +3059,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -3065,7 +3067,7 @@ namespace LangExt
         /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
         }
@@ -3075,7 +3077,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -3157,7 +3159,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3165,7 +3167,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), xs));
         }
@@ -3205,7 +3207,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3213,7 +3215,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
@@ -3221,7 +3223,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3229,7 +3231,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
@@ -3253,7 +3255,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3261,7 +3263,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
@@ -3269,7 +3271,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3277,7 +3279,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
@@ -3285,7 +3287,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3293,7 +3295,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3301,7 +3303,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
@@ -3309,7 +3311,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
@@ -3317,7 +3319,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3325,7 +3327,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3333,7 +3335,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3341,7 +3343,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3349,7 +3351,7 @@ namespace LangExt
         /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
         }
@@ -3359,7 +3361,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -3441,7 +3443,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3449,7 +3451,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), xs));
         }
@@ -3489,7 +3491,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3497,7 +3499,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
@@ -3505,7 +3507,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3513,7 +3515,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
@@ -3537,7 +3539,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3545,7 +3547,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
@@ -3553,7 +3555,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3561,7 +3563,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
@@ -3569,7 +3571,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3577,7 +3579,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3585,7 +3587,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
@@ -3593,7 +3595,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
@@ -3601,7 +3603,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3609,7 +3611,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3617,7 +3619,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3625,7 +3627,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3633,7 +3635,7 @@ namespace LangExt
         /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
         }
@@ -3643,7 +3645,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13, Tuple<T14>>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13, Tuple<T14>>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -3725,7 +3727,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3733,7 +3735,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), xs));
         }
@@ -3773,7 +3775,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3781,7 +3783,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
@@ -3789,7 +3791,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3797,7 +3799,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
@@ -3821,7 +3823,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3829,7 +3831,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
@@ -3837,7 +3839,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3845,7 +3847,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
@@ -3853,7 +3855,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3861,7 +3863,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3869,7 +3871,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
@@ -3877,7 +3879,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
@@ -3885,7 +3887,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3893,7 +3895,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3901,7 +3903,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3909,7 +3911,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3917,7 +3919,7 @@ namespace LangExt
         /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
         }
@@ -3927,7 +3929,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13, Tuple<T14, T15>>>>> f)
+        public static Seq<U> Unfold<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Option<Tuple<U, T1, T2, T3, T4, T5, T6, Tuple<T7, T8, T9, T10, T11, T12, T13, Tuple<T14, T15>>>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -4009,7 +4011,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すScanです。
         /// </summary>
-        public static ISeq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
+        public static Seq<U> Scan<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, U init, Func<U, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
         {
             return self.Scan(init, (acc, tpl) => f(acc, tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4017,7 +4019,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すScanBackです。
         /// </summary>
-        public static ISeq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U, U> f)
+        public static Seq<U> ScanBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, U init, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U, U> f)
         {
             return self.ScanBack(init, (tpl, xs) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), xs));
         }
@@ -4057,7 +4059,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4065,7 +4067,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すFilterWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> FilterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, bool> f)
         {
             return self.FilterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
@@ -4073,7 +4075,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4081,7 +4083,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すMapWithIndexです。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, U> f)
+        public static Seq<U> MapWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, U> f)
         {
             return self.MapWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
@@ -4105,7 +4107,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4113,7 +4115,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すBindWithIndexです。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, ISeq<U>> f)
+        public static Seq<U> BindWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, Seq<U>> f)
         {
             return self.BindWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
@@ -4121,7 +4123,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4129,7 +4131,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すChooseWithIndexです。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, Option<U>> f)
+        public static Seq<U> ChooseWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, Option<U>> f)
         {
             return self.ChooseWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
@@ -4137,7 +4139,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4145,7 +4147,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4153,7 +4155,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> SkipWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, bool> f)
         {
             return self.SkipWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
@@ -4161,7 +4163,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileWithIndexです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> TakeWhileWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, bool> f)
         {
             return self.TakeWhileWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
@@ -4169,7 +4171,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4177,7 +4179,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4185,7 +4187,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4193,7 +4195,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4201,7 +4203,7 @@ namespace LangExt
         /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
         }
@@ -4300,7 +4302,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すFilterです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> Filter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
         {
             return self.Filter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4308,7 +4310,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すMapです。
         /// </summary>
-        public static ISeq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
+        public static Seq<U> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
         {
             return self.Map(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4324,7 +4326,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すBindです。
         /// </summary>
-        public static ISeq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, ISeq<U>> f)
+        public static Seq<U> Bind<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Seq<U>> f)
         {
             return self.Bind(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4332,7 +4334,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すChooseです。
         /// </summary>
-        public static ISeq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Option<U>> f)
+        public static Seq<U> Choose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Option<U>> f)
         {
             return self.Choose(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4340,7 +4342,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すSkipWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> SkipWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
         {
             return self.SkipWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4348,7 +4350,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すTakeWhileです。
         /// </summary>
-        public static ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
+        public static Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> TakeWhile<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
         {
             return self.TakeWhile(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4356,7 +4358,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すPartitionです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>> Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
         {
             return self.Partition(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4364,7 +4366,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すSpanです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>> Span<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
         {
             return self.Span(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4372,7 +4374,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すBreakです。
         /// </summary>
-        public static Tuple<ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>, ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
+        public static Tuple<Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>, Seq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>>> Break<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> f)
         {
             return self.Break(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4380,7 +4382,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> SortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
         {
             return self.SortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4388,7 +4390,7 @@ namespace LangExt
         /// <summary>
         /// 16要素タプルのシーケンスの各要素を展開して関数に渡すRevSortByです。
         /// </summary>
-        public static IOrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
+        public static OrderedSeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> RevSortBy<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> f)
         {
             return self.RevSortBy(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
@@ -4396,3 +4398,5 @@ namespace LangExt
 
     }
 }
+
+#pragma warning restore 618

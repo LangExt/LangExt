@@ -655,7 +655,7 @@ let ``LangExtSeq.Reverse eq Array.rev``() =
 let ``LangExtSeq.Sequence`` () =
   let optSeq xs = LangExtSeq.Map(intSeq xs, fun x -> if even x then some(x) else none())
   let optEq a b =
-    let conv (x: LangExt.Option<LangExt.ISeq<_>>) =
+    let conv (x: LangExt.Option<LangExt.Seq<_>>) =
       if x.IsSome then Some(x.GetOrElse(fun () -> failwith ""))
       else None
     match (conv a), (conv b) with
@@ -669,7 +669,7 @@ let ``LangExtSeq.Sequence`` () =
 let ``LangExtSeq.SequenceSuccess`` () =
   let resSeq xs = LangExtSeq.Map(intSeq xs, fun x -> if even x then success(x) else failure(x))
   let resEq a b =
-    let conv (x: LangExt.Result<LangExt.ISeq<_>, int>) =
+    let conv (x: LangExt.Result<LangExt.Seq<_>, int>) =
       if x.IsSuccess then Some(x.GetOrElse(fun () -> failwith ""))
       else None
     match (conv a), (conv b) with
@@ -683,7 +683,7 @@ let ``LangExtSeq.SequenceSuccess`` () =
 let ``LangExtSeq.SequenceFailure`` () =
   let resSeq xs = LangExtSeq.Map(intSeq xs, fun x -> if even x then success(x) else failure(x))
   let resEq a b =
-    let conv (x: LangExt.Result<int, LangExt.ISeq<_>>) =
+    let conv (x: LangExt.Result<int, LangExt.Seq<_>>) =
       if x.IsFailure then Some(x.GetFailureOrElse(fun () -> failwith ""))
       else None
     match (conv a), (conv b) with

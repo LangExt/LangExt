@@ -122,9 +122,9 @@ namespace LangExt
         }
 
         /// <summary>
-        /// Option[T] → ISeq[T]
+        /// Option[T] → Seq[T]
         /// </summary>
-        public static ISeq<T> ToSeq<T>(this Option<T> self)
+        public static Seq<T> ToSeq<T>(this Option<T> self)
         {
             return self.Match(Seq.Singleton, () => Seq.Create<T>());
         }

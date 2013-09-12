@@ -215,7 +215,7 @@ namespace LangExt
         /// <summary>
         /// 範囲をシーケンスに変換します。
         /// </summary>
-        public ISeq<int> ToSeq()
+        public Seq<int> ToSeq()
         {
             var begin = this.Begin;
             if (this.Increasing)
@@ -232,7 +232,7 @@ namespace LangExt
         /// <summary>
         /// stepを指定して範囲をシーケンスに変換します。
         /// </summary>
-        public ISeq<int> ToSeq(int step)
+        public Seq<int> ToSeq(int step)
         {
             if (step == 0)
                 throw new ArgumentOutOfRangeException("step", string.Format(Properties.Resources.ExMsgInvalidValue, 0));

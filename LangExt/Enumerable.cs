@@ -12,9 +12,9 @@ namespace LangExt
         /// <summary>
         /// IEnumerable[T]からシーケンスに変換します。
         /// </summary>
-        public static ISeq<T> ToSeq<T>(this IEnumerable<T> self)
+        public static Seq<T> ToSeq<T>(this IEnumerable<T> self)
         {
-            return new Seq<T>(self);
+            return new EnumerableSeq<T>(self);
         }
 
         /// <summary>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LangExt
 {
-    sealed class CachedSeq<T> : ISeq<T>
+    sealed class CachedSeq<T> : Seq<T>
     {
         IEnumerator<T> itor;
         readonly List<T> values = new List<T>();

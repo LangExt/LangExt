@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
+#pragma warning disable 618
+
 namespace LangExt
 {
     using StdEnumerable = System.Linq.Enumerable;
@@ -11,9 +13,16 @@ namespace LangExt
     /// 要素Tのシーケンスを表すインターフェイスです。
     /// </summary>
     /// <typeparam name="T">要素の型</typeparam>
+    [Obsolete("このインターフェイスはLangExt3.0で廃止予定なので、代わりにSeq[T]を使ってください。")]
     public interface ISeq<out T> : IEnumerable<T> { }
 
-    internal sealed class EmptySeq<T> : ISeq<T>
+    /// <summary>
+    /// 要素Tのシーケンスを表すインターフェイスです。
+    /// </summary>
+    /// <typeparam name="T">要素の型</typeparam>
+    public interface Seq<out T> : ISeq<T> { }
+
+    internal sealed class EmptySeq<T> : Seq<T>
     {
         internal readonly static EmptySeq<T> Instance = new EmptySeq<T>();
         class EmptyEnumerator : IEnumerator<T>
@@ -38,12 +47,12 @@ namespace LangExt
         public override string ToString() { return "seq []"; }
     }
 
-    internal class Seq<T> : ISeq<T>
+    internal class EnumerableSeq<T> : Seq<T>
     {
-        #region Seqの実装
+        #region EnumerableSeqの実装
         readonly IEnumerable<T> value;
 
-        internal Seq(IEnumerable<T> value) { this.value = value; }
+        internal EnumerableSeq(IEnumerable<T> value) { this.value = value; }
 
         public IEnumerator<T> GetEnumerator() { return this.value.GetEnumerator(); }
 
@@ -61,7 +70,7 @@ namespace LangExt
         /// <summary>
         /// 引数を要素として含むシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Seq<T>(params T[] elems) { return new Seq<T>(elems); }
+        public static Seq<T> Seq<T>(params T[] elems) { return new EnumerableSeq<T>(elems); }
     }
 
     /// <summary>
@@ -93,52 +102,52 @@ namespace LangExt
         /// <summary>
         /// 空のシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Empty<T>() { return EmptySeq<T>.Instance; }
+        public static Seq<T> Empty<T>() { return EmptySeq<T>.Instance; }
 
         /// <summary>
         /// 引数を要素として含むシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Create<T>(params T[] elems) { return new Seq<T>(elems); }
+        public static Seq<T> Create<T>(params T[] elems) { return new EnumerableSeq<T>(elems); }
 
         /// <summary>
         /// fを元に無限に続くシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> InitInfinite<T>(Func<int, T> f) { return new Seq<T>(Enumerable.InitInfinite(f)); }
+        public static Seq<T> InitInfinite<T>(Func<int, T> f) { return new EnumerableSeq<T>(Enumerable.InitInfinite(f)); }
 
         /// <summary>
         /// fを元にn要素のシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Init<T>(int n, Func<int, T> f)
+        public static Seq<T> Init<T>(int n, Func<int, T> f)
         {
             if (n < 0) throw new ArgumentOutOfRangeException("n", n, string.Format(Properties.Resources.ExMsgTooSmall, "n", 0, n));
-            return new Seq<T>(Enumerable.Init(n, f));
+            return new EnumerableSeq<T>(Enumerable.Init(n, f));
         }
 
         /// <summary>
         /// 指定した要素を含む無限に続くシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> RepeatInfinite<T>(T t) { return new Seq<T>(Enumerable.RepeatInfinite(t)); }
+        public static Seq<T> RepeatInfinite<T>(T t) { return new EnumerableSeq<T>(Enumerable.RepeatInfinite(t)); }
 
         /// <summary>
         /// 指定した要素を含むn要素のシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Repeat<T>(int n, T t)
+        public static Seq<T> Repeat<T>(int n, T t)
         {
             if (n < 0) throw new ArgumentOutOfRangeException("n", n, string.Format(Properties.Resources.ExMsgTooSmall, "n", 0, n));
-            return new Seq<T>(Enumerable.Repeat(n, t));
+            return new EnumerableSeq<T>(Enumerable.Repeat(n, t));
         }
 
         /// <summary>
         /// 指定した要素のみを含む1要素のシーケンスを生成します。
         /// </summary>
-        public static ISeq<T> Singleton<T>(T t) { return Repeat(1, t); }
+        public static Seq<T> Singleton<T>(T t) { return Repeat(1, t); }
 
         /// <summary>
         /// 初期状態からfによって計算されたシーケンスを生成します。
         /// </summary>
-        public static ISeq<U> Unfold<T, U>(this T self, Func<T, Option<Tuple<U, T>>> f)
+        public static Seq<U> Unfold<T, U>(this T self, Func<T, Option<Tuple<U, T>>> f)
         {
-            return new Seq<U>(Enumerable.Unfold(self, f));
+            return new EnumerableSeq<U>(Enumerable.Unfold(self, f));
         }
         #endregion
 
@@ -345,19 +354,19 @@ namespace LangExt
         /// シーケンスの先頭から畳み込みを行い、各ステップの結果をシーケンスとして返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<U> Scan<T, U>(this ISeq<T> self, U init, Func<U, T, U> f)
+        public static Seq<U> Scan<T, U>(this ISeq<T> self, U init, Func<U, T, U> f)
         {
-            return new Seq<U>(((IEnumerable<T>)self).Scan(init, f));
+            return new EnumerableSeq<U>(((IEnumerable<T>)self).Scan(init, f));
         }
 
         /// <summary>
         /// シーケンスの末尾から畳み込みを行い、各ステップの結果をシーケンスとして返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<U> ScanBack<T, U>(this ISeq<T> self, U init, Func<T, U, U> f)
+        public static Seq<U> ScanBack<T, U>(this ISeq<T> self, U init, Func<T, U, U> f)
         {
             var xs = StdEnumerable.Reverse(self);
-            return new Seq<U>(xs.Scan(init, (acc, x) => f(x, acc))).Reverse();
+            return new EnumerableSeq<U>(xs.Scan(init, (acc, x) => f(x, acc))).Reverse();
         }
 
         /// <summary>
@@ -365,9 +374,9 @@ namespace LangExt
         /// Scanと異なり、初期値にはシーケンスの先頭要素が使われます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> Scan1<T>(this ISeq<T> self, Func<T, T, T> f)
+        public static Seq<T> Scan1<T>(this ISeq<T> self, Func<T, T, T> f)
         {
-            return new Seq<T>(((IEnumerable<T>)self).Scan1(f));
+            return new EnumerableSeq<T>(((IEnumerable<T>)self).Scan1(f));
         }
 
         /// <summary>
@@ -375,10 +384,10 @@ namespace LangExt
         /// Scanと異なり、初期値にはシーケンスの末尾要素が使われます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> ScanBack1<T>(this ISeq<T> self, Func<T, T, T> f)
+        public static Seq<T> ScanBack1<T>(this ISeq<T> self, Func<T, T, T> f)
         {
             var xs = StdEnumerable.Reverse(self);
-            return new Seq<T>(xs.Scan1((acc, x) => f(x, acc))).Reverse();
+            return new EnumerableSeq<T>(xs.Scan1((acc, x) => f(x, acc))).Reverse();
         }
         #endregion
 
@@ -444,14 +453,14 @@ namespace LangExt
         /// シーケンスから、predを満たす要素のみを含むシーケンスを生成して返します。
         /// 標準クエリ演算子のWhereに対応します。
         /// </summary>
-        public static ISeq<T> Filter<T>(this ISeq<T> self, Func<T, bool> pred) { return new Seq<T>(StdEnumerable.Where(self, pred)); }
+        public static Seq<T> Filter<T>(this ISeq<T> self, Func<T, bool> pred) { return new EnumerableSeq<T>(StdEnumerable.Where(self, pred)); }
 
         /// <summary>
         /// シーケンスから、predを満たす要素のみを含むシーケンスを生成して返します。
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のWhereに対応します。
         /// </summary>
-        public static ISeq<T> FilterWithIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new Seq<T>(StdEnumerable.Where(self, pred)); }
+        public static Seq<T> FilterWithIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new EnumerableSeq<T>(StdEnumerable.Where(self, pred)); }
         #endregion
 
         #region Map系メソッド
@@ -459,14 +468,14 @@ namespace LangExt
         /// シーケンスのすべての要素に対してfを適用したシーケンスを生成して返します。
         /// 標準クエリ演算子のSelectに対応します。
         /// </summary>
-        public static ISeq<U> Map<T, U>(this ISeq<T> self, Func<T, U> f) { return new Seq<U>(StdEnumerable.Select(self, f)); }
+        public static Seq<U> Map<T, U>(this ISeq<T> self, Func<T, U> f) { return new EnumerableSeq<U>(StdEnumerable.Select(self, f)); }
 
         /// <summary>
         /// シーケンスのすべての要素に対してfを適用したシーケンスを生成して返します。
         /// fには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のSelectに対応します。
         /// </summary>
-        public static ISeq<U> MapWithIndex<T, U>(this ISeq<T> self, Func<T, int, U> f) { return new Seq<U>(StdEnumerable.Select(self, f)); }
+        public static Seq<U> MapWithIndex<T, U>(this ISeq<T> self, Func<T, int, U> f) { return new EnumerableSeq<U>(StdEnumerable.Select(self, f)); }
         #endregion
 
         #region Iter系メソッド
@@ -516,23 +525,23 @@ namespace LangExt
         /// シーケンスの各要素を順番にfの引数に対して渡し、fから返された各シーケンスを平坦化したシーケンスを生成して返します。
         /// 標準クエリ演算子のSelectManyに対応します。
         /// </summary>
-        public static ISeq<U> Bind<T, U>(this ISeq<T> self, Func<T, ISeq<U>> f) { return new Seq<U>(StdEnumerable.SelectMany(self, f)); }
+        public static Seq<U> Bind<T, U>(this ISeq<T> self, Func<T, Seq<U>> f) { return new EnumerableSeq<U>(StdEnumerable.SelectMany(self, f)); }
 
         /// <summary>
         /// シーケンスの各要素を順番にfの引数に対して渡し、fから返された各シーケンスを平坦化したシーケンスを生成して返します。
         /// fには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のSelectManyに対応します。
         /// </summary>
-        public static ISeq<U> BindWithIndex<T, U>(this ISeq<T> self, Func<T, int, ISeq<U>> f) { return new Seq<U>(StdEnumerable.SelectMany(self, f)); }
+        public static Seq<U> BindWithIndex<T, U>(this ISeq<T> self, Func<T, int, Seq<U>> f) { return new EnumerableSeq<U>(StdEnumerable.SelectMany(self, f)); }
 
         /// <summary>
         /// シーケンスの各要素を順番にfの引数に対して渡し、fから返された各シーケンスを平坦化したシーケンスを生成して返します。
         /// 標準クエリ演算子のSelectManyに似ていますが、渡す関数の戻り値の型がより広いものを受け入れます。
         /// </summary>
-        public static ISeq<U> Collect<T, U, V>(this ISeq<T> self, Func<T, V> f) where V : ISeq<U>
+        public static Seq<U> Collect<T, U, V>(this ISeq<T> self, Func<T, V> f) where V : ISeq<U>
         {
             var xs = new List<U>();
-            var res = new Seq<U>(xs);
+            var res = new EnumerableSeq<U>(xs);
             foreach (var x in self)
             {
                 xs.AddRange(f(x));
@@ -548,14 +557,14 @@ namespace LangExt
         /// シーケンスのすべての要素に対してfを適用し、Someを返した要素のみを集めたシーケンスを生成して返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<U> Choose<T, U>(this ISeq<T> self, Func<T, Option<U>> f) { return new Seq<U>(self.Bind(t => f(t).ToArray())); }
+        public static Seq<U> Choose<T, U>(this ISeq<T> self, Func<T, Option<U>> f) { return new EnumerableSeq<U>(self.Bind(t => f(t).ToArray())); }
 
         /// <summary>
         /// シーケンスのすべての要素に対してfを適用し、Someを返した要素のみを集めたシーケンスを生成して返します。
         /// fには、要素のほかに要素のインデックスも渡されます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<U> ChooseWithIndex<T, U>(this ISeq<T> self, Func<T, int, Option<U>> f) { return new Seq<U>(self.BindWithIndex((t, i) => f(t, i).ToArray())); }
+        public static Seq<U> ChooseWithIndex<T, U>(this ISeq<T> self, Func<T, int, Option<U>> f) { return new EnumerableSeq<U>(self.BindWithIndex((t, i) => f(t, i).ToArray())); }
         #endregion
 
         #region 部分シーケンス取得系メソッド(Skip/Take/SkipWhile/SkipWhileWithIndex/TakeWhile/TakeWhileWithIndex)
@@ -565,7 +574,7 @@ namespace LangExt
         /// nがシーケンスの要素の個数よりも大きい場合、空のシーケンスが返されます。
         /// 標準クエリ演算子のSkipに対応します。
         /// </summary>
-        public static ISeq<T> Skip<T>(this ISeq<T> self, int n) { return new Seq<T>(StdEnumerable.Skip(self, n)); }
+        public static Seq<T> Skip<T>(this ISeq<T> self, int n) { return new EnumerableSeq<T>(StdEnumerable.Skip(self, n)); }
 
         /// <summary>
         /// シーケンスの先頭からn個の要素を取り出したシーケンスを生成して返します。
@@ -573,33 +582,33 @@ namespace LangExt
         /// nがシーケンスの要素の個数よりも大きい場合、入力のシーケンスがそのまま返されます。
         /// 標準クエリ演算子のTakeに対応します。
         /// </summary>
-        public static ISeq<T> Take<T>(this ISeq<T> self, int n) { return new Seq<T>(StdEnumerable.Take(self, n)); }
+        public static Seq<T> Take<T>(this ISeq<T> self, int n) { return new EnumerableSeq<T>(StdEnumerable.Take(self, n)); }
 
         /// <summary>
         /// シーケンスの先頭からpredを満たす要素をスキップしたシーケンスを生成して返します。
         /// 標準クエリ演算子のSkipWhileに対応します。
         /// </summary>
-        public static ISeq<T> SkipWhile<T>(this ISeq<T> self, Func<T, bool> pred) { return new Seq<T>(StdEnumerable.SkipWhile(self, pred)); }
+        public static Seq<T> SkipWhile<T>(this ISeq<T> self, Func<T, bool> pred) { return new EnumerableSeq<T>(StdEnumerable.SkipWhile(self, pred)); }
 
         /// <summary>
         /// シーケンスの先頭からpredを満たす要素をスキップしたシーケンスを生成して返します。
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のSkipWhileに対応します。
         /// </summary>
-        public static ISeq<T> SkipWhileWithIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new Seq<T>(StdEnumerable.SkipWhile(self, pred)); }
+        public static Seq<T> SkipWhileWithIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new EnumerableSeq<T>(StdEnumerable.SkipWhile(self, pred)); }
 
         /// <summary>
         /// シーケンスの先頭からpredを満たす要素を取り出したシーケンスを生成して返します。
         /// 標準クエリ演算子のTakeWhileに対応します。
         /// </summary>
-        public static ISeq<T> TakeWhile<T>(this ISeq<T> self, Func<T, bool> pred) { return new Seq<T>(StdEnumerable.TakeWhile(self, pred)); }
+        public static Seq<T> TakeWhile<T>(this ISeq<T> self, Func<T, bool> pred) { return new EnumerableSeq<T>(StdEnumerable.TakeWhile(self, pred)); }
 
         /// <summary>
         /// シーケンスの先頭からpredを満たす要素を取り出したシーケンスを生成して返します。
         /// predには、要素のほかに要素のインデックスも渡されます。
         /// 標準クエリ演算子のTakeWhileに対応します。
         /// </summary>
-        public static ISeq<T> TakeWhileWithIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new Seq<T>(StdEnumerable.TakeWhile(self, pred)); }
+        public static Seq<T> TakeWhileWithIndex<T>(this ISeq<T> self, Func<T, int, bool> pred) { return new EnumerableSeq<T>(StdEnumerable.TakeWhile(self, pred)); }
         #endregion
 
         #region 分割系メソッド(Partition/SplitAt/Span/Break)
@@ -607,7 +616,7 @@ namespace LangExt
         /// predを満たす要素と満たさない要素にシーケンスを分割します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Tuple<ISeq<T>, ISeq<T>> Partition<T>(this ISeq<T> self, Func<T, bool> pred)
+        public static Tuple<Seq<T>, Seq<T>> Partition<T>(this ISeq<T> self, Func<T, bool> pred)
         {
             var res1 = new List<T>();
             var res2 = new List<T>();
@@ -616,25 +625,25 @@ namespace LangExt
                 if (pred(x)) res1.Add(x);
                 else res2.Add(x);
             }
-            return Tuple.Create((ISeq<T>)new Seq<T>(res1), (ISeq<T>)new Seq<T>(res2));
+            return Tuple.Create((Seq<T>)new EnumerableSeq<T>(res1), (Seq<T>)new EnumerableSeq<T>(res2));
         }
 
         /// <summary>
         /// 指定した位置シーケンスを分割します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Tuple<ISeq<T>, ISeq<T>> SplitAt<T>(this ISeq<T> self, int n)
+        public static Tuple<Seq<T>, Seq<T>> SplitAt<T>(this ISeq<T> self, int n)
         {
-            return LangExt.Create.Tuple(new Seq<T>(self).Take(n), new Seq<T>(self).Skip(n));
+            return LangExt.Create.Tuple(new EnumerableSeq<T>(self).Take(n), new EnumerableSeq<T>(self).Skip(n));
         }
 
         /// <summary>
         /// TakeWhileの結果とSkipWhileの結果の両方を同時に取得します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Tuple<ISeq<T>, ISeq<T>> Span<T>(this ISeq<T> self, Func<T, bool> pred)
+        public static Tuple<Seq<T>, Seq<T>> Span<T>(this ISeq<T> self, Func<T, bool> pred)
         {
-            return LangExt.Create.Tuple(new Seq<T>(self).TakeWhile(pred), new Seq<T>(self).SkipWhile(pred));
+            return LangExt.Create.Tuple(new EnumerableSeq<T>(self).TakeWhile(pred), new EnumerableSeq<T>(self).SkipWhile(pred));
         }
 
         /// <summary>
@@ -642,9 +651,9 @@ namespace LangExt
         /// Spanと異なり、predの否定が渡されます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Tuple<ISeq<T>, ISeq<T>> Break<T>(this ISeq<T> self, Func<T, bool> pred)
+        public static Tuple<Seq<T>, Seq<T>> Break<T>(this ISeq<T> self, Func<T, bool> pred)
         {
-            return LangExt.Create.Tuple(new Seq<T>(self).TakeWhile(t => !pred(t)), new Seq<T>(self).SkipWhile(t => !pred(t)));
+            return LangExt.Create.Tuple(new EnumerableSeq<T>(self).TakeWhile(t => !pred(t)), new EnumerableSeq<T>(self).SkipWhile(t => !pred(t)));
         }
         #endregion
 
@@ -654,9 +663,9 @@ namespace LangExt
         /// 各ウィンドウは、新しい配列として返されます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T[]> Windowed<T>(this ISeq<T> self, int windowSize)
+        public static Seq<T[]> Windowed<T>(this ISeq<T> self, int windowSize)
         {
-            return new Seq<T[]>(((IEnumerable<T>)self).Windowed(windowSize));
+            return new EnumerableSeq<T[]>(((IEnumerable<T>)self).Windowed(windowSize));
         }
 
         /// <summary>
@@ -664,9 +673,9 @@ namespace LangExt
         /// 各ウィンドウは、3要素のタプルとして返されます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<Tuple<T, T, T>> Windowed3<T>(this ISeq<T> self)
+        public static Seq<Tuple<T, T, T>> Windowed3<T>(this ISeq<T> self)
         {
-            return new Seq<Tuple<T, T, T>>(((IEnumerable<T>)self).Windowed3());
+            return new EnumerableSeq<Tuple<T, T, T>>(((IEnumerable<T>)self).Windowed3());
         }
 
         /// <summary>
@@ -674,9 +683,9 @@ namespace LangExt
         /// 各ウィンドウは、2要素のタプルとして返されます。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<Tuple<T, T>> Pairwise<T>(this ISeq<T> self)
+        public static Seq<Tuple<T, T>> Pairwise<T>(this ISeq<T> self)
         {
-            return new Seq<Tuple<T, T>>(((IEnumerable<T>)self).Pairwise());
+            return new EnumerableSeq<Tuple<T, T>>(((IEnumerable<T>)self).Pairwise());
         }
         #endregion
 
@@ -685,36 +694,36 @@ namespace LangExt
         /// シーケンスをソートします。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> Sort<T>(this ISeq<T> self)
+        public static Seq<T> Sort<T>(this ISeq<T> self)
         {
-            return new Seq<T>(StdEnumerable.OrderBy(self, x => x));
+            return new EnumerableSeq<T>(StdEnumerable.OrderBy(self, x => x));
         }
 
         /// <summary>
         /// シーケンスを逆順にソートします。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> RevSort<T>(this ISeq<T> self)
+        public static Seq<T> RevSort<T>(this ISeq<T> self)
         {
-            return new Seq<T>(StdEnumerable.OrderByDescending(self, x => x));
+            return new EnumerableSeq<T>(StdEnumerable.OrderByDescending(self, x => x));
         }
 
         /// <summary>
         /// シーケンスをソートします。
         /// 標準クエリ演算子のOrderByに対応します。
         /// </summary>
-        public static IOrderedSeq<T> SortBy<T, U>(this ISeq<T> self, Func<T, U> f)
+        public static OrderedSeq<T> SortBy<T, U>(this ISeq<T> self, Func<T, U> f)
         {
-            return new OrderedSeq<T>(StdEnumerable.OrderBy(self, f));
+            return new OrderedEnumerableSeq<T>(StdEnumerable.OrderBy(self, f));
         }
 
         /// <summary>
         /// シーケンスを逆順にソートします。
         /// 標準クエリ演算子のOrderByDescendingに対応します。
         /// </summary>
-        public static IOrderedSeq<T> RevSortBy<T, U>(this ISeq<T> self, Func<T, U> f)
+        public static OrderedSeq<T> RevSortBy<T, U>(this ISeq<T> self, Func<T, U> f)
         {
-            return new OrderedSeq<T>(StdEnumerable.OrderByDescending(self, f));
+            return new OrderedEnumerableSeq<T>(StdEnumerable.OrderByDescending(self, f));
         }
         #endregion
 
@@ -777,28 +786,28 @@ namespace LangExt
         /// シーケンスに別のシーケンスを連結したシーケンスを生成して返します。
         /// 標準クエリ演算子のConcatに対応します。
         /// </summary>
-        public static ISeq<T> Append<T>(this ISeq<T> self, ISeq<T> other) { return new Seq<T>(StdEnumerable.Concat(self, other)); }
+        public static Seq<T> Append<T>(this ISeq<T> self, ISeq<T> other) { return new EnumerableSeq<T>(StdEnumerable.Concat(self, other)); }
 
         /// <summary>
         /// ネストしたシーケンスのネストを一段取り除きます。
         /// 例えば、ISeq[ISeq[T]]をISeq[T]に変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> Concat<T, U>(this ISeq<U> self) where U : IEnumerable<T> { return new Seq<T>(self.Bind((U u) => u)); }
+        public static Seq<T> Concat<T, U>(this ISeq<U> self) where U : IEnumerable<T> { return new EnumerableSeq<T>(self.Bind((U u) => u)); }
 
         /// <summary>
         /// シーケンスを、走査した要素をキャッシュするシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> Cache<T>(this ISeq<T> self) { return new CachedSeq<T>(self); }
+        public static Seq<T> Cache<T>(this ISeq<T> self) { return new CachedSeq<T>(self); }
 
         /// <summary>
         /// シーケンスを反転させたシーケンスを生成します。
         /// 標準クエリ演算子のReverseに対応します。
         /// </summary>
-        public static ISeq<T> Reverse<T>(this ISeq<T> self)
+        public static Seq<T> Reverse<T>(this ISeq<T> self)
         {
-            return new Seq<T>(StdEnumerable.Reverse(self));
+            return new EnumerableSeq<T>(StdEnumerable.Reverse(self));
         }
 
         /// <summary>
@@ -806,7 +815,7 @@ namespace LangExt
         /// 一つでもNoneが存在した場合はNoneを返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Option<ISeq<T>> Sequence<T>(this ISeq<Option<T>> self)
+        public static Option<Seq<T>> Sequence<T>(this ISeq<Option<T>> self)
         {
             var res = new List<T>();
             foreach (var x in self)
@@ -815,7 +824,7 @@ namespace LangExt
                     return Option.None;
                 res.Add(Unsafe.OptionUnsafe.GetValue(x)); // 上のifでNoneの場合を除外しているので、このGetValueの呼び出しは安全
             }
-            return Option.Some<ISeq<T>>(new Seq<T>(res));
+            return Option.Some<Seq<T>>(new EnumerableSeq<T>(res));
         }
 
         /// <summary>
@@ -823,7 +832,7 @@ namespace LangExt
         /// 一つでもFailureが存在した場合はFailureを返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Result<ISeq<TSuccess>, TFailure> SequenceSuccess<TSuccess, TFailure>(this ISeq<Result<TSuccess, TFailure>> self)
+        public static Result<Seq<TSuccess>, TFailure> SequenceSuccess<TSuccess, TFailure>(this ISeq<Result<TSuccess, TFailure>> self)
         {
             var res = new List<TSuccess>();
             foreach (var x in self)
@@ -832,7 +841,7 @@ namespace LangExt
                     return Result.Failure(x.FailureValue);
                 res.Add(x.SuccessValue);
             }
-            return Result.Success((ISeq<TSuccess>)new Seq<TSuccess>(res));
+            return Result.Success((Seq<TSuccess>)new EnumerableSeq<TSuccess>(res));
         }
 
         /// <summary>
@@ -840,7 +849,7 @@ namespace LangExt
         /// 一つでもFailureが存在した場合はFailureを返します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static Result<TSuccess, ISeq<TFailure>> SequenceFailure<TSuccess, TFailure>(this ISeq<Result<TSuccess, TFailure>> self)
+        public static Result<TSuccess, Seq<TFailure>> SequenceFailure<TSuccess, TFailure>(this ISeq<Result<TSuccess, TFailure>> self)
         {
             var res = new List<TFailure>();
             foreach (var x in self)
@@ -849,50 +858,50 @@ namespace LangExt
                     return Result.Success(x.SuccessValue);
                 res.Add(x.FailureValue);
             }
-            return Result.Failure((ISeq<TFailure>)new Seq<TFailure>(res));
+            return Result.Failure((Seq<TFailure>)new EnumerableSeq<TFailure>(res));
         }
 
         /// <summary>
         /// Option[T]のシーケンスからSomeの要素のみを抜き出し、その値を取り出したシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> OnlySome<T>(this ISeq<Option<T>> self) { return self.Choose(Func.Id); }
+        public static Seq<T> OnlySome<T>(this ISeq<Option<T>> self) { return self.Choose(Func.Id); }
 
         /// <summary>
         /// Result[T, _]のシーケンスからSuccessの要素のみを抜き出し、その値を取り出したシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> OnlySuccess<T, _>(this ISeq<Result<T, _>> self) { return self.Choose(Result.ToOption); }
+        public static Seq<T> OnlySuccess<T, _>(this ISeq<Result<T, _>> self) { return self.Choose(Result.ToOption); }
 
         /// <summary>
         /// Result[_, T]のシーケンスからFailureの要素のみを抜き出し、その値を取り出したシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<T> OnlyFailure<_, T>(this ISeq<Result<_, T>> self) { return self.Choose(Result.ToOptionFailure); }
+        public static Seq<T> OnlyFailure<_, T>(this ISeq<Result<_, T>> self) { return self.Choose(Result.ToOptionFailure); }
 
         /// <summary>
         /// nullを含みうるシーケンスから、Optionのシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<Option<T>> MapOption<T>(this ISeq<T> self) where T : class { return self.Map(Option.Create); }
+        public static Seq<Option<T>> MapOption<T>(this ISeq<T> self) where T : class { return self.Map(Option.Create); }
 
         /// <summary>
         /// nullを含みうるシーケンスから、Optionのシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<Option<T>> MapOption<T>(this ISeq<T?> self) where T : struct { return self.Map(Option.Create); }
+        public static Seq<Option<T>> MapOption<T>(this ISeq<T?> self) where T : struct { return self.Map(Option.Create); }
         
         /// <summary>
         /// nullを含みうるシーケンスから、Resultのシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<Result<T, Unit>> MapResult<T>(this ISeq<T> self) where T : class { return self.Map(Result.Create); }
+        public static Seq<Result<T, Unit>> MapResult<T>(this ISeq<T> self) where T : class { return self.Map(Result.Create); }
 
         /// <summary>
         /// nullを含みうるシーケンスから、Resultのシーケンスに変換します。
         /// 対応する標準クエリ演算子はありません。
         /// </summary>
-        public static ISeq<Result<T, Unit>> MapResult<T>(this ISeq<T?> self) where T : struct { return self.Map(Result.Create); }
+        public static Seq<Result<T, Unit>> MapResult<T>(this ISeq<T?> self) where T : struct { return self.Map(Result.Create); }
         
         /// <summary>
         /// 使用しません。
@@ -913,3 +922,5 @@ namespace LangExt
         }
     }
 }
+
+#pragma warning restore 618

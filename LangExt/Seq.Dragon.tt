@@ -24,38 +24,40 @@
         new MethodTemplate("Option<$(tupleType)>", "TryReduce", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
         new MethodTemplate("U", "FoldBack", "U", "U init, Func<$(typeParams), U, U> f", "init, (tpl, xs) => f($(access), xs)").WithMax(15),
         new MethodTemplate("Option<$(tupleType)>", "TryReduceBack", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(tpl, xs) => f($(access), $(access,xs))").WithMax(8),
-        new MethodTemplate("ISeq<U>", "Scan", "U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
-        new MethodTemplate("ISeq<U>", "ScanBack", "U", "U init, Func<$(typeParams), U, U> f", "init, (tpl, xs) => f($(access), xs)").WithMax(15),
-        new MethodTemplate("ISeq<$(tupleType)>", "Scan1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
-        new MethodTemplate("ISeq<$(tupleType)>", "ScanBack1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(tpl, xs) => f($(access), $(access,xs))").WithMax(8),
+        new MethodTemplate("Seq<U>", "Scan", "U", "U init, Func<U, $(typeParams), U> f", "init, (acc, tpl) => f(acc, $(access))").WithMax(15),
+        new MethodTemplate("Seq<U>", "ScanBack", "U", "U init, Func<$(typeParams), U, U> f", "init, (tpl, xs) => f($(access), xs)").WithMax(15),
+        new MethodTemplate("Seq<$(tupleType)>", "Scan1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(acc, tpl) => f($(access,acc), $(access))").WithMax(8),
+        new MethodTemplate("Seq<$(tupleType)>", "ScanBack1", "", "Func<$(typeParams), $(typeParams), $(tupleType)> f", "(tpl, xs) => f($(access), $(access,xs))").WithMax(8),
         new MethodTemplate("Option<$(tupleType)>", "TryFind", "", "Func<$(typeParams), bool> f"),
         new MethodTemplate("Option<U>", "TryPick", "U", "Func<$(typeParams), Option<U>> f"),
         new MethodTemplate("bool", "Forall", "", "Func<$(typeParams), bool> f"),
         new MethodTemplate("bool", "Exists", "", "Func<$(typeParams), bool> f"),
-        new MethodTemplate("ISeq<$(tupleType)>", "Filter", "", "Func<$(typeParams), bool> f"),
-        new MethodTemplate("ISeq<$(tupleType)>", "FilterWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
-        new MethodTemplate("ISeq<U>", "Map", "U", "Func<$(typeParams), U> f"),
-        new MethodTemplate("ISeq<U>", "MapWithIndex", "U", "Func<$(typeParams), int, U> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("Seq<$(tupleType)>", "Filter", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Seq<$(tupleType)>", "FilterWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("Seq<U>", "Map", "U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("Seq<U>", "MapWithIndex", "U", "Func<$(typeParams), int, U> f", "(tpl, i) => f($(access), i)").WithMax(15),
         new MethodTemplate("void", "Iter", "", "Action<$(typeParams)> f"),
         new MethodTemplate("void", "IterWithIndex", "", "Action<$(typeParams), int> f", "(tpl, i) => f($(access), i)").WithMax(15),
-        new MethodTemplate("ISeq<U>", "Bind", "U", "Func<$(typeParams), ISeq<U>> f"),
-        new MethodTemplate("ISeq<U>", "BindWithIndex", "U", "Func<$(typeParams), int, ISeq<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
-//        new MethodTemplate("ISeq<U>", "Collect", "U, V", "Func<$(typeParams), V> f", "where V : ISeq<U>", "tpl => f($(access))"),
-        new MethodTemplate("ISeq<U>", "Choose", "U", "Func<$(typeParams), Option<U>> f"),
-        new MethodTemplate("ISeq<U>", "ChooseWithIndex", "U", "Func<$(typeParams), int, Option<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
-        new MethodTemplate("ISeq<$(tupleType)>", "SkipWhile", "", "Func<$(typeParams), bool> f"),
-        new MethodTemplate("ISeq<$(tupleType)>", "TakeWhile", "", "Func<$(typeParams), bool> f"),
-        new MethodTemplate("ISeq<$(tupleType)>", "SkipWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
-        new MethodTemplate("ISeq<$(tupleType)>", "TakeWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
-        new MethodTemplate("Tuple<ISeq<$(tupleType)>, ISeq<$(tupleType)>>", "Partition", "", "Func<$(typeParams), bool> f"),
-        new MethodTemplate("Tuple<ISeq<$(tupleType)>, ISeq<$(tupleType)>>", "Span", "", "Func<$(typeParams), bool> f"),
-        new MethodTemplate("Tuple<ISeq<$(tupleType)>, ISeq<$(tupleType)>>", "Break", "", "Func<$(typeParams), bool> f"),
-        new MethodTemplate("IOrderedSeq<$(tupleType)>", "SortBy", "U", "Func<$(typeParams), U> f"),
-        new MethodTemplate("IOrderedSeq<$(tupleType)>", "RevSortBy", "U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("Seq<U>", "Bind", "U", "Func<$(typeParams), Seq<U>> f"),
+        new MethodTemplate("Seq<U>", "BindWithIndex", "U", "Func<$(typeParams), int, Seq<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
+//        new MethodTemplate("Seq<U>", "Collect", "U, V", "Func<$(typeParams), V> f", "where V : ISeq<U>", "tpl => f($(access))"),
+        new MethodTemplate("Seq<U>", "Choose", "U", "Func<$(typeParams), Option<U>> f"),
+        new MethodTemplate("Seq<U>", "ChooseWithIndex", "U", "Func<$(typeParams), int, Option<U>> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("Seq<$(tupleType)>", "SkipWhile", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Seq<$(tupleType)>", "TakeWhile", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Seq<$(tupleType)>", "SkipWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("Seq<$(tupleType)>", "TakeWhileWithIndex", "", "Func<$(typeParams), int, bool> f", "(tpl, i) => f($(access), i)").WithMax(15),
+        new MethodTemplate("Tuple<Seq<$(tupleType)>, Seq<$(tupleType)>>", "Partition", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Tuple<Seq<$(tupleType)>, Seq<$(tupleType)>>", "Span", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("Tuple<Seq<$(tupleType)>, Seq<$(tupleType)>>", "Break", "", "Func<$(typeParams), bool> f"),
+        new MethodTemplate("OrderedSeq<$(tupleType)>", "SortBy", "U", "Func<$(typeParams), U> f"),
+        new MethodTemplate("OrderedSeq<$(tupleType)>", "RevSortBy", "U", "Func<$(typeParams), U> f"),
     };
 #>
 using System;
 using System.Collections.Generic;
+
+#pragma warning disable 618
 
 namespace LangExt
 {
@@ -74,7 +76,7 @@ namespace LangExt
         /// <summary>
         /// <#= i #>要素タプルの各要素を展開して関数に渡すUnfoldです。
         /// </summary>
-        public static ISeq<U> Unfold<<#= TypeParams("T", i) #>, U>(this <#= TupleType(i) #> self, Func<<#= TypeParams("T", i) #>, Option<<#= TupleType(i + 1, n => n == 1 ? "U" : "T" + (n - 1)) #>>> f)
+        public static Seq<U> Unfold<<#= TypeParams("T", i) #>, U>(this <#= TupleType(i) #> self, Func<<#= TypeParams("T", i) #>, Option<<#= TupleType(i + 1, n => n == 1 ? "U" : "T" + (n - 1)) #>>> f)
         {
             return Unfold(self, tpl =>
                 from res in tpl.Match(f)
@@ -99,3 +101,5 @@ namespace LangExt
 <# } #>
     }
 }
+
+#pragma warning restore 618

@@ -10,14 +10,20 @@ namespace LangExt
     /// 要素Tの並び替えられたシーケンスを表すインターフェイスです。
     /// </summary>
     /// <typeparam name="T">要素の型</typeparam>
-    public interface IOrderedSeq<T> : ISeq<T>, System.Linq.IOrderedEnumerable<T> { }
+    public interface IOrderedSeq<T> : Seq<T>, System.Linq.IOrderedEnumerable<T> { }
 
-    internal class OrderedSeq<T> : IOrderedSeq<T>
+    /// <summary>
+    /// 要素Tの並び替えられたシーケンスを表すインターフェイスです。
+    /// </summary>
+    /// <typeparam name="T">要素の型</typeparam>
+    public interface OrderedSeq<T> : IOrderedSeq<T> { }
+
+    internal class OrderedEnumerableSeq<T> : OrderedSeq<T>
     {
         #region OrderedSeqの実装
         readonly System.Linq.IOrderedEnumerable<T> value;
 
-        internal OrderedSeq(System.Linq.IOrderedEnumerable<T> value) { this.value = value; }
+        internal OrderedEnumerableSeq(System.Linq.IOrderedEnumerable<T> value) { this.value = value; }
 
         public IEnumerator<T> GetEnumerator() { return this.value.GetEnumerator(); }
 
@@ -44,18 +50,18 @@ namespace LangExt
         /// 並び替えられたシーケンスをさらに別のキーで安定ソートします。
         /// 標準クエリ演算子のThenByに対応します。
         /// </summary>
-        public static IOrderedSeq<T> ThenBy<T, U>(this IOrderedSeq<T> self, Func<T, U> f)
+        public static OrderedSeq<T> ThenBy<T, U>(this IOrderedSeq<T> self, Func<T, U> f)
         {
-            return new OrderedSeq<T>(StdEnumerable.ThenBy(self, f));
+            return new OrderedEnumerableSeq<T>(StdEnumerable.ThenBy(self, f));
         }
 
         /// <summary>
         /// 並び替えられたシーケンスをさらに別のキーで安定ソートします。
         /// 標準クエリ演算子のThenByDescendingに対応します。
         /// </summary>
-        public static IOrderedSeq<T> RevThenBy<T, U>(this IOrderedSeq<T> self, Func<T, U> f)
+        public static OrderedSeq<T> RevThenBy<T, U>(this IOrderedSeq<T> self, Func<T, U> f)
         {
-            return new OrderedSeq<T>(StdEnumerable.ThenByDescending(self, f));
+            return new OrderedEnumerableSeq<T>(StdEnumerable.ThenByDescending(self, f));
         }
         
         /// <summary>

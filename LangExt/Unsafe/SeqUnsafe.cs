@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 
+#pragma warning disable 618
+
 namespace LangExt.Unsafe
 {
     using StdEnumerable = System.Linq.Enumerable;
@@ -148,3 +150,5 @@ namespace LangExt.Unsafe
         }
     }
 }
+
+#pragma warning restore 618

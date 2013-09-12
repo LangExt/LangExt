@@ -33,7 +33,7 @@ namespace LangExt.Tests
         public class Holder
         {
             public System.Collections.Generic.List<int> History { get; private set; }
-            public ISeq<int> Body { get; private set; }
+            public Seq<int> Body { get; private set; }
 
             public Holder(params int[] values)
             {

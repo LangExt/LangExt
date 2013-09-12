@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 
+#pragma warning disable 618
+
 namespace LangExt.Unsafe
 {
     partial class SeqUnsafe
@@ -526,3 +528,5 @@ namespace LangExt.Unsafe
 
     }
 }
+
+#pragma warning restore 618

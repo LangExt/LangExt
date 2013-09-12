@@ -165,17 +165,17 @@ namespace LangExt
         }
 
         /// <summary>
-        /// Result[T, _] → ISeq[T]
+        /// Result[T, _] → Seq[T]
         /// </summary>
-        public static ISeq<T> ToSeq<T, _>(this Result<T, _> self)
+        public static Seq<T> ToSeq<T, _>(this Result<T, _> self)
         {
             return self.Match(Seq.Singleton, e => Seq.Empty<T>());
         }
 
         /// <summary>
-        /// Result[_, T] → ISeq[T]
+        /// Result[_, T] → Seq[T]
         /// </summary>
-        public static ISeq<T> ToSeqFailure<_, T>(this Result<_, T> self)
+        public static Seq<T> ToSeqFailure<_, T>(this Result<_, T> self)
         {
             return self.Match(s => Seq.Empty<T>(), Seq.Singleton);
         }
