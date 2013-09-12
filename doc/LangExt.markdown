@@ -29,9 +29,9 @@ LangExt以外で提供される型に対する関数の定義は、ジェネリ�
 モジュール以外のクラスや、構造体、列挙型などをまとめて、型と記述しています。
 
 ### シーケンス
-`ISeq[T]`のことを、シーケンスと呼びます。
+`Seq[T]`のことを、シーケンスと呼びます。
 LangExtではLINQ to Objectsを捨て、シーケンスに対して「より関数プログラミングの語彙に近いAPI」を再構築しています。
-その際に、`IEnumerable[T]`ではなく、`ISeq[T]`を操作の対象に選んだため、配列との統一的なAPIは諦めています。
+その際に、`IEnumerable[T]`ではなく、`Seq[T]`を操作の対象に選んだため、配列との統一的なAPIは諦めています。
 しかし、オーバーロードを極力排除したことにより、LINQ to Objectsよりも拡張の幅が大きくなっています。
 また、LINQ to Objectsより多くの操作を提供しているため、LINQ to Objectでは実現できなかった表現力を備えています。
 
@@ -294,8 +294,8 @@ res.MapFailure(e => e.ToString());
 失敗側に対してクエリ式が使いたい場合は、SwapResultを呼び出すことで成功と失敗を入れ替えることで一応実現できます。
 クエリ式による操作が終わったら、再びSwapResultを呼び出してください。
 
-### ISeq型/Seqモジュール
-ISeq[T]は、Tのシーケンスを表します。
+### Seq型/Seqモジュール
+Seq[T]は、Tのシーケンスを表します。
 
 関数を引数に渡す高階関数のうち、インデックスを取るバージョンはWithIndexで終わります。
 例えば、MapWithIndexは`(T, int) → U`という関数を受け取り、第二引数に現在の要素のインデックスが渡されてきます。
@@ -322,7 +322,7 @@ Sequenceに対してはSequenceSuccess/SequenceFailureが、OnlySomeに対して
 #### nullを含みうるシーケンスの変換
 MapOption関数を使うことで、nullを含みうるシーケンスを、Optionのシーケンスに変換できます。
 
-参照型の場合は`ISeq[T] → ISeq[Option[T]]`ですが、null許容型の場合`ISeq[T?] → ISeq[Option[T]]`と、
+参照型の場合は`Seq[T] → Seq[Option[T]]`ですが、null許容型の場合`Seq[T?] → Seq[Option[T]]`と、
 null許容型が取り除かれることに注意してください。
 
 同様に、MapResult関数を使うことで、nullを含みうるシーケンスをResultのシーケンスに変換できます。
@@ -335,7 +335,7 @@ LINQ to Objectsが提供しているクエリ式はすべて使用可能です�
 #### IEnumerableについて
 IEnumerable[T]に対してもいくつか拡張メソッドを定義していますが、シーケンスに比べると限定的です。
 
-基本的には、IEnumerable[T]は使わず、ISeq[T]を使います。
+基本的には、IEnumerable[T]は使わず、Seq[T]を使います。
 ToSeqメソッドによって、IEnumerable[T]をシーケンスに変換できます。
 
 ### Choice型

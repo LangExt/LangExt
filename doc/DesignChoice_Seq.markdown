@@ -1,19 +1,19 @@
-ISeq(シーケンス)
-================
-LangExtでは、IEnumerable[T]の代わりとなる型として、ISeq[T]を提供しています。
-ここでは、なぜIEnumerable[T]の代わりにISeq[T]という別の型を用意したのかを中心に説明します。
+Seq(シーケンス)
+===============
+LangExtでは、IEnumerable[T]の代わりとなる型として、Seq[T]を提供しています。
+ここでは、なぜIEnumerable[T]の代わりにSeq[T]という別の型を用意したのかを中心に説明します。
 また、LINQを捨てた理由についても説明します。
 
 この設計選択に納得できない場合、LangExtを直接使うのは避けた方がいいでしょう。
 LangExtからフォークして、独自のライブラリを作るなどしてください。
 
-ISeqとIEnumerableの違い
------------------------
-ISeq[T]はIEnumerable[T]を継承しているため、IEnumerable[T]が必要な場面ではいつでもISeq[T]も使えます。
-LangExtでは、IEnumerable[T]よりもISeq[T]の使用を推奨しています。
+SeqとIEnumerableの違い
+----------------------
+Seq[T]はIEnumerable[T]を継承しているため、IEnumerable[T]が必要な場面ではいつでもSeq[T]も使えます。
+LangExtでは、IEnumerable[T]よりもSeq[T]の使用を推奨しています。
 以降ではその理由を説明します。
 
-### ISeq[T]の方が名前が短い
+### Seq[T]の方が名前が短い
 IEnumerable[T]は名前が長いという大きな欠点を抱えています。
 長い型名はタイプが面倒なだけでなく、画面を占有するため、読みにくく理解しにくいコードになりがちです。
 IEnumerable[T]を2つ受け取り、IEnumerable[T]を返すような関数Fを考えてみると、
@@ -23,20 +23,17 @@ IEnumerable[T]を2つ受け取り、IEnumerable[T]を返すような関数Fを�
 public static IEnumerable<T> F(IEnumerable<T> xs, IEnumerable<T> ys)
 ```
 
-それに対して、ISeq[T]はIEnumerable[T]の半分の文字数で済むため、字数はそれほど消費しません。
+それに対して、Seq[T]はIEnumerable[T]の半分の文字数で済むため、字数はそれほど消費しません。
 
 ```cs
-public static ISeq<T> F(ISeq<T> xs, ISeq<T> ys)
+public static Seq<T> F(Seq<T> xs, Seq<T> ys)
 ```
 
-本来なら、Seq[T]型にしたかったのですが、.NETの名前付けの慣習に従っています。
-反対意見が少なければ、将来Seqという名前に変更する可能性はあります。
+### Seq[T]の方が出来る操作が多い
+LangExtではSeq[T]の方を使ってもらえるように、IEnumerable[T]に対して出来る操作よりも、
+Seq[T]に対してできる操作の方が充実しています。
 
-### ISeq[T]の方が出来る操作が多い
-LangExtではISeq[T]の方を使ってもらえるように、IEnumerable[T]に対して出来る操作よりも、
-ISeq[T]に対してできる操作の方が充実しています。
-
-ISeq[T]のみに対してできる操作には、例えば以下の関数があります。
+Seq[T]のみに対してできる操作には、例えば以下の関数があります。
 
 * Init/Repeat
 * Size/Len/Count
@@ -47,14 +44,14 @@ ISeq[T]のみに対してできる操作には、例えば以下の関数があ�
 * Sort/RevSort
 * TryFind/TryPick
 
-これらの関数が使いたい場合、`ToSeq`メソッドでISeq[T]に変換してください。
+これらの関数が使いたい場合、`ToSeq`メソッドでSeq[T]に変換してください。
 
 ### IEnumerable[T]を捨てたことによる欠点
-IEnumerable[T]ではなく、ISeq[T]という新しい型を中心に据えたことによる欠点もあります。
+IEnumerable[T]ではなく、Seq[T]という新しい型を中心に据えたことによる欠点もあります。
 それは、yield構文がそのままでは使えなくなるという点です。
 
 C#のyield構文は、IEnumerable[T]/IEnumerator[T]と切り離すことが出来ません。
-そのため、現状のLangExtではIEnumerable[T]に対してyieldで実装したものをISeq[T]でラップすることで実装しています。
+そのため、現状のLangExtではIEnumerable[T]に対してyieldで実装したものをSeq[T]でラップすることで実装しています。
 
 標準クエリ演算子からの解放
 --------------------------
@@ -101,7 +98,7 @@ Try無しの(例外を投げうる)関数はUnsafe名前空間内に別定義し
 
 ### クエリ式の提供
 LangExtでは、LINQのうち標準クエリ演算子は捨てましたが、クエリ式は使えるようになっています。
-ISeq[T]も、クエリ式の対象にすることが可能です。
+Seq[T]も、クエリ式の対象にすることが可能です。
 
 ```cs
 return
