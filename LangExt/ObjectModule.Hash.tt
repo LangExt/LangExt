@@ -1,0 +1,44 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+<#@ include file="..\T4\DragonUtil.ttinclude" #>
+namespace LangExt
+{
+    partial class ObjectModule
+    {
+        /// <summary>
+        /// 引数に渡されたオブジェクトのハッシュ値を計算します。
+        /// </summary>
+        public static int Hash(params object[] objs)
+        {
+            var res = 31;
+            foreach (var obj in objs)
+            {
+                res ^= obj == null ? 0 : obj.GetHashCode();
+            }
+            return res;
+        }
+<# for (int i = 1; i <= Max; i++) { #>
+
+        /// <summary>
+        /// 引数に渡されたオブジェクトのハッシュ値を計算します。
+        /// </summary>
+        public static int Hash<<#= TypeParams("T", i) #>>(<#= MethodDefArgs("T", "t", i) #>)
+        {
+            var res = 31;
+<# for (int j = 0; j < i; j++) { #>
+            res ^= t<#= j + 1 #>.IsNull() ? 0 : t<#= j + 1 #>.GetHashCode();
+<# } #>
+            return res;
+        }
+<# } #>
+    }
+}
