@@ -98,6 +98,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectModule.Dragon.tt</DependentUpon>
     </Compile>
+    <Compile Include="ObjectModule.Hash.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectModule.Hash.tt</DependentUpon>
+    </Compile>
     <Compile Include="Option.Dragon.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -223,6 +228,11 @@
       <DependentUpon>ObjectModule.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjectModule.Dragon.cs</LastGenOutput>
+    </None>
+    <None Include="ObjectModule.Hash.tt">
+      <DependentUpon>ObjectModule.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectModule.Hash.cs</LastGenOutput>
     </None>
     <None Include="Option.Dragon.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
