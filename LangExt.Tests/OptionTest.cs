@@ -777,5 +777,28 @@ namespace LangExt.Tests
                 Assert.That(nonePlaceholder.Equals(noneInt), Is.False);
             }
         }
+
+        public class Comparability
+        {
+            [TestCase(42, true, 0, 1)]
+            [TestCase(42, true, 42, 0)]
+            [TestCase(0, true, 42, -1)]
+            [TestCase(42, false, 42, 1)]
+            public void CompareTo_Some<T>(T value, bool otherIsSome, T other, int expected)
+                where T : IComparable<T>
+            {
+                Assert.That(Option.Some(value).CompareTo(SomeIf(otherIsSome, other)).Match(() => -1, () => 0, () => 1), Is.EqualTo(expected));
+                Assert.That(Option.Comparer<T>().Compare(Option.Some(value), SomeIf(otherIsSome, other)), Is.EqualTo(expected));
+            }
+
+            [TestCase(true, 0, -1)]
+            [TestCase(false, 0, 0)]
+            public void CompareTo_None<T>(bool otherIsSome, T other, int expected)
+                where T : IComparable<T>
+            {
+                Assert.That(Option<T>.None.CompareTo(SomeIf(otherIsSome, other)).Match(() => -1, () => 0, () => 1), Is.EqualTo(expected));
+                Assert.That(Option.Comparer<T>().Compare(Option.None, SomeIf(otherIsSome, other)), Is.EqualTo(expected));
+            }
+        }
     }
 }

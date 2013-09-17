@@ -1,9 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LangExt
 {
     partial class Option
     {
+        /// <summary>
+        /// Option[T] → CompareResult
+        /// </summary>
+        public static Comparable.CompareResult CompareTo<T>(this Option<T> self, Option<T> other)
+            where T : IComparable<T>
+        {
+            if (self.IsNone && other.IsNone) return Comparable.CompareResult.EQ;
+            if (self.IsNone && other.IsNone == false) return Comparable.CompareResult.LT;
+            if (self.IsNone == false && other.IsNone) return Comparable.CompareResult.GT;
+            return self.Value.Cmp(other.Value);
+        }
+
+        /// <summary>
+        /// () → IComparer[Option[T]]
+        /// </summary>
+        public static IComparer<Option<T>> Comparer<T>()
+            where T : IComparable<T>
+        {
+            return new Comparer<Option<T>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
+        }
+
         /// <summary>
         /// () → Option[T]
         /// </summary>
