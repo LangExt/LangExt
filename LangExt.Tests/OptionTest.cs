@@ -684,6 +684,19 @@ namespace LangExt.Tests
                 Assert.That(Option.Some(value).Equals(value), Is.False);
             }
 
+            [TestCase("hoge", true, "", false)]
+            [TestCase("hoge", true, "hoge", true)]
+            [TestCase("hoge", true, "piyo", false)]
+            [TestCase("hoge", false, "piyo", false)]
+            [TestCase(42, true, 0, false)]
+            [TestCase(42, true, 42, true)]
+            [TestCase(42, false, 42, false)]
+            [TestCase("42", true, 42, false)]
+            public void NonStrictEquals_Some<T, U>(T value, bool otherIsSome, U other, bool expected)
+            {
+                Assert.That(Option.Some(value).NonStrictEquals(SomeIf(otherIsSome, other)), Is.EqualTo(expected));
+            }
+
             [TestCase(true, "hoge", true)]
             [TestCase(false, "hoge", false)]
             [TestCase(true, 42, true)]
@@ -691,6 +704,16 @@ namespace LangExt.Tests
             public void Equals_None<T>(bool isNone, T other, bool expected)
             {
                 Assert.That(Option.None.Equals(SomeIf(!isNone, other)), Is.False);
+                Assert.That(Option<T>.None.Equals(SomeIf(!isNone, other)), Is.EqualTo(expected));
+            }
+
+            [TestCase(true, "hoge", true)]
+            [TestCase(false, "hoge", false)]
+            [TestCase(true, 42, true)]
+            [TestCase(false, 42, false)]
+            public void NonStrictEquals_None<T>(bool isNone, T other, bool expected)
+            {
+                Assert.That(Option.None.NonStrictEquals(SomeIf(!isNone, other)), Is.EqualTo(expected));
                 Assert.That(Option<T>.None.Equals(SomeIf(!isNone, other)), Is.EqualTo(expected));
             }
 

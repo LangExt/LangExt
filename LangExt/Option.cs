@@ -258,12 +258,27 @@ namespace LangExt
 
         /// <summary>
         /// 現在のオブジェクトが、同じ型の別のオブジェクトと等しいかどうかを判定します。
+        /// Option.Noneで返された値と、型付きのNoneを比較した場合にfalseが返される点に注意してください。
+        /// もしその場合にtrueを返してほしい場合は、EqualsではなくNonStrictEqualsを使用してください。
         /// </summary>
         /// <param name="other">このオブジェクトと比較するOption</param>
         /// <returns>現在のオブジェクトがotherで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
         public bool Equals(Option<T> other)
         {
             return this.hasValue == other.hasValue && Equals(this.value, other.value);
+        }
+
+        /// <summary>
+        /// 現在のオブジェクトが、別のOptionと等しいかどうかを判定します。
+        /// Equalsとは違い、Option.Noneで返された値と型付きのNoneを比較した場合にもtrueを返します。
+        /// </summary>
+        /// <param name="other">このオブジェクトと比較するOption</param>
+        /// <returns>現在のオブジェクトがotherで指定されたオブジェクトと等しい場合はtrue、それ以外の場合はfalse</returns>
+        public bool NonStrictEquals<U>(Option<U> other)
+        {
+            if (this.hasValue == false)
+                return other.hasValue == false;
+            return Equals(this.value, other.value);
         }
 
         /// <summary>
