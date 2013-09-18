@@ -63,6 +63,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Enumerable.Dragon.tt</DependentUpon>
     </Compile>
+    <Compile Include="Func.Conv.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Func.Conv.tt</DependentUpon>
+    </Compile>
     <Compile Include="Func.Create.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -213,6 +218,11 @@
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Chain.cs</LastGenOutput>
+    </None>
+    <None Include="Func.Conv.tt">
+      <DependentUpon>Func.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Func.Conv.cs</LastGenOutput>
     </None>
     <None Include="Func.Create.tt">
       <DependentUpon>Func.cs</DependentUpon>

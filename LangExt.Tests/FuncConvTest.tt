@@ -1,0 +1,61 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+using LangExt;
+using NUnit.Framework;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class FuncConvTest
+    {
+        [Test]
+        public void TestToFunctional()
+        {
+<# for (int i = 2; i < Max; i++) { #>
+            var f<#= i - 1 #> = Create.Func((string prefix, <#= Repeat(", ", "int x{0}", i) #>) => prefix + (<#= Repeat(" + ", "x{0}", i) #>));
+            var g<#= i - 1 #> = f<#= i - 1 #>.ToFunctional();
+            Assert.That(g<#= i - 1 #>(<#= Repeat(")(", "{0}", i) #>)("hoge"), Is.EqualTo(f<#= i - 1 #>("hoge", <#= Repeat(", ", "{0}", i) #>)));
+<# } #>
+        }
+
+        [Test]
+        public void TestToObjective()
+        {
+<# for (int i = 2; i < Max; i++) { #>
+            var f<#= i - 1 #> = Create.Func((<#= Repeat(", ", "int x{0}", i) #>, string prefix) => prefix + (<#= Repeat(" + ", "x{0}", i) #>)).Curried();
+            var g<#= i - 1 #> = f<#= i - 1 #>.ToObjective();
+            Assert.That(g<#= i - 1 #>("hoge", <#= Repeat(", ", "{0}", i) #>), Is.EqualTo(f<#= i - 1 #>(<#= Repeat(")(", "{0}", i) #>)("hoge")));
+<# } #>
+        }
+
+        [Test]
+        public void ToFunctionalしてToObjectiveすると元に戻る()
+        {
+<# for (int i = 2; i < Max; i++) { #>
+            var f<#= i - 1 #> = Create.Func((string prefix, <#= Repeat(", ", "int x{0}", i) #>) => prefix + (<#= Repeat(" + ", "x{0}", i) #>));
+            var g<#= i - 1 #> = f<#= i - 1 #>.ToFunctional().ToObjective();
+            Assert.That(g<#= i - 1 #>("hoge", <#= Repeat(", ", "{0}", i) #>), Is.EqualTo(f<#= i - 1 #>("hoge", <#= Repeat(", ", "{0}", i) #>)));
+<# } #>
+        }
+
+        [Test]
+        public void ToObjectiveしてToFunctionalすると元に戻る()
+        {
+<# for (int i = 2; i < Max; i++) { #>
+            var f<#= i - 1 #> = Create.Func((<#= Repeat(", ", "int x{0}", i) #>, string prefix) => prefix + (<#= Repeat(" + ", "x{0}", i) #>)).Curried();
+            var g<#= i - 1 #> = f<#= i - 1 #>.ToObjective().ToFunctional();
+            Assert.That(g<#= i - 1 #>(<#= Repeat(")(", "{0}", i) #>)("hoge"), Is.EqualTo(f<#= i - 1 #>(<#= Repeat(")(", "{0}", i) #>)("hoge")));
+<# } #>
+        }
+    }
+}

@@ -1,0 +1,39 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+
+namespace LangExt
+{
+    partial class Func
+    {
+<# for (int i = 2; i <= Max; i++) { #>
+        /// <summary>
+        /// 第一引数に操作対象が来るような関数を、カリー化しつつ第一引数を最後の位置に持って行きます。
+        /// これにより、オブジェクト指向スタイルの関数に対する部分適用を容易にします。
+        /// </summary>
+        public static <#= Fold("Func<T1, T" + (i + 1) + ">", (acc, j) => "Func<T" + (i - j + 2) + ", " + acc + ">", 2, i + 1) #> ToFunctional<<#= TypeParams("T", i + 1) #>>(this Func<<#= TypeParams("T", i + 1) #>> self)
+        {
+            return <#= Repeat(" => ", "t{0}", 2, i + 1) #> => t1 => self(<#= MethodCallArgs("t", i) #>);
+        }
+
+        /// <summary>
+        /// 最終引数に操作対象が来るようにカリー化された関数を、アンカリー化しつつ最後の引数を第一引数の位置に持って行きます。
+        /// これにより、C#上でより自然に関数型スタイルの関数を扱えるようにします。
+        /// </summary>
+        public static Func<T<#= i #>, <#= TypeParams("T", i - 1)  #>, T<#= i + 1 #>> ToObjective<<#= TypeParams("T", i + 1) #>>(this <#= Fold("T" + (i + 1), "Func<T{1}, {0}>", i) #> self)
+        {
+            return (t<#= i #>, <#= Repeat(", ", "t{0}", i - 1) #>) => self(<#= Repeat(")(", "t{0}", i) #>);
+        }
+
+<# } #>
+    }
+}

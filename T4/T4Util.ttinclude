@@ -19,7 +19,17 @@ string Fold(string init, string format, int begin, int end)
     var result = init;
     for (int i = begin; i < end; i++)
     {
-        result = string.Format(format, result, (end - begin) - i);
+        result = string.Format(format, result, i);
+    }
+    return result;
+}
+
+string Fold(string init, Func<string, int, string> f, int begin, int end)
+{
+    var result = init;
+    for (int i = begin; i < end; i++)
+    {
+        result = f(result, i);
     }
     return result;
 }
