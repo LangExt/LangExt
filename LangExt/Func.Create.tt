@@ -1,0 +1,37 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+
+namespace LangExt
+{
+    partial class Func
+    {
+<# for (int i = 1; i <= Max; i++) { #>
+        /// <summary>
+        /// ラムダ式をvarで受け取ることが出来ないことを緩和するための関数です。
+        /// 引数にはラムダ式を直接渡すことを想定しています。
+        /// </summary>
+        public static Func<<#= TypeParams("T", i) #>, TResult> Create<<#= TypeParams("T", i) #>, TResult>(Func<<#= TypeParams("T", i) #>, TResult> f) { return f; }
+<# } #>
+    }
+
+    partial class Create
+    {
+<# for (int i = 1; i <= Max; i++) { #>
+        /// <summary>
+        /// ラムダ式をvarで受け取ることが出来ないことを緩和するための関数です。
+        /// 引数にはラムダ式を直接渡すことを想定しています。
+        /// </summary>
+        public static Func<<#= TypeParams("T", i) #>, TResult> Func<<#= TypeParams("T", i) #>, TResult>(Func<<#= TypeParams("T", i) #>, TResult> f) { return f; }
+<# } #>
+    }
+}

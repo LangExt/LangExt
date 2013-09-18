@@ -34,13 +34,13 @@ namespace LangExt
         /// <summary><#= i #>要素のタプルを受け取る関数をカリー化します。</summary>
         public static <#= Fold("U", "Func<T{1}, {0}>", i) #> CurriedX<<#= types #>, U>(this Func<<#= TupleType(i) #>, U> self)
         {
-            return <#= Fold("self(Create.Tuple(" + MethodCallArgs("t", i) + "))", "t{1} => {0}", i) #>;
+            return <#= Fold("self(LangExt.Create.Tuple(" + MethodCallArgs("t", i) + "))", "t{1} => {0}", i) #>;
         }
 
         /// <summary><#= i #>要素のタプルを受け取る関数をカリー化します。</summary>
         public static <#= Fold("U", "Func<T{1}, {0}>", i) #> CurryX<<#= types #>, U>(Func<<#= TupleType(i) #>, U> self)
         {
-            return <#= Fold("self(Create.Tuple(" + MethodCallArgs("t", i) + "))", "t{1} => {0}", i) #>;
+            return <#= Fold("self(LangExt.Create.Tuple(" + MethodCallArgs("t", i) + "))", "t{1} => {0}", i) #>;
         }
 
         /// <summary><#= i #>つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -70,13 +70,13 @@ namespace LangExt
         /// <summary><#= i #>要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<<#= types #>, U> Untupled<<#= types #>, U>(this Func<<#= TupleType(i) #>, U> self)
         {
-            return (<#= MethodCallArgs("t", i) #>) => self(Create.Tuple(<#= MethodCallArgs("t", i) #>));
+            return (<#= MethodCallArgs("t", i) #>) => self(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
         }
 
         /// <summary><#= i #>要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<<#= types #>, U> Untuple<<#= types #>, U>(Func<<#= TupleType(i) #>, U> self)
         {
-            return (<#= MethodCallArgs("t", i) #>) => self(Create.Tuple(<#= MethodCallArgs("t", i) #>));
+            return (<#= MethodCallArgs("t", i) #>) => self(LangExt.Create.Tuple(<#= MethodCallArgs("t", i) #>));
         }
 
         /// <summary><#= i #>つの引数を受け取るカリー化関数をアンカリー化します。</summary>

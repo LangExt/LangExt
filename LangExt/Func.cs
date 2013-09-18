@@ -20,7 +20,7 @@ namespace LangExt
         {
             return t2 => t1 => f(t1)(t2);
         }
-        
+
         /// <summary>
         /// 使用しません。
         /// </summary>

@@ -20,13 +20,13 @@ namespace LangExt
         /// <summary>2要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, U>> CurriedX<T1, T2, U>(this Func<Tuple<T1, T2>, U> self)
         {
-            return t1 => t2 => self(Create.Tuple(t1, t2));
+            return t1 => t2 => self(LangExt.Create.Tuple(t1, t2));
         }
 
         /// <summary>2要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, U>> CurryX<T1, T2, U>(Func<Tuple<T1, T2>, U> self)
         {
-            return t1 => t2 => self(Create.Tuple(t1, t2));
+            return t1 => t2 => self(LangExt.Create.Tuple(t1, t2));
         }
 
         /// <summary>2つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -56,13 +56,13 @@ namespace LangExt
         /// <summary>2要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, U> Untupled<T1, T2, U>(this Func<Tuple<T1, T2>, U> self)
         {
-            return (t1, t2) => self(Create.Tuple(t1, t2));
+            return (t1, t2) => self(LangExt.Create.Tuple(t1, t2));
         }
 
         /// <summary>2要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, U> Untuple<T1, T2, U>(Func<Tuple<T1, T2>, U> self)
         {
-            return (t1, t2) => self(Create.Tuple(t1, t2));
+            return (t1, t2) => self(LangExt.Create.Tuple(t1, t2));
         }
 
         /// <summary>2つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -92,13 +92,13 @@ namespace LangExt
         /// <summary>3要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, U>>> CurriedX<T1, T2, T3, U>(this Func<Tuple<T1, T2, T3>, U> self)
         {
-            return t1 => t2 => t3 => self(Create.Tuple(t1, t2, t3));
+            return t1 => t2 => t3 => self(LangExt.Create.Tuple(t1, t2, t3));
         }
 
         /// <summary>3要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, U>>> CurryX<T1, T2, T3, U>(Func<Tuple<T1, T2, T3>, U> self)
         {
-            return t1 => t2 => t3 => self(Create.Tuple(t1, t2, t3));
+            return t1 => t2 => t3 => self(LangExt.Create.Tuple(t1, t2, t3));
         }
 
         /// <summary>3つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -128,13 +128,13 @@ namespace LangExt
         /// <summary>3要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, U> Untupled<T1, T2, T3, U>(this Func<Tuple<T1, T2, T3>, U> self)
         {
-            return (t1, t2, t3) => self(Create.Tuple(t1, t2, t3));
+            return (t1, t2, t3) => self(LangExt.Create.Tuple(t1, t2, t3));
         }
 
         /// <summary>3要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, U> Untuple<T1, T2, T3, U>(Func<Tuple<T1, T2, T3>, U> self)
         {
-            return (t1, t2, t3) => self(Create.Tuple(t1, t2, t3));
+            return (t1, t2, t3) => self(LangExt.Create.Tuple(t1, t2, t3));
         }
 
         /// <summary>3つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -164,13 +164,13 @@ namespace LangExt
         /// <summary>4要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, U>>>> CurriedX<T1, T2, T3, T4, U>(this Func<Tuple<T1, T2, T3, T4>, U> self)
         {
-            return t1 => t2 => t3 => t4 => self(Create.Tuple(t1, t2, t3, t4));
+            return t1 => t2 => t3 => t4 => self(LangExt.Create.Tuple(t1, t2, t3, t4));
         }
 
         /// <summary>4要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, U>>>> CurryX<T1, T2, T3, T4, U>(Func<Tuple<T1, T2, T3, T4>, U> self)
         {
-            return t1 => t2 => t3 => t4 => self(Create.Tuple(t1, t2, t3, t4));
+            return t1 => t2 => t3 => t4 => self(LangExt.Create.Tuple(t1, t2, t3, t4));
         }
 
         /// <summary>4つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -200,13 +200,13 @@ namespace LangExt
         /// <summary>4要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, U> Untupled<T1, T2, T3, T4, U>(this Func<Tuple<T1, T2, T3, T4>, U> self)
         {
-            return (t1, t2, t3, t4) => self(Create.Tuple(t1, t2, t3, t4));
+            return (t1, t2, t3, t4) => self(LangExt.Create.Tuple(t1, t2, t3, t4));
         }
 
         /// <summary>4要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, U> Untuple<T1, T2, T3, T4, U>(Func<Tuple<T1, T2, T3, T4>, U> self)
         {
-            return (t1, t2, t3, t4) => self(Create.Tuple(t1, t2, t3, t4));
+            return (t1, t2, t3, t4) => self(LangExt.Create.Tuple(t1, t2, t3, t4));
         }
 
         /// <summary>4つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -236,13 +236,13 @@ namespace LangExt
         /// <summary>5要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, U>>>>> CurriedX<T1, T2, T3, T4, T5, U>(this Func<Tuple<T1, T2, T3, T4, T5>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => self(Create.Tuple(t1, t2, t3, t4, t5));
+            return t1 => t2 => t3 => t4 => t5 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5));
         }
 
         /// <summary>5要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, U>>>>> CurryX<T1, T2, T3, T4, T5, U>(Func<Tuple<T1, T2, T3, T4, T5>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => self(Create.Tuple(t1, t2, t3, t4, t5));
+            return t1 => t2 => t3 => t4 => t5 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5));
         }
 
         /// <summary>5つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -272,13 +272,13 @@ namespace LangExt
         /// <summary>5要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, U> Untupled<T1, T2, T3, T4, T5, U>(this Func<Tuple<T1, T2, T3, T4, T5>, U> self)
         {
-            return (t1, t2, t3, t4, t5) => self(Create.Tuple(t1, t2, t3, t4, t5));
+            return (t1, t2, t3, t4, t5) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5));
         }
 
         /// <summary>5要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, U> Untuple<T1, T2, T3, T4, T5, U>(Func<Tuple<T1, T2, T3, T4, T5>, U> self)
         {
-            return (t1, t2, t3, t4, t5) => self(Create.Tuple(t1, t2, t3, t4, t5));
+            return (t1, t2, t3, t4, t5) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5));
         }
 
         /// <summary>5つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -308,13 +308,13 @@ namespace LangExt
         /// <summary>6要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, U>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => self(Create.Tuple(t1, t2, t3, t4, t5, t6));
+            return t1 => t2 => t3 => t4 => t5 => t6 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6));
         }
 
         /// <summary>6要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, U>>>>>> CurryX<T1, T2, T3, T4, T5, T6, U>(Func<Tuple<T1, T2, T3, T4, T5, T6>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => self(Create.Tuple(t1, t2, t3, t4, t5, t6));
+            return t1 => t2 => t3 => t4 => t5 => t6 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6));
         }
 
         /// <summary>6つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -344,13 +344,13 @@ namespace LangExt
         /// <summary>6要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, U> Untupled<T1, T2, T3, T4, T5, T6, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6) => self(Create.Tuple(t1, t2, t3, t4, t5, t6));
+            return (t1, t2, t3, t4, t5, t6) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6));
         }
 
         /// <summary>6要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, U> Untuple<T1, T2, T3, T4, T5, T6, U>(Func<Tuple<T1, T2, T3, T4, T5, T6>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6) => self(Create.Tuple(t1, t2, t3, t4, t5, t6));
+            return (t1, t2, t3, t4, t5, t6) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6));
         }
 
         /// <summary>6つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -380,13 +380,13 @@ namespace LangExt
         /// <summary>7要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, U>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
         }
 
         /// <summary>7要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, U>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
         }
 
         /// <summary>7つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -416,13 +416,13 @@ namespace LangExt
         /// <summary>7要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, U> Untupled<T1, T2, T3, T4, T5, T6, T7, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
+            return (t1, t2, t3, t4, t5, t6, t7) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
         }
 
         /// <summary>7要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, U> Untuple<T1, T2, T3, T4, T5, T6, T7, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
+            return (t1, t2, t3, t4, t5, t6, t7) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7));
         }
 
         /// <summary>7つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -452,13 +452,13 @@ namespace LangExt
         /// <summary>8要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, U>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
         }
 
         /// <summary>8要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, U>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
         }
 
         /// <summary>8つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -488,13 +488,13 @@ namespace LangExt
         /// <summary>8要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
+            return (t1, t2, t3, t4, t5, t6, t7, t8) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
         }
 
         /// <summary>8要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
+            return (t1, t2, t3, t4, t5, t6, t7, t8) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8));
         }
 
         /// <summary>8つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -524,13 +524,13 @@ namespace LangExt
         /// <summary>9要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, U>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
         }
 
         /// <summary>9要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, U>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
         }
 
         /// <summary>9つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -560,13 +560,13 @@ namespace LangExt
         /// <summary>9要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
         }
 
         /// <summary>9要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9));
         }
 
         /// <summary>9つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -596,13 +596,13 @@ namespace LangExt
         /// <summary>10要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, U>>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
         }
 
         /// <summary>10要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, U>>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
         }
 
         /// <summary>10つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -632,13 +632,13 @@ namespace LangExt
         /// <summary>10要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
         }
 
         /// <summary>10要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
         }
 
         /// <summary>10つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -668,13 +668,13 @@ namespace LangExt
         /// <summary>11要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, U>>>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
         }
 
         /// <summary>11要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, U>>>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
         }
 
         /// <summary>11つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -704,13 +704,13 @@ namespace LangExt
         /// <summary>11要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
         }
 
         /// <summary>11要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
         }
 
         /// <summary>11つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -740,13 +740,13 @@ namespace LangExt
         /// <summary>12要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, U>>>>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
         }
 
         /// <summary>12要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, U>>>>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
         }
 
         /// <summary>12つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -776,13 +776,13 @@ namespace LangExt
         /// <summary>12要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
         }
 
         /// <summary>12要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
         }
 
         /// <summary>12つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -812,13 +812,13 @@ namespace LangExt
         /// <summary>13要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, U>>>>>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
         }
 
         /// <summary>13要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, U>>>>>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
         }
 
         /// <summary>13つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -848,13 +848,13 @@ namespace LangExt
         /// <summary>13要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
         }
 
         /// <summary>13要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
         }
 
         /// <summary>13つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -884,13 +884,13 @@ namespace LangExt
         /// <summary>14要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, U>>>>>>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
         }
 
         /// <summary>14要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, U>>>>>>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
         }
 
         /// <summary>14つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -920,13 +920,13 @@ namespace LangExt
         /// <summary>14要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
         }
 
         /// <summary>14要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
         }
 
         /// <summary>14つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -956,13 +956,13 @@ namespace LangExt
         /// <summary>15要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, U>>>>>>>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
         }
 
         /// <summary>15要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, U>>>>>>>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
         }
 
         /// <summary>15つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -992,13 +992,13 @@ namespace LangExt
         /// <summary>15要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
         }
 
         /// <summary>15要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
         }
 
         /// <summary>15つの引数を受け取るカリー化関数をアンカリー化します。</summary>
@@ -1028,13 +1028,13 @@ namespace LangExt
         /// <summary>16要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, Func<T16, U>>>>>>>>>>>>>>>> CurriedX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
         }
 
         /// <summary>16要素のタプルを受け取る関数をカリー化します。</summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, Func<T16, U>>>>>>>>>>>>>>>> CurryX<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>, U> self)
         {
-            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
+            return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => t9 => t10 => t11 => t12 => t13 => t14 => t15 => t16 => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
         }
 
         /// <summary>16つの引数を受け取る複数関数をタプル関数化します。</summary>
@@ -1064,13 +1064,13 @@ namespace LangExt
         /// <summary>16要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> Untupled<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(this Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
         }
 
         /// <summary>16要素のタプルを受け取る関数を複数引数関数化します。</summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U> Untuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, U>(Func<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>, U> self)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16) => self(Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16) => self(LangExt.Create.Tuple(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16));
         }
 
         /// <summary>16つの引数を受け取るカリー化関数をアンカリー化します。</summary>

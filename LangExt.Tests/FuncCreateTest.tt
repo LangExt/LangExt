@@ -1,0 +1,39 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+using LangExt;
+using NUnit.Framework;
+
+namespace LangExt.Tests
+{
+    [TestFixture]
+    public class FuncCreateTest
+    {
+        [Test]
+        public void TestFuncCreate()
+        {
+<# for (int i = 1; i <= Max; i++) { #>
+            var f<#= i #> = Func.Create((<#= Repeat(", ", "int i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>);
+            Assert.That(f<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(<#= Enumerable.Range(1, i).Sum() #>));
+<# } #>
+        }
+
+        [Test]
+        public void TestCreateFunc()
+        {
+<# for (int i = 1; i <= Max; i++) { #>
+            var f<#= i #> = Create.Func((<#= Repeat(", ", "int i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>);
+            Assert.That(f<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(<#= Enumerable.Range(1, i).Sum() #>));
+<# } #>
+        }
+    }
+}

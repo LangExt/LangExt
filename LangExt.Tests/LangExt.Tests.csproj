@@ -55,6 +55,11 @@
   <ItemGroup>
     <Compile Include="CachedSeqTest.cs" />
     <Compile Include="ChoiceTest.cs" />
+    <Compile Include="FuncCreateTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FuncCreateTest.tt</DependentUpon>
+    </Compile>
     <Compile Include="FuncCurryTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,6 +122,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="FuncCreateTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FuncCreateTest.cs</LastGenOutput>
+    </None>
     <None Include="FuncCurryTest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FuncCurryTest.cs</LastGenOutput>
