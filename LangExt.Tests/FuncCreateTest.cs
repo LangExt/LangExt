@@ -11,6 +11,8 @@ namespace LangExt.Tests
         [Test]
         public void TestFuncCreate()
         {
+            var f0 = Func.Create(() => 10);
+            Assert.That(f0(), Is.EqualTo(10));
             var f1 = Func.Create((int i1) => i1);
             Assert.That(f1(1), Is.EqualTo(1));
             var f2 = Func.Create((int i1, int i2) => i1 + i2);
@@ -48,6 +50,8 @@ namespace LangExt.Tests
         [Test]
         public void TestCreateFunc()
         {
+            var f0 = Create.Func(() => 10);
+            Assert.That(f0(), Is.EqualTo(10));
             var f1 = Create.Func((int i1) => i1);
             Assert.That(f1(1), Is.EqualTo(1));
             var f2 = Create.Func((int i1, int i2) => i1 + i2);

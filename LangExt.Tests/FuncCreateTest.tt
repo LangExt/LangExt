@@ -21,6 +21,8 @@ namespace LangExt.Tests
         [Test]
         public void TestFuncCreate()
         {
+            var f0 = Func.Create(() => 10);
+            Assert.That(f0(), Is.EqualTo(10));
 <# for (int i = 1; i <= Max; i++) { #>
             var f<#= i #> = Func.Create((<#= Repeat(", ", "int i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>);
             Assert.That(f<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(<#= Enumerable.Range(1, i).Sum() #>));
@@ -30,6 +32,8 @@ namespace LangExt.Tests
         [Test]
         public void TestCreateFunc()
         {
+            var f0 = Create.Func(() => 10);
+            Assert.That(f0(), Is.EqualTo(10));
 <# for (int i = 1; i <= Max; i++) { #>
             var f<#= i #> = Create.Func((<#= Repeat(", ", "int i{0}", i) #>) => <#= Repeat(" + ", "i{0}", i) #>);
             Assert.That(f<#= i #>(<#= Repeat(", ", "{0}", i) #>), Is.EqualTo(<#= Enumerable.Range(1, i).Sum() #>));
