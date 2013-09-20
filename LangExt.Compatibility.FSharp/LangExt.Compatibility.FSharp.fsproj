@@ -47,6 +47,7 @@
     <Compile Include="Option.fs" />
     <Compile Include="FSharpFunc.fsi" />
     <Compile Include="FSharpFunc.fs" />
+    <Compile Include="Result.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

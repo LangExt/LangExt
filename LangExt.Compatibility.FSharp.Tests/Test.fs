@@ -37,3 +37,11 @@ let ``LangExtのOptionからF#のOptionに変換できる``() =
 
   let res = FsOption.ofCsOption CsOption.None
   Assert.AreEqual(None, res)
+
+[<Test>]
+let LangExtのResultをコンピュテーション式で扱える() =
+  let res = CsResult.result { return 10 }
+  Assert.AreEqual(CsResult.success 10, res)
+
+  let res = CsResult.result { let! a = CsResult.failure "oops!" in return 10 }
+  Assert.AreEqual((CsResult.failure "oops!": CsResult<int, string>), res)
