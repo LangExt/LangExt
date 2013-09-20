@@ -13,5 +13,9 @@
     <dependencies>
       <dependency id="LangExt" version="2.0.0.0" />
     </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="FSharp.Core" />
+      <frameworkAssembly assemblyName="System.Numerics" />
+    </frameworkAssemblies>
   </metadata>
 </package>
