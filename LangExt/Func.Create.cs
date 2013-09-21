@@ -94,6 +94,10 @@ namespace LangExt
 
     partial class Create
     {
+        /// <summary>
+        /// ラムダ式をvarで受け取ることが出来ないことを緩和するための関数です。
+        /// 引数にはラムダ式を直接渡すことを想定しています。
+        /// </summary>
         public static Func<TResult> Func<TResult>(Func<TResult> f) { return f; }
         /// <summary>
         /// ラムダ式をvarで受け取ることが出来ないことを緩和するための関数です。
