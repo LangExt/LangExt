@@ -11,7 +11,4 @@
     <description>$description$</description>
     <tags>functional c# library</tags>
   </metadata>
-  <files>
-      <file src="bin\Release\*" target="lib\portable-windows8+net40"/>
-  </files>
 </package>
