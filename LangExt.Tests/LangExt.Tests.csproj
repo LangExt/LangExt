@@ -109,6 +109,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SeqZipTest.tt</DependentUpon>
     </Compile>
+    <Compile Include="TryFuncTest.cs" />
     <Compile Include="TupleModuleTest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
