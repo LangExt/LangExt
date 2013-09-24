@@ -482,3 +482,60 @@ Uにclass制約が付いた形で提供されるほか、Uにstruct制約が付�
 nullを返したことを表現するために、NullResultExceptionという名前の例外クラスを使っています。
 
 これらの逆操作は提供していません。
+
+#### 関数型スタイルの関数から、OOPスタイルの関数への変換と、その逆
+以降では、T1, T2を受け取ってUを返す関数のみ記載していますが、
+T16までの複数引数関数すべてに対応しています。
+
+多くのオブジェクト指向プログラミング言語では、ヘルパメソッドの第一引数にレシーバ相当のオブジェクトを置くスタイルがよく使われます。
+
+```cs
+public static class Objective
+{
+    public static Hoge F(Piyo self, Foo arg1, Bar arg2) ...
+}
+```
+
+C#の拡張メソッドは、第一引数に「this」を付けることでまさに第一引数をレシーバのように扱う記述が可能になる機能です。
+
+それに対して、関数プログラミングでは、関数をカリー化した上で最後の引数にレシーバ相当のオブジェクトを置くスタイルがよく使われます。
+
+```cs
+public static class Functional
+{
+    public static readonly Func<Foo, Func<Bar, Func<Piyo, Foo>>> F = arg1 => arg2 => self => ...
+}
+```
+
+このスタイルではレシーバ相当のオブジェクトを一番最後に指定できるため、他の(固定的な)引数をあらかじめ与えておく、という方法が取れます。
+
+```cs
+var f = Functional.F(arg1)(arg2);
+...
+var res = f(self);
+```
+
+リストなどでは、レシーバ以外の引数はレシーバよりも固定的であることが多くあるため、非常に便利です。
+
+しかし、これら2つのスタイルを常に用意しておくのは現実的ではありません。
+そのため、LangExtではこれらのスタイルを相互変換するために、ToFunctionalとToObjectiveという関数を用意しています。
+
+OOPLスタイルの関数Fに対して、ToFunctionalを呼び出すと、カリー化しつつ第一引数を最後に持って行った関数に変換できます。
+
+```cs
+var res1 = Objective.F(self, arg1, arg2);
+
+var f = Objective.F.ToFunctional();
+var res2 = f(arg1)(arg2)(self);
+```
+
+関数プログラミングスタイルの関数Fに対して、ToObjectiveを呼び出すと、アンカリー化しつつ最後の引数を最初に持って行った関数に変換できます。
+
+```cs
+var res1 = Functional.F(arg1)(arg2)(self);
+
+var f = Functional.F.ToObjective();
+var res2 = f(self, arg1, arg2);
+```
+
+ToFunctionalしてToObjectiveする、もしくはToObjectiveしてToFunctionalすると、元の関数に戻ります。
