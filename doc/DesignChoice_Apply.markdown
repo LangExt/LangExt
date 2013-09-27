@@ -8,7 +8,26 @@ Applyとは
 Applyモジュールは、OptionやResult（以降、モナド）に対して関数を適用できる機能を提供します。
 
 モナドに対しての関数適用は、Bind関数やクエリ式によって行われますが、Applyモジュールはそのファサードとして機能します。
-このファサードは、束縛を含まないような単純な関数適用に特化しています。
+このファサードは、クエリ式でfrom v in mとしたvをselectのみで使うだけの場合に有効です。
+
+```cs
+var res =
+    from x in mx
+    from y in my
+    select x + y;
+```
+
+このコードは、Applyモジュールを使うことで以下のように変形できます。
+
+```cs
+var res = Apply.To(mx, my).By((x, y) => x + y);
+```
+
+selectの処理が関数化されている場合、更に単純に記述できます。
+
+```cs
+var res = Apply.To(mx, my).By(f);
+```
 
 名前の選択
 ---------
