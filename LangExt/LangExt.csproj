@@ -238,6 +238,7 @@
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Create.cs</LastGenOutput>
+    </None>
     <None Include="Apply.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Apply.cs</LastGenOutput>
