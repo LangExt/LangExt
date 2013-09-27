@@ -66,20 +66,3 @@ public static class Apply
     ...
 }
 ```
-
-LangExt1.xからの移行
---------------------
-LangExt1.xではApplyモジュールは存在しません。
-しかし下記のような式があったときApplyモジュールを利用することで、よりシンプルなコードにすることができます。
-
-```cs
-from x1 in o1
-from x2 in o2
-....
-select func(x1, x2, ..., x3)
-```
-
-下記のように置き換えます。
-```cs
-Apply.To(o1, o2, ..., o16).By(func)
-```
