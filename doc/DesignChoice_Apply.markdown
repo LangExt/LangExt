@@ -53,6 +53,19 @@ HaskellのApplicativeとは、適用の順番が逆であることに注意し�
 -------------
 HaskellのApplicativeはモナドに対してではなくファンクタに対して適用が行われます。
 しかし、C#では型クラスをエミュレートすることが難しく、各々のモナドをファンクタとして汎化することができません。
+そのため、Applyモジュールでは、次のようにオーバーロードを使い各モナドをサポートしています。
+
+```cs
+public static class Apply
+{
+    public static ??? To<T1>(Option<T1> m1) { ... }
+    public static ??? To<T1, T2>(Option<T1> m1, Option<T2> m2) { ... }
+    ...
+    public static ??? To<T1, TFailure>(Result<T1, TFailure> m1) { ... }
+    public static ??? To<T1, T2, TFailure>(Result<T1, TFailure> m1, Result<T2, TFailure> m2) { ... }
+    ...
+}
+```
 
 LangExt1.xからの移行
 --------------------
