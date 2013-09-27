@@ -554,6 +554,6 @@ Apply.To(o1, o2, ..., o16).By(func)
 ```
 
 funcの型は、To関数に渡される引数の型によって決定されます。
-例えば、To関数に渡される引数の型が`(Option[string], Option[int])`だった場合、By関数に渡す関数の型は`(string, int) → T`になります（Tは任意の型）。
+例えば、To関数に渡される引数の型が`(Option[string], Option[int])`だった場合、By関数に渡す関数の型は`(string, int) → T`になります。
 
 `Result[T, U]`のように複数の型引数が存在する場合、To関数に渡す`Result[T, U]`の型パラメータ`U`は、すべてが同一である必要があります。
