@@ -42,18 +42,21 @@ namespace LangExt
     var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ", TArgOfMonad>", "m", i);
     var monadicCallArgs = MethodCallArgs("m", i);
     var callArgs = MethodCallArgs("arg", i);
-    var monadicDefFields = DefFields("\r\n            " + monad +"<TArg", ", TArgOfMonad>", "m", i);
-    var assignments = Repeat(";", "\r\n                this.m{0} = m{0}", i) + ";";
-    var froms = Repeat("", "\r\n                    from arg{0} in m{0}", i);
 #>
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
         public class Applicative<#= monad #><<#= typesWithArgOfMonad #>>
-        {<#= monadicDefFields #>
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            <#= string.Format("{0}<TArg{1}, TArgOfMonad> m{1}", monad, j) #>;
+<# } #>
 
             internal Applicative<#= monad #>(<#= monadicDefArgs #>)
-            {<#= assignments #>
+            {
+<# for (int j = 1; j <= i; j++) { #>
+                <#= string.Format("this.m{0} = m{0}", j) #>;
+<# } #>
             }
 
             /// <summary>
@@ -61,7 +64,10 @@ namespace LangExt
             /// </summary>
             public <#= monad #><TResult, TArgOfMonad> By<TResult>(Func<<#= types #>, TResult> f)
             {
-                return <#= froms #>
+                return 
+<# for (int j = 1; j <= i; j++) { #>
+                    <#= string.Format("from arg{0} in m{0}", j) #>
+<# } #>
                     select f(<#= callArgs #>);
             }
         }
@@ -81,23 +87,29 @@ namespace LangExt
     var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ">", "m", i);
     var monadicCallArgs = MethodCallArgs("m", i);
     var callArgs = MethodCallArgs("arg", i);
-    var monadicDefFields = DefFields("\r\n            " + monad +"<TArg", ">", "m", i);
-    var assignments = Repeat(";", "\r\n                this.m{0} = m{0}", i) + ";";
-    var froms = Repeat("", "\r\n                    from arg{0} in m{0}", i);
 #>
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
         public class Applicative<#= monad #><<#= types #>>
-        {<#= monadicDefFields #>
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            <#= string.Format("{0}<TArg{1}> m{1}", monad, j) #>;
+<# } #>
 
             internal Applicative<#= monad #>(<#= monadicDefArgs #>)
-            {<#= assignments #>
+            {
+<# for (int j = 1; j <= i; j++) { #>
+                <#= string.Format("this.m{0} = m{0}", j) #>;
+<# } #>
             }
 
             public <#= monad #><TResult> By<TResult>(Func<<#= types #>, TResult> f)
             {
-                return <#= froms #>
+                return 
+<# for (int j = 1; j <= i; j++) { #>
+                    <#= string.Format("from arg{0} in m{0}", j) #>
+<# } #>
                     select f(<#= callArgs #>);
             }
         }
