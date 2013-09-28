@@ -94,11 +94,6 @@ string MethodCallArgs(string prefix, int begin, int end)
     return Repeat(", ", prefix + "{0}", begin, end);
 }
 
-string DefFields(string typePrefix, string typePostfix, string varPrefix, int count)
-{
-    return Repeat(";", typePrefix + "{0}" + typePostfix + " " + varPrefix + "{0}", count) + ";";
-}
-
 string TupleType(int elems, Func<int, string> f)
 {
     var res = new StringBuilder("Tuple<");
