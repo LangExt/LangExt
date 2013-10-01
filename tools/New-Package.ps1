@@ -29,6 +29,9 @@ function Build([string] $target) {
   RemoveIfExists $([System.IO.Path]::Combine($target, 'bin'))
   RemoveIfExists $([System.IO.Path]::Combine($target, 'obj'))
   &$msbuild $($target + '.sln') /t:Build /p:Configuration=Release /p:VisualStudioVersion=11.0 /m:$processors
+  if (-not $?) {
+    throw "build error. target: $target"
+  }
 }
 
 function Pack($target) {
@@ -40,8 +43,12 @@ function Pack($target) {
   } else {
     &$nuget pack "$target.csproj" -Symbols -Properties 'VisualStudioVersion=11.0'
   }
+  $res = $?
   mv *.nupkg $packageDir
   cd $orgDir
+  if (-not $res) {
+    throw "nuget pack error. target: $target"
+  }
 }
 
 function NewPackages($targets) {
@@ -59,6 +66,7 @@ function NewPackages($targets) {
   }
 
   cd $orgDir
+  trap { cd $orgDir; break }
 }
 
 NewPackages $targets
