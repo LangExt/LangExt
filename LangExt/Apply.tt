@@ -9,9 +9,6 @@
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ include file="..\T4\T4Util.ttinclude" #>
-using System;
-using System.Collections.Generic;
-
 <#
     // (NameOfTheMonad, HasArgment)
     var monadInfos = new []{ 
@@ -20,6 +17,8 @@ using System.Collections.Generic;
             Tuple.Create("ISeq", false)
             };
 #>
+using System;
+using System.Collections.Generic;
 
 namespace LangExt
 {
@@ -80,8 +79,7 @@ namespace LangExt
             return new Applicative<#= monad #><<#= typesWithArgOfMonad #>>(<#= monadicCallArgs #>);
         }
 
-<#          } #>
-<# else { #>
+<# } else { #>
 <#
     var types = TypeParams("TArg", i);
     var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ">", "m", i);
