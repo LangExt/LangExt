@@ -44,6 +44,11 @@
     <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Apply.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Apply.tt</DependentUpon>
+    </Compile>
     <Compile Include="CachedSeq.cs" />
     <Compile Include="Choice.cs">
       <AutoGen>True</AutoGen>
@@ -233,6 +238,10 @@
       <DependentUpon>Func.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Func.Create.cs</LastGenOutput>
+    </None>
+    <None Include="Apply.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Apply.cs</LastGenOutput>
     </None>
     <None Include="Func.Curry.tt">
       <DependentUpon>Func.cs</DependentUpon>

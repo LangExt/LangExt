@@ -1,0 +1,131 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\T4\T4Util.ttinclude" #>
+using System;
+using System.Collections.Generic;
+
+<#
+    // (NameOfTheMonad, HasArgment)
+    var monadInfos = new []{ 
+            Tuple.Create("Option", false),
+            Tuple.Create("Result", true),
+            Tuple.Create("ISeq", false)
+            };
+#>
+
+namespace LangExt
+{
+    /// <summary>
+    /// 任意のモナドに対して関数を適用できる形式（Applicative）に変換する機能を提供するクラスです。
+    /// </summary>
+    public static class Apply
+    {
+<# foreach (var monadInfo in monadInfos) { #>
+<#
+        var monad = monadInfo.Item1;
+        var hasArg = monadInfo.Item2;
+#>
+        #region for the <#= monad #>
+<# for (int i = 1; i <= Max; i++) { #>
+<# if(hasArg){ #>
+<#
+    var types = TypeParams("TArg", i);
+    var typesWithArgOfMonad = TypeParams("TArg", i) + ", TArgOfMonad";
+    var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ", TArgOfMonad>", "m", i);
+    var monadicCallArgs = MethodCallArgs("m", i);
+    var callArgs = MethodCallArgs("arg", i);
+#>
+        /// <summary>
+        /// 関数を適用できる形式のモナドを表すクラスです。
+        /// </summary>
+        public class Applicative<#= monad #><<#= typesWithArgOfMonad #>>
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            <#= string.Format("{0}<TArg{1}, TArgOfMonad> m{1}", monad, j) #>;
+<# } #>
+
+            internal Applicative<#= monad #>(<#= monadicDefArgs #>)
+            {
+<# for (int j = 1; j <= i; j++) { #>
+                <#= string.Format("this.m{0} = m{0}", j) #>;
+<# } #>
+            }
+
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
+            public <#= monad #><TResult, TArgOfMonad> By<TResult>(Func<<#= types #>, TResult> f)
+            {
+                return 
+<# for (int j = 1; j <= i; j++) { #>
+                    <#= string.Format("from arg{0} in m{0}", j) #>
+<# } #>
+                    select f(<#= callArgs #>);
+            }
+        }
+
+        /// <summary>
+        /// 指定された複数のモナドを適用可能（Applicative）にします。
+        /// </summary>
+        public static Applicative<#= monad #><<#= typesWithArgOfMonad #>> To<<#= typesWithArgOfMonad #>>(<#= monadicDefArgs #>)
+        {
+            return new Applicative<#= monad #><<#= typesWithArgOfMonad #>>(<#= monadicCallArgs #>);
+        }
+
+<#          } #>
+<# else { #>
+<#
+    var types = TypeParams("TArg", i);
+    var monadicDefArgs =  MethodDefArgs(monad + "<TArg", ">", "m", i);
+    var monadicCallArgs = MethodCallArgs("m", i);
+    var callArgs = MethodCallArgs("arg", i);
+#>
+        /// <summary>
+        /// 関数を適用できる形式のモナドを表すクラスです。
+        /// </summary>
+        public class Applicative<#= monad #><<#= types #>>
+        {
+<# for (int j = 1; j <= i; j++) { #>
+            <#= string.Format("{0}<TArg{1}> m{1}", monad, j) #>;
+<# } #>
+
+            internal Applicative<#= monad #>(<#= monadicDefArgs #>)
+            {
+<# for (int j = 1; j <= i; j++) { #>
+                <#= string.Format("this.m{0} = m{0}", j) #>;
+<# } #>
+            }
+
+            public <#= monad #><TResult> By<TResult>(Func<<#= types #>, TResult> f)
+            {
+                return 
+<# for (int j = 1; j <= i; j++) { #>
+                    <#= string.Format("from arg{0} in m{0}", j) #>
+<# } #>
+                    select f(<#= callArgs #>);
+            }
+        }
+
+        /// <summary>
+        /// 指定された複数のモナドを適用可能（Applicative）にします。
+        /// </summary>
+        public static Applicative<#= monad #><<#= types #>> To<<#= types #>>(<#= monadicDefArgs #>)
+        {
+            return new Applicative<#= monad #><<#= types #>>(<#= monadicCallArgs #>);
+        }
+        
+<#          } #>
+<#      }#>
+        #endregion
+
+<# } #>
+    }
+}
