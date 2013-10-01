@@ -51,7 +51,7 @@ function NewPackages($targets) {
   mkdir $packageDir
 
   if ($targets -eq $null) {
-    $targets = ls *.sln | %{ [System.IO.Path]::GetFileNameWithoutExtension($_.Name) }
+    $targets = ls *.sln | sort -Descending | %{ [System.IO.Path]::GetFileNameWithoutExtension($_.Name) }
   }
   $targets | %{
     Build $_
