@@ -1,3 +1,5 @@
+param([string] $message)
+
 $myDir = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Path)
 $projectRoot = [System.IO.Path]::GetDirectoryName($myDir)
 
@@ -31,6 +33,9 @@ mv tmp\* .
 rmdir tmp
 rmdir -Recurse -Force doc
 git add -A
-git commit --no-verify -m "update document.`n`nid: $id"
+if ([string]::IsNullOrEmpty($message)) {
+  $message = 'update document.'
+}
+git commit --no-verify -m "$message`n`nid: $id"
 
 cd $orgDir
