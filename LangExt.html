@@ -37,16 +37,58 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2 id="用語">用語</h2>
 <p>このドキュメントおよびLangExtで使用する用語の説明です。</p>
 <h3 id="関数">関数</h3>
-<p>staticメソッドを単に「関数」と記述しています。</p>
+<p>staticメソッドやラムダ式、デリゲートを単に「関数」と記述しています。 他にも、関数を引数に取るようなメソッドや、関数を返すようなメソッドのことを「高階関数」と記述します。</p>
 <h3 id="モジュール">モジュール</h3>
 <p>staticクラスのことをモジュールと記述しています。</p>
-<p>LangExtが提供するジェネリック型に対しては、同名のモジュールに拡張メソッドを含む関数を定義します。 それに対して、LangExtが提供する非ジェネリック型には、型名の後ろに「Module」というサフィックスを付けたモジュール名を使います。</p>
+<p>LangExtが提供するジェネリック型に対しては、同名のモジュールに拡張メソッドを含む関数を定義します。 例えば、ジェネリック型のOption型に対するモジュールの名前はOptionです。<br />それに対して、LangExtが提供する非ジェネリック型には、型名の後ろに「Module」というサフィックスを付けたモジュール名を使います。 例えば、非ジェネリック型のUnit型に対するモジュールの名前はUnitModuleです。</p>
 <p>LangExt以外で提供される型に対する関数の定義は、ジェネリック型と同名の非ジェネリック型を持たない型と、それ以外の型で扱いが異なります。 ジェネリック型と同名の非ジェネリック型を持たない型の場合、ジェネリック型と同名のモジュールに拡張メソッドを含む関数を定義します。 例えば、<code>System.Func</code>などがこれに該当し、Funcモジュールに関数を定義しています。 それに対して、ジェネリック型と同名の非ジェネリックを持つ型、あるいは非ジェネリック型の場合、 型名の後ろに「Module」というサフィックスを付けたモジュール名を使います。 例えば、<code>System.Tuple</code>などがこれに該当し、TupleModuleモジュールに関数を定義しています。</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">型の定義場所</th>
+<th align="center">型パラメータ</th>
+<th align="center">型パラメータなしの型の有無</th>
+<th align="left">モジュール名</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">LangExt</td>
+<td align="center">有</td>
+<td align="center">-</td>
+<td align="left">型名と同名</td>
+</tr>
+<tr class="even">
+<td align="left">LangExt</td>
+<td align="center">無</td>
+<td align="center">-</td>
+<td align="left">型名 + Module</td>
+</tr>
+<tr class="odd">
+<td align="left">LangExt以外</td>
+<td align="center">有</td>
+<td align="center">有</td>
+<td align="left">型名 + Module</td>
+</tr>
+<tr class="even">
+<td align="left">LangExt以外</td>
+<td align="center">有</td>
+<td align="center">無</td>
+<td align="left">型名と同名</td>
+</tr>
+<tr class="odd">
+<td align="left">LangExt以外</td>
+<td align="center">無</td>
+<td align="center">-</td>
+<td align="left">型名 + Module</td>
+</tr>
+</tbody>
+</table>
 <p>また、インターフェイスに対するモジュールの場合、Iプレフィックスを取り除いた名前を使います。 例えば、<code>System.Collections.Generic.IEnumerable</code>などがこれに該当し、Enumerableモジュールに関数を定義しています。</p>
 <h3 id="型">型</h3>
 <p>モジュール以外のクラスや、構造体、列挙型などをまとめて、型と記述しています。</p>
 <h3 id="シーケンス">シーケンス</h3>
-<p><code>ISeq[T]</code>のことを、シーケンスと呼びます。 LangExtではLINQ to Objectsを捨て、シーケンスに対して「より関数プログラミングの語彙に近いAPI」を再構築しています。 その際に、<code>IEnumerable[T]</code>ではなく、<code>ISeq[T]</code>を操作の対象に選んだため、配列との統一的なAPIは諦めています。 しかし、オーバーロードを極力排除したことにより、LINQ to Objectsよりも拡張の幅が大きくなっています。 また、LINQ to Objectsより多くの操作を提供しているため、LINQ to Objectでは実現できなかった表現力を備えています。</p>
+<p><code>Seq[T]</code>のことを、シーケンスと呼びます。 LangExtではLINQ to Objectsを捨て、シーケンスに対して「より関数プログラミングの語彙に近いAPI」を再構築しています。 その際に、<code>IEnumerable[T]</code>ではなく、<code>Seq[T]</code>を操作の対象に選んだため、配列との統一的なAPIは諦めています。 しかし、オーバーロードを極力排除したことにより、LINQ to Objectsよりも拡張の幅が大きくなっています。 また、LINQ to Objectsより多くの操作を提供しているため、LINQ to Objectでは実現できなかった表現力を備えています。</p>
 <h2 id="表記">表記</h2>
 <p>このドキュメントおよびLangExtで使用する表記の説明です。</p>
 <h3 id="関数の型">関数の型</h3>
@@ -71,6 +113,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>です。 タプルを受け取る関数(タプル関数)と複数引数の関数は、以下のように区別されます。</p>
 <pre class="sourceCode cs"><code class="sourceCode cs">T1 * T2 → U
 (T1, T2) → U</code></pre>
+<h3 id="choice">Choice</h3>
+<p>Choice(択一)の型は、各要素の型を+で連結して記述します。 例えば、T1とT2のChoiceの型は、</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">T1 + T2</code></pre>
+<p>です。</p>
 <h3 id="シーケンス-1">シーケンス</h3>
 <p>波かっこの中にカンマ区切りで要素を列挙することで、シーケンスの値を表します。 例えば、要素として1～3の整数を含むシーケンスは、</p>
 <pre class="sourceCode cs"><code class="sourceCode cs">{ <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> }</code></pre>
@@ -82,9 +128,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>この型をユーザが明示的に使用することはありません。 この型は、Option型を型パラメータを指定せずに生成したりするために使用されます。 基本的には暗黙の型変換のために使用されますが、具体的な使用例はOption型などを参照してください。</p>
 <p>この型の値に意味はないため、列挙子を持たない列挙型として実装されています。 数値をキャストすることでこの型の値を作ることはできますが、そうした場合の動作は保証しませんので注意してください。</p>
 <h3 id="unit型">Unit型</h3>
-<p>Unit型は、意味を持つ値がないことを表すための型です(0bitの情報を持つ型とも言えるでしょう)。 この型は列挙型として実装されており、<code>_</code>という唯一の列挙子を持ちます。</p>
+<p>Unit型は、意味を持つ値がないことを表すための型です(0bitの情報を持つ型とも言えるでしょう)。 この型はフィールドを一つも持たない構造体として実装されています。</p>
 <p>voidとの違いは、voidは値がないうえに、型パラメータとして使用することができないのに対して、Unit型はそうではないという点です。 値がない場合とある場合を共通化したい場合、Unit型が使用できます。</p>
-<p>数値をキャストすることでこの型の<code>_</code>以外の値を作ることはできますが、そうした場合の動作は保証しませんので注意してください。 バージョン2.1で、列挙型ではなく構造体に変更される予定です。</p>
+<p>Ignore関数を使うことによって、任意の型の値をUnit型に変換する(捨てる)ことが可能です。</p>
 <h3 id="option型">Option型</h3>
 <p>Option型は、失敗しうる計算の結果として使用できる型です。 この型は、nullを使うよりも安全に「値がないこと」を表せます。</p>
 <p>nullはコンパイラによってnullチェックを強制できないため、プログラマが必要な場所にnullチェックを埋め込む必要があります。 これに漏れがあると、NullReferenceExceptionが発生するバグとなります。 この問題の根本には、nullが入りうる型Tの値tに対して、nullが入っていようがいまいが関係なくTの持つメンバーにアクセスできてしまうという問題があります。</p>
@@ -129,8 +175,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 str.<span class="fu">TryToInt</span>().<span class="fu">Match</span>(
     Some: result =&gt; <span class="co">/* 変換に成功した場合の式 */</span>,
     None: () =&gt; <span class="co">/* 変換に失敗した場合の式 */</span>);</code></pre>
-<p>出力引数が使いたくなった場合は、立ち止まってOption型で置き換えれないかを考えましょう。</p>
-<h4 id="optionモジュール">Optionモジュール</h4>
+<p>boolを返す出力引数を取る関数が使いたくなった場合は、立ち止まってOption型で置き換えれないかを考えましょう。 出力引数が1つしかない場合は簡単に置き換え可能です。 出力引数が複数ある場合、特にstring型やint型といった基本的な型を複数出力引数に指定するのはアンチパターンなので、 そういう場合にはそれらをまとめた型を作りましょう。 そうすれば、Option型で置き換え可能になります。</p>
+<h4 id="optionの生成">Optionの生成</h4>
 <p>Option型の値を生成するためには、Optionモジュールの関数・プロパティを使用します。 Option.Some/Option.None以外に、Option.Createという関数により、nullの場合はNoneとして、それ以外の場合はSomeとしてOptionオブジェクトを生成できます。</p>
 <h4 id="クエリ式">クエリ式</h4>
 <p>Option型はクエリ式で使うこともできます。</p>
@@ -162,10 +208,10 @@ select c + b</code></pre>
 <pre class="sourceCode cs"><code class="sourceCode cs">res.<span class="fu">MapFailure</span>(e =&gt; e.<span class="fu">ToString</span>());</code></pre>
 <p>のように記述します。</p>
 <p>失敗側に対してクエリ式が使いたい場合は、SwapResultを呼び出すことで成功と失敗を入れ替えることで一応実現できます。 クエリ式による操作が終わったら、再びSwapResultを呼び出してください。</p>
-<h3 id="iseq型seqモジュール">ISeq型/Seqモジュール</h3>
-<p>ISeq[T]は、Tのシーケンスを表します。</p>
+<h3 id="seq型seqモジュール">Seq型/Seqモジュール</h3>
+<p>Seq[T]は、Tのシーケンスを表します。</p>
 <p>関数を引数に渡す高階関数のうち、インデックスを取るバージョンはWithIndexで終わります。 例えば、MapWithIndexは<code>(T, int) → U</code>という関数を受け取り、第二引数に現在の要素のインデックスが渡されてきます。</p>
-<p>失敗する可能性のある関数に対しては、Optionを返すバージョンを提供しています。 Optionを返すバージョンの関数は、Tryから始まります。 例えば、Findは要素が見つからなかった場合に例外を投げますが、TryFindはNoneを返します。</p>
+<p>失敗する可能性のある関数<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>に対しては、Optionを返すバージョンを提供しています。 Optionを返すバージョンの関数は、Tryから始まります。 例えば、Findは要素が見つからなかった場合に例外を投げますが、TryFindはNoneを返します。</p>
 <h4 id="optionを含むシーケンスの変換">Optionを含むシーケンスの変換</h4>
 <p>Optionのシーケンスに対する2つの関数、SequeneとOnlySomeを提供しています。</p>
 <p>Sequenceは、OptionのシーケンスがSomeのみを含む場合にSomeをシーケンスの外側にくくり出します。 一つでもNoneが含まれていた場合、Noneとなります。 例えば、<code>{ Some(1), Some(2), Some(3) }</code>とあった場合、<code>Some { 1, 2, 3 }</code>となり、 <code>{ Some(1), Some(2), None }</code>とあった場合、<code>None</code>になります。</p>
@@ -174,13 +220,20 @@ select c + b</code></pre>
 <p>Optionを含むシーケンスの変換同様の操作が、Resultに対しても提供されています。 Sequenceに対してはSequenceSuccess/SequenceFailureが、OnlySomeに対してはOnlySuccess/OnlyFailureがそれぞれ対応します。</p>
 <h4 id="nullを含みうるシーケンスの変換">nullを含みうるシーケンスの変換</h4>
 <p>MapOption関数を使うことで、nullを含みうるシーケンスを、Optionのシーケンスに変換できます。</p>
-<p>参照型の場合は<code>ISeq[T] → ISeq[Option[T]]</code>ですが、null許容型の場合<code>ISeq[T?] → ISeq[Option[T]]</code>と、 null許容型が取り除かれることに注意してください。</p>
+<p>参照型の場合は<code>Seq[T] → Seq[Option[T]]</code>ですが、null許容型の場合<code>Seq[T?] → Seq[Option[T]]</code>と、 null許容型が取り除かれることに注意してください。</p>
 <p>同様に、MapResult関数を使うことで、nullを含みうるシーケンスをResultのシーケンスに変換できます。 この際、nullの場合は<code>Result.Failure(Unit)</code>に変換されます。</p>
 <h4 id="クエリ式の提供">クエリ式の提供</h4>
 <p>シーケンスはクエリ式も提供しています。 LINQ to Objectsが提供しているクエリ式はすべて使用可能です。</p>
 <h4 id="ienumerableについて">IEnumerableについて</h4>
 <p>IEnumerable[T]に対してもいくつか拡張メソッドを定義していますが、シーケンスに比べると限定的です。</p>
-<p>基本的には、IEnumerable[T]は使わず、ISeq[T]を使います。 ToSeqメソッドによって、IEnumerable[T]をシーケンスに変換できます。</p>
+<p>基本的には、IEnumerable[T]は使わず、Seq[T]を使います。 ToSeqメソッドによって、IEnumerable[T]をシーケンスに変換できます。</p>
+<h3 id="choice型">Choice型</h3>
+<p>Choice型は、択一を表す型です。 Result型に似ていますが、Result型が「成功」と「失敗」という風に各型パラメータに意味を与えているのに対して、 Choice型は各型パラメータを平等に扱います。 そのため、Result型よりもより抽象度の高い型と言えます。 また、現状では16個までの型パラメータを持つことが出来ます。</p>
+<p>Choice型に対して可能な操作はあまりありません。 基本的にはMatchメソッドを使うことになります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Choice&lt;<span class="dt">int</span>, <span class="dt">string</span>&gt; c = ...
+c.<span class="fu">Match</span>(
+  i =&gt; ...,
+  str =&gt; ...);</code></pre>
 <h3 id="createモジュール">Createモジュール</h3>
 <p>Createモジュールは、LangExtやC#の標準ライブラリで扱うことのできる様々な型の値を生成するための関数を提供します。</p>
 <p>基本的には、<code>モジュール名.Create</code>というメソッドを提供している場合、<code>Create.型名</code>という関数を提供しています。 例えば、<code>Seq.Create</code>に対して<code>Create.Seq</code>を、<code>TupleModule.Create</code>に対して<code>Create.Tuple</code>を提供しています。 この例からわかるように、Createモジュールの関数を使った方が統一性のある記述ができますので、CreateメソッドではなくCreateモジュールの使用をお勧めします。</p>
@@ -203,7 +256,7 @@ select c + b</code></pre>
 <p>複数引数関数をカリー化関数に変換する関数<code>((T1, T2) → U) → (T1 → T2 → U)</code>を、Curryという名前で提供しています。拡張メソッド版に、Curriedも提供しています。 これの逆操作<code>(T1 → T2 → U) → ((T1, T2) → U)</code>を、Uncurryという名前で提供し、拡張メソッド版としてUncurriedも提供しています。</p>
 <p>CurryしてUncurryすると、意味としては何もしていないのと同じです。</p>
 <h4 id="タプル関数とカリー化関数の相互変換">タプル関数とカリー化関数の相互変換</h4>
-<p>タプル関数をカリー化関数に変換する関数<code>(T1 * T2 → U) → (T1 → T2 → U)</code>を、CurryXという名前で提供しています。拡張メソッド版に、CurriedXも提供しています。 これの逆操作<code>(T1 → T2 → U) → (T1 * T2 → U)</code>を、UncurryXという名前で提供し、拡張メソッド版としてUncurriedXも提供しています。 サフィックスとして使われているXは、タプルを表すアスタリスクが由来です<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>。</p>
+<p>タプル関数をカリー化関数に変換する関数<code>(T1 * T2 → U) → (T1 → T2 → U)</code>を、CurryXという名前で提供しています。拡張メソッド版に、CurriedXも提供しています。 これの逆操作<code>(T1 → T2 → U) → (T1 * T2 → U)</code>を、UncurryXという名前で提供し、拡張メソッド版としてUncurriedXも提供しています。 サフィックスとして使われているXは、タプルを表すアスタリスクが由来です<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup>。</p>
 <p>CurryXしてUncurryXすると、意味としては何もしていないのと同じです。</p>
 <h4 id="複数引数関数とタプル関数の相互変換">複数引数関数とタプル関数の相互変換</h4>
 <p>複数引数関数をタプル関数に変換する関数<code>((T1, T2) → U) → (T1 * T2 → U)</code>を、Tupleという名前で提供しています。拡張メソッド版に、Tupledも提供しています。 これの逆操作<code>(T1 * T2 → U) → ((T1, T2) → U)</code>を、Untupleという名前で提供し、拡張メソッドとしてUntupledも提供しています。</p>
@@ -220,14 +273,52 @@ select c + b</code></pre>
 <p>例外を投げうる関数<code>T → U</code>を、<code>T → Result[U, Exception]</code>に変換する関数を、ExnToResultFuncという名前で提供しています。ExnはF#(もしくはOCaml)由来の短縮です。 この関数は、渡された関数が例外を投げた場合にFailureで例外を包んで返し、それ以外の場合はSuccessでその値を包んで返します。</p>
 <p>上記2つを同時に行う関数を、ToResultFuncという名前で提供しています。 nullを返したことを表現するために、NullResultExceptionという名前の例外クラスを使っています。</p>
 <p>これらの逆操作は提供していません。</p>
+<h4 id="関数型スタイルの関数からoopスタイルの関数への変換とその逆">関数型スタイルの関数から、OOPスタイルの関数への変換と、その逆</h4>
+<p>以降では、T1, T2を受け取ってUを返す関数のみ記載していますが、 T16までの複数引数関数すべてに対応しています。</p>
+<p>多くのオブジェクト指向プログラミング言語では、ヘルパメソッドの第一引数にレシーバ相当のオブジェクトを置くスタイルがよく使われます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">static</span> <span class="kw">class</span> Objective
+{
+    <span class="kw">public</span> <span class="kw">static</span> Hoge <span class="fu">F</span>(Piyo self, Foo arg1, Bar arg2) ...
+}</code></pre>
+<p>C#の拡張メソッドは、第一引数に「this」を付けることでまさに第一引数をレシーバのように扱う記述が可能になる機能です。</p>
+<p>それに対して、関数プログラミングでは、関数をカリー化した上で最後の引数にレシーバ相当のオブジェクトを置くスタイルがよく使われます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">static</span> <span class="kw">class</span> Functional
+{
+    <span class="kw">public</span> <span class="kw">static</span> <span class="kw">readonly</span> Func&lt;Foo, Func&lt;Bar, Func&lt;Piyo, Foo&gt;&gt;&gt; F = arg1 =&gt; arg2 =&gt; self =&gt; ...
+}</code></pre>
+<p>このスタイルではレシーバ相当のオブジェクトを一番最後に指定できるため、他の(固定的な)引数をあらかじめ与えておく、という方法が取れます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">var</span> f = Functional.<span class="fu">F</span>(arg1)(arg2);
+...
+<span class="dt">var</span> res = <span class="fu">f</span>(self);</code></pre>
+<p>リストなどでは、レシーバ以外の引数はレシーバよりも固定的であることが多くあるため、非常に便利です。</p>
+<p>しかし、これら2つのスタイルを常に用意しておくのは現実的ではありません。 そのため、LangExtではこれらのスタイルを相互変換するために、ToFunctionalとToObjectiveという関数を用意しています。</p>
+<p>OOPLスタイルの関数Fに対して、ToFunctionalを呼び出すと、カリー化しつつ第一引数を最後に持って行った関数に変換できます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">var</span> res1 = Objective.<span class="fu">F</span>(self, arg1, arg2);
+
+<span class="dt">var</span> f = Objective.<span class="fu">F</span>.<span class="fu">ToFunctional</span>();
+<span class="dt">var</span> res2 = <span class="fu">f</span>(arg1)(arg2)(self);</code></pre>
+<p>関数プログラミングスタイルの関数Fに対して、ToObjectiveを呼び出すと、アンカリー化しつつ最後の引数を最初に持って行った関数に変換できます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">var</span> res1 = Functional.<span class="fu">F</span>(arg1)(arg2)(self);
+
+<span class="dt">var</span> f = Functional.<span class="fu">F</span>.<span class="fu">ToObjective</span>();
+<span class="dt">var</span> res2 = <span class="fu">f</span>(self, arg1, arg2);</code></pre>
+<p>ToFunctionalしてToObjectiveする、もしくはToObjectiveしてToFunctionalすると、元の関数に戻ります。</p>
+<h3 id="applyモジュール">Applyモジュール</h3>
+<p>Applyモジュールは、OptionやResultに対して関数を適用できる機能を提供します。</p>
+<p>通常、OptionやResultに対して関数を適用するには、Bind関数やクエリ式を使用する必要があります。 これは、束縛を含む複雑な関数適用には便利ですが、単に<code>(T → U)</code>から<code>M[T] → M[U]</code>に変換が必要になるだけの関数適用にはオーバースペックです。 そのような単純な関数適用には、Applyモジュールを使用します。</p>
+<p>次のサンプルは複数のOption（o1, o2, ..., o16）に対してfuncを適用しています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Apply.<span class="fu">To</span>(o1, o2, ..., o16).<span class="fu">By</span>(func)</code></pre>
+<p>funcの型は、To関数に渡される引数の型によって決定されます。 例えば、To関数に渡される引数の型が<code>(Option[string], Option[int])</code>だった場合、By関数に渡す関数の型は<code>(string, int) → T</code>になります。</p>
+<p><code>Result[T, U]</code>のように複数の型引数が存在する場合、To関数に渡す<code>Result[T, U]</code>の型パラメータ<code>U</code>は、すべてが同一である必要があります。</p>
 <div class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>Match関数で名前付き引数を使うアイディアは、<a href="https://twitter.com/koropicot/status/315132868915523586">ころくんのつぶやき</a>から借りています。<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>サフィックスのXがタプルを表すアスタリスクから来ている、というのは、こじつけの理由で、これに至るまでに紆余曲折を経ています。 当初は、<code>(T1 * T2 → U) → (T1 → T2 → U)</code>をCurry、<code>(T1 → T2 → U) → (T1 * T2 → U)</code>をUncurryにしようとしていましたが、 Curryは引数の型の違うオーバーロードとして実現できるものの、Uncurryは戻り値の型が違うだけになるため、別の名前が必要でした。</p>
+<li id="fn2"><p>失敗する可能性のある関数は、LangExt.Unsafe名前空間以下で定義しています。 そのため、これらを使用する場合はLangExt.Unsafe名前空間をusingする必要があります。<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>サフィックスのXがタプルを表すアスタリスクから来ている、というのは、こじつけの理由で、これに至るまでに紆余曲折を経ています。 当初は、<code>(T1 * T2 → U) → (T1 → T2 → U)</code>をCurry、<code>(T1 → T2 → U) → (T1 * T2 → U)</code>をUncurryにしようとしていましたが、 Curryは引数の型の違うオーバーロードとして実現できるものの、Uncurryは戻り値の型が違うだけになるため、別の名前が必要でした。</p>
 <p>これにUncurry2と名前を付けてしまうと、紛らわしい(2引数版、2要素タプル版と勘違いしてしまう)という懸念があり、早々に却下されました。 Tupleという名前も考慮しましたが、これでは対称性が取れないという別の問題が生じます。 他の似たようなメソッドはCurryに対してUncurry、Tupleに対してUntupleとなっているため、ここだけCurryに対してTupleを採用するのは統一性がありません。</p>
 <p>そこで、CurryとUncurryを基本に、意味のない語を付ける案に至りました。 候補としてあがったものは、XやZ、アンダースコアなどです。 Xを選んだのは、Xがタプルを表すアスタリスクに見えるから、という由来として挙げた理由からです。</p>
-<p>Xを選んだものの、プレフィックスにするかサフィックスにするかは迷いました。 正直、こじつけで理由はあるものの、意味のない語であるため、どうでもよかったのです。 ただ、Xの後に母音が来ると、そのまま読めてしまうのが微妙な感じがしたので、Xuncurry(残カレー？)ではなく、UncurryXの方が良さそうでした。 こういう経緯を経て、タプル関数とカリー化関数の相互変換関数の名前がCurryXとUncurryXに決まりました。<a href="#fnref2">↩</a></p></li>
+<p>Xを選んだものの、プレフィックスにするかサフィックスにするかは迷いました。 正直、こじつけで理由はあるものの、意味のない語であるため、どうでもよかったのです。 ただ、Xの後に母音が来ると、そのまま読めてしまうのが微妙な感じがしたので、Xuncurry(残カレー？)ではなく、UncurryXの方が良さそうでした。 こういう経緯を経て、タプル関数とカリー化関数の相互変換関数の名前がCurryXとUncurryXに決まりました。<a href="#fnref3">↩</a></p></li>
 </ol>
 </div>
 <hr>

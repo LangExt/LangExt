@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+    <a href="index.html">index</a>
+</div>
+<hr>
+<h1 id="rangeの設計">Rangeの設計</h1>
+<p>LangExtでは、(整数の)範囲を表す型としてRangeを提供しています。 ここでは、このRangeの設計上の選択について説明します。</p>
+<h2 id="rangeとは">Rangeとは</h2>
+<p>Rangeは、簡単には始点と終点(自身を含まない)を保持するクラスです。 それ自体は非常に単純ですが、どのようにしてRangeを生成するかという問題があります。</p>
+<h2 id="rangeの生成問題">Rangeの生成問題</h2>
+<p>例えば、LINQのEnumerable.Rangeは始点と範囲の長さを指定するインターフェイスになっています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Enumerable.<span class="fu">Range</span>(<span class="dv">2</span>, <span class="dv">4</span>); <span class="co">// =&gt; { 2, 3, 4, 5 }</span></code></pre>
+<p>それに対して、C++やPythonのrangeは、始点と終点(自身を含まない)を指定するインターフェイスになっています。</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Python</span>
+<span class="dt">list</span>(<span class="dt">range</span>(<span class="dv">2</span>, <span class="dv">4</span>)) <span class="co"># =&gt; [ 2, 3 ]</span></code></pre>
+<p>これは、複数の言語を知っているプログラマにとっては頭の痛い問題で、 言語ごとにどちらのインターフェイスを備えているかを覚えておくか、都度調べる必要があります。</p>
+<p>この問題は範囲を扱う場合に常について回ります。</p>
+<ul>
+<li>部分文字列の指定方法</li>
+<li>部分リストの指定方法</li>
+<li>GUIの複数選択時の指定方法</li>
+</ul>
+<p>.NETでは幸い、大体のAPIが始点と長さを渡す方法に統一されていますが、 そうだとしても、分かりにくいことに変わりはありません。</p>
+<h2 id="幽霊型phantom-typeによる解決">幽霊型(Phantom Type)による解決</h2>
+<p>この問題を、LangExtでは幽霊型を使うことで解決しています。 幽霊型とは、型パラメータの値を使わないにもかかわらず、型パラメータを持つような型のことです。 例えば次のようなものです。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="co">// 型パラメータとしてTを受け取るが、</span>
+<span class="kw">public</span> <span class="kw">interface</span> Hoge&lt;T&gt;
+{
+    <span class="co">// そのTを使っていない</span>
+    <span class="dt">int</span> <span class="fu">Piyo</span>();
+}</code></pre>
+<h3 id="intwithunitt型">IntWithUnit[T]型</h3>
+<p>LangExtでは、IntWithUnit[T]という型があり、このTを使っていません。 この型はint型の値をラップするだけのクラスですが、単位を表す型を型パラメータとして取ります。 型パラメータがあるおかげで、以下のaとbは違う型になります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">class</span> KiB : IUnit {}
+<span class="kw">class</span> MilliSecond : IUnit {}
+
+<span class="dt">var</span> a = <span class="kw">new</span> IntWithUnit&lt;KiB&gt;(<span class="dv">124</span>)
+<span class="dt">var</span> b = <span class="kw">new</span> IntWithUnit&lt;MilliSecond&gt;(<span class="dv">326</span>);</code></pre>
+<p>IntWithUnitでは、加算を以下のように定義しています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">static</span> IntWithUnit&lt;T&gt; <span class="kw">operator</span> +(IntWithUnit&lt;T&gt; lhs, IntWithUnit&lt;T&gt; rhs) { ... }</code></pre>
+<p>これにより、加算は型パラメータが同じもの同士でしかできない、という制約を実現しています。 この制約はコンパイル時に働くため、上の例で<code>a + b</code>と書いても、コンパイルエラーになります。</p>
+<h3 id="range.create">Range.Create</h3>
+<p>LangExtのRangeを生成するためには、コンストラクタではなくCreateメソッドを使います。 このCreateメソッドの引数にIntWithUnitを使っており、長さの指定も終了位置の指定も出来るようになっています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">struct</span> Range : IEquatable&lt;Range&gt;
+{
+    <span class="co">// ...</span>
+    <span class="kw">public</span> <span class="kw">static</span> Range <span class="fu">Create</span>(<span class="dt">int</span> begin, IntWithUnit&lt;RangeUnit.<span class="fu">Length</span>&gt; len) { ... }
+    <span class="kw">public</span> <span class="kw">static</span> Range <span class="fu">Create</span>(<span class="dt">int</span> begin, IntWithUnit&lt;RangeUnit.<span class="fu">Index</span>&gt; end) { ... }
+    <span class="co">// ...</span>
+}</code></pre>
+<p>Rangeを生成する場合は、以下のようにします。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Range.<span class="fu">Create</span>(<span class="dv">2</span>, <span class="kw">new</span> IntWithUnit&lt;RangeUnit.<span class="fu">Length</span>&gt;(<span class="dv">4</span>)); <span class="co">// =&gt; Range(Begin=2, End=6, Length=4)</span>
+Range.<span class="fu">Create</span>(<span class="dv">2</span>, <span class="kw">new</span> IntWithUnit&lt;RangeUnit.<span class="fu">Index</span>&gt;(<span class="dv">4</span>));  <span class="co">// =&gt; Range(Begin=2, End=4, Length=2)</span></code></pre>
+<p>Rangeは、それ自体はSeqではないので、SeqにするためにはToSeqメソッドを呼ぶ必要があります。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Range.<span class="fu">Create</span>(<span class="dv">2</span>, <span class="kw">new</span> IntWithUnit&lt;RangeUnit.<span class="fu">Length</span>&gt;(<span class="dv">4</span>)).<span class="fu">ToSeq</span>(); <span class="co">// =&gt; { 2, 3, 4, 5 }</span>
+Range.<span class="fu">Create</span>(<span class="dv">2</span>, <span class="kw">new</span> IntWithUnit&lt;RangeUnit.<span class="fu">Index</span>&gt;(<span class="dv">4</span>)).<span class="fu">ToSeq</span>();  <span class="co">// =&gt; { 2, 3 }</span></code></pre>
+<h2 id="幽霊型による解決の欠点">幽霊型による解決の欠点</h2>
+<p>幽霊型によるRangeの生成の欠点は、記述が面倒なところでしょう。 拡張メソッドを用意したとしても、長くなってしまいます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Range.<span class="fu">Create</span>(<span class="dv">2</span>, (<span class="dv">4</span>).<span class="fu">AsIndex</span>()).<span class="fu">ToSeq</span>(); <span class="co">// =&gt; { 2, 3 }</span></code></pre>
+<p>これを緩和するために、Create以外にもRangeを生成する方法を提供しています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Range.<span class="fu">FromUntil</span>(<span class="dv">2</span>, <span class="dv">4</span>).<span class="fu">ToSeq</span>(); <span class="co">// =&gt; { 2, 3 }</span>
+Range.<span class="fu">FromTo</span>(<span class="dv">2</span>, <span class="dv">4</span>).<span class="fu">ToSeq</span>();    <span class="co">// =&gt; { 2, 3, 4 }</span></code></pre>
+<p>.NETのAPIとしては長さを取るものが多いので、長さを指定してRangeを生成する用のstaticメソッドも用意したいのですが、 いい名前が思い浮かばないためまだ用意できていません。</p>
+<hr>
+<div id="footer">
+    <a href="index.html">index</a>
+</div>
+</body>
+</html>

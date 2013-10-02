@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+    <a href="index.html">index</a>
+</div>
+<hr>
+<h1 id="applyの設計">Applyの設計</h1>
+<p>LangExtでは、OptionやResultに対して関数を適用できる機能としてApplyモジュールを提供しています。 ここでは、このApplyの設計上の選択について説明します。</p>
+<h2 id="applyとは">Applyとは</h2>
+<p>Applyモジュールは、OptionやResult（以降、モナド）に対して関数を適用する機能を提供します。</p>
+<p>モナドに対しての関数適用は、Bind関数やクエリ式によって行われますが、Applyモジュールはそのファサードとして機能します。 このファサードは、クエリ式でfrom v in mとしたvをselectのみで使うだけの場合に有効です。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">var res =
+    from x <span class="kw">in</span> mx
+    from y <span class="kw">in</span> my
+    select x + y;</code></pre>
+<p>このコードは、Applyモジュールを使うことで以下のように変形できます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">var</span> res = Apply.<span class="fu">To</span>(mx, my).<span class="fu">By</span>((x, y) =&gt; x + y);</code></pre>
+<p>selectの処理が関数化されている場合、更に単純に記述できます。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="dt">var</span> res = Apply.<span class="fu">To</span>(mx, my).<span class="fu">By</span>(f);</code></pre>
+<h2 id="名前の選択">名前の選択</h2>
+<p>Applyモジュールは、HaskellのApplicativeに影響を受けたので、最初は名前もそのまま輸入することを考えました。 ただし、C#はHaskellほど演算子オーバーロードを自由に行えず、演算子を使わずに<code>Applicative.Apply</code>のようにすると名前が長くなり ファサードとしての役割が弱くなってしまいます。</p>
+<p>次に、名前を短くするために、<code>Apply._</code>や<code>Ap.ply</code>という名前を考案しました。 しかしながら、これらは一見したときに分かりにくいため却下となりました。</p>
+<p>C#にはメソッドチェーンという文化があります。 最終的には、Applyモジュールはこの文化にのっとり関数の適用の対象（To）と関数(By)を分離することにしました。 そして下記のようになりました。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs">Apply.<span class="fu">To</span>(o1, o2, ..., o16).<span class="fu">By</span>(func)</code></pre>
+<p>HaskellのApplicativeとは、適用の順番が逆であることに注意してください。 これは、C#では関数合成のサポートがなく、代わりにラムダ式を使う頻度が高いのでByの引数式のほうが長くなることを考慮したためです。</p>
+<h2 id="ファンクタについて">ファンクタについて</h2>
+<p>HaskellのApplicativeはモナドに対してではなくファンクタに対して適用が行われます。 しかし、C#では型クラスをエミュレートすることが難しく、各々のモナドをファンクタとして汎化することができません。 そのため、Applyモジュールでは、次のようにオーバーロードを使い各モナドをサポートしています。</p>
+<pre class="sourceCode cs"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">static</span> <span class="kw">class</span> Apply
+{
+    <span class="kw">public</span> <span class="kw">static</span> ApplicativeOption&lt;T1&gt; To&lt;T1&gt;(Option&lt;T1&gt; m1) { ... }
+    <span class="kw">public</span> <span class="kw">static</span> ApplicativeOption&lt;T1, T2&gt; To&lt;T1, T2&gt;(Option&lt;T1&gt; m1, Option&lt;T2&gt; m2) { ... }
+    ...
+    <span class="kw">public</span> <span class="kw">static</span> ApplicativeResult&lt;T1, TFailure&gt; To&lt;T1, TFailure&gt;(Result&lt;T1, TFailure&gt; m1) { ... }
+    <span class="kw">public</span> <span class="kw">static</span> ApplicativeResult&lt;T1, T2, TFailure&gt; To&lt;T1, T2, TFailure&gt;(Result&lt;T1, TFailure&gt; m1, Result&lt;T2, TFailure&gt; m2) { ... }
+    ...
+}</code></pre>
+<hr>
+<div id="footer">
+    <a href="index.html">index</a>
+</div>
+</body>
+</html>

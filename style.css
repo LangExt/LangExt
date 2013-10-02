@@ -43,12 +43,39 @@ code {
 pre code {
   border: none;
   background-color: transparent;
+  padding: 0;
+  margin: 0;
 }
 pre {
   border: 1px solid lightgray;
   background-color: #fffbf0;
   margin: 1em 2em;
   padding: 0.5em;
+}
+span.co {
+  font-style: normal !important;
+}
+
+table {
+  border-collapse: collapse;
+  margin-left: 1em;
+}
+
+tr.header {
+  border-bottom: 1px solid black;
+}
+
+th {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+tr.odd, tr.even {
+  border-top: 1px dotted lightgray;
+}
+
+th:not( :first-child ), td:not( :first-child ) {
+  border-left: 1px solid lightgray;
 }
 
 .footnotes {
