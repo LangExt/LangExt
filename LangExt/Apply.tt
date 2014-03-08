@@ -102,6 +102,9 @@ namespace LangExt
 <# } #>
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public <#= monad #><TResult> By<TResult>(Func<<#= types #>, TResult> f)
             {
                 return 

@@ -22,6 +22,9 @@ namespace LangExt
                 this.m1 = m1;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TResult> f)
             {
                 return 
@@ -52,6 +55,9 @@ namespace LangExt
                 this.m2 = m2;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TResult> f)
             {
                 return 
@@ -85,6 +91,9 @@ namespace LangExt
                 this.m3 = m3;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TResult> f)
             {
                 return 
@@ -121,6 +130,9 @@ namespace LangExt
                 this.m4 = m4;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TResult> f)
             {
                 return 
@@ -160,6 +172,9 @@ namespace LangExt
                 this.m5 = m5;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TResult> f)
             {
                 return 
@@ -202,6 +217,9 @@ namespace LangExt
                 this.m6 = m6;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult> f)
             {
                 return 
@@ -247,6 +265,9 @@ namespace LangExt
                 this.m7 = m7;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult> f)
             {
                 return 
@@ -295,6 +316,9 @@ namespace LangExt
                 this.m8 = m8;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> f)
             {
                 return 
@@ -346,6 +370,9 @@ namespace LangExt
                 this.m9 = m9;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult> f)
             {
                 return 
@@ -400,6 +427,9 @@ namespace LangExt
                 this.m10 = m10;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> f)
             {
                 return 
@@ -457,6 +487,9 @@ namespace LangExt
                 this.m11 = m11;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TResult> f)
             {
                 return 
@@ -517,6 +550,9 @@ namespace LangExt
                 this.m12 = m12;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TResult> f)
             {
                 return 
@@ -580,6 +616,9 @@ namespace LangExt
                 this.m13 = m13;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TResult> f)
             {
                 return 
@@ -646,6 +685,9 @@ namespace LangExt
                 this.m14 = m14;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TResult> f)
             {
                 return 
@@ -715,6 +757,9 @@ namespace LangExt
                 this.m15 = m15;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TResult> f)
             {
                 return 
@@ -787,6 +832,9 @@ namespace LangExt
                 this.m16 = m16;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Option<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16, TResult> f)
             {
                 return 
@@ -1692,6 +1740,9 @@ namespace LangExt
                 this.m1 = m1;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TResult> f)
             {
                 return 
@@ -1722,6 +1773,9 @@ namespace LangExt
                 this.m2 = m2;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TResult> f)
             {
                 return 
@@ -1755,6 +1809,9 @@ namespace LangExt
                 this.m3 = m3;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TResult> f)
             {
                 return 
@@ -1791,6 +1848,9 @@ namespace LangExt
                 this.m4 = m4;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TResult> f)
             {
                 return 
@@ -1830,6 +1890,9 @@ namespace LangExt
                 this.m5 = m5;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TResult> f)
             {
                 return 
@@ -1872,6 +1935,9 @@ namespace LangExt
                 this.m6 = m6;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult> f)
             {
                 return 
@@ -1917,6 +1983,9 @@ namespace LangExt
                 this.m7 = m7;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult> f)
             {
                 return 
@@ -1965,6 +2034,9 @@ namespace LangExt
                 this.m8 = m8;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> f)
             {
                 return 
@@ -2016,6 +2088,9 @@ namespace LangExt
                 this.m9 = m9;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult> f)
             {
                 return 
@@ -2070,6 +2145,9 @@ namespace LangExt
                 this.m10 = m10;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> f)
             {
                 return 
@@ -2127,6 +2205,9 @@ namespace LangExt
                 this.m11 = m11;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TResult> f)
             {
                 return 
@@ -2187,6 +2268,9 @@ namespace LangExt
                 this.m12 = m12;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TResult> f)
             {
                 return 
@@ -2250,6 +2334,9 @@ namespace LangExt
                 this.m13 = m13;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TResult> f)
             {
                 return 
@@ -2316,6 +2403,9 @@ namespace LangExt
                 this.m14 = m14;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TResult> f)
             {
                 return 
@@ -2385,6 +2475,9 @@ namespace LangExt
                 this.m15 = m15;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TResult> f)
             {
                 return 
@@ -2457,6 +2550,9 @@ namespace LangExt
                 this.m16 = m16;
             }
 
+            /// <summary>
+            /// 指定された関数をこのモナドに適用します。
+            /// </summary>
             public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16, TResult> f)
             {
                 return 
