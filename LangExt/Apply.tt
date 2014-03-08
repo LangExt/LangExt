@@ -14,7 +14,7 @@
     var monadInfos = new []{ 
             Tuple.Create("Option", false),
             Tuple.Create("Result", true),
-            Tuple.Create("ISeq", false)
+            Tuple.Create("Seq", false)
             };
 #>
 using System;

@@ -1679,20 +1679,20 @@ namespace LangExt
 
         #endregion
 
-        #region for the ISeq
+        #region for the Seq
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1>
+        public class ApplicativeSeq<TArg1>
         {
-            ISeq<TArg1> m1;
+            Seq<TArg1> m1;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1)
+            internal ApplicativeSeq(Seq<TArg1> m1)
             {
                 this.m1 = m1;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1703,26 +1703,26 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1> To<TArg1>(ISeq<TArg1> m1)
+        public static ApplicativeSeq<TArg1> To<TArg1>(Seq<TArg1> m1)
         {
-            return new ApplicativeISeq<TArg1>(m1);
+            return new ApplicativeSeq<TArg1>(m1);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2>
+        public class ApplicativeSeq<TArg1, TArg2>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2)
             {
                 this.m1 = m1;
                 this.m2 = m2;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1734,28 +1734,28 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2> To<TArg1, TArg2>(ISeq<TArg1> m1, ISeq<TArg2> m2)
+        public static ApplicativeSeq<TArg1, TArg2> To<TArg1, TArg2>(Seq<TArg1> m1, Seq<TArg2> m2)
         {
-            return new ApplicativeISeq<TArg1, TArg2>(m1, m2);
+            return new ApplicativeSeq<TArg1, TArg2>(m1, m2);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3)
             {
                 this.m1 = m1;
                 this.m2 = m2;
                 this.m3 = m3;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1768,22 +1768,22 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3> To<TArg1, TArg2, TArg3>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3> To<TArg1, TArg2, TArg3>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3>(m1, m2, m3);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3>(m1, m2, m3);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -1791,7 +1791,7 @@ namespace LangExt
                 this.m4 = m4;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1805,23 +1805,23 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4> To<TArg1, TArg2, TArg3, TArg4>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4> To<TArg1, TArg2, TArg3, TArg4>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4>(m1, m2, m3, m4);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4>(m1, m2, m3, m4);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -1830,7 +1830,7 @@ namespace LangExt
                 this.m5 = m5;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1845,24 +1845,24 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5> To<TArg1, TArg2, TArg3, TArg4, TArg5>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5> To<TArg1, TArg2, TArg3, TArg4, TArg5>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5>(m1, m2, m3, m4, m5);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5>(m1, m2, m3, m4, m5);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -1872,7 +1872,7 @@ namespace LangExt
                 this.m6 = m6;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1888,25 +1888,25 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(m1, m2, m3, m4, m5, m6);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(m1, m2, m3, m4, m5, m6);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -1917,7 +1917,7 @@ namespace LangExt
                 this.m7 = m7;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1934,26 +1934,26 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7>(m1, m2, m3, m4, m5, m6, m7);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7>(m1, m2, m3, m4, m5, m6, m7);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -1965,7 +1965,7 @@ namespace LangExt
                 this.m8 = m8;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -1983,27 +1983,27 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>(m1, m2, m3, m4, m5, m6, m7, m8);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>(m1, m2, m3, m4, m5, m6, m7, m8);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2016,7 +2016,7 @@ namespace LangExt
                 this.m9 = m9;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2035,28 +2035,28 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>(m1, m2, m3, m4, m5, m6, m7, m8, m9);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>(m1, m2, m3, m4, m5, m6, m7, m8, m9);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
-            ISeq<TArg10> m10;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
+            Seq<TArg10> m10;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2070,7 +2070,7 @@ namespace LangExt
                 this.m10 = m10;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2090,29 +2090,29 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
-            ISeq<TArg10> m10;
-            ISeq<TArg11> m11;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
+            Seq<TArg10> m10;
+            Seq<TArg11> m11;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2127,7 +2127,7 @@ namespace LangExt
                 this.m11 = m11;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2148,30 +2148,30 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
-            ISeq<TArg10> m10;
-            ISeq<TArg11> m11;
-            ISeq<TArg12> m12;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
+            Seq<TArg10> m10;
+            Seq<TArg11> m11;
+            Seq<TArg12> m12;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2187,7 +2187,7 @@ namespace LangExt
                 this.m12 = m12;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2209,31 +2209,31 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
-            ISeq<TArg10> m10;
-            ISeq<TArg11> m11;
-            ISeq<TArg12> m12;
-            ISeq<TArg13> m13;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
+            Seq<TArg10> m10;
+            Seq<TArg11> m11;
+            Seq<TArg12> m12;
+            Seq<TArg13> m13;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2250,7 +2250,7 @@ namespace LangExt
                 this.m13 = m13;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2273,32 +2273,32 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
-            ISeq<TArg10> m10;
-            ISeq<TArg11> m11;
-            ISeq<TArg12> m12;
-            ISeq<TArg13> m13;
-            ISeq<TArg14> m14;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
+            Seq<TArg10> m10;
+            Seq<TArg11> m11;
+            Seq<TArg12> m12;
+            Seq<TArg13> m13;
+            Seq<TArg14> m14;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13, ISeq<TArg14> m14)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13, Seq<TArg14> m14)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2316,7 +2316,7 @@ namespace LangExt
                 this.m14 = m14;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2340,33 +2340,33 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13, ISeq<TArg14> m14)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13, Seq<TArg14> m14)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
-            ISeq<TArg10> m10;
-            ISeq<TArg11> m11;
-            ISeq<TArg12> m12;
-            ISeq<TArg13> m13;
-            ISeq<TArg14> m14;
-            ISeq<TArg15> m15;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
+            Seq<TArg10> m10;
+            Seq<TArg11> m11;
+            Seq<TArg12> m12;
+            Seq<TArg13> m13;
+            Seq<TArg14> m14;
+            Seq<TArg15> m15;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13, ISeq<TArg14> m14, ISeq<TArg15> m15)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13, Seq<TArg14> m14, Seq<TArg15> m15)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2385,7 +2385,7 @@ namespace LangExt
                 this.m15 = m15;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2410,34 +2410,34 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13, ISeq<TArg14> m14, ISeq<TArg15> m15)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13, Seq<TArg14> m14, Seq<TArg15> m15)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15);
         }
         
         /// <summary>
         /// 関数を適用できる形式のモナドを表すクラスです。
         /// </summary>
-        public class ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16>
+        public class ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16>
         {
-            ISeq<TArg1> m1;
-            ISeq<TArg2> m2;
-            ISeq<TArg3> m3;
-            ISeq<TArg4> m4;
-            ISeq<TArg5> m5;
-            ISeq<TArg6> m6;
-            ISeq<TArg7> m7;
-            ISeq<TArg8> m8;
-            ISeq<TArg9> m9;
-            ISeq<TArg10> m10;
-            ISeq<TArg11> m11;
-            ISeq<TArg12> m12;
-            ISeq<TArg13> m13;
-            ISeq<TArg14> m14;
-            ISeq<TArg15> m15;
-            ISeq<TArg16> m16;
+            Seq<TArg1> m1;
+            Seq<TArg2> m2;
+            Seq<TArg3> m3;
+            Seq<TArg4> m4;
+            Seq<TArg5> m5;
+            Seq<TArg6> m6;
+            Seq<TArg7> m7;
+            Seq<TArg8> m8;
+            Seq<TArg9> m9;
+            Seq<TArg10> m10;
+            Seq<TArg11> m11;
+            Seq<TArg12> m12;
+            Seq<TArg13> m13;
+            Seq<TArg14> m14;
+            Seq<TArg15> m15;
+            Seq<TArg16> m16;
 
-            internal ApplicativeISeq(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13, ISeq<TArg14> m14, ISeq<TArg15> m15, ISeq<TArg16> m16)
+            internal ApplicativeSeq(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13, Seq<TArg14> m14, Seq<TArg15> m15, Seq<TArg16> m16)
             {
                 this.m1 = m1;
                 this.m2 = m2;
@@ -2457,7 +2457,7 @@ namespace LangExt
                 this.m16 = m16;
             }
 
-            public ISeq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16, TResult> f)
+            public Seq<TResult> By<TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16, TResult> f)
             {
                 return 
                     from arg1 in m1
@@ -2483,9 +2483,9 @@ namespace LangExt
         /// <summary>
         /// 指定された複数のモナドを適用可能（Applicative）にします。
         /// </summary>
-        public static ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16>(ISeq<TArg1> m1, ISeq<TArg2> m2, ISeq<TArg3> m3, ISeq<TArg4> m4, ISeq<TArg5> m5, ISeq<TArg6> m6, ISeq<TArg7> m7, ISeq<TArg8> m8, ISeq<TArg9> m9, ISeq<TArg10> m10, ISeq<TArg11> m11, ISeq<TArg12> m12, ISeq<TArg13> m13, ISeq<TArg14> m14, ISeq<TArg15> m15, ISeq<TArg16> m16)
+        public static ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16> To<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16>(Seq<TArg1> m1, Seq<TArg2> m2, Seq<TArg3> m3, Seq<TArg4> m4, Seq<TArg5> m5, Seq<TArg6> m6, Seq<TArg7> m7, Seq<TArg8> m8, Seq<TArg9> m9, Seq<TArg10> m10, Seq<TArg11> m11, Seq<TArg12> m12, Seq<TArg13> m13, Seq<TArg14> m14, Seq<TArg15> m15, Seq<TArg16> m16)
         {
-            return new ApplicativeISeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16);
+            return new ApplicativeSeq<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16);
         }
         
         #endregion
