@@ -144,7 +144,7 @@ namespace LangExt
         /// 非ジェネリック型のIEnumerableを、IEnumerable[T]に変換します。
         /// 標準クエリ演算子のCastに対応します。
         /// </summary>
-        public static IEnumerable<T> Cast<T>(this System.Collections.IEnumerable self) { return Enumerable.Cast<T>(self); }
+        public static IEnumerable<T> Cast<T>(this System.Collections.IEnumerable self) { return StdEnumerable.Cast<T>(self); }
 
         /// <summary>
         /// IEnumerableに別のIEnumerableを連結したIEnumerableを生成して返します。
