@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BB082C0F-CD4E-4F8B-B1EE-B731C03C4DE6}</ProjectGuid>
+    <ProjectGuid>{B41F681E-6A2D-481B-9281-FE09FA370A67}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LangExt.Assertions.NUnit</RootNamespace>
-    <AssemblyName>LangExt.Assertions.NUnit</AssemblyName>
+    <RootNamespace>LangExt.Assertions.NUnit.Tests</RootNamespace>
+    <AssemblyName>LangExt.Assertions.NUnit.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -48,11 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assert.cs" />
+    <Compile Include="AssertTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LangExt.Assertions.Nunit\LangExt.Assertions.NUnit.csproj">
+      <Project>{bb082c0f-cd4e-4f8b-b1ee-b731c03c4de6}</Project>
+      <Name>LangExt.Assertions.NUnit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
