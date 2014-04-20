@@ -72,6 +72,11 @@ namespace LangExt.Assertions.NUnit
             return new AssertionExpression<T>(NIs.EqualTo(expected));
         }
 
+        public static IAssertionExpression<Tuple<T1, T2>> EqualTo<T1, T2>(T1 expected1, T2 expected2)
+        {
+            return new AssertionExpression<Tuple<T1, T2>>(NIs.EqualTo(Tuple.Create(expected1, expected2)));
+        }
+
         public static NotExpression Not
         {
             get { return NotExpression.Instance; }

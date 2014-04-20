@@ -73,5 +73,12 @@ namespace LangExt.Assertions.NUnit.Tests
             TestSuccess(() => Assert.That(Option.Some("hoge"), Is.Some("hoge")));
             TestFailure(() => Assert.That(Option<string>.None, Is.Some("hoge")), "  Expected: Some(hoge)\r\n  But was:  None\r\n");
         }
+
+        [NTest]
+        public void タプルの比較ができる()
+        {
+            TestSuccess(() => Assert.That(Tuple.Create(42, "aaa"), Is.EqualTo(42, "aaa")));
+            TestFailure(() => Assert.That(Tuple.Create(42, "aaa"), Is.EqualTo(0, "aaa")));
+        }
     }
 }
