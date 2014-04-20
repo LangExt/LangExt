@@ -51,5 +51,12 @@ namespace LangExt.Assertions.NUnit.Tests
             TestSuccess(() => Assert.That(42, Is.Not.EqualTo(0)));
             TestFailure(() => Assert.That(42, Is.Not.EqualTo(42)));
         }
+
+        [NTest]
+        public void Noneの比較ができる()
+        {
+            TestSuccess(() => Assert.That(Option<int>.None, Is.None));
+            TestFailure(() => Assert.That(Option.Some(42), Is.None));
+        }
     }
 }

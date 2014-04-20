@@ -13,6 +13,11 @@ namespace LangExt.Assertions.NUnit
         {
             NAssert.That(actual, expression.ToNUnitConstraint());
         }
+
+        public static void That<T>(Option<T> actual, OptionExpression<T> expression)
+        {
+            NAssert.That(actual, expression.ToNUnitConstraint());
+        }
     }
 
     public interface IAssertionExpression<T>
@@ -35,6 +40,31 @@ namespace LangExt.Assertions.NUnit
         }
     }
 
+    public class OptionExpression<T>
+    {
+        readonly IResolveConstraint constraint;
+
+        public OptionExpression(IResolveConstraint constraint)
+        {
+            this.constraint = constraint;
+        }
+
+        public virtual IResolveConstraint ToNUnitConstraint()
+        {
+            return this.constraint;
+        }
+
+        public static implicit operator OptionExpression<T>(OptionIsNoneExpression expr)
+        {
+            return new OptionExpression<T>(NIs.EqualTo(Option<T>.None));
+        }
+    }
+
+    public class OptionIsNoneExpression
+    {
+        public static readonly OptionIsNoneExpression Instance = new OptionIsNoneExpression();
+    }
+
     public static class Is
     {
         public static IAssertionExpression<T> EqualTo<T>(T expected)
@@ -45,6 +75,11 @@ namespace LangExt.Assertions.NUnit
         public static NotExpression Not
         {
             get { return NotExpression.Instance; }
+        }
+
+        public static OptionIsNoneExpression None
+        {
+            get { return OptionIsNoneExpression.Instance; }
         }
     }
 
