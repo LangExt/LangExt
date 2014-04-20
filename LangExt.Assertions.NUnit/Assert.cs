@@ -81,6 +81,11 @@ namespace LangExt.Assertions.NUnit
         {
             get { return OptionIsNoneExpression.Instance; }
         }
+
+        public static IAssertionExpression<Option<T>> Some<T>(T expected)
+        {
+            return new AssertionExpression<Option<T>>(NIs.EqualTo(Option.Some(expected)));
+        }
     }
 
     public sealed class NotExpression

@@ -63,5 +63,15 @@ namespace LangExt.Assertions.NUnit.Tests
             TestSuccess(() => Assert.That(Option<int>.None, Is.None));
             TestFailure(() => Assert.That(Option.Some(42), Is.None), "  Expected: None\r\n  But was:  Some(42)\r\n");
         }
+
+        [NTest]
+        public void Someの比較ができる()
+        {
+            TestSuccess(() => Assert.That(Option.Some("hoge"), Is.EqualTo(Option.Some("hoge"))));
+            TestFailure(() => Assert.That(Option<string>.None, Is.EqualTo(Option.Some("hoge"))), "  Expected: Some(hoge)\r\n  But was:  None\r\n");
+
+            TestSuccess(() => Assert.That(Option.Some("hoge"), Is.Some("hoge")));
+            TestFailure(() => Assert.That(Option<string>.None, Is.Some("hoge")), "  Expected: Some(hoge)\r\n  But was:  None\r\n");
+        }
     }
 }
