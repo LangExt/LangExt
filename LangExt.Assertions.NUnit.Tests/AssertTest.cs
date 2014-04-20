@@ -3,6 +3,7 @@ using LangExt;
 
 using NTest = global::NUnit.Framework.TestAttribute;
 using NAssert = global::NUnit.Framework.Assert;
+using NIs = global::NUnit.Framework.Is;
 
 namespace LangExt.Assertions.NUnit.Tests
 {
@@ -21,15 +22,19 @@ namespace LangExt.Assertions.NUnit.Tests
             }
         }
 
-        void TestFailure(Action assertion)
+        void TestFailure(Action assertion, string message = null)
         {
             try
             {
                 assertion();
                 NAssert.Fail("失敗すべきアサーションが成功");
             }
-            catch (global::NUnit.Framework.AssertionException)
+            catch (global::NUnit.Framework.AssertionException e)
             {
+                if (message != null)
+                {
+                    NAssert.That(e.Message, NIs.EqualTo(message));
+                }
                 // 成功
             }
             catch (Exception e)
@@ -56,7 +61,7 @@ namespace LangExt.Assertions.NUnit.Tests
         public void Noneの比較ができる()
         {
             TestSuccess(() => Assert.That(Option<int>.None, Is.None));
-            TestFailure(() => Assert.That(Option.Some(42), Is.None));
+            TestFailure(() => Assert.That(Option.Some(42), Is.None), "  Expected: None\r\n  But was:  Some(42)\r\n");
         }
     }
 }
