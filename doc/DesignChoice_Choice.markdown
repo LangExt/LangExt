@@ -27,6 +27,48 @@ public static Choice<bool, double, string, IEnumerable<Choice<XElement, XAttribu
 
 列挙型にも似ていますが、列挙型は種類しか表せないのに対して、Choiceは型に応じた値も持てるという違いがあります。
 
+Choiceの生成
+------------
+Choiceの生成方法は、大まかに分けて
+
+* コンストラクタで生成する
+* Createを使って生成する(暗黙型変換前提)
+
+の2つの方法があります。
+
+コンストラクタで生成する方法はC#では一般的ですが、型パラメータをすべて書かなければならないため面倒です。
+例えば、`int + string`を受け取る`F`という関数があった場合に、コンストラクタを使って渡してみましょう。
+
+```cs
+F(new Choice<int, string>(42));
+```
+
+`F`が`int + string`を受け取ることが分かり切っているにもかかわらず、コンストラクタでは型パラメータを省略できません。
+これを解決するために、Create系メソッドと暗黙型変換を使います。
+
+```cs
+F(Create.Choice.Case1Of2(42));
+// もしくは
+F(Choice.CreateCase1Of2(42));
+```
+
+Choiceの保持する型の数が増えれば増えるほど、型パラメータを省略できることの嬉しさは増えます。
+
+### Choice特有の事情
+LangExtでは、CreateクラスによってLangExtが対応する型の生成をまとめています。
+Choiceクラスの値もCreateクラスによって作れますが、Choiceクラス特有の事情によって他の型よりも一つ余分にネストしています。
+
+```cs
+// Choice以外の型の場合
+var opt = Create.Option("hoge");
+// Choiceの場合
+Choice<int, string> x = Create.Choice.Case2Of2("hoge");
+```
+
+これは、補完の候補がChoiceで汚染されないための措置です。
+Choiceは型自体2～16要素まで対応しているうえに、「その中でどのインデックスの型を保持するのか」という情報も必要です。
+もしCreate直下にこれらのメソッドを追加していたら、Createの利用価値がなくなっていたでしょう。
+
 値の取り出し方
 --------------
 Choiceが返ってきた場合は、返ってきたChoiceオブジェクトから値を取り出す必要があります。
