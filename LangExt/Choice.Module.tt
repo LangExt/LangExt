@@ -24,13 +24,23 @@ namespace LangExt
 for (int i = 2; i <= Max; i++) {
     var types = TypeParams("T", i);
 #>
-<# for (int j = 0; j < i; j++) { #>
+<#
+for (int j = 0; j < i; j++) {
+    var incomplTypesTemp = new List<string>();
+    for (var tag = 0; tag < i; tag++) {
+        if (tag == j)
+            incomplTypesTemp.Add("T" + (tag + 1));
+        else
+            incomplTypesTemp.Add("Placeholder");
+    }
+    var incomplTypes = string.Join(", ", incomplTypesTemp);
+#>
         /// <summary>
-        /// T<#= j + 1 #>を含むChoice[...]オブジェクトを生成します。
+        /// T<#= j + 1 #>を含む<#= i #>要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<<#= types #>> Create<<#= types #>>(T<#= j + 1 #> value)
+        public static Choice<<#= incomplTypes #>> CreateCase<#= j + 1 #>Of<#= i #><T<#= j + 1 #>>(T<#= j + 1 #> value)
         {
-            return new Choice<<#= types #>>(value);
+            return new Choice<<#= incomplTypes #>>(value);
         }
 
 <# } #>

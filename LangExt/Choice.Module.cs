@@ -11,19 +11,19 @@ namespace LangExt
     public static partial class Choice
     {
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む2要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2> Create<T1, T2>(T1 value)
+        public static Choice<T1, Placeholder> CreateCase1Of2<T1>(T1 value)
         {
-            return new Choice<T1, T2>(value);
+            return new Choice<T1, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む2要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2> Create<T1, T2>(T2 value)
+        public static Choice<Placeholder, T2> CreateCase2Of2<T2>(T2 value)
         {
-            return new Choice<T1, T2>(value);
+            return new Choice<Placeholder, T2>(value);
         }
 
         /// <summary>
@@ -90,27 +90,27 @@ namespace LangExt
             return new Comparer<Choice<T1, T2>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む3要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3> Create<T1, T2, T3>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder> CreateCase1Of3<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3>(value);
+            return new Choice<T1, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む3要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3> Create<T1, T2, T3>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder> CreateCase2Of3<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3>(value);
+            return new Choice<Placeholder, T2, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む3要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3> Create<T1, T2, T3>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3> CreateCase3Of3<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3>(value);
+            return new Choice<Placeholder, Placeholder, T3>(value);
         }
 
         /// <summary>
@@ -181,35 +181,35 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む4要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder> CreateCase1Of4<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む4要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder> CreateCase2Of4<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む4要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder> CreateCase3Of4<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む4要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4> CreateCase4Of4<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4>(value);
         }
 
         /// <summary>
@@ -284,43 +284,43 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む5要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of5<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む5要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder> CreateCase2Of5<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む5要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder> CreateCase3Of5<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む5要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder> CreateCase4Of5<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む5要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5> CreateCase5Of5<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5>(value);
         }
 
         /// <summary>
@@ -399,51 +399,51 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む6要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of6<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む6要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of6<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む6要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder> CreateCase3Of6<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む6要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder> CreateCase4Of6<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む6要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder> CreateCase5Of6<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む6要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6> CreateCase6Of6<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6>(value);
         }
 
         /// <summary>
@@ -526,59 +526,59 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む7要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of7<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む7要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of7<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む7要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of7<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む7要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder> CreateCase4Of7<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む7要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder> CreateCase5Of7<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む7要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder> CreateCase6Of7<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む7要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7> CreateCase7Of7<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7>(value);
         }
 
         /// <summary>
@@ -665,67 +665,67 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of8<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of8<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of8<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of8<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder> CreateCase5Of8<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder> CreateCase6Of8<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder> CreateCase7Of8<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む8要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8> CreateCase8Of8<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8>(value);
         }
 
         /// <summary>
@@ -816,75 +816,75 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of9<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of9<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of9<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of9<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of9<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder> CreateCase6Of9<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder> CreateCase7Of9<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder> CreateCase8Of9<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む9要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9> CreateCase9Of9<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9>(value);
         }
 
         /// <summary>
@@ -979,83 +979,83 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of10<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of10<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of10<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of10<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of10<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase6Of10<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder> CreateCase7Of10<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder> CreateCase8Of10<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder> CreateCase9Of10<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder>(value);
         }
 
         /// <summary>
-        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// T10を含む10要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10> CreateCase10Of10<T10>(T10 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10>(value);
         }
 
         /// <summary>
@@ -1154,91 +1154,91 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of11<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of11<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of11<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of11<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of11<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase6Of11<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase7Of11<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder> CreateCase8Of11<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder> CreateCase9Of11<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// T10を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder> CreateCase10Of11<T10>(T10 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder>(value);
         }
 
         /// <summary>
-        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// T11を含む11要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11> CreateCase11Of11<T11>(T11 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11>(value);
         }
 
         /// <summary>
@@ -1341,99 +1341,99 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of12<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of12<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of12<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of12<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of12<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase6Of12<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase7Of12<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase8Of12<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder> CreateCase9Of12<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// T10を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder> CreateCase10Of12<T10>(T10 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// T11を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder> CreateCase11Of12<T11>(T11 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder>(value);
         }
 
         /// <summary>
-        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// T12を含む12要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12> CreateCase12Of12<T12>(T12 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12>(value);
         }
 
         /// <summary>
@@ -1540,107 +1540,107 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of13<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of13<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of13<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of13<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of13<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase6Of13<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase7Of13<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase8Of13<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase9Of13<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// T10を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder> CreateCase10Of13<T10>(T10 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// T11を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder> CreateCase11Of13<T11>(T11 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// T12を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder> CreateCase12Of13<T12>(T12 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder>(value);
         }
 
         /// <summary>
-        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// T13を含む13要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13> CreateCase13Of13<T13>(T13 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13>(value);
         }
 
         /// <summary>
@@ -1751,115 +1751,115 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of14<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of14<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of14<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of14<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of14<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase6Of14<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase7Of14<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase8Of14<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase9Of14<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// T10を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase10Of14<T10>(T10 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// T11を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder, Placeholder> CreateCase11Of14<T11>(T11 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// T12を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder, Placeholder> CreateCase12Of14<T12>(T12 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// T13を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13, Placeholder> CreateCase13Of14<T13>(T13 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13, Placeholder>(value);
         }
 
         /// <summary>
-        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// T14を含む14要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T14> CreateCase14Of14<T14>(T14 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T14>(value);
         }
 
         /// <summary>
@@ -1974,123 +1974,123 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of15<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of15<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of15<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of15<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of15<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase6Of15<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase7Of15<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase8Of15<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase9Of15<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// T10を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase10Of15<T10>(T10 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// T11を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase11Of15<T11>(T11 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// T12を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder, Placeholder, Placeholder> CreateCase12Of15<T12>(T12 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// T13を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13, Placeholder, Placeholder> CreateCase13Of15<T13>(T13 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// T14を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T14, Placeholder> CreateCase14Of15<T14>(T14 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T14, Placeholder>(value);
         }
 
         /// <summary>
-        /// T15を含むChoice[...]オブジェクトを生成します。
+        /// T15を含む15要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T15> CreateCase15Of15<T15>(T15 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T15>(value);
         }
 
         /// <summary>
@@ -2209,131 +2209,131 @@ namespace LangExt
             return new Comparer<Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>((a, b) => a.CompareTo(b).Match(() => -1, () => 0, () => 1));
         }
         /// <summary>
-        /// T1を含むChoice[...]オブジェクトを生成します。
+        /// T1を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value)
+        public static Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase1Of16<T1>(T1 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<T1, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T2を含むChoice[...]オブジェクトを生成します。
+        /// T2を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value)
+        public static Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase2Of16<T2>(T2 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, T2, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T3を含むChoice[...]オブジェクトを生成します。
+        /// T3を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value)
+        public static Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase3Of16<T3>(T3 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, T3, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T4を含むChoice[...]オブジェクトを生成します。
+        /// T4を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase4Of16<T4>(T4 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, T4, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T5を含むChoice[...]オブジェクトを生成します。
+        /// T5を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase5Of16<T5>(T5 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, T5, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T6を含むChoice[...]オブジェクトを生成します。
+        /// T6を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase6Of16<T6>(T6 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T6, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T7を含むChoice[...]オブジェクトを生成します。
+        /// T7を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase7Of16<T7>(T7 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T7, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T8を含むChoice[...]オブジェクトを生成します。
+        /// T8を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase8Of16<T8>(T8 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T8, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T9を含むChoice[...]オブジェクトを生成します。
+        /// T9を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase9Of16<T9>(T9 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T9, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T10を含むChoice[...]オブジェクトを生成します。
+        /// T10を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase10Of16<T10>(T10 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T10, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T11を含むChoice[...]オブジェクトを生成します。
+        /// T11を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase11Of16<T11>(T11 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T11, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T12を含むChoice[...]オブジェクトを生成します。
+        /// T12を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder, Placeholder, Placeholder, Placeholder> CreateCase12Of16<T12>(T12 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T12, Placeholder, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T13を含むChoice[...]オブジェクトを生成します。
+        /// T13を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13, Placeholder, Placeholder, Placeholder> CreateCase13Of16<T13>(T13 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T13, Placeholder, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T14を含むChoice[...]オブジェクトを生成します。
+        /// T14を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T14, Placeholder, Placeholder> CreateCase14Of16<T14>(T14 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T14, Placeholder, Placeholder>(value);
         }
 
         /// <summary>
-        /// T15を含むChoice[...]オブジェクトを生成します。
+        /// T15を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T15, Placeholder> CreateCase15Of16<T15>(T15 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T15, Placeholder>(value);
         }
 
         /// <summary>
-        /// T16を含むChoice[...]オブジェクトを生成します。
+        /// T16を含む16要素の不完全Choiceオブジェクトを生成します。
         /// </summary>
-        public static Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Create<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T16 value)
+        public static Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T16> CreateCase16Of16<T16>(T16 value)
         {
-            return new Choice<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+            return new Choice<Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, Placeholder, T16>(value);
         }
 
         /// <summary>

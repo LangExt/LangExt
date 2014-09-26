@@ -12,14 +12,14 @@ namespace LangExt.Tests
         [Test]
         public void intとstringからなるChoiceに数値を入れると数値が取り出せる()
         {
-            var x = Choice.Create<int, string>(42);
+            Choice<int, string> x = Choice.CreateCase1Of2(42);
             Assert.That(x.Match<int>(Func.Id, Fail<string, int>), Is.EqualTo(42));
         }
 
         [Test]
         public void intとstringからなるChoiceに文字列を入れると文字列が取り出せる()
         {
-            var x = Choice.Create<int, string>("hoge");
+            Choice<int, string> x = Choice.CreateCase2Of2("hoge");
             Assert.That(x.Match<string>(Fail<int, string>, Func.Id), Is.EqualTo("hoge"));
         }
 
@@ -30,8 +30,8 @@ namespace LangExt.Tests
         [TestCase(1, "hoge", false)]
         public void Equalsで比較ができる(object a, object b, bool expected)
         {
-            var x = a.GetType() == typeof(int) ? Create.Choice<int, string>((int)a) : Create.Choice<int, string>((string)a);
-            var y = b.GetType() == typeof(int) ? Create.Choice<int, string>((int)b) : Create.Choice<int, string>((string)b);
+            var x = a.GetType() == typeof(int) ? new Choice<int, string>((int)a) : new Choice<int, string>((string)a);
+            var y = b.GetType() == typeof(int) ? new Choice<int, string>((int)b) : new Choice<int, string>((string)b);
             Assert.That(x.Equals(y), Is.EqualTo(expected));
             Assert.That(x == y, Is.EqualTo(expected));
             Assert.That(x != y, Is.EqualTo(!expected));
@@ -41,7 +41,7 @@ namespace LangExt.Tests
         [TestCase("hoge", "Choice(hoge:String)")]
         public void ToStringで文字列化できる(object a, string expected)
         {
-            var x = a.GetType() == typeof(int) ? Create.Choice<int, string>((int)a) : Create.Choice<int, string>((string)a);
+            var x = a.GetType() == typeof(int) ? new Choice<int, string>((int)a) : new Choice<int, string>((string)a);
             Assert.That(x.ToString(), Is.EqualTo(expected));
         }
 
@@ -51,8 +51,8 @@ namespace LangExt.Tests
         [TestCase(40, "piyo", null)]
         public void 二項演算できる(object a, object b, string expected)
         {
-            var x = a.GetType() == typeof(int) ? Create.Choice<int, string>((int)a) : Create.Choice<int, string>((string)a);
-            var y = b.GetType() == typeof(int) ? Create.Choice<int, string>((int)b) : Create.Choice<int, string>((string)b);
+            var x = a.GetType() == typeof(int) ? new Choice<int, string>((int)a) : new Choice<int, string>((string)a);
+            var y = b.GetType() == typeof(int) ? new Choice<int, string>((int)b) : new Choice<int, string>((string)b);
             var expectedOpt = Option.Create(expected);
             Assert.That(Create.Tuple(x, y).TryBinOp((i, j) => (i + j).ToString(), (s1, s2) => s1 + s2), Is.EqualTo(expectedOpt));
         }
@@ -67,8 +67,8 @@ namespace LangExt.Tests
         [TestCase("hoge", 2, 1)]
         public void 大小比較できる(object a, object b, int expected)
         {
-            var x = a.GetType() == typeof(int) ? Create.Choice<int, string>((int)a) : Create.Choice<int, string>((string)a);
-            var y = b.GetType() == typeof(int) ? Create.Choice<int, string>((int)b) : Create.Choice<int, string>((string)b);
+            var x = a.GetType() == typeof(int) ? new Choice<int, string>((int)a) : new Choice<int, string>((string)a);
+            var y = b.GetType() == typeof(int) ? new Choice<int, string>((int)b) : new Choice<int, string>((string)b);
             Assert.That(x.CompareTo(y).Match(() => -1, () => 0, () => 1), Is.EqualTo(expected));
             var cmp = Choice.Comparer<int, string>();
             Assert.That(cmp.Compare(x, y), Is.EqualTo(expected));

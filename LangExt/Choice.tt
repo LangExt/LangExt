@@ -44,6 +44,25 @@ for (int i = 2; i <= Max; i++) {
         public Choice(T<#= j + 1 #> value) { Case<#= j + 1 #> = new Option<T<#= j + 1 #>>(value); }
 
 <# } #>
+<# for (int j = 0; j < i; j++) { #>
+        /// <summary>
+        /// T<#= j + 1 #>を保持する不完全Choiceオブジェクトを完全なChoice[...]オブジェクトに変換します。
+        /// </summary>
+        public static implicit operator Choice<<#= types #>>(Choice<<#
+            var result = new List<string>();
+            for (var tag = 0; tag < i; tag++) {
+                if (tag == j)
+                    result.Add("T" + (tag + 1));
+                else
+                    result.Add("Placeholder");
+            }
+            this.Write(string.Join(", ", result));
+        #>> x)
+        {
+            return new Choice<<#= types #>>(x.Case<#= j + 1 #>.Value);
+        }
+
+<# } #>
         /// <summary>
         /// 擬似的にパターンマッチを行います。
         /// </summary>
@@ -141,19 +160,32 @@ for (int i = 2; i <= Max; i++) {
 <# } #>
     partial class Create
     {
+        public static class Choice
+        {
 <#
 for (int i = 2; i <= Max; i++) {
     var types = TypeParams("T", i);
 #>
-<# for (int j = 0; j < i; j++) { #>
-        /// <summary>
-        /// T<#= j + 1 #>を含むChoice[...]オブジェクトを生成します。
-        /// </summary>
-        public static Choice<<#= types #>> Choice<<#= types #>>(T<#= j + 1 #> value)
-        {
-            return new Choice<<#= types #>>(value);
-        }
+<#
+for (int j = 0; j < i; j++) {
+    var incomplTypesTemp = new List<string>();
+    for (var tag = 0; tag < i; tag++) {
+        if (tag == j)
+            incomplTypesTemp.Add("T" + (tag + 1));
+        else
+            incomplTypesTemp.Add("Placeholder");
+    }
+    var incomplTypes = string.Join(", ", incomplTypesTemp);
+#>
+            /// <summary>
+            /// T<#= j + 1 #>を含む<#= i #>要素の不完全Choiceオブジェクトを生成します。
+            /// </summary>
+            public static Choice<<#= incomplTypes #>> Case<#= j + 1 #>Of<#= i #><T<#= j + 1 #>>(T<#= j + 1 #> value)
+            {
+                return new Choice<<#= incomplTypes #>>(value);
+            }
 
 <# } } #>
+        }
     }
 }
