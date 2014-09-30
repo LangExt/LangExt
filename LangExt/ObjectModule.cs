@@ -9,6 +9,15 @@ namespace LangExt
     public static partial class ObjectModule
     {
         /// <summary>
+        /// オブジェクトをそのまま返しますが、処理を差し込めます。
+        /// </summary>
+        public static T Tap<T>(this T self, Action<T> act)
+        {
+            act(self);
+            return self;
+        }
+
+        /// <summary>
         /// オブジェクトがnullかどうかを判定します。
         /// </summary>
         /// <param name="self">判定の対象</param>

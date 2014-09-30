@@ -13,6 +13,7 @@
 <#
     MethodTemplate.SelfType = "{0}";
     var methods = new[] {
+        new MethodTemplate("$(tupleType)", "Tap", "", "Action<$(typeParams)> f"),
         new MethodTemplate("Option<$(tupleType)>", "NoneIf", "", "Func<$(typeParams), bool> f"),
         new MethodTemplate("Result<$(tupleType), Unit>", "FailureIf", "", "Func<$(typeParams), bool> f"),
     };
