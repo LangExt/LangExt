@@ -783,6 +783,12 @@ namespace LangExt
         }
 
         /// <summary>
+        /// オブジェクトのシーケンスをTのシーケンスに変換したシーケンスを生成して返します。
+        /// 対応する標準クエリ演算子はありません。
+        /// </summary>
+        public static Seq<T> Cast<T>(this ISeq<object> self) { return self.Map(x => (T)x); }
+
+        /// <summary>
         /// シーケンスに別のシーケンスを連結したシーケンスを生成して返します。
         /// 標準クエリ演算子のConcatに対応します。
         /// </summary>
