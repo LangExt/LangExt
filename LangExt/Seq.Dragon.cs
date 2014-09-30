@@ -213,11 +213,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 2要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2()));
+        }
+
+        /// <summary>
         /// 2要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Action<T1, T2, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
+        }
+
+        /// <summary>
+        /// 2要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2>(this ISeq<Tuple<T1, T2>> self, Func<T1, T2, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), i));
         }
 
         /// <summary>
@@ -529,11 +545,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 3要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3()));
+        }
+
+        /// <summary>
         /// 3要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Action<T1, T2, T3, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
+        }
+
+        /// <summary>
+        /// 3要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3>(this ISeq<Tuple<T1, T2, T3>> self, Func<T1, T2, T3, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), i));
         }
 
         /// <summary>
@@ -845,11 +877,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 4要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4()));
+        }
+
+        /// <summary>
         /// 4要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Action<T1, T2, T3, T4, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
+        }
+
+        /// <summary>
+        /// 4要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4>(this ISeq<Tuple<T1, T2, T3, T4>> self, Func<T1, T2, T3, T4, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), i));
         }
 
         /// <summary>
@@ -1161,11 +1209,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 5要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5()));
+        }
+
+        /// <summary>
         /// 5要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Action<T1, T2, T3, T4, T5, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
+        }
+
+        /// <summary>
+        /// 5要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5>(this ISeq<Tuple<T1, T2, T3, T4, T5>> self, Func<T1, T2, T3, T4, T5, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), i));
         }
 
         /// <summary>
@@ -1477,11 +1541,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 6要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6()));
+        }
+
+        /// <summary>
         /// 6要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Action<T1, T2, T3, T4, T5, T6, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
+        }
+
+        /// <summary>
+        /// 6要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6>> self, Func<T1, T2, T3, T4, T5, T6, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), i));
         }
 
         /// <summary>
@@ -1793,11 +1873,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 7要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7()));
+        }
+
+        /// <summary>
         /// 7要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Action<T1, T2, T3, T4, T5, T6, T7, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
+        }
+
+        /// <summary>
+        /// 7要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7>> self, Func<T1, T2, T3, T4, T5, T6, T7, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), i));
         }
 
         /// <summary>
@@ -2109,11 +2205,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 8要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8()));
+        }
+
+        /// <summary>
         /// 8要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
+        }
+
+        /// <summary>
+        /// 8要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), i));
         }
 
         /// <summary>
@@ -2393,11 +2505,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 9要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9()));
+        }
+
+        /// <summary>
         /// 9要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
+        }
+
+        /// <summary>
+        /// 9要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), i));
         }
 
         /// <summary>
@@ -2677,11 +2805,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 10要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10()));
+        }
+
+        /// <summary>
         /// 10要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
+        }
+
+        /// <summary>
+        /// 10要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), i));
         }
 
         /// <summary>
@@ -2961,11 +3105,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 11要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11()));
+        }
+
+        /// <summary>
         /// 11要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
+        }
+
+        /// <summary>
+        /// 11要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), i));
         }
 
         /// <summary>
@@ -3245,11 +3405,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 12要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12()));
+        }
+
+        /// <summary>
         /// 12要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
+        }
+
+        /// <summary>
+        /// 12要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), i));
         }
 
         /// <summary>
@@ -3529,11 +3705,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 13要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13()));
+        }
+
+        /// <summary>
         /// 13要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
+        }
+
+        /// <summary>
+        /// 13要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), i));
         }
 
         /// <summary>
@@ -3813,11 +4005,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 14要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14()));
+        }
+
+        /// <summary>
         /// 14要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
+        }
+
+        /// <summary>
+        /// 14要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), i));
         }
 
         /// <summary>
@@ -4097,11 +4305,27 @@ namespace LangExt
         }
 
         /// <summary>
+        /// 15要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15()));
+        }
+
+        /// <summary>
         /// 15要素タプルのシーケンスの各要素を展開して関数に渡すIterWithIndexです。
         /// </summary>
         public static void IterWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int> f)
         {
             self.IterWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
+        }
+
+        /// <summary>
+        /// 15要素タプルのシーケンスの各要素を展開して関数に渡すIterFWithIndexです。
+        /// </summary>
+        public static Unit IterFWithIndex<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, int, Unit> f)
+        {
+            return self.IterFWithIndex((tpl, i) => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), i));
         }
 
         /// <summary>
@@ -4321,6 +4545,14 @@ namespace LangExt
         public static void Iter<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> f)
         {
             self.Iter(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
+        }
+
+        /// <summary>
+        /// 16要素タプルのシーケンスの各要素を展開して関数に渡すIterFです。
+        /// </summary>
+        public static Unit IterF<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this ISeq<Tuple<T1, T2, T3, T4, T5, T6, T7, Tuple<T8, T9, T10, T11, T12, T13, T14, Tuple<T15, T16>>>> self, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Unit> f)
+        {
+            return self.IterF(tpl => f(tpl._1(), tpl._2(), tpl._3(), tpl._4(), tpl._5(), tpl._6(), tpl._7(), tpl._8(), tpl._9(), tpl._10(), tpl._11(), tpl._12(), tpl._13(), tpl._14(), tpl._15(), tpl._16()));
         }
 
         /// <summary>
